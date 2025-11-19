@@ -1,0 +1,31 @@
+# Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
+
+client_id = "6d305687623fae68b6d8e57f753d7499"
+name = "wishlist-guru-last"
+application_url = "https://example.com"
+embedded = true
+
+[build]
+automatically_update_urls_on_dev = true
+
+[webhooks]
+api_version = "2026-01"
+
+[access_scopes]
+# Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
+scopes = "read_content,read_customers,read_files,read_inventory,read_locales,read_orders,read_product_listings,read_themes,write_content,write_files,write_inventory,write_locales,write_orders,write_products,write_themes"
+
+[auth]
+redirect_urls = [
+  "https://example.com/auth/callback",
+  "https://example.com/auth/shopify/callback",
+  "https://example.com/api/auth/callback"
+]
+
+[app_proxy]
+url = "https://example.com/wgWishlist"
+subpath = "wg-wishlist"
+prefix = "apps"
+
+[pos]
+embedded = false

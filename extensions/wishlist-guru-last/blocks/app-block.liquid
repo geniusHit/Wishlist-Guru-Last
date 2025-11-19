@@ -1,0 +1,44 @@
+<div class="notifcation-main-sec">
+<div class="tooltip-above"></div>
+<div class="wf-text-notification-above" style="display: none;"></div>
+<div id="wishlist-guru"
+class="wishlist-guru-bb"
+  data-product-variants='{{ product.variants | json }}'
+  data-product-images='{{ product.images | json }}'
+  data-product-id={{ product.id }}
+  data-product-title='{{ product.title }}'
+  data-product-handle='{{ product.handle }}'
+  data-variant-id='{{ product.selected_variant.id }}'
+  variant-id='{{ product.selected_or_first_available_variant.id }}'
+  >
+
+</div>
+  <div class="wf-text-notification-below" style="display: none;"></div>
+<div class="tooltip-below"></div>
+</div>
+{% assign featured_product = collections.all.products | where: 'featured', true | first %}
+<div id="featured-product" data-title="{{ featured_product.title }}" data-price="{{ featured_product.price | money_with_currency }}">
+    <!-- Other product details -->
+</div>
+
+<script>
+ let variantsData = {{ product.variants | json }}
+</script>
+
+{% # theme-check-disable AssetSizeJavaScript %}
+<script src="{{ 'console-button.js' | asset_url }}" defer ></script>
+{% # theme-check-enable AssetSizeJavaScript %} 
+
+{% comment %} <script src="https://cdn.jsdelivr.net/gh/Web-framez/public_js/console-button.js" defer></script> {% endcomment %}
+
+{% schema %}
+  {
+    "name": "Wishlist Button",
+    "target": "section",
+    "enabled_on": {
+      "templates": ["*"]
+    },
+    "stylesheet": "console-button.css",
+    "settings": []
+  }
+{% endschema %}

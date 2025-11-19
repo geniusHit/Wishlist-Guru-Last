@@ -1,0 +1,10 @@
+{
+  "watch": [
+    "restart.txt",
+    "index.js",
+    "./backend/utils/themeDetector.js"
+  ],
+  "execMap": {
+    "js": "node"
+  }
+}

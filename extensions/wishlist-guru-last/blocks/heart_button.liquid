@@ -1,0 +1,202 @@
+<link href="{{ 'console-heart.css' | asset_url }}" rel="stylesheet" type="text/css">
+{% # theme-check-disable AssetSizeJavaScript %}
+ <script src="{{ 'console-heart.js' | asset_url }}" defer ></script>
+ {% # theme-check-enable AssetSizeJavaScript %} 
+
+ {% comment %} ---------this is a demo of using a toast library--------- {% endcomment %}
+{% comment %} 
+<!-- Toastr CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+<!-- jQuery (Required for Toastr) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<!-- Toastr JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+ {% endcomment %}
+<div
+  id="heart"
+  button-setting='{{ app.metafields.wishlist-app.wishlist-button-setting.value }}'
+  language-setting='{{ app.metafields.wishlist-app.language-setting.value }}'
+  general-setting='{{ app.metafields.wishlist-app.general-setting.value }}'
+  advance-setting='{{ app.metafields.wishlist-app.advance-setting.value }}'
+  theme-name='{{ app.metafields.wishlist-app.current-theme-name.value }}'
+  collection-btn-setting='{{ app.metafields.wishlist-app.collection-setting.value }}'
+  current-plan='{{ app.metafields.wishlist-app.current-plan.value }}'
+  shop-domain='{{ shop.domain }}'
+  shop-name='{{ shop.name }}'
+  customer-email='{{ customer.email }}'
+  get-font-family='{{ settings.type_body_font.family }}'
+  get-font-family-fallback='{{ settings.type_body_font.fallback_families }}'
+  permanent-domain= '{{ shop.permanent_domain }}'
+  isMultiwishlistTrue='{{ app.metafields.wishlist-app.is-Multi-wishlist }}'
+  isVariantTrue='{{ app.metafields.wishlist-app.is-variant-wishlist.value }}'
+  cur-data='{{ shop.currency }}'
+  ></div>
+  <div id="wf-custom-wishBtn-inject" class="inject-button-pp" data-product-id={{ product.id }} data-product-handle='{{ product.handle }}' variant-id='{{ product.selected_or_first_available_variant.id }}' inject-code-automatic='{{ app.metafields.wishlist-app.inject-code-automatic.value }}'  ></div>
+
+<!-- This is modal -->
+<div id="wg-myModal" class="wg-modal">
+  <div class="wg-modal-content">
+    <div class="wg-close" ></div>
+    <div id="main-Modal-form">
+      <div class="modal-section">
+        <div class="modal-heading-parent"><h2 class="modal-heading"></h2></div>
+        <div class="cart-all-div"></div>
+      </div>
+      <p class="modal-page-auth"></p>     
+
+      <!-- This is grid and share button -->
+      <div class="wg-modal-layer">
+        <div class="searchData"></div>
+        <div class="grid-outer-main">
+          <div class="grid-option">
+            <span class="gridText"></span>
+            <div class="grid-option-img1 grid1" onclick="gridFxn('1')">
+              <span></span>
+            </div>
+            <div class="grid-option-img2 grid2" onclick="gridFxn('2')">
+              <span></span>
+            </div>
+            <div class="grid-option-img3 grid3" onclick="gridFxn('3')">
+              <span></span>
+            </div>
+            <div class="grid-option-img4 grid4" onclick="gridFxn('4')">
+              <span></span>
+            </div>
+          </div>
+          <div class="share-div"></div>
+        </div>
+
+        <div class="wg-filter-main-div"></div>
+        <div id="wg-modal-inner-content">
+          <div class="show-title"></div>
+          <div class="modal-button-div"></div>
+        </div>
+        <div id="wg-isLogin-modal"></div>
+      </div>
+      <p class="powered-by-text"></p>
+    </div>
+  </div>
+</div>
+
+<!-- This is drawer -->
+<div class="overlayy" onclick="closeNav()">
+  <span></span>
+</div>
+<div id="mySidenav" class="sidenav">
+  <h2 class="drawer-text"></h2>
+  <div class="closebtn" onclick="closeNav()"></div>
+   {% comment %} <i class="fa fa-times closebtn" aria-hidden="true"  onclick="closeNav()"></i> {% endcomment %}
+  <div class="swlb-div"></div>
+  <div class="drawer-main"></div>
+  <div class="drawer-button-div"></div>
+  <div id="wg-isLogin-drawer"></div>
+</div>
+
+<div id="wg-myModalD" class="wg-modalD">
+  <div class="wg-modal-content1">
+    <span class="closeD">&times;</span>
+    <div id="main-Modal-form1">
+      <span class="sharable-link-heading"></span>
+      <span class="modal-inside"></span>
+      <br>
+    </div>
+  </div>
+</div>
+  <!-- This is share wishlist modal -->
+  <div id="wg-myModal1" class="wg-modal1">
+    <div class="wg-modal-content1">
+      <div class="close1"></div>
+      <div id="main-Modal-form1">
+        <span class="sharable-link-heading"></span>
+        <span class="modal-inside"></span>
+        <br>
+      </div>
+    </div>
+  </div>
+<!-- This is share wishlist via email modal -->
+<div id="myshareModal">
+    <div class="modal-share-content"></div>
+  <div class="successDiv">
+    {% comment %} <i class="fa fa-times closeByShareModal" aria-hidden="true"  onclick="closeShareModal()"></i> {% endcomment %}
+      <div class="closeByShareModal" onclick="closeShareModal()"></div>
+      <div class="successInnerDiv"> </div>
+  </div> 
+</div>
+<!--Multi wishlist -->
+<div id="wg-multiWishlistMainDiv">
+  <div id="wg-multiWishlist_div">
+    <div class="wg-closeMultiwishlist"></div>
+    <div id="wg-multiWishlistInnerContent"></div>
+  </div>
+</div>
+<!-- This is alert -->
+<div class="our-sweetalert"></div>
+
+  <script>
+    const wfCurrencyType = '{{ shop.money_format }}';
+    const currentPermanentDomain =  '{{ shop.permanent_domain }}';
+    const currentLoginCustomerEmail = '{{ customer.email }}';
+    localStorage.setItem("customer-email", currentLoginCustomerEmail); 
+    const myPlan = parseInt('{{ app.metafields.wishlist-app.current-plan.value }}');
+    let customCodeUnfiltered = {{ app.metafields.wishlist-app.advance-setting.value }};
+    let customCode = JSON.parse(JSON.stringify(customCodeUnfiltered).replace(/~/g, "'"));
+    if (myPlan > 1) {
+    let styleTag = document.createElement("style");
+    styleTag.innerHTML = customCode.customCss;
+    document.getElementsByTagName("head")[0].appendChild(styleTag);
+    eval(customCode.customJs);
+
+    };
+     if (!document.querySelector("#wf-custom-Product")) {
+        var wfDiv = document.createElement('div');
+        // Set div id and data attribute
+        wfDiv.id = 'wf-custom-Product';
+        wfDiv.style.display ="none"
+        wfDiv.setAttribute('data-aj', '0');
+        wfDiv.setAttribute('data-product-handle','[]');
+        // Prepend the wfDiv to the body
+        document.body.prepend(wfDiv);
+    }
+ if (!document.querySelector("#wf-custom-button-Product")) {
+        var wfDiv = document.createElement('div');
+        // Set div id and data attribute
+        wfDiv.id = 'wf-custom-button-Product';
+        wfDiv.style.display ="none"
+        wfDiv.setAttribute('data-aj', '0');
+        wfDiv.setAttribute('data-product-handle','[]');
+        // Prepend the wfDiv to the body
+        document.body.prepend(wfDiv);
+    }
+  if(currentPermanentDomain === 'l-a-girl-cosmetics.myshopify.com'){
+    if (!document.querySelector("#wf-custom-Product-laGirlUsa")) {
+        var checkdiv = document.createElement('div');
+        // Set div id and data attribute
+        checkdiv.id = 'wf-custom-Product-laGirlUsa';
+        checkdiv.style.display ="none"
+        checkdiv.setAttribute('data-aj', '0');
+        checkdiv.setAttribute('data-product-handle','[]');
+        // Prepend the checkdiv to the body
+        document.body.prepend(checkdiv);
+    }
+  }
+</script>
+<script>
+    const trendingSection = document.getElementById('wishlist-guru-trending-widget');
+    if (!trendingSection) {
+        const script = document.createElement('script');
+        script.src = "{{ 'trending_widget.js' | asset_url }}";
+        script.defer = true;
+        document.body.appendChild(script);
+    }
+</script>
+<script src="{{ 'checkEvent.js' | asset_url }}" defer ></script>
+{% schema %}
+  {
+    "name": "App Configuration",
+    "target": "body",
+    "enabled_on": {
+      "templates": ["*"]
+    },
+    "settings": []
+  }
+{% endschema %}

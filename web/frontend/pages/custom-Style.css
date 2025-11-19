@@ -1,0 +1,5449 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+
+body {
+    font-family: 'Poppins' !important;
+    font-display: "swap" !important;
+
+}
+
+.custom-range-input2 {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1%;
+    width: 100%;
+}
+
+.Polaris-Box {
+    margin-bottom: 15px;
+}
+
+.range-width {
+    width: 60%;
+    margin-right: 1%;
+}
+
+.text-width {
+    width: 18%;
+    margin-right: 1%;
+
+}
+
+.text-pixel {
+    width: 20%;
+}
+
+
+/*************************************ICON*************************************/
+.iconPosRight {
+    flex-direction: row-reverse;
+}
+
+.colorAndInput {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.leftText {
+    justify-content: flex-start;
+}
+
+.rightText {
+    justify-content: flex-end;
+}
+
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.prev span:nth-child(2) {
+    display: none;
+}
+
+.next span:nth-child(2) {
+    display: none;
+}
+
+.pagination .page-item {
+    width: 30px;
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+}
+
+
+.wishlist-location-style .Polaris-Grid {
+    grid-template-columns: repeat(1, 1fr) !important;
+}
+
+.not-allowed-class {
+    cursor: not-allowed !important;
+}
+
+.disable-block77 {
+    pointer-events: none;
+    color: #9f9f9f;
+    /* background-color: gray; */
+    opacity: 0.6;
+    /* cursor: not-allowed !important; */
+    /* pointer-events: none !important; */
+    /* position: relative; */
+}
+
+.active {
+    background-color: rgb(171, 171, 171);
+    font-weight: 700;
+    /* border: 2px solid bla; */
+}
+
+.page-item.active span.visually-hidden {
+    display: none;
+}
+
+.page-item a {
+    text-decoration: none;
+    color: white;
+}
+
+.notificationToolTipCollapsible,
+.notificationToastCollapsible,
+.notificationTextCollapsible {
+    padding-left: 25px;
+}
+
+.customMediaCard .Polaris-MediaCard {
+    flex-direction: row-reverse !important;
+}
+
+.Polaris-MediaCard__MediaContainer:not(.Polaris-MediaCard--portrait) {
+    border-top-right-radius: 0.5rem !important;
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0.5rem !important;
+}
+
+.cursor-pointer .Polaris-Grid-Cell {
+    display: flex;
+    align-items: center;
+}
+
+.selectMsgLanguage {
+    background-color: red;
+    width: 30%;
+    position: absolute !important;
+}
+
+
+
+.Polaris-Page-Header__TitleWrapper {
+    text-align: center;
+    width: 100%;
+}
+
+
+.Polaris-Breadcrumbs__Breadcrumb {
+    z-index: 99;
+    background-color: white !important;
+    margin-top: -13px !important;
+    /* position: fixed !important; */
+}
+
+
+
+
+.langauge-page-main-div .custom-margin label {
+    padding-top: 15px;
+}
+
+
+/* 
+.Polaris-Tabs__Tab--selected {
+
+} */
+
+
+/* .notii .customColorBox:nth-child(2) {
+    top: -100px;
+} */
+
+
+
+
+.inputSearchCss {
+    background-color: white !important;
+    height: 35px;
+    /* width: 60%; */
+    /* margin-top: 10px; */
+    /* margin-bottom: 15px; */
+    border: 1px solid rgb(196, 196, 196);
+    border-radius: 5px;
+}
+
+.page-item {
+    border: 0px solid red !important;
+    box-shadow: 0px 0px 2px black;
+}
+
+.page-item a {
+    color: black !important;
+    width: 100%;
+    height: 100%;
+    /* display: contents; */
+    padding: 4px;
+}
+
+
+
+
+
+#get-support-page .Polaris-Box {
+    /* background-color: red !important; */
+    margin: 0px 100px 20px 100px;
+    /* padding: 50px; */
+}
+
+#get-support-page .Polaris-Box .Polaris-Box {
+    /* background-color: red !important; */
+    margin: 0px 0px;
+}
+
+
+.bold-word {
+    font-weight: bold;
+}
+
+.view-all-btn {
+    background-color: rgb(207, 205, 205);
+    color: black;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    border-radius: 5px;
+    margin-left: 120px;
+}
+
+.view-all-btn:hover {
+    background-color: black;
+    color: white;
+}
+
+.view-all {
+    margin-left: 120px !important;
+}
+
+.demoCar .Polaris-RadioButton {
+    position: relative;
+    top: 29px;
+}
+
+.recharts-cartesian-axis-ticks {
+    font-size: 12px;
+}
+
+.errorMessageColor {
+    color: red;
+}
+
+.customMediaCard img {
+    width: 100px;
+    height: 100p;
+    position: absolute;
+    top: 20%;
+    right: 10%;
+    /* transform: translate(-10%, -10%); */
+
+
+}
+
+
+/* ----------------------show text on hover---------------------- */
+
+
+
+/* WF Dashboard Style */
+
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 15px;
+    line-height: 24px;
+    color: #7F7F7F;
+    letter-spacing: 0.3px;
+    font-weight: 300;
+    font-family: "Poppins", Arial, Helvetica, sans-serif;
+}
+
+.wf-dashboard {
+    background: #e0e7ef;
+}
+
+.wf-dashboard .Polaris-Page--fullWidth {
+    padding: 40px 70px 70px;
+}
+
+.wf-dashboard .Polaris-Box {
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    border-radius: 0;
+    box-shadow: none;
+    border: none;
+    overflow: visible;
+}
+
+.wf-dashboard .Polaris-Page-Header__TitleWrapper {
+    text-align: left;
+}
+
+.wf-dashboard h1.Polaris-Header-Title,
+.wf-dashboard-box .custom-margin h2,
+.pricing-plan-table h2,
+.wf-dashboard-analytic h2,
+.wf-dashboard h2 {
+    margin: 0;
+    font-size: 18px;
+    line-height: 28px;
+    color: #04468F;
+    letter-spacing: 0.5px;
+    font-weight: 700;
+    text-transform: capitalize;
+    padding: 0 0 5px;
+}
+
+.wf-dashboard h2 {
+    font-size: 16px;
+    line-height: 26px;
+    /* text-transform: none; */
+}
+
+.wf-dashboard .Polaris-Header-Title__SubTitle {
+    margin: 0;
+}
+
+.wf-dashboard .Polaris-Header-Title__SubTitle {
+    font-size: 15px;
+    line-height: 24px;
+    color: #7F7F7F;
+    letter-spacing: 0.3px;
+    font-weight: 300;
+}
+
+.enable-theme {
+    border: solid red;
+    border-width: 0px 0px 4px 0px;
+    border-radius: 100px;
+    background: #F88763;
+    color: #fff;
+    width: 100%;
+    max-width: 200px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: auto;
+    min-width: auto;
+    padding: 15px 25px;
+    transition: all 0.3ms ease-in-out;
+}
+
+.enable-theme:hover,
+.enable-theme:focus {
+    background: red;
+    border-color: black;
+}
+
+
+.enable-app button,
+.disable-app button {
+    margin-left: 5px;
+    width: 100%;
+}
+
+
+
+.wf-dashboard .enable-app button[type="button"],
+.wf-dashboard .disable-app button[type="button"],
+.wf-dashboard-box-inner button[type="button"] {
+    border: solid #E46138;
+    border-width: 0px 0px 4px 0px;
+    border-radius: 100px;
+    background: #F88763;
+    color: #fff;
+    width: 100%;
+    /* max-width: 200px; */
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: auto;
+    min-width: 10rem;
+    padding: 15px 25px;
+    transition: all 0.3ms ease-in-out;
+}
+
+.wf-dashboard .enable-app button[type="button"]:hover,
+.wf-dashboard .enable-app button[type="button"]:focus {
+    background: #E46138;
+    border-color: #F88763;
+}
+
+.wf-dashboard .enable-app button[type="button"] .Polaris-Button__Text,
+.wf-dashboard .disable-app button[type="button"] .Polaris-Button__Text,
+.wf-dashboard-box-inner button[type="button"] .Polaris-Button__Text {
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    font-family: 'Poppins';
+    line-height: 13px;
+    color: #fff;
+}
+
+.wf-dashboard .disable-app button[type="button"] {
+    border-color: #1A4193;
+    background: #4867A9;
+}
+
+.wf-dashboard .disable-app button[type="button"]:hover,
+.wf-dashboard .disable-app button[type="button"]:focus {
+    background: #4867A9;
+    border-color: #1A4193;
+}
+
+/* zoom in effect for enable button */
+@keyframes wfqZoomInOut {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+        /* Zoom in */
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.wfq-zoom-button button {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    animation: wfqZoomInOut 1.2s infinite ease-in-out;
+    transition: transform 0.3s;
+}
+
+
+
+
+
+
+/* oikikik,olo */
+.wf-style-wishbtn.wfq-promo-code-box .disable-app button[type="button"]:hover,
+.wf-style-wishbtn.wfq-promo-code-box .disable-app button[type="button"]:focus {
+    background: #fff;
+    border-color: #FF56A5;
+    color: #FF56A5;
+    border: 2px solid;
+}
+
+.wf-style-wishbtn.wfq-promo-code-box .disable-app button[type="button"]:hover span.Polaris-Button__Text,
+.wf-style-wishbtn.wfq-promo-code-box .disable-app button[type="button"]:focus span.Polaris-Button__Text {
+    color: #FF56A5;
+}
+
+.wf-dashboard-box-inner button[type="button"] {
+    border: 2px solid #4867A9;
+    max-width: 160px;
+    box-shadow: none;
+    background: transparent;
+    margin: 0 0 0 auto;
+}
+
+.wf-dashboard-box-inner button[type="button"] .Polaris-Button__Text {
+    color: #4867A9;
+}
+
+.wf-dashboard-box-inner button[type="button"]:hover,
+.wf-dashboard-box-inner button[type="button"]:focus {
+    background: #4867A9;
+    border-color: transparent;
+}
+
+.wf-dashboard-box-inner button[type="button"]:hover .Polaris-Button__Text,
+.wf-dashboard-box-inner button[type="button"]:focus .Polaris-Button__Text {
+    color: #fff;
+}
+
+.wf-dashboard .custom-margin span,
+.wf-dashboard-box-inner p span,
+.wf-dashboard-analytic h3,
+.wf-dashboard-analytic h5 {
+    margin: 0 !important;
+    font-size: 15px;
+    line-height: 24px;
+    color: #012167;
+    font-weight: 600;
+    padding: 0 0 5px;
+}
+
+.wf-dashboard .Polaris-ActionMenu-SecondaryAction .enable-theme-secondary button[type="button"] {
+    box-shadow: none !important;
+    background: #65378B !important;
+    border-color: #7F50A7 !important;
+    outline: none;
+    border-radius: 100px !important;
+}
+
+.wf-dashboard .Polaris-ActionMenu-SecondaryAction .enable-theme-secondary button[type="button"]:hover,
+.wf-dashboard .Polaris-ActionMenu-SecondaryAction .enable-theme-secondary button[type="button"]:focus {
+    background: #7F50A7 !important;
+    border-color: #65378B !important;
+}
+
+
+
+/* .wf-dashboard .custom-margin span {
+    padding: 0 !important;
+
+} */
+
+
+.wf-dashboard h3,
+#PolarisPortalsContainer h2,
+#PolarisPortalsContainer caption.Polaris-DatePicker__Title {
+    font-size: 15px;
+    line-height: 24px;
+    color: #012167;
+    font-weight: 600;
+}
+
+.wf-dashboard .custom-margin p,
+.wf-dashboard-box-inner p,
+.wf-help-dashboard p,
+.wf-dashboard-analytic p,
+.wf-dashboard p,
+.wf-dashboard-shareWishlist ul li {
+    font-size: 14px;
+    line-height: 21px;
+    font-weight: 400;
+    color: #666666;
+}
+
+.wf-dashboard .custom-margin p.plan-span span {
+    font-weight: 700;
+    color: #666666;
+}
+
+.wf-dashboard .Polaris-Page-Header__Row {
+    padding: 0 0 40px;
+}
+
+.wf-dashboard-box {
+    background: #fff;
+    padding: 35px 40px 20px;
+    border-radius: 14px;
+    margin: 0 0 30px;
+}
+
+.wf-dashboard-box .custom-margin,
+.wf-dashboard-buttonSetting .custom-margin {
+    padding: 0 0 20px;
+}
+
+.wf-dashboard-box .Polaris-ButtonGroup__Item button,
+.wf-help-dashboard button[type="button"],
+.lock-minor button[type="button"],
+.pricing-plan-table button[type="button"],
+.overview-main select,
+.overview-main button[type="button"],
+.wg-style-tableHeading-wdt button[type="button"],
+.analytic-view-btn button[type="button"],
+#PolarisPortalsContainer .Polaris-Button--primary,
+#PolarisPortalsContainer .Polaris-Modal-Dialog .Polaris-HorizontalStack .Polaris-Button,
+.upgradeButton {
+    border-radius: 100px;
+    height: 45px;
+    /* width: 100%;
+     max-width: 160px; */
+    min-width: 10rem;
+    min-height: auto;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: none;
+    transition: all 0.3ms ease-in-out;
+    color: #fff;
+}
+
+.wf-dashboard-boxplain .Polaris-ButtonGroup__Item:nth-child(1) button,
+.pricing-plan-table button[type="button"],
+.overview-main button[type="button"],
+.wg-style-tableHeading-wdt button[type="button"],
+.analytic-view-btn button[type="button"],
+#PolarisPortalsContainer .Polaris-Button--primary,
+#PolarisPortalsContainer .Polaris-Modal-Dialog .Polaris-HorizontalStack .Polaris-Button {
+    background: #4867A9;
+    border: solid #1A4193;
+    border-width: 0px 0px 4px;
+}
+
+.wf-dashboard-boxplain .Polaris-ButtonGroup__Item:nth-child(1) button:hover,
+.wf-dashboard-boxplain .Polaris-ButtonGroup__Item:nth-child(1) button:focus,
+.pricing-plan-table button[type="button"]:hover,
+.pricing-plan-table button[type="button"]:focus,
+.overview-main button[type="button"]:hover,
+.wg-style-tableHeading-wdt button[type="button"]:hover,
+.wg-style-tableHeading-wdt button[type="button"]:focus,
+.overview-main button[type="button"]:focus,
+.analytic-view-btn button[type="button"]:hover,
+.analytic-view-btn button[type="button"]:focus,
+#PolarisPortalsContainer .Polaris-Button--primary:hover,
+#PolarisPortalsContainer .Polaris-Button--primary:focus,
+#PolarisPortalsContainer .Polaris-Modal-Dialog .Polaris-HorizontalStack .Polaris-Button:hover,
+#PolarisPortalsContainer .Polaris-Modal-Dialog .Polaris-HorizontalStack .Polaris-Button:focus {
+    background: #1A4193;
+    border-color: #4867A9;
+}
+
+.wf-dashboard-box .Polaris-ButtonGroup__Item button .Polaris-Button__Text,
+.wf-help-dashboard button[type="button"] .Polaris-Button__Text,
+.pricing-plan-table button[type="button"] .Polaris-Button__Text,
+.overview-main select,
+.overview-main button[type="button"] .Polaris-Button__Text,
+.wg-style-tableHeading-wdt button[type="button"] .Polaris-Button__Text,
+.analytic-view-btn button[type="button"] .Polaris-Button__Text,
+.wf-style-wishbtn ul.Polaris-Tabs button[type="button"] span,
+#PolarisPortalsContainer .Polaris-Button--primary .Polaris-Button__Text,
+#PolarisPortalsContainer .Polaris-Modal-Dialog .Polaris-HorizontalStack .Polaris-Button .Polaris-Button__Text {
+    text-transform: uppercase;
+    font-size: 13px;
+    line-height: 14px;
+    letter-spacing: 0.5px;
+    font-weight: 700;
+}
+
+.wf-dashboard-boxplain .Polaris-ButtonGroup__Item:nth-child(1) button .Polaris-Button__Text,
+.pricing-plan-table button[type="button"] .Polaris-Button__Text {
+    color: #fff;
+}
+
+.wf-dashboard-boxplain .Polaris-ButtonGroup__Item:nth-child(2) button,
+.pricing-plan-table .highLight_div button[type="button"],
+.overview-main select {
+    border: 2px solid #4867A9;
+}
+
+.wf-dashboard-boxplain .Polaris-ButtonGroup__Item:nth-child(2) button:hover,
+.wf-dashboard-boxplain .Polaris-ButtonGroup__Item:nth-child(2) button:focus,
+.pricing-plan-table .highLight_div button[type="button"]:hover,
+.pricing-plan-table .highLight_div button[type="button"]:focus {
+    background: #4867A9;
+    border-color: transparent;
+}
+
+.wf-dashboard-boxplain .Polaris-ButtonGroup__Item:nth-child(2) button .Polaris-Button__Text,
+.pricing-plan-table .highLight_div button[type="button"] .Polaris-Button__Text {
+    color: #4867A9;
+}
+
+.pricing-plan-table .highLight_div button[type="button"] .Polaris-Button__Text {
+    color: #FF56A5;
+}
+
+.wf-dashboard-boxplain .Polaris-ButtonGroup__Item:nth-child(2) button:hover .Polaris-Button__Text,
+.wf-dashboard-boxplain .Polaris-ButtonGroup__Item:nth-child(2) button:focus .Polaris-Button__Text,
+.pricing-plan-table .highLight_div button[type="button"]:hover .Polaris-Button__Text,
+.pricing-plan-table .highLight_div button[type="button"]:focus .Polaris-Button__Text {
+    color: #fff;
+}
+
+.wf-dashboard-boxplain .Polaris-ButtonGroup__Item:nth-child(2) button .Polaris-Button__Text svg {
+    display: none;
+}
+
+.new-dash-bg {
+    background-color: #d7e2f3;
+    padding: 24px;
+    border-radius: 20px;
+}
+
+.wf-new-dashboard .wf-dashboard-box {
+    margin: 0 0 0px;
+}
+
+
+.wf-dashboard-box .plan-div {
+    padding: 20px;
+    border-radius: 20px;
+    background: #F4F4F4;
+    max-width: 280px;
+    margin: 0 0 0 auto;
+}
+
+.wf-dashboard-box .plan-div>.custom-margin {
+    padding: 0 0 10px;
+    text-align: right;
+    font-size: 15px;
+    line-height: 22px;
+    font-weight: 500;
+    color: #9C9C9C;
+}
+
+.wf-dashboard-box .plan-div h5 {
+    text-align: left;
+    text-transform: uppercase;
+    color: #fff;
+    padding: 40px 40px 40px 100px;
+    border-radius: 12px;
+    font-size: 20px;
+    line-height: 22px;
+    letter-spacing: 1px;
+    font-weight: 700;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3ms ease-in-out;
+}
+
+.wf-dashboard-box .premium_plan_selected .plan-div h5 {
+    background: linear-gradient(94.73deg, #EFB94C 3.05%, #DA914C 48.41%, #AF3344 96.57%);
+}
+
+.wf-dashboard-box .premium_plan_selected .plan-div h5:hover,
+.wf-dashboard-box .premium_plan_selected .plan-div h5:focus {
+    background: linear-gradient(94.73deg, #AF3344 3.05%, #DA914C 48.41%, #EFB94C 96.57%);
+}
+
+/* ------------here we will provide css for pro plan------------ */
+
+.wf-dashboard-box .pro_plan_selected .plan-div h5 {
+    /* background: linear-gradient(94.73deg, #A9F1DF 3.05%, #faaaaa 48.41%, #FFBBBB 96.57%); */
+    background: linear-gradient(94.73deg, #f8aad1 3.05%, #ff4ea7 48.41%, #f1298d 96.57%);
+}
+
+.wf-dashboard-box .pro_plan_selected .plan-div h5:hover,
+.wf-dashboard-box .pro_plan_selected .plan-div h5:focus {
+    /* background: linear-gradient(94.73deg, #FFBBBB 3.05%, #faaaaa 48.41%, #A9F1DF 96.57%); */
+    background: linear-gradient(94.73deg, #f1298d 3.05%, #ff4ea7 48.41%, #f8aad1 96.57%);
+}
+
+
+.wf-dashboard-box .free_plan_selected .plan-div h5 {
+    background: linear-gradient(95.06deg, #AECA94 5.47%, #89C77B 48.67%, #1AB77F 94.55%);
+}
+
+.wf-dashboard-box .free_plan_selected .plan-div h5:hover,
+.wf-dashboard-box .free_plan_selected .plan-div h5:focus {
+    background: linear-gradient(95.06deg, #1AB77F 5.47%, #89C77B 48.67%, #AECA94 94.55%);
+}
+
+.wf-dashboard-box .basic_plan_selected .plan-div h5 {
+    background: linear-gradient(94.62deg, #4FC5E1 4.25%, #4E9ED5 48.96%, #3F54A4 96.43%);
+}
+
+.wf-dashboard-box .basic_plan_selected .plan-div h5:hover,
+.wf-dashboard-box .basic_plan_selected .plan-div h5:focus {
+    background: linear-gradient(94.62deg, #3F54A4 4.25%, #4E9ED5 48.96%, #4FC5E1 96.43%);
+}
+
+.wf-dashboard-box .plan-div h5::before {
+    content: '';
+    position: absolute;
+    left: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 60px;
+    height: 60px;
+}
+
+.wf-dashboard-box .premium_plan_selected .plan-div h5::before {
+    background: url(../assets/premium-icon.svg) no-repeat;
+    background-size: cover;
+}
+
+.wf-dashboard-box .pro_plan_selected .plan-div h5::before {
+    background: url(../assets/premium-icon.svg) no-repeat;
+    background-size: cover;
+}
+
+.wf-dashboard-box .free_plan_selected .plan-div h5::before {
+    background: url('../assets/free-plan-icon.svg') no-repeat;
+    background-size: cover;
+}
+
+.wf-dashboard-box .basic_plan_selected .plan-div h5::before {
+    background: url('../assets/basic-plan-icon.svg') no-repeat;
+    background-size: cover;
+}
+
+.wf-dashboard-box .Polaris-Grid {
+    align-items: center;
+}
+
+.wf-dashboard-box-inner p span {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0px;
+}
+
+.wf-dashboard-box-inner .mandatorySpan img {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    padding: 8px;
+    background: #C9C9C9;
+}
+
+.wf-dashboard-box-inner .mandatorySpan img.greenIcon {
+    background: #22B87E;
+}
+
+.wf-dashboard-box-inner .mandatorySpan img.greyIcon {
+    background: #C9C9C9;
+}
+
+.wf-dashboard-box-inner {
+    margin: 0 10px;
+    transition: all 0.3ms ease-in-out;
+}
+
+/* .wf-dashboard-box-inner:hover,
+.wf-dashboard-box-inner:focus {
+    background: #f9f9f9;
+} */
+
+.wf-dashboard-box-inner>.Polaris-Box {
+    padding: 25px 15px;
+    border-bottom: 1px solid #D9D9D9;
+}
+
+.wf-dashboard-box-inner:last-child>.Polaris-Box {
+    border: none;
+}
+
+.wf-dashboard-box-inner .mandatorySpan {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.wf-dashboard-box-inner .Polaris-Grid {
+    align-items: flex-start;
+}
+
+.basic-plan,
+.pro-plan {
+    background: linear-gradient(94.62deg, #4FC5E1 4.25%, #4E9ED5 48.96%, #3F54A4 96.43%);
+    border-radius: 15px;
+    width: 100%;
+    max-width: 65px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #fff !important;
+    cursor: pointer;
+    transition: all 0.3ms ease-in-out;
+}
+
+.basic-plan:hover,
+.basic-plan:focus {
+    background: linear-gradient(94.62deg, #3F54A4 4.25%, #4E9ED5 48.96%, #4FC5E1 96.43%);
+}
+
+.pro-plan {
+    background: linear-gradient(94.73deg, #EFB94C 3.05%, #DA914C 48.41%, #AF3344 96.57%);
+    max-width: 90px;
+}
+
+.new-pro-plan {
+    background: linear-gradient(94.73deg, #f8aad1 3.05%, #ff4ea7 48.41%, #f1298d 96.57%);
+    max-width: 50px;
+}
+
+.new-pro-plan:hover,
+.new-pro-plan:focus {
+    background: linear-gradient(94.73deg, #f1298d 3.05%, #ff4ea7 48.41%, #f8aad1 96.57%) !important;
+}
+
+.pro-plan:hover,
+.pro-plan:focus {
+    background: linear-gradient(94.73deg, #AF3344 3.05%, #DA914C 48.41%, #EFB94C 96.57%);
+}
+
+.wf-help-dashboard,
+.wf-dashboard-report .wf-analatic-footer .wf-help-dashboard {
+    background: #F8F2FD;
+    margin: 0;
+    border-radius: 30px;
+    position: relative;
+    padding: 40px !important;
+}
+
+.docs-link {
+    background-color: inherit !important;
+    position: absolute;
+    margin-top: -7px;
+}
+
+.wf-help-dashboard::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 200px;
+    height: 160px;
+    background: url('../assets/help-heart-icon.svg') no-repeat bottom right;
+    background-size: 100%;
+}
+
+.wf-help-dashboard .custom-margin {
+    padding: 0 !important;
+}
+
+.wf-help-dashboard .custom-margin h2 {
+    color: #7F50A7;
+    /* text-transform: none; */
+    padding: 0 0 10px;
+}
+
+.wf-help-dashboard .help-text-paragraph {
+    padding: 0 0 25px;
+    text-align: justify;
+}
+
+.wf-help-dashboard-btn {
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+    gap: 10px;
+    /* max-width: 340px; */
+}
+
+.wf-help-dashboard button[type="button"],
+.lock-minor button[type="button"],
+.upgradeButton {
+    border: solid #65378B;
+    border-width: 0px 0px 4px;
+    background: #7F50A7;
+    /* padding: 10px; */
+}
+
+.for-defaut-dashboard .lock-minor button[type="button"] .Polaris-Button__Text {
+    color: #4276B0 !important;
+}
+
+.for-defaut-dashboard .lock-minor button[type="button"] .Polaris-Button__Text:hover {
+    color: white !important;
+}
+
+.wf-help-dashboard button[type="button"] .Polaris-Button__Text,
+.wf-help-dashboard button[type="button"] .Polaris-Button__Text a,
+.lock-minor button[type="button"] .Polaris-Button__Text,
+.upgradeButton {
+    font-family: 'Poppins';
+    color: #fff;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.wf-help-dashboard button[type="button"]:hover,
+.wf-help-dashboard button[type="button"]:focus,
+.lock-minor button[type="button"]:hover,
+.lock-minor button[type="button"]:focus,
+.upgradeButton:hover,
+.upgradeButton:focus {
+    background: #65378B;
+    border-color: #7F50A7;
+}
+
+.wf-dashboard-box-inner .wf-quick-access {
+    background: #F4F4F4;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.wf-dashboard-box-inner .wf-quick-access img {
+    width: 20px;
+    height: 20px;
+    border-radius: 0;
+    padding: 0;
+    background: transparent;
+}
+
+.lock-minor button[type="button"] .Polaris-Button__Text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.lock-minor button[type="button"] .Polaris-Button__Text svg {
+    width: 18px;
+    fill: #fff;
+}
+
+/** Plane Dashboard page **/
+
+.wf-dashboard-plane .note-div {
+    padding: 20px;
+    background: #EDF5FF;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin: 0 0 30px;
+}
+
+.wf-dashboard-plane .note-div span {
+    background: #EDB64C;
+    border-radius: 11px;
+    max-width: 80px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    font-size: 16px;
+    line-height: 18px;
+    font-weight: 600;
+    color: #5B3603;
+    text-transform: uppercase;
+}
+
+.wf-dashboard-plane .note-div .Polaris-Text--headingXs {
+    font-size: 15px;
+    line-height: 22px;
+    color: #333333;
+    font-weight: 400;
+    text-transform: none;
+}
+
+.wf-dashboard-plane .toggle-paid-inner,
+.overview-main1 .Polaris-ButtonGroup,
+.wf-style-wishbtn ul.Polaris-Tabs {
+    border: 2px solid #4276B0;
+    border-radius: 100px;
+    padding: 8px;
+    height: 60px;
+    width: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+}
+
+.wf-dashboard-plane .toggle-paid-inner label,
+.overview-main1 .Polaris-ButtonGroup button[type="button"],
+.wf-style-wishbtn ul.Polaris-Tabs button[type="button"] {
+    font-size: 15px;
+    line-height: 17px;
+    font-weight: 600;
+    text-transform: capitalize;
+    letter-spacing: 0.2px;
+    text-align: center;
+    color: #4276B0;
+    border-radius: 100px;
+    max-width: 100%;
+    width: 100%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.overview-main1 .Polaris-ButtonGroup button[type="button"],
+.wf-style-wishbtn ul.Polaris-Tabs button[type="button"] {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+.wf-dashboard-plane .toggle-paid-inner label.activeToggle,
+.overview-main1 .Polaris-ButtonGroup button[aria-pressed="true"],
+.wf-style-wishbtn ul.Polaris-Tabs button[aria-selected="true"] {
+    background: linear-gradient(104.62deg, #9ECCFF 12.23%, #4276B0 85.84%);
+    color: #fff;
+}
+
+.wf-dashboard-plane .toggle-paid-inner label.activeToggle:hover,
+.wf-dashboard-plane .toggle-paid-inner label.activeToggle:focus,
+.overview-main1 .Polaris-ButtonGroup button[aria-pressed="true"]:hover,
+.overview-main1 .Polaris-ButtonGroup button[aria-pressed="true"]:focus,
+.wf-style-wishbtn ul.Polaris-Tabs button[aria-selected="true"]:hover,
+.wf-style-wishbtn ul.Polaris-Tabs button[aria-selected="true"]:focus {
+    background: linear-gradient(104.62deg, #4276B0 12.23%, #9ECCFF 85.84%);
+}
+
+.wf-dashboard-plane .toggle-paid-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin: 0 0 30px;
+}
+
+.wf-dashboard-plane .toggle-paid-section p {
+    font-size: 14px;
+    line-height: 16px;
+    color: #4276B0;
+    font-weight: 400;
+    letter-spacing: 0.2px;
+}
+
+.wf-dashboard-plane .toggle-paid-section p span {
+    font-weight: 700;
+}
+
+.pricing-plan-table,
+#boxx-shadow .Polaris-Grid,
+.analytic-graph-bar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    align-items: flex-start;
+    padding: 0 0 45px;
+}
+
+.pricing-plan-table .Polaris-Grid-Cell,
+#boxx-shadow .Polaris-Grid-Cell,
+.analytic-graph-bar .box-shadow,
+.wf-wishlist-preview .wf-wishprev-inner,
+.wf-style-wishbtn {
+    background: #fff;
+    padding: 26px 35px;
+    border-radius: 50px;
+    position: relative;
+    grid-column-end: auto;
+}
+
+.pricing-plan-table .Polaris-Grid-Cell {
+    padding: 20px 20px;
+}
+
+
+.pricing-plan-table .Polaris-Grid-Cell::after,
+#boxx-shadow .Polaris-Grid-Cell::after,
+.analytic-graph-bar .box-shadow::after,
+.customer-recently-inner .Polaris-LegacyCard::after,
+.wf-wishlist-preview .wf-wishprev-inner::after,
+.wf-style-wishbtn::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -18px;
+    transform: translateX(-50%);
+    background: radial-gradient(50% 50% at 50% 50%, #3E6EA6 0%, #D9D9D9 100%);
+    height: 20px;
+    width: 250px;
+    border-radius: 100%;
+    opacity: 0.28;
+}
+
+.analytic_last_tables {
+    background-color: white;
+    border-radius: 20px;
+}
+
+.pricing-plan-table .Polaris-LegacyCard {
+    background: transparent;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.pricing-plan-table .Polaris-LegacyCard__Section {
+    padding: 0;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+}
+
+.pricing-plan-table h2 {
+    text-align: center;
+    padding: 0 0 8px;
+}
+
+.pricing-plan-table img {
+    display: block;
+    margin: 0 auto 12px;
+}
+
+.pricing-plan-table .pricing-price {
+    width: 100%;
+    max-width: 230px;
+    height: 65px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 42px;
+    font-size: 26px;
+    line-height: 28px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: #fff;
+    border-radius: 20px;
+    position: relative;
+}
+
+/* 
+.pricing-plan-table .freePlanBox .pricing-price {
+    background: linear-gradient(95.06deg, #AECA94 5.47%, #89C77B 48.67%, #1AB77F 94.55%);
+}
+
+.pricing-plan-table .basicPlanBox .pricing-price {
+    background: linear-gradient(94.62deg, #4FC5E1 4.25%, #4E9ED5 48.96%, #3F54A4 96.43%);
+}
+
+.pricing-plan-table .proPlanBox .pricing-price {
+    background: linear-gradient(94.73deg, #f8aad1 3.05%, #ff4ea7 48.41%, #f1298d 96.57%);
+}
+
+.pricing-plan-table .premiumPlanBox .pricing-price {
+    background: linear-gradient(94.73deg, #EFB94C 3.05%, #DA914C 48.41%, #AF3344 96.57%);
+} */
+/* 
+.pricing-plan-table .pricing-price::after {
+    content: "";
+    position: absolute;
+    bottom: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 230px;
+    height: 27px;
+    border-radius: 100%;
+    opacity: 0.3;
+} */
+/* 
+.pricing-plan-table .freePlanBox .pricing-price::after {
+    background: radial-gradient(50% 50% at 50% 50%, #80C57B 0%, #FFFFFF 100%);
+}
+
+.pricing-plan-table .basicPlanBox .pricing-price::after {
+    background: radial-gradient(50% 50% at 50% 50%, #4EA3D6 0%, #FFFFFF 100%);
+}
+
+.pricing-plan-table .premiumPlanBox .pricing-price::after {
+    background: radial-gradient(50% 50% at 50% 50%, #D98F4C 0%, #FFFFFF 100%);
+} */
+
+.pricing-plan-table ul {
+    margin: 0;
+    padding: 0 0 56px;
+    list-style: none;
+}
+
+.pricing-plan-table ul li {
+    font-size: 14px;
+    line-height: 24px;
+    color: #666666;
+    font-weight: 500;
+    position: relative;
+    padding: 0 0 2px 22px;
+}
+
+.pricing-plan-table ul li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 5px;
+    width: 14px;
+    height: 14px;
+    background: url('../assets/pricing-list-icon.svg') no-repeat center left;
+    background-size: cover;
+}
+
+.pricing-plan-table ul li.last-li {
+    color: #FF56A5;
+}
+
+.pricing-plan-table ul li.last-li::before {
+    display: none;
+}
+
+.pricing-plan-table .basicPlanBox ul li::before {
+    filter: brightness(0) saturate(100%) invert(74%) sepia(13%) saturate(1964%) hue-rotate(153deg) brightness(92%) contrast(90%);
+}
+
+.pricing-plan-table .proPlanBox ul li::before {
+    filter: brightness(0) saturate(100%) invert(85%) sepia(80%) saturate(2803%) hue-rotate(280deg) brightness(98%) contrast(98%);
+}
+
+.pricing-plan-table .premiumPlanBox ul li::before {
+    filter: brightness(0) saturate(100%) invert(89%) sepia(27%) saturate(2328%) hue-rotate(321deg) brightness(94%) contrast(89%);
+}
+
+.pricing-plan-table .icon_div {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+}
+
+.pricing-plan-table .icon_div img {
+    margin: 0;
+}
+
+.pricing-plan-table .highLight_div button[type="button"] {
+    background: transparent;
+}
+
+.pricing-plan-table button[type="button"] {
+    position: absolute;
+    left: 50%;
+    bottom: 25px;
+    transform: translateX(-50%);
+}
+
+.pricing-plan-table .basicClass ul {
+    padding: 0 0 60px;
+}
+
+.pricing-plan-table .premiumPlanBox ul {
+    padding: 0 0 15px;
+}
+
+.pricing-plan-table .premiumPlanBox h4,
+.pricing-plan-table .proPlanBox h4 {
+    font-size: 12px;
+    text-transform: capitalize;
+    font-weight: 400;
+    color: #fff;
+    line-height: 16px;
+    height: 24px;
+    width: 100px;
+    border-radius: 6px;
+    background: #FF56A5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    margin: 0 auto 15px;
+    position: relative;
+}
+
+.pricing-plan-table .premiumPlanBox h4::before,
+.pricing-plan-table .premiumPlanBox h4::after,
+.pricing-plan-table .proPlanBox h4::before,
+.pricing-plan-table .proPlanBox h4::after {
+    content: "";
+    position: absolute;
+    left: -100%;
+    top: 50%;
+    width: 85px;
+    height: 1px;
+    background: #D9D9D9;
+}
+
+.pricing-plan-table .premiumPlanBox h4::after,
+.pricing-plan-table .proPlanBox h4::after {
+    left: auto;
+    right: -100%;
+}
+
+.pricing-plan-table .freePlanBox ul {
+    padding: 0 0 119px;
+}
+
+.pricing-plan-table .premiumPlanBox ul:last-child {
+    padding: 0 0 50px;
+}
+
+.pricing-plan-table .premiumPlanBox ul:last-child li::before {
+    filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(7485%) hue-rotate(118deg) brightness(87%) contrast(78%);
+}
+
+.talkUsDivParent {
+    background: #fff;
+    text-align: center;
+    border-radius: 30px;
+    max-width: 700px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.talkUsDivParent p {
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    color: #333333;
+}
+
+.talkUsDivParent p span {
+    font-weight: 700;
+    color: #7F50A7;
+}
+
+.talkUsDivParent img {
+    margin-right: 12px;
+}
+
+.talkUsDivParent a {
+    text-decoration: none;
+    background: linear-gradient(98.25deg, #7F50A7 13.02%, #6451A2 52.97%, #4D52A4 94.54%);
+    width: 100%;
+    max-width: 145px;
+    height: 45px;
+    color: #fff;
+    border-radius: 100px;
+    border: solid #2E3193;
+    border-width: 0px 0px 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 16px;
+    margin-left: 30px;
+}
+
+.talkUsDivParent a:hover,
+.talkUsDivParent a:focus {
+    background: linear-gradient(98.25deg, #4D52A4 13.02%, #6451A2 52.97%, #7F50A7 94.54%);
+}
+
+/** Analytic page **/
+
+.wf-dashboard-analytic h5 {
+    color: #4867A9;
+    padding: 0;
+}
+
+.wf-overview-inner {
+    padding: 20px 25px 45px;
+    background: #EDF5FF;
+    border-radius: 20px;
+    margin: 0 0 45px;
+}
+
+#boxx-shadow .Polaris-Grid {
+    grid-template-columns: repeat(4, 1fr);
+    align-items: normal;
+    text-align: center;
+    padding: 0;
+}
+
+
+/* 
+.wf-new-dashboard .Polaris-Grid {
+    grid-template-columns: none;
+} */
+
+
+#boxx-shadow .Polaris-Grid h6 {
+    font-size: 14px;
+    line-height: 24px;
+    color: #666666;
+    font-weight: 700;
+}
+
+#boxx-shadow .Polaris-Grid-Cell,
+.analytic-graph-bar .box-shadow,
+.wf-wishlist-preview .wf-wishprev-inner,
+.wf-style-wishbtn {
+    padding: 20px 25px;
+    border-radius: 20px;
+}
+
+#boxx-shadow .Polaris-Grid-Cell {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.wf-dashboard-analytic p {
+    padding: 0 0 5px;
+}
+
+.overview-main {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 0 20px;
+}
+
+.analytic-progress {
+    color: #65378B;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 14px;
+    text-align: right;
+}
+
+#boxx-shadow .Polaris-RangeSlider-SingleThumb {
+    padding-top: 10px;
+}
+
+.wf-dashboard-analytic h2 {
+    padding: 0;
+}
+
+.overview-main select {
+    outline: none;
+    color: #4867A9;
+    padding: 10px 15px;
+    font-family: 'Poppins';
+    font-weight: 600;
+    text-transform: none;
+    appearance: none;
+}
+
+.overview-select {
+    position: relative;
+}
+
+.overview-main .overview-select:after {
+    content: "";
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    width: 10px;
+    height: 10px;
+    border-right: 2px solid #4867A9;
+    border-top: 2px solid #4867A9;
+    transform: rotate(135deg);
+    cursor: pointer;
+}
+
+.overview-main select>option {
+    font-family: 'Poppins';
+    font-weight: 600;
+}
+
+.graphical-representation-dates {
+    padding: 20px 25px 45px;
+    background: #EDF5FF;
+    border-radius: 20px;
+    margin: 0 0 45px;
+}
+
+.graphical-representation-dates .analytic-graph-bar {
+    padding: 0;
+}
+
+.overview-main1 {
+    padding: 0 0 25px;
+}
+
+.overview-main1 h3 {
+    padding: 0 0 15px;
+    text-transform: capitalize;
+}
+
+.overview-main.overview-main1 .dates-for-graphical button[type="button"] {
+    margin: 0 0 0 auto;
+    min-width: 10rem;
+}
+
+.overview-main1 .Polaris-ButtonGroup {
+    height: 45px;
+    width: 180px;
+    border-width: 1px;
+}
+
+.overview-main1 .Polaris-ButtonGroup button[type="button"] {
+    max-width: 75px;
+    height: 35px;
+}
+
+.overview-main1 .Polaris-ButtonGroup .Polaris-ButtonGroup__Item {
+    width: 100%;
+    margin: 0;
+}
+
+.analytic-graph-bar,
+.customer-recently-table {
+    align-items: normal;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.new-graph-class {
+    align-items: normal;
+    grid-template-columns: repeat(1, 1fr) !important;
+}
+
+.analytic-graph-bar .box-shadow h3 {
+    padding: 0 0 15px;
+}
+
+.analytic-graph-bar .box-shadow .recharts-wrapper {
+    max-height: 100% !important;
+    max-width: 100% !important;
+    margin-top: -10px;
+}
+
+.analytic-content-btn {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.analytic-content-btn,
+.wf-recently-inner {
+    padding: 20px 25px 0;
+}
+
+.analytic-graph-bar .box-shadow {
+    width: 100%;
+}
+
+.analytic-graph-bar .recharts-legend-wrapper {
+    width: auto !important;
+    right: 0 !important;
+    top: -30px !important;
+    bottom: auto !important;
+    left: auto !important;
+}
+
+.analytic-graph-bar .recharts-legend-wrapper ul li {
+    margin-right: 0 !important;
+    background: transparent;
+    border: 1px solid #1A4193;
+    border-radius: 6px;
+    opacity: 1;
+    padding: 2px 10px;
+}
+
+.analytic-graph-bar .recharts-legend-wrapper ul li svg {
+    filter: brightness(0) saturate(100%) invert(17%) sepia(81%) saturate(1908%) hue-rotate(210deg) brightness(97%) contrast(94%);
+}
+
+.analytic-graph-bar .recharts-legend-wrapper ul li span {
+    color: #1A4193 !important;
+    font-size: 13px;
+    line-height: 13px;
+    font-weight: 600;
+}
+
+.analytic-graph-bar .box-shadow-totalWish ul li {
+    border: 1px solid #65378B;
+}
+
+.analytic-graph-bar .box-shadow-totalWish ul li svg {
+    filter: brightness(0) saturate(100%) invert(27%) sepia(12%) saturate(4207%) hue-rotate(236deg) brightness(92%) contrast(94%);
+}
+
+.analytic-graph-bar .box-shadow-totalWish ul li span {
+    color: #65378B !important;
+}
+
+.analytic-view-btn button[type="button"] {
+    min-width: 8rem;
+    height: 40px;
+}
+
+.customer-recently-table {
+    display: grid;
+    gap: 25px;
+}
+
+.customer-recently-table p {
+    min-height: 60px;
+}
+
+.customer-recently-table table thead tr {
+    background: #EDF5FF;
+}
+
+.customer-recently-table table thead tr th,
+#PolarisPortalsContainer .Polaris-Modal__Body table thead tr th {
+    background: transparent;
+    border: none;
+    padding: 15px 10px;
+    font-size: 13px;
+    line-height: 20px;
+    color: #04468F;
+    font-weight: 700;
+    text-align: center;
+    text-transform: capitalize;
+}
+
+.customer-recently-table table tbody tr {
+    background: transparent;
+    border: solid #e9e9e9;
+    border-width: 0px 0px 1px;
+}
+
+.customer-recently-table table tbody tr td,
+.customer-recently-table table tbody tr td span {
+    background: transparent !important;
+}
+
+.customer-recently-table table tbody tr td,
+.customer-recently-table table tbody tr td span,
+#PolarisPortalsContainer .Polaris-Modal__Body table tbody tr td button {
+    padding: 10px;
+    font-size: 13px;
+    line-height: 18px;
+    color: #666666;
+    font-weight: 500;
+    height: auto;
+    white-space: pre-line;
+    text-align: left;
+}
+
+.customer-recently-table table tbody tr td span {
+    display: inline-block;
+    text-decoration: none;
+}
+
+.customer-recently-table table tbody tr td:first-child,
+.customer-recently-table table tbody tr td:last-child {
+    text-align: center;
+}
+
+.customer-recently-table table tbody tr td img {
+    display: block;
+    margin: 0 auto;
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.customer-recently-inner .Polaris-LegacyCard {
+    border-radius: 20px;
+    position: relative;
+}
+
+.customer-recently-inner .Polaris-IndexTable__IndexTableWrapper {
+    border-radius: 0;
+}
+
+.customer-recently-table table tbody tr:hover,
+.customer-recently-table table tbody tr:focus {
+    background: #EDF5FF !important;
+}
+
+/** Button Setting Page **/
+
+.wf-dashboard-buttonSetting .Polaris-Frame {
+    background: transparent;
+}
+
+.wf-wishlist-preview {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 25px;
+    padding: 0 0 45px;
+}
+
+.wf-wishlist-preview .buttonsGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin: 5px 0 20px;
+}
+
+.wf-wishlist-preview .buttonsGrid label {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 10px;
+    padding: 0;
+}
+
+.wf-wishlist-preview .buttonsGrid label span {
+    margin: 0;
+}
+
+.wf-wishlist-preview .wf-wishprev-inner {
+    padding: 25px;
+}
+
+.wf-dashboard-buttonSetting h4,
+.wf-wishlist-range-box label,
+.border-input-field label {
+    font-size: 14px;
+    line-height: 22px;
+    color: #012167;
+    font-weight: 500;
+    padding: 0 0 5px;
+}
+
+.wf-wishlist-preview .Polaris-Select select,
+.wf-style-wishbtn .Polaris-Select select {
+    border: none;
+    padding: 10px;
+    border-radius: 0;
+}
+
+.wf-wishlist-preview .Polaris-Select .Polaris-Select__Content,
+.wf-style-wishbtn .Polaris-Select .Polaris-Select__Content {
+    border: 1px solid #D9D9D9;
+    border-radius: 6px;
+    padding: 10px;
+    min-height: auto;
+    box-shadow: none;
+}
+
+.wf-wishlist-preview .Polaris-Select .Polaris-Select__Content,
+.wf-wishlist-preview .Polaris-Select select>option,
+.wf-style-wishbtn .Polaris-Select .Polaris-Select__Content,
+.wf-style-wishbtn .Polaris-Select select>option {
+    font-size: 13px;
+    line-height: 18px;
+    color: #666666;
+    font-weight: 500;
+}
+
+.wf-wishlist-preview .Polaris-Select .Polaris-Select__Backdrop,
+.wf-style-wishbtn .Polaris-Select .Polaris-Select__Backdrop {
+    border: none;
+    background: transparent;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.wf-wishlist-preview .Polaris-Select__Input:focus-visible~.Polaris-Select__Backdrop::after,
+.wf-style-wishbtn .Polaris-Select__Input:focus-visible~.Polaris-Select__Backdrop::after {
+    display: none;
+}
+
+.wf-wishprev-inner .Polaris-Box img {
+    max-width: 150px;
+    margin: 0 auto 15px;
+    display: block;
+}
+
+.demoSpans button[type="button"] {
+    width: 100%;
+    border: 1px solid #D9D9D9;
+    border-radius: 0;
+    padding: 10px;
+}
+
+.demoSpans button[type="button"] .Polaris-Button__Text {
+    font-size: 14px;
+    line-height: 18px;
+    color: #333;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.wf-wishprev-inner .Polaris-Box h3 {
+    text-align: center;
+    padding: 0 0 5px;
+}
+
+.wf-wishprev-inner .product-price-priv {
+    text-align: center;
+    color: #65378B;
+    font-size: 15px;
+    line-height: 24px;
+    font-weight: 700;
+    padding: 0 0 5px;
+}
+
+.wf-product-color-varition {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 0 0 20px;
+}
+
+.wf-product-color-varition .Polaris-ButtonGroup {
+    margin: 0;
+    gap: 5px;
+}
+
+.wf-product-color-varition .Polaris-ButtonGroup__Item {
+    margin: 0;
+}
+
+.wf-product-color-varition .Polaris-ButtonGroup__Item button[type="button"] {
+    padding: 5px;
+    width: 16px;
+    height: 16px;
+    border: none;
+    box-shadow: none;
+    text-indent: -999px;
+    min-width: auto;
+    min-height: auto;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.wf-product-color-varition .Polaris-ButtonGroup__Item:nth-child(1) button[type="button"] {
+    background: #ff0000;
+}
+
+.wf-product-color-varition .Polaris-ButtonGroup__Item:nth-child(2) button[type="button"] {
+    background: #04468F;
+}
+
+.wf-product-color-varition .Polaris-ButtonGroup__Item:nth-child(3) button[type="button"] {
+    background: #000;
+}
+
+.wf-wishlist-preview .wf-wishprev-inner:last-child h2 {
+    text-align: center;
+}
+
+.wf-style-wishbtn {
+    margin: 0 0 45px;
+}
+
+.wf-style-wishbtn ul.Polaris-Tabs {
+    width: 100%;
+}
+
+.wf-style-wishbtn ul.Polaris-Tabs button[type="button"] {
+    margin: 0;
+}
+
+.wf-style-wishbtn ul.Polaris-Tabs button[type="button"] span {
+    color: #4276B0;
+}
+
+.wf-style-wishbtn ul.Polaris-Tabs button[type="button"] span::before,
+.wf-style-wishbtn ul.Polaris-Tabs button[type="button"] span::after {
+    display: none;
+}
+
+.wf-style-wishbtn ul.Polaris-Tabs button[aria-selected="true"] span {
+    color: #fff;
+}
+
+.wf-style-wishbtn .Polaris-Grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.wf-style-wishbtn .Polaris-Grid .Polaris-Grid-Cell {
+    grid-column-end: auto;
+}
+
+.wf-style-wishbtn .Polaris-TextField input[type="text"],
+.wf-style-wishbtn .Polaris-TextField input[type="number"],
+.wf-advanceSetting textarea {
+    border: 1px solid #D9D9D9;
+    border-radius: 6px;
+    padding: 10px;
+    font-size: 13px;
+    line-height: 18px;
+    color: #666666;
+    font-weight: 500;
+    min-height: auto;
+}
+
+.wf-style-wishbtn .Polaris-TextField .Polaris-TextField__Backdrop {
+    border: none;
+    background: transparent;
+    border-radius: 0;
+}
+
+.wf-style-wishbtn .Polaris-TextField .Polaris-TextField__Backdrop::after {
+    display: none;
+}
+
+.wf-style-wishbtn .color-selector {
+    height: 40px;
+    width: 45px;
+    border-radius: 6px;
+    cursor: pointer;
+    border: 1px solid #D9D9D9;
+}
+
+.wf-wishlist-range-box {
+    display: grid;
+    grid-template-columns: 3.8fr 0.2fr;
+    gap: 10px;
+    align-items: flex-end;
+    padding: 0 0 20px;
+}
+
+#add-to-wishlist-section .wf-wishlist-range-box,
+.wf-style-wishbtn .border-input-field.false .wf-wishlist-range-box,
+.wf-style-wishbtn .undefined.border-input-field .wf-wishlist-range-box,
+.disableEverything.border-input-field .wf-wishlist-range-box {
+    padding: 0;
+}
+
+.wf-style-wishbtn .wf-range-input {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.wf-style-wishbtn .wf-range-input .Polaris-TextField input[type="text"] {
+    width: 45px;
+    height: 40px;
+    text-align: center;
+}
+
+.wf-style-wishbtn .wf-range-input .Polaris-Select .Polaris-Select__Content {
+    padding: 5px 0px 5px 6px;
+    width: 45px;
+    height: 40px;
+}
+
+.wf-style-wishbtn .border-input-field {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    align-items: flex-end;
+    gap: 10px;
+}
+
+.wf-style-wishbtn .input-field-colorpicker {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.wf-style-wishbtn .input-field-colorpicker .Polaris-TextField input[type="text"] {
+    height: 40px;
+    width: 70px;
+    padding: 5px;
+}
+
+.wf-style-wishbtn .border-input-field.false,
+.wf-style-wishbtn .undefined.border-input-field,
+.disableEverything.border-input-field,
+.wf-style-wishbtn .border-input-field.border-input-field-full {
+    grid-template-columns: 1fr;
+    padding: 0 0 20px;
+}
+
+.wf-style-wishbtn .border-input-field-full .wf-wishlist-range-box {
+    padding: 0;
+}
+
+#add-to-cart-section.wf-style-wishbtn .Polaris-Grid,
+.wishlist-ui-grid2 .Polaris-Grid {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+#add-to-cart-section.wf-style-wishbtn {
+    margin: 0;
+}
+
+.disableEverything .wf-wishlist-range-box,
+.disableEverything.border-input-field {
+    opacity: 0.7;
+}
+
+.box-with-shadow {
+    box-shadow: 0px 0px 5px rgb(193, 193, 193);
+    padding: 15px;
+    border-radius: 10px;
+    height: auto;
+}
+
+.white-bg {
+    background-color: white;
+    padding: 15px 25px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px rgb(224, 224, 224);
+}
+
+.white-bg .Polaris-Button {
+    margin-top: 10px;
+    border-radius: 20px;
+    padding: 5px 15px;
+}
+
+.white-space {
+    white-space: normal;
+    text-align: justify;
+}
+
+.link-csss {
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.setup-button {
+    width: 25%;
+    margin-left: 37.5%;
+}
+
+.lock-minor.youtube-button button[type="button"]:hover span {
+    color: #fff !important;
+}
+
+/* .box-with-shadow .Polaris-Button {
+    background-color: black;
+    color: white;
+} */
+
+/** Polaris Popup **/
+
+#PolarisPortalsContainer .Polaris-Box {
+    padding: 15px;
+    margin: 0;
+    border: none;
+}
+
+#PolarisPortalsContainer .Polaris-Modal__Body table tbody tr td button {
+    text-align: center;
+    border-radius: 0 !important;
+}
+
+#PolarisPortalsContainer h2 {
+    text-transform: uppercase;
+}
+
+#PolarisPortalsContainer .Polaris-Modal__Body .Polaris-DatePicker__Day--selected {
+    background: #4867A9;
+    color: #fff;
+    border-radius: 6px !important;
+}
+
+#PolarisPortalsContainer .Polaris-Modal__Body table tbody tr td button:hover,
+#PolarisPortalsContainer .Polaris-Modal__Body table tbody tr td button:focus {
+    color: #fff;
+}
+
+#PolarisPortalsContainer .Polaris-Modal-Dialog__Modal {
+    background: white;
+    border-radius: 20px;
+}
+
+
+.lang-modal .Polaris-Modal-Dialog__Modal {
+    background-color: white !important;
+}
+
+#PolarisPortalsContainer .Polaris-Button--plain.Polaris-Button--iconOnly svg {
+    filter: brightness(0) saturate(100%) invert(20%) sepia(4%) saturate(37%) hue-rotate(12deg) brightness(96%) contrast(98%);
+    width: 20px;
+}
+
+#PolarisPortalsContainer .Polaris-Modal__Body {
+    border: solid #d2e6ff;
+    border-width: 1px 0px;
+}
+
+#PolarisPortalsContainer caption.Polaris-DatePicker__Title {
+    color: #333;
+}
+
+#PolarisPortalsContainer .Polaris-Button--primary {
+    height: 40px;
+}
+
+#PolarisPortalsContainer .Polaris-Modal-CloseButton {
+    padding: 0;
+    border-radius: 0;
+}
+
+#PolarisPortalsContainer .Polaris-Modal-CloseButton svg {
+    filter: brightness(0) saturate(100%) invert(42%) sepia(1%) saturate(2501%) hue-rotate(347deg) brightness(88%) contrast(77%);
+    width: 15px;
+}
+
+#PolarisPortalsContainer .Polaris-Modal-CloseButton:hover,
+#PolarisPortalsContainer .Polaris-Modal-CloseButton:focus {
+    background: transparent;
+}
+
+#PolarisPortalsContainer .Polaris-Modal-CloseButton:hover svg,
+#PolarisPortalsContainer .Polaris-Modal-CloseButton:focus svg {
+    filter: brightness(0) saturate(100%) invert(40%) sepia(73%) saturate(453%) hue-rotate(182deg) brightness(83%) contrast(85%);
+}
+
+/** General Setting Page **/
+
+.wf-generalSetting .Polaris-LegacyCard {
+    background: transparent;
+    border-radius: 0;
+    box-shadow: none;
+    outline: none;
+}
+
+.wf-generalSetting .Polaris-MediaCard__MediaContainer {
+    flex-basis: 15% !important;
+}
+
+.wf-generalSetting .Polaris-MediaCard__InfoContainer {
+    flex-basis: 85% !important;
+}
+
+.wf-generalSetting .Polaris-LegacyCard__Section {
+    padding: 0;
+    border: none;
+    border-radius: 0;
+}
+
+.wf-generalSetting .Polaris-MediaCard {
+    flex-direction: row-reverse;
+}
+
+.wf-generalSetting .Polaris-MediaCard__MediaContainer img {
+    max-width: 100px;
+    width: 100%;
+    margin: 0 0 0 auto;
+    display: block;
+    object-fit: cover;
+    object-position: center;
+}
+
+.wf-generalSetting .Polaris-LegacyStack__Item,
+.wf-generalSetting .Polaris-MediaCard__Heading,
+.wf-generalSetting .Polaris-LegacyStack__Item {
+    margin: 0 !important;
+}
+
+.wf-generalSetting .wf-dashboard-box-inner .Polaris-ButtonGroup__Item button {
+    margin-top: 10px;
+    min-width: 10rem;
+    max-width: 100%;
+}
+
+/** Collect Setting Page **/
+
+.wf-collection-IconBtn {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 15px;
+}
+
+.wf-collectionSetting .wf-style-wishbtn {
+    margin: 0;
+}
+
+.wf-pickWishlist {
+    padding: 0 0 20px;
+}
+
+.wf-collection-IconSettion {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.wf-collection-IconSettion .collection-select .wf-wishlist-range-box,
+.wf-pickWishlist-collection .wf-wishlist-range-box,
+.wishlist-ui-grid1 .Polaris-Grid,
+.wf-wishlist-select-box {
+    grid-template-columns: 1fr;
+}
+
+.wf-collection-IconSettion .wf-wishlist-range-box {
+    padding: 0;
+}
+
+.wf-pickWishlist-collection .wf-wishlist-range-box,
+.wf-pickWishlist-collection .wf-wishlist-range-box label {
+    padding: 0;
+}
+
+.wf-pickWishlist-collection span.Polaris-Choice__Label {
+    width: 20px;
+    height: 20px;
+}
+
+.wf-pickWishlist-collection .wf-wishlist-range-box label {
+    align-items: center;
+}
+
+.wf-pickWishlist-collection .first-icon {
+    display: flex;
+    position: relative;
+    width: 100%;
+}
+
+.wf-pickWishlist-collection .first-icon .less-visible {
+    /* position: absolute; */
+    /* top: -18px; */
+    /* left: 0; */
+    /* opacity: 0; */
+    /* backface-visibility: hidden; */
+    /* overflow: hidden; */
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.wf-pickWishlist-collection .first-icon:hover .less-visible,
+.wf-pickWishlist-collection .first-icon:focus .less-visible {
+    opacity: 1;
+    backface-visibility: visible;
+    overflow: visible;
+    top: 3px;
+    left: 60px;
+}
+
+.wf-pickWishlist-collection .custom-range-input {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+}
+
+.wf-collection-IconBtn .wf-IconBtn-box,
+.wf-trending-page .wf-IconBtn-box {
+    display: grid;
+    grid-template-columns: 2.8fr 0.2fr;
+    align-items: center;
+    gap: 8px;
+}
+
+.wf-collection-IconBtn .Polaris-Connected__Item {
+    width: 100%;
+}
+
+.wf-collection-IconBtn .copyIcon img,
+.wf-trending-page .copyIcon img {
+    filter: brightness(0) saturate(100%) invert(47%) sepia(86%) saturate(1623%) hue-rotate(302deg) brightness(101%) contrast(100%);
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+}
+
+/** Report Page Style **/
+
+.wf-listingRecord {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 25px 25px 0;
+}
+
+.wf-dashboard-report .wf-dashboard-box {
+    margin: 0;
+    padding: 0;
+}
+
+.wf-dashboard-report .customer-recently-table {
+    display: inherit;
+}
+
+.wf-dashboard-report .customer-recently-table .Polaris-LegacyCard {
+    background: transparent;
+    border-radius: 0;
+    outline: none;
+    box-shadow: none;
+}
+
+.wf-dashboard-report table tbody tr td button[type="button"] {
+    padding: 0;
+    min-width: auto;
+    min-height: auto;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.wf-dashboard-report table tbody tr td button[type="button"] .Polaris-Button__Content,
+.wf-dashboard-report table tbody tr td button[type="button"] .Polaris-Button__Text {
+    padding: 0;
+}
+
+.wf-dashboard-report table tbody tr td button[type="button"] .Polaris-Icon {
+    padding: 0;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #04468F !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.wf-dashboard-report table tbody tr td button[type="button"] svg {
+    width: 14px;
+    height: 14px;
+    filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(7492%) hue-rotate(270deg) brightness(92%) contrast(108%);
+}
+
+.wf-dashboard-report table tbody tr .show-less-text {
+    width: 175px;
+    overflow: hidden;
+}
+
+.wf-dashboard-report table tbody tr .show-less-text td {
+    width: 100%;
+}
+
+.wf-dashboard-report table tbody tr td {
+    text-align: center;
+}
+
+.wf-dashboard-report table thead tr th,
+.wf-dashboard-report table tbody tr td {
+    background: transparent !important;
+    position: inherit !important;
+    filter: none !important;
+}
+
+.wf-dashboard-report .polaris_pagination {
+    margin: 0;
+    background: #EDF5FF;
+    padding: 20px;
+}
+
+.wf-dashboard-report .polaris_pagination .Polaris-ButtonGroup__Item,
+.wf-dashboard-report .polaris_pagination .Polaris-ButtonGroup {
+    margin: 0;
+}
+
+.wf-dashboard-report .Polaris-IndexTable__ScrollBarContainer {
+    position: initial;
+    border: none;
+    background: transparent;
+    border-radius: 0;
+}
+
+.wf-dashboard-report .polaris_pagination button[type="button"] {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background: #04468F !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    max-width: 100%;
+    border: 1px solid transparent;
+    cursor: pointer;
+    min-width: auto;
+}
+
+.wf-dashboard-report .polaris_pagination button[type="button"]:hover,
+.wf-dashboard-report .polaris_pagination button[type="button"]:focus {
+    border-color: #04468F;
+}
+
+.wf-dashboard-report .polaris_pagination button[type="button"] svg {
+    filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(7492%) hue-rotate(270deg) brightness(92%) contrast(108%);
+}
+
+.wf-dashboard-report .polaris_pagination button[type="button"]:hover svg,
+.wf-dashboard-report .polaris_pagination button[type="button"]:focus svg {
+    filter: brightness(0) saturate(100%) invert(15%) sepia(51%) saturate(4526%) hue-rotate(201deg) brightness(94%) contrast(97%);
+}
+
+.wf-dashboard-report .polaris_pagination .Polaris-ButtonGroup {
+    gap: 15px;
+}
+
+.wf-dashboard-report .Polaris-Select select,
+.wf-dashboard-report .Polaris-Select .Polaris-Select__Content {
+    font-family: 'Poppins';
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 14px;
+    letter-spacing: 0.5px;
+    color: #4867A9;
+    padding: 10px 15px;
+}
+
+.wf-dashboard-report .Polaris-Select .Polaris-Select__Content {
+    border: 2px solid #4867A9;
+    outline: none;
+    border-radius: 100px;
+    height: 45px;
+    width: 100%;
+    max-width: 160px;
+}
+
+.wf-dashboard-report .Polaris-Select .Polaris-Select__Backdrop {
+    border: none;
+    background: transparent;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.wf-dashboard-report .Polaris-Select .Polaris-Select__Backdrop::after,
+.wf-dashboard-report .Polaris-AlphaFilters__Container .Polaris-TextField__Backdrop::after {
+    display: none;
+}
+
+.wf-dashboard-report .Polaris-IndexFilters__ActionWrap {
+    padding: 15px 25px;
+}
+
+.wf-dashboard-report .Polaris-IndexFilters__ActionWrap button[type="button"],
+.wf-dashboard-report .Polaris-HorizontalStack button[type="button"] {
+    border: 1px solid #65378B;
+    border-radius: 6px;
+    padding: 6px 12px;
+    box-shadow: none;
+    background: transparent;
+    min-height: 34px;
+    min-width: auto;
+}
+
+.wf-dashboard-report .Polaris-IndexFilters__ActionWrap button[type="button"] svg,
+.wf-dashboard-report .Polaris-HorizontalStack button[type="button"] svg {
+    filter: brightness(0) saturate(100%) invert(27%) sepia(12%) saturate(4207%) hue-rotate(236deg) brightness(92%) contrast(94%);
+    width: 20px;
+    height: 20px;
+}
+
+.wf-dashboard-report .Polaris-IndexFilters__ActionWrap button[type="button"]:hover,
+.wf-dashboard-report .Polaris-IndexFilters__ActionWrap button[type="button"]:focus,
+.wf-dashboard-report .Polaris-HorizontalStack button[type="button"]:hover,
+.wf-dashboard-report .Polaris-HorizontalStack button[type="button"]:focus {
+    background: #65378B;
+    border-color: transparent;
+    text-decoration: none;
+}
+
+.wf-dashboard-report .Polaris-IndexFilters__ActionWrap button[type="button"]:hover svg,
+.wf-dashboard-report .Polaris-IndexFilters__ActionWrap button[type="button"]:focus svg,
+.wf-dashboard-report .Polaris-HorizontalStack button[type="button"]:hover svg,
+.wf-dashboard-report .Polaris-HorizontalStack button[type="button"]:focus svg {
+    filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(7499%) hue-rotate(281deg) brightness(109%) contrast(105%);
+}
+
+.Polaris-AlphaFilters__Container {
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 15px 25px;
+}
+
+.wf-dashboard-report .Polaris-AlphaFilters__Container input[type="text"] {
+    border: 1px solid #D9D9D9;
+    border-radius: 6px;
+    min-height: auto;
+}
+
+.wf-dashboard-report .Polaris-AlphaFilters__Container input[type="text"],
+.wf-dashboard-report .Polaris-AlphaFilters__Container .Polaris-TextField__Backdrop {
+    padding: 10px;
+    font-size: 13px;
+    line-height: 18px;
+    color: #666666;
+    font-weight: 500;
+}
+
+.wf-dashboard-report .Polaris-TextField__ClearButton {
+    margin-right: 0;
+}
+
+.wf-dashboard-report .Polaris-TextField__ClearButton .Polaris-Icon {
+    width: 30px;
+    height: 30px;
+}
+
+.wf-dashboard-report .Polaris-TextField__ClearButton .Polaris-Icon svg {
+    filter: brightness(0) saturate(100%) invert(23%) sepia(20%) saturate(4786%) hue-rotate(250deg) brightness(89%) contrast(85%);
+}
+
+.wf-dashboard-report .Polaris-HorizontalStack .Polaris-Button--sizeMicro .Polaris-Button__Text {
+    font-size: 13px;
+    line-height: 13px;
+    font-weight: 600;
+    color: #65378B;
+    font-family: 'Poppins';
+}
+
+.wf-dashboard-report .Polaris-HorizontalStack button[type="button"]:hover .Polaris-Button__Text,
+.wf-dashboard-report .Polaris-HorizontalStack button[type="button"]:focus .Polaris-Button__Text {
+    color: #fff;
+}
+
+.wf-dashboard-report .Polaris-HorizontalStack {
+    margin: 0;
+    gap: 5px;
+}
+
+.wf-dashboard-report .Polaris-HorizontalStack button[type="button"]::after,
+.wf-dashboard-report .Polaris-HorizontalStack button[type="button"] .Polaris-Button__Content::after {
+    display: none;
+}
+
+.wf-dashboard-report .Polaris-Button--plain {
+    margin: 0;
+}
+
+/** Popover popup **/
+
+#PolarisPortalsContainer .Polaris-Popover {
+    margin: 10px 0 0;
+    box-shadow: none;
+}
+
+#PolarisPortalsContainer .Polaris-Popover__Content--fluidContent {
+    height: auto !important;
+}
+
+#PolarisPortalsContainer .Polaris-Popover .Polaris-Box {
+    background: #EDF5FF;
+    border-radius: 20px;
+}
+
+#PolarisPortalsContainer .Polaris-Popover .Polaris-Box .Polaris-Box {
+    padding: 0;
+    font-size: 13px;
+    line-height: 18px;
+    color: #666666;
+    font-weight: 500;
+    font-family: 'Poppins';
+}
+
+#PolarisPortalsContainer .Polaris-Popover .Polaris-Box ul li .Polaris-Choice__Control,
+#PolarisPortalsContainer .Polaris-Popover .Polaris-Box ul li .Polaris-RadioButton__Input {
+    width: 18px !important;
+    height: 18px !important;
+}
+
+#PolarisPortalsContainer .Polaris-Popover .Polaris-Box svg {
+    height: 15px;
+    width: 15px;
+}
+
+#PolarisPortalsContainer .Polaris-Modal-Dialog .Polaris-LegacyCard {
+    background: transparent;
+    border-radius: 0;
+    box-shadow: none;
+    outline: none;
+}
+
+#PolarisPortalsContainer .Polaris-Modal-Dialog .Polaris-IndexTable table tbody tr {
+    background: transparent;
+    border: none;
+}
+
+#PolarisPortalsContainer .Polaris-Modal-Dialog .Polaris-IndexTable table tbody tr:not(:last-child) {
+    border: solid #e9e9e9;
+    border-width: 0px 0px 1px;
+}
+
+#PolarisPortalsContainer .Polaris-Modal-Dialog .Polaris-IndexTable table tbody tr td {
+    background: transparent;
+    padding: 10px;
+}
+
+#PolarisPortalsContainer .Polaris-Modal-Dialog .Polaris-IndexTable table tbody tr td,
+#PolarisPortalsContainer .Polaris-Modal-Dialog .Polaris-IndexTable table tbody tr td span {
+    font-size: 13px;
+    line-height: 18px;
+    color: #666666;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+#PolarisPortalsContainer .Polaris-Modal-Dialog .Polaris-IndexTable table tbody tr td img {
+    display: block;
+    margin: 0 auto;
+    width: 35px;
+    height: 35px;
+    object-fit: cover;
+    object-position: center;
+}
+
+#PolarisPortalsContainer .Polaris-Modal-Dialog__Modal>.Polaris-HorizontalStack {
+    justify-content: flex-end;
+}
+
+/** Wishlist UI Setting Inner **/
+
+.wishlistUi-TyleInner>.wf-wishlist-range-box {
+    padding: 0 0 5px;
+}
+
+.Polaris-Page-Header__BreadcrumbWrapper {
+    position: relative;
+    padding-left: 45px;
+}
+
+.Polaris-Page-Header__BreadcrumbWrapper .Polaris-Box {
+    position: absolute;
+    left: 0;
+    top: 15px;
+}
+
+.Polaris-Page-Header__BreadcrumbWrapper .Polaris-Breadcrumbs__Breadcrumb {
+    border-radius: 6px;
+    background: #7F50A7 !important;
+    width: 30px;
+    height: 30px;
+    min-width: auto;
+    min-height: auto;
+    border: solid #65378B;
+    border-width: 0px 0px 2px;
+}
+
+.Polaris-Page-Header__BreadcrumbWrapper .Polaris-Breadcrumbs__Icon svg {
+    filter: brightness(0) saturate(100%) invert(100%) sepia(1%) saturate(7500%) hue-rotate(277deg) brightness(101%) contrast(104%);
+    width: 18px;
+    height: 20px;
+}
+
+.Polaris-Grid.gridGapRow-0 {
+    grid-row-gap: 0;
+}
+
+#custom-code-icon-section p {
+    padding: 0 0 10px;
+}
+
+#custom-code-icon-section .wf-wishlist-range-box {
+    padding: 0;
+}
+
+.wf-dashboard-notificationSetting .custom-margin,
+.wf-dashboard-shareWishlist .custom-margin {
+    padding: 0 0 15px;
+}
+
+.wf-dashboard-notificationSetting #basic-collapsible .wf-wishlist-range-box,
+.wf-dashboard-shareWishlist .wf-wishlist-range-box,
+.wf-dashboard-notificationSetting .wf-show-notification .wf-wishlist-range-box {
+    padding: 0 0 5px;
+}
+
+.wf-style-wishbtn .notification-number .Polaris-TextField {
+    border: 1px solid #D9D9D9;
+    border-radius: 6px;
+}
+
+.wf-style-wishbtn .notification-number .Polaris-TextField input[type="number"] {
+    border: none;
+    border-radius: 0;
+}
+
+.upgradeButton {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    cursor: pointer;
+    z-index: 10;
+    pointer-events: all;
+}
+
+.wf-languageSetting .wf-wishlist-range-box {
+    grid-template-columns: 1fr;
+}
+
+.pb-15 {
+    padding-bottom: 15px;
+}
+
+.wf-addCartButton .wf-wishlist-range-box {
+    padding: 0 0 5px;
+}
+
+div#basic-collapsible\ collapse-wbl {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    display: grid;
+}
+
+/* New Style */
+
+.developer-form-box {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+}
+
+.wf-style-wishbtn .Polaris-TextField textarea {
+    border: 1px solid #D9D9D9;
+    border-radius: 6px;
+    padding: 10px;
+    font-size: 13px;
+    line-height: 18px;
+    color: #666666;
+    font-weight: 500;
+    min-height: auto;
+}
+
+.errorMessageColor {
+    color: #ff0000;
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 500;
+}
+
+.request-button-submit button[type="submit"] {
+    border: solid #1A4193;
+    border-width: 0px 0px 4px;
+    background: #4867A9;
+    border-radius: 100px;
+    color: #fff;
+    width: 100%;
+    max-width: 150px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: auto;
+    min-width: auto;
+    padding: 15px 25px;
+    transition: all 0.3ms ease-in-out;
+}
+
+.request-button-submit button[type="submit"]:hover,
+.request-button-submit button[type="submit"]:focus {
+    border-color: #4867A9;
+    background: #1A4193;
+}
+
+.request-button-submit button[type="submit"] .Polaris-Button__Text {
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    font-family: 'Poppins';
+    line-height: 13px;
+    color: #fff;
+}
+
+.wf-getsupport-dashboard label {
+    font-size: 14px;
+    line-height: 22px;
+    color: #012167;
+    font-weight: 500;
+    padding: 0 0 5px;
+}
+
+.developer-form-box a {
+    border-radius: 100px;
+    height: 45px;
+    width: 100%;
+    max-width: max-content;
+    min-width: 12.5rem;
+    min-height: auto;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: none;
+    transition: all 0.3ms ease-in-out;
+    color: #4867A9;
+    border: 1px solid #4867A9;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 12px;
+    line-height: 14px;
+    font-weight: 700;
+    background: transparent;
+}
+
+.developer-form-box a:hover,
+.developer-form-box a:focus {
+    color: #fff;
+    border-color: transparent;
+    background: #4867A9;
+}
+
+.developer-form-box .Polaris-Box:not(:last-child) {
+    padding: 0 0 20px;
+}
+
+.developer-form-box p {
+    margin: 0 0 20px;
+}
+
+.wf-style-wishbtn .border-input-field .wf-range-input {
+    grid-template-columns: 1fr;
+}
+
+
+
+/** New Update Style **/
+
+.wf-dashboard-analytic .wf-dashboard-box-inner button[type="button"] {
+    margin: 0 auto;
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.wf-dashboard-analytic #boxx-shadow .Polaris-Grid-Cell {
+    justify-content: flex-start;
+    padding-bottom: 75px;
+}
+
+.wf-dashboard-report .Polaris-Frame {
+    background: transparent;
+    margin: 0;
+    width: 100%;
+}
+
+.wf-userReport .Polaris-Page {
+    padding: 0;
+    max-width: 100%;
+}
+
+.wf-userReport .wf-listingRecord {
+    padding: 15px 0 25px;
+}
+
+.wf-userReport .Polaris-AlphaFilters__Container {
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 0 0 25px;
+}
+
+.wf-userReport .customer-recently-table table thead tr th,
+.wf-userReport #PolarisPortalsContainer .Polaris-Modal__Body table thead tr th,
+.wf-userReport .customer-recently-table table tbody tr td,
+.wf-wishListDataTable .customer-recently-table table thead tr th,
+.wf-wishListDataTable #PolarisPortalsContainer .Polaris-Modal__Body table thead tr th,
+.wf-wishListDataTable .customer-recently-table table tbody tr td {
+    text-align: left;
+}
+
+.wf-userReport .customer-recently-table .Polaris-IndexTable__EmptySearchResultWrapper img {
+    width: 30px;
+}
+
+.wf-userReport .customer-recently-table .Polaris-LegacyStack__Item {
+    margin: 0;
+}
+
+.wf-userReport .customer-recently-table p {
+    min-height: auto;
+}
+
+.customer-recently-inner .Polaris-LegacyCard {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    overflow: hidden;
+}
+
+.wf-wishListDataTable .Polaris-LegacyCard {
+    background: transparent;
+    box-shadow: none;
+    outline: none;
+    border-radius: 0;
+}
+
+.wf-wishListDataTable .Polaris-AlphaFilters__Container {
+    background: transparent;
+    border: none;
+    padding: 15px 0 25px;
+}
+
+.wf-wishListDataTable .customer-recently-table table tbody tr td img {
+    margin: 0;
+}
+
+.currentWishlistUser {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.wf-dashboard-report .Polaris-Page-Header__TitleWrapper {
+    align-self: flex-start;
+}
+
+.wf-currentWishlistUser .Polaris-Page-Header__RightAlign,
+.wf-currentWishlistUser .Polaris-ButtonGroup,
+.wf-currentWishlistUser .Polaris-ButtonGroup__Item {
+    margin: 0;
+}
+
+.wf-currentWishlistUser .Polaris-Button {
+    padding: 0;
+    background: transparent;
+    outline: none;
+}
+
+.wf-currentWishlistUser .Polaris-Select .Polaris-Select__Content {
+    margin: 0 auto;
+}
+
+
+
+/* Date Per Record table */
+
+.datePerRecord {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+}
+
+.datePerRecord2 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.email-quota-field {
+    border: 2px #4867A9 solid;
+    padding: 9px;
+    border-radius: 30px;
+    text-align: center;
+}
+
+.wf-dashboard-report .datePerRecord-pagination button[type="button"]:hover svg,
+.wf-dashboard-report .datePerRecord-pagination button[type="button"]:focus svg {
+    filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(7492%) hue-rotate(270deg) brightness(92%) contrast(108%);
+}
+
+.deleteWishlistItem {
+    margin: 0;
+    background: transparent;
+}
+
+.deleteWishlistItem:hover,
+.deleteWishlistItem:focus {
+    background: transparent;
+}
+
+.deleteWishlistItem button[type="button"] {
+    margin: 0 auto;
+}
+
+#boxx-shadow.wf-dashboard-box-inner {
+    margin: 0;
+}
+
+#boxx-shadow.wf-dashboard-box-inner:hover,
+#boxx-shadow.wf-dashboard-box-inner:focus {
+    background: transparent;
+}
+
+
+.onlyAnalyticPage table tbody tr td {
+    text-align: center;
+}
+
+#PolarisPortalsContainer .Polaris-Modal__Body {
+    border: none;
+}
+
+.wf-contactSupportTeam-btn button[type="button"] {
+    margin: 0px 0 0;
+    max-width: 220px;
+}
+
+.wf-contactSupportTeam-btn:hover,
+.wf-contactSupportTeam-btn:focus {
+    background: transparent;
+}
+
+.wf-help-dashboard button[type="button"] {
+    min-width: 10rem;
+    padding: 10px 20px;
+}
+
+.search-icon-css {
+    margin-bottom: 40px;
+    /* color: "#666666"; */
+    filter: brightness(0) saturate(100%) invert(42%) sepia(0%) saturate(176%) hue-rotate(178deg) brightness(91%) contrast(85%);
+}
+
+
+.free-trial-div {
+    /* background-color: #61f6bd; */
+    position: relative;
+    top: 25px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.wf-dashboard-ismultiwishlist .toggle-paid-inner,
+.wf-dashboard-yes-no-toggle .toggle-paid-inner {
+    border: 2px solid #4276B0;
+    border-radius: 100px;
+    padding: 8px;
+    height: 60px;
+    width: 215px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+}
+
+.wf-dashboard-ismultiwishlist .toggle-paid-inner,
+.wf-dashboard-yes-no-toggle .toggle-paid-inner {
+    width: 300px;
+}
+
+.wf-dashboard-ismultiwishlist .toggle-paid-inner label,
+.wf-dashboard-yes-no-toggle .toggle-paid-inner label {
+    font-size: 15px;
+    line-height: 17px;
+    font-weight: 600;
+    text-transform: capitalize;
+    letter-spacing: 0.2px;
+    text-align: center;
+    color: #4276B0;
+    border-radius: 100px;
+    max-width: 100px;
+    width: 100%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    cursor: pointer;
+}
+
+
+.wf-dashboard-ismultiwishlist .toggle-paid-inner label,
+.wf-dashboard-yes-no-toggle .toggle-paid-inner label {
+    max-width: 150px;
+}
+
+.wf-new-dashboard .wf-dashboard-box {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.wf-new-dashboard .wf-dashboard-boxplain.lang-box {
+    gap: 0;
+}
+
+.wf-new-dashboard .wf-dashboard-boxplain.lang-box .Polaris-Grid {
+    align-items: flex-start;
+}
+
+.wf-new-dashboard .wf-dashboard-box-inner button[type="button"] {
+    margin: 0;
+    max-width: 100% !important;
+}
+
+.wf-new-dashboard .lock-minor button[type="button"] {
+    width: 100%;
+}
+
+.wf-new-dashboard .wf-dashboard-ismultiwishlist .wf-installation-product {
+    width: 300px;
+    height: 50px;
+    border: 2px solid #545D7E;
+    padding: 4.17px 4.8px;
+}
+
+.wf-new-dashboard .wf-dashboard-ismultiwishlist .wf-installation-product label {
+    color: #001D35;
+}
+
+.icon-enable-wf-new {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
+
+.wf-new-dashboard .activeToggle {
+    color: #fff;
+}
+
+.change-language-u {
+    color: blue;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.wf-new-dashboard .wf-dashboard-ismultiwishlist .toggle-paid-inner label.activeToggle:hover {
+    background: linear-gradient(104.62deg, #22B87E 12.23%, #95f2ce 85.84%);
+}
+
+.wf-dashboard-ismultiwishlist .toggle-paid-inner label.activeToggle,
+.wf-dashboard-yes-no-toggle .toggle-paid-inner label.activeToggle {
+    background: linear-gradient(104.62deg, #9ECCFF 12.23%, #4276B0 85.84%);
+    /* background: #22B87E; */
+    color: #fff;
+}
+
+.wf-new-dashboard .wf-dashboard-ismultiwishlist .toggle-paid-inner label.activeToggle,
+.wf-new-dashboard .wf-dashboard-yes-no-toggle .toggle-paid-inner label.activeToggle {
+    /* background: linear-gradient(104.62deg, #9ECCFF 12.23%, #4276B0 85.84%); */
+    background: #22B87E;
+    color: #fff;
+}
+
+.wf-new-dashboard .wf-dashboard-box-inner .save-setup button[type="button"] {
+    max-width: max-content !important;
+    min-width: max-content;
+}
+
+
+.wf-new-dashboard h2 {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.wf-new-dashboard h3 {
+    padding-left: 10px;
+}
+
+.wishlistUi-TyleInner h3 {
+    padding-left: 0px;
+}
+
+
+.Polaris-Grid .Polaris-Grid-Cell:nth-child(3) {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.wf-dashboard-ismultiwishlist .toggle-paid-inner label.activeToggle:hover,
+.wf-dashboard-ismultiwishlist .toggle-paid-inner label.activeToggle:focus,
+.wf-dashboard-yes-no-toggle .toggle-paid-inner label.activeToggle:hover,
+.wf-dashboard-yes-no-toggle .toggle-paid-inner label.activeToggle:focus {
+    background: linear-gradient(104.62deg, #4276B0 12.23%, #9ECCFF 85.84%);
+}
+
+
+.wf-dashboard-ismultiwishlist .toggle-paid-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin: 0 0 30px;
+}
+
+.wf-dashboard-ismultiwishlist .toggle-paid-section {
+    margin: 0 0 0;
+}
+
+.wf-dashboard-ismultiwishlist .wf-installation-product {
+    width: 300px;
+    height: 50px;
+}
+
+.wf-dashboard-ismultiwishlist .wf-installation-product label {
+    padding: 0;
+    font-size: 12px;
+    line-height: 14px;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.wf-manual-btn {
+    margin: 0 0 15px;
+}
+
+.wf-collectionSetting #basic-collapsible .wf-wishlist-range-box {
+    padding: 0;
+}
+
+.overview-main1 .Polaris-ButtonGroup {
+    width: 100%;
+}
+
+.Polaris-ActionMenu-SecondaryAction a:hover,
+.Polaris-ActionMenu-SecondaryAction button:hover {
+    background: transparent !important;
+}
+
+#quick-add-icon-section .wf-wishlist-range-box,
+#quick-add-icon-section .wf-wishlist-range-box,
+.notification-section>.Polaris-Box .wf-style-wishbtn .wf-wishlist-range-box,
+.quick-add-icon-section .wf-wishlist-range-box {
+    padding: 0;
+}
+
+.wf-dashboard-plane .note-div span {
+    flex: 0 0 5rem;
+    max-width: 100%;
+    padding: 0 10px;
+}
+
+
+
+.wf-contactSupportTeam-btn button[type="button"],
+.wf-dashboard-box-inner button[type="button"] {
+    max-width: max-content;
+}
+
+.pricing-plan-table ul li.last-li {
+    color: #fff !important;
+    position: absolute !important;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    padding: 5px !important;
+    display: block;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(95.06deg, #AECA94 5.47%, #89C77B 48.67%, #1AB77F 94.55%);
+    /* font-weight: 700; */
+}
+
+.pricing-plan-table .basicClass ul,
+.pricing-plan-table .premiumPlanBox ul:last-child {
+    padding: 0 0 100px;
+}
+
+.Polaris-Modal-Dialog__Modal {
+    max-width: 800px !important;
+}
+
+
+.pricing-plan-table button[type="button"] {
+    bottom: 65px;
+}
+
+.pricing-plan-table .Polaris-Grid-Cell {
+    overflow: hidden;
+}
+
+.youtube-main-box {
+    display: flex;
+    gap: 30px;
+}
+
+.youtube-main-box .wf-dashboard-box {
+    width: 50%;
+}
+
+
+
+.wf-dashboard-box-inner .setupButtons {
+    display: flex;
+    align-items: end;
+    justify-content: flex-end;
+    gap: 15px;
+    margin: 0 0 0 auto;
+    margin-top: 15px;
+}
+
+.wf-dashboard-box-inner .outerSetupButtons {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.wf-dashboard-box-inner .stepPera {
+    font-size: 22px;
+    margin-bottom: 10px;
+    line-height: 28px;
+    color: #04468F;
+    letter-spacing: 0.5px;
+    font-weight: 700;
+    text-transform: capitalize;
+    padding: 0 0 5px;
+}
+
+.wf-setup-guide .wf-dashboard-box-inner .wg-mainThemeDiv {
+    display: grid;
+    gap: 25px;
+    grid-template-columns: 1.5fr 2.5fr;
+}
+
+.wf-setup-guide .wf-dashboard-box-inner .wg-mainThemeDiv img {
+    width: 100%;
+}
+
+.wg-mainThemeDiv h4 {
+    margin: 25px 0;
+}
+
+.wg-mainThemeDiv h3 {
+    margin: 40px 0px 0;
+    background: linear-gradient(95.06deg, #1AB77F 5.47%, #60b34c 48.67%, #1AB77F 94.55%);
+    padding: 8px 25px;
+    color: #fff;
+    border-radius: 12px;
+    display: inline-block;
+    font-weight: 700;
+    border-bottom: 5px solid #338121;
+    position: relative;
+}
+
+.wf-setup-guide .wf-dashboard-box-inner .wg-mainThemeDiv .wg-themeSelect {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.wf-stepdefault2 {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 0 0 15px;
+}
+
+.wf-setup-guide .wf-dashboard-box-inner .wg-mainThemeDiv .wg-themeSelect .enable-app {
+    margin: 0;
+}
+
+.wf-setup-guide .wf-dashboard-box-inner .wg-mainThemeDiv .wg-themeSelect div {
+    width: 100%;
+}
+
+.wf-setup-guide .wf-dashboard-box-inner .wg-mainThemeDiv button {
+    margin: 0;
+}
+
+.wf-setup-guide .wf-dashboard-box-inner .wg-mainThemeDiv .appActivated {
+    align-items: center;
+    display: flex;
+    justify-content: flex-start;
+    gap: 15px;
+}
+
+.wf-setup-guide .wf-dashboard-box-inner .wg-mainThemeDiv .enable-app {
+    margin-top: 15px;
+}
+
+.note-div .wf-dashboard.disable-app span {
+    background: transparent !important;
+    flex: none;
+}
+
+
+.note-button-div button {
+    width: 240px !important;
+}
+
+.wf-ui-settings .disableEverything .dontRunAgain {
+    margin-top: -25px;
+}
+
+.lock-minor.youtube-button a {
+    text-decoration: none;
+}
+
+
+.lock-minor.youtube-button button[type="button"] {
+    background: transparent;
+    border: 2px solid #4867A9;
+    border-bottom: 4px solid #4867A9;
+}
+
+.lock-minor.youtube-button button[type="button"] img {
+    width: 35px;
+}
+
+.lock-minor.youtube-button button[type="button"]:hover,
+.lock-minor.youtube-button button[type="button"]:focus {
+    background: #ce1312;
+    border: 2px solid #8d0b0b;
+    border-bottom: 4px solid #8d0b0b;
+}
+
+.lock-minor.youtube-button button[type="button"]:hover img,
+.lock-minor.youtube-button button[type="button"]:focus img {
+    filter: brightness(0) saturate(100%) invert(100%) sepia(100%) saturate(0%) hue-rotate(57deg) brightness(100%) contrast(100%);
+
+}
+
+.analytic-top-box {
+    padding-top: 20px;
+}
+
+.analytic-top-box-num {
+    font-size: 35px;
+    /* color: transparent;
+    -webkit-text-stroke: 1px #4867A9; */
+}
+
+
+
+.lang-switcher .language-switcher-table {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+    margin-bottom: 20px;
+}
+
+.lang-switcher .disable-app button[type="button"] {
+    width: 100px;
+}
+
+.lang-switcher .Polaris-Modal-Section .Polaris-Box {
+    text-align: left;
+}
+
+.lang-radio-btn {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 20px;
+}
+
+.wf-style-wishbtn .urlField {
+    display: flex;
+    align-items: baseline;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.wf-style-wishbtn .urlField .Polaris-TextField {
+    width: 70px;
+}
+
+.wf-store-btns {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+.wf-store-btns .editBtn button[type="button"] {
+    width: 180px;
+    height: 40px;
+}
+
+#PolarisPortalsContainer .wf-style-wishbtn h2 {
+    text-align: left;
+    text-transform: capitalize;
+}
+
+.wf-style-wishbtn .note-div {
+    padding: 10px;
+}
+
+.pb-10 {
+    padding-bottom: 10px;
+}
+
+.wf-language-modal {
+    padding: 0 !important;
+}
+
+.wf-language-modal .note-div {
+    margin: 0 0 10px;
+}
+
+.wf-language-modal h2 {
+    padding: 0 0 10px;
+}
+
+.wf-language-url-btn {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    align-items: flex-start;
+}
+
+.wf-language-main-btn {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.wf-language-modal .wf-wishlist-range-box {
+    padding: 0;
+}
+
+.wf-language-main-btn .lang-radio-btn {
+    flex-direction: column;
+    gap: 0;
+}
+
+/* ------------------------------------------------------------------ */
+
+.wg-style-tableHeading-wdt {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.wf-upload-logo span.Polaris-Thumbnail {
+    width: 150px !important;
+    height: 150px !important;
+}
+
+.wf-upload-logo span.Polaris-Thumbnail img {
+    margin: auto;
+    width: 100%;
+    height: auto;
+}
+
+.wf-dropZone {
+    width: 40%;
+}
+
+.wf-dropZone .Polaris-DropZone--sizeLarge {
+    min-height: 3rem;
+}
+
+.wf-dropZone .Polaris-DropZone-FileUpload--large {
+    padding: 0.3rem 2rem;
+}
+
+.wf-dropZone .Polaris-DropZone__Container {
+    padding: 0.7rem 2rem;
+}
+
+.wf-dropZone span.addLogo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px;
+    font-size: 13px;
+    background: #effff9;
+    border-radius: 5px;
+}
+
+.wf-imageValidation {
+    margin-top: 15px;
+}
+
+
+
+
+
+
+
+.wf-edit-header-save {
+    top: 0px;
+}
+
+.wf-dashboard .Polaris-Breadcrumbs__Breadcrumb {
+    z-index: 999;
+}
+
+
+.wf-edit-template {
+    display: flex;
+    gap: 15px;
+    align-items: flex-start;
+}
+
+.wf-edit-template .wf-edit-template-left {
+    flex: 1;
+    min-width: 0;
+}
+
+.wf-right {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+}
+
+.wf-template-editor {
+    border: 1px solid black;
+    margin-bottom: 15px;
+}
+
+.wf-popover button {
+    padding: 3px;
+    min-width: 2rem;
+    min-height: 2rem;
+    margin-left: 5px;
+}
+
+.keySpan {
+    font-weight: 700;
+}
+
+.wf-footerDiv {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.wf-template-colors {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.wf-previewDiv {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.wf-dashboard .Polaris-IndexTable__StickyTableHeadings .Polaris-IndexTable__TableHeading {
+    background: transparent;
+    border: none;
+    padding: 15px 10px;
+    font-size: 13px;
+    line-height: 20px;
+    color: #04468F;
+    font-weight: 700;
+    text-align: left;
+    text-transform: capitalize;
+}
+
+.wf-addCartButton .editBtn {
+    width: 200px;
+}
+
+.wf-reportDiv {
+    min-height: 450px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.wf-reportDiv h2 {
+    font-size: 18px;
+    margin: 10px;
+}
+
+.wf-reportDiv .disable-app button[type="button"] {
+    margin: auto;
+    width: 300px;
+}
+
+
+.demoCardNonColored #wf-count-demo {
+    display: none;
+}
+
+.wf-dashboard-yes-no-toggle .toggle-paid-inner .wf-wishlist-range-box {
+    display: none;
+}
+
+.wf-dashboard-yes-no-toggle .toggle-paid-inner {
+    width: 200px;
+}
+
+.wf-showCount-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.wf-style-wishbtn.wf-count-box-basic {
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.wf-style-wishbtn.wf-count-box-basic-second {
+    margin-top: -18px;
+}
+
+div#basic-collapsible .wishlist-ui-grid2 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    display: grid;
+}
+
+.wf-previewDiv .editBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    width: auto;
+}
+
+.wf-previewDiv .editBtn .wf-resetButton button {
+    min-width: 90px;
+}
+
+.view-all-index-page button[type="button"] {
+    min-width: 70px !important;
+}
+
+.wf-trending-page .wishlistUi-TyleInner,
+.wf-trending-page .wishlistUi-TyleInner-3 {
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5px;
+    grid-row-gap: 5px;
+}
+
+.wf-trending-page .wishlistUi-TyleInner-3 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.wf-trending-page .wg-navigation-dots,
+.wf-trending-page .wg-disable-dots,
+.wf-trending-page .wg-no-disable-dots {
+    grid-column: 1/-1;
+}
+
+.wf-trending-page .disableOneByOne .wf-wishlist-range-box,
+.wf-trending-page .wg-no-disable .wf-wishlist-range-box {
+    padding: 0;
+}
+
+svg.recharts-surface {
+    overflow: visible;
+}
+
+.new-word {
+    text-transform: capitalize;
+    width: max-content;
+}
+
+
+.for-defaut-dashboard .Polaris-ButtonGroup__Item:first-child .Polaris-Button {
+    background-color: #F88763 !important;
+}
+
+.for-defaut-dashboard .Polaris-ButtonGroup__Item:first-child .Polaris-Button:hover {
+    background-color: #E46138 !important;
+    border: solid #F88763;
+    border-width: 0px 0px 4px;
+}
+
+.for-defaut-dashboard .Polaris-ButtonGroup__Item:nth-child(1) button {
+    border: solid #E46138;
+    border-width: 0px 0px 4px;
+}
+
+.default-page-list {
+    height: 18px;
+    width: 18px;
+    background-color: rgb(122, 194, 15);
+    padding: 2px;
+}
+
+
+
+
+/* 
+.skeleton-main-div {
+    position: relative;
+    padding: 30px 80px;
+    background-color: #dbdbdb;
+    height: 100vh;
+}
+
+.loader-gif {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    opacity: 0.7;
+} */
+
+
+
+
+
+
+
+
+
+/* .skeleton-main-div {
+    position: relative;
+    padding: 30px 80px;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background: linear-gradient(75deg, transparent 40%, #bcbcbc 50%, transparent 60%);
+    background-size: 300% 100%;
+    animation: shimmer 2s infinite linear;
+    border-radius: 10px;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -100% 0;
+    }
+
+    100% {
+        background-position: 100% 0;
+    }
+}
+
+.loader-gif {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    opacity: 0.7;
+} */
+
+
+
+
+
+
+.skeleton-main-div {
+    position: relative;
+    padding: 30px 80px;
+    width: 100%;
+    height: 100vh;
+    /* Adjust as needed */
+    overflow: hidden;
+
+    /* Creating a single moving sloped line */
+    background: linear-gradient(75deg, transparent 35%, #d2d2d2 50%, transparent 65%);
+    background-size: 200% 100%;
+    /* Make sure there's enough space for smooth movement */
+
+    /* Moves the line smoothly without resetting abruptly */
+    animation: shimmer 2s infinite linear;
+    border-radius: 10px;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+.loader-gif {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    opacity: 0.8;
+}
+
+.glowing-button {
+    /* background-color: rgb(255, 255, 255); */
+    /* color: rgb(0, 0, 0); */
+    /* padding: 10px 20px; */
+    /* border: none; */
+    border-radius: 100%;
+    /* font-size: 16px; */
+    /* cursor: pointer; */
+    /* outline: none; */
+    box-shadow: 0 0 20px #E46138;
+    animation: glowEffect 1s infinite alternate;
+}
+
+@keyframes glowEffect {
+    0% {
+        box-shadow: 0 0 20px white;
+    }
+
+    100% {
+        box-shadow: 0 0 20px #E46138;
+    }
+}
+
+.for-pdp-upgrade .upgradeButton {
+    margin-top: 90px;
+}
+
+
+
+/* ----------this is for the plan page----------- */
+.wfq-dashboard-plane h1.Polaris-Header-Title.Polaris-Header-Title__TitleWithSubtitle {
+    font-family: Poppins;
+    font-weight: 700;
+    font-size: 54px;
+    line-height: 100%;
+    color: #000;
+    text-align: center;
+}
+
+.wfq-dashboard-plane .pricing-plan-table button[type="button"]:hover span.Polaris-Button__Text {
+    color: #FF56A5;
+}
+
+.wfq-dashboard-plane .Polaris-Header-Title__SubTitle p {
+    font-family: Poppins;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 100%;
+    text-align: center;
+    color: #000;
+    margin: 7px 0 0;
+}
+
+.wfq-dashboard-plane .Polaris-Page-Header__Row {
+    padding: 0 0 47px;
+}
+
+.wfq-dashboard-plane .toggle-paid-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin: 0 auto 30px;
+    max-width: 636px;
+    padding: 5px 16px 5px 3px;
+    border-radius: 24px;
+}
+
+.wfq-dashboard-plane .toggle-paid-inner {
+    border: none;
+    border-radius: 100px;
+    padding: 20px 5px;
+    height: 40px;
+    width: max-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+}
+
+.wfq-dashboard-plane .toggle-paid-inner label.activeToggle {
+    background: #FF56A5;
+    height: 42px;
+    width: 234px;
+    font-weight: 700;
+    font-size: 18.88px;
+    line-height: 100%;
+}
+
+/* .wfq-dashboard-plane .toggle-paid-inner label {
+    font-weight: 700;
+    font-size: 18.88px;
+    line-height: 100%;
+    color: #000;
+    width: max-content;
+    border-radius: 100px;
+} */
+
+.wfq-dashboard-plane .toggle-paid-inner label {
+    font-size: 15px;
+    line-height: 17px;
+    font-weight: 600;
+    text-transform: capitalize;
+    letter-spacing: 0.2px;
+    text-align: center;
+    color: #FF56A5;
+    border-radius: 100px;
+    padding: 0 10px;
+    width: 100%;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+
+.wfq-dashboard-plane .toggle-paid-inner label.activeToggle {
+    /* background: linear-gradient(104.62deg, #9eccff 12.23%, #4276b0 85.84%); */
+    color: #fff;
+}
+
+.wfq-dashboard-plane .toggle-paid-inner label.activeToggle:hover,
+.wfq-dashboard-plane .toggle-paid-inner label.activeToggle:focus {
+    background: linear-gradient(104.62deg, #4276b0 12.23%, #9eccff 85.84%);
+}
+
+
+.wfq-dashboard-plane .toggle-paid-section p {
+    font-weight: 700;
+    font-size: 13.42px;
+    line-height: 100%;
+    margin: 0;
+    background: #000000;
+    color: #fff;
+    width: 240px;
+    border-radius: 13px;
+    height: 26.83px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.wfq-dashboard-plane h2 {
+    font-family: Poppins;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 100%;
+    text-align: left !important;
+    color: #000;
+    padding: 0;
+}
+
+.wfq-dashboard-plane .pricing-plan-table .pricing-price {
+    font-family: Poppins;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 100%;
+    color: #000;
+    padding: 0;
+    justify-content: flex-start;
+    margin: 0 0 18px;
+    border-bottom: 1px solid #FF56A5;
+    border-radius: 0;
+}
+
+.wfq-dashboard-plane .pricing-plan-table .Polaris-Grid-Cell {
+    padding: 35px 26px;
+    border-radius: 24px;
+}
+
+.wfq-dashboard-plane .pricing-plan-table .highLight_div .Polaris-Grid-Cell {
+    /* background: transparent; */
+    background-color: #FF56A5;
+}
+
+.wfq-dashboard-plane .pricing-plan-table ul li {
+    position: relative;
+    padding: 0 0 7px 29px;
+    font-family: Poppins;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: #000;
+    /* border-radius: 10px; */
+}
+
+.wfq-dashboard-plane .pricing-plan-table ul li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 5px;
+    width: 14px;
+    height: 14px;
+    background: url("/assets/pricing-list-icon.svg") no-repeat center left;
+    background-size: cover;
+    filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(7485%) hue-rotate(118deg) brightness(87%) contrast(78%);
+}
+
+.wfq-dashboard-plane .pricing-plan-table button[type="button"] {
+    bottom: 65px;
+    background: #FF56A5;
+    border: none;
+    height: 38px;
+    width: 90%;
+}
+
+.wfq-dashboard-plane .pricing-plan-table button[type="button"]:hover {
+    background: #fff;
+    border: 2px solid #FF56A5;
+    color: #FF56A5;
+}
+
+.wfq-dashboard-plane .highLight_div {
+    background: linear-gradient(163.91deg, #3185fa 5.94%, #0b4699 98.86%);
+    border-radius: 24px;
+}
+
+.wfq-dashboard-plane .highLight_div h2 {
+    color: #fff;
+}
+
+.wfq-dashboard-plane .pricing-plan-table .highLight_div .pricing-price {
+    color: #fff;
+    border-bottom: 1px solid #fff;
+}
+
+.wfq-dashboard-plane .pricing-plan-table .highLight_div ul li {
+    color: #fff;
+}
+
+.wfq-dashboard-plane .pricing-plan-table .highLight_div .pricing-plan-table ul li::before {
+    filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(7485%) hue-rotate(118deg) brightness(100%) contrast(78%);
+}
+
+.wfq-dashboard-plane .pricing-plan-table .highLight_div button[type="button"] {
+    background: #fff;
+    border: none;
+    color: #0b4699 !important;
+}
+
+.wfq-dashboard-plane .wfq-promo-code-box .wfq-style-wishbtn {
+    padding: 20px;
+    height: auto;
+    background: #FF56A5;
+    border-radius: 14px;
+}
+
+.wfq-quote-plan-page .wfq-style-wishbtn p.Polaris-Text--root {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 100%;
+    text-transform: capitalize;
+    color: #fff;
+    margin: 0 0 9px;
+}
+
+
+.wfq-quote-form-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.wfq-dashboard-plane .wfq-quote-form-btn {
+    justify-content: flex-start;
+    background: #fff;
+    border-radius: 24px;
+    height: 48px;
+    padding: 0 7px 0 0px;
+}
+
+.wfq-dashboard-plane .wfq-promo-code-box .Polaris-TextField input[type="text"] {
+    border: none;
+    border-radius: 24px;
+}
+
+.wfq-dashboard .disable-app button[type="button"] {
+    border-color: #FF56A5;
+    background: #FF56A5;
+    border: 2px solid #FF56A5;
+}
+
+.wfq-dashboard-plane .wfq-style-wishbtn::after {
+    content: none;
+}
+
+.wfq-style-wishbtn.wfq-avail-promo {
+    background: transparent !important;
+    width: 60% !important;
+    padding-left: 50px !important;
+    border-left: 1px solid #c0c0c0;
+    border-radius: 0 !important;
+}
+
+.wfq-promo-code-box {
+    justify-content: flex-start;
+    gap: 50px;
+}
+
+.wfq-dashboard-plane .toggle-paid-inner label.activeToggle:hover {
+    background: #FF56A5;
+}
+
+.wfq-style-wishbtn.wfq-avail-promo h2.Polaris-Text--root.Polaris-Text--headingMd {
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 100%;
+    color: #FF56A5;
+}
+
+.wfq-style-wishbtn.wfq-avail-promo p {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 100%;
+    color: #000;
+    padding: 8px 0 22px;
+}
+
+.wfq-promo-code-box .lang-radio-btn p {
+    color: #fff;
+}
+
+.wfq-style-wishbtn.wfq-avail-promo .promo-code-list div {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 100%;
+}
+
+.promo-code-list .wfq-quote-form-btn {
+    height: max-content;
+}
+
+.wfq-main-promo {
+    padding-bottom: 5px;
+}
+
+.promo-code-list .wfq-quote-form-btn.disable-app button[type="button"] {
+    height: 15px;
+    padding: 10px;
+}
+
+.promo-code-list .bold-promo-list {
+    font-weight: 700;
+    border: 1px dotted #FF56A5;
+    padding: 3px 5px;
+    color: #FF56A5;
+    border-radius: 4px;
+}
+
+.wfq-dashboard-plane .pricing-plan-table .pricing-price span {
+    font-family: Poppins;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 100%;
+}
+
+.wfq-promo-code-box .lang-radio-btn,
+.wfq-login-tabs .wishlist-ui-grid2 {
+    gap: 5px;
+}
+
+.promo-code-list .wfq-no-promo {
+    color: #FF56A5 !important;
+}
+
+.wfq-promo-code-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.wfq-promo-code-box .wfq-quote-form-btn {
+    gap: 10px;
+}
+
+.wfq-promo-code-box p {
+    padding: 7px 0;
+}
+
+.wfq-dashboard .wfq-promo-code-box .disable-app button[type="button"] {
+    min-width: 5rem;
+}
+
+
+
+
+.wfq-dashboard-plane .note-div span.note-span {
+    background: #FF56A5;
+    border-radius: 11px;
+    max-width: max-content;
+    width: 100%;
+    min-width: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    font-size: 16px;
+    line-height: 18px;
+    font-weight: 600;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.wfq-dashboard-plane .note-div {
+    padding: 10px;
+    /* background: #d4e6fd; */
+    background: #fdcee4;
+    border-radius: 11px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin: 0 0 20px;
+}
+
+.wfq-dashboard .wfq-promo-code-box .disable-app button[type="button"] {
+    min-width: 5rem;
+}
+
+/* .wfq-dashboard .disable-app button[type="button"] {
+    border-color: #FF56A5;
+    background: #FF56A5;
+    border: none;
+} */
+
+.wfq-apply-span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+/* .promo-code-list .wfq-quote-form-btn.disable-app button[type="button"] {
+    height: 15px;
+    padding: 5px;
+} */
+
+.wfq-dashboard .wfq-promo-code-box .disable-app button[type="button"] {
+    min-width: 5rem;
+}
+
+.skeleton-main-div {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+}
+
+.skeleton-text {
+    position: relative;
+    top: -28%;
+}
+
+
+.wf-setup-guide .enable-app {
+    width: 250px;
+}
+
+
+/* for demo product */
+
+
+
+.icon-top-right {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.icon-top-left {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+.icon-bottom-right {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+.icon-bottom-left {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+}
+
+.demoImgWrapper {
+    position: relative;
+}
+
+.demoTitleWrapper {
+    display: flex;
+    /* justify-content: space-between; */
+    justify-content: center;
+    gap: 10px;
+}
+
+.demoCartWrapper {
+    display: flex;
+    /* justify-content: space-between; */
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+
+.displayNone {
+    display: none;
+}
+
+
+.wIconPos {
+    margin-bottom: -20px;
+}
+
+
+#addToCartDemo {
+    width: 100%;
+}
+
+.pdpSettings {
+    margin-top: 25px;
+}
+
+.demoImgWrapper {
+    background-color: rgb(255, 225, 198);
+}
+
+.demoImgWrapper img {
+    height: 550px;
+    width: 450px !important;
+    max-width: max-content !important;
+    /* background-size: contain; */
+}
+
+
+/* for the other apps----- */
+
+.webframez-apps-wrapper {
+    border-radius: 30px;
+    background-color: white;
+    padding: 40px;
+}
+
+#webframez-apps-wrapper2 {
+    display: grid;
+    grid-template-columns: 30% 30% 30%;
+    justify-content: space-between;
+}
+
+.webframez-app-alpha {
+    display: flex;
+}
+
+.webframez-apps {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.webframez-app-image img {
+    width: 50px;
+    height: 50px;
+}
+
+.webframez-app {
+    display: flex;
+}
+
+.webframez-app-heading {
+    padding: 0px 15px;
+    font-weight: 600;
+}
+
+.webframez-apps a {
+    text-decoration: none;
+    color: black;
+}
+
+.webframez-apps a:hover {
+    color: black;
+}
+
+.webframez-app-business {
+    background-color: #d6eaff;
+    color: #6d90a4;
+    width: auto;
+    padding: 1px 10px;
+    text-align: center;
+    border-radius: 25px;
+    font-weight: normal;
+    display: inline-block;
+    font-size: 12px;
+    margin-top: 8px;
+}
+
+.webframez-app-desc {
+    font-size: 12px;
+    color: gray;
+}
+
+.rdw-fontfamily-optionwrapper {
+    max-height: 200px;
+    /* you can adjust */
+    overflow-y: auto;
+    /* enable vertical scrollbar */
+    overflow-x: hidden;
+    /* hide horizontal scroll */
+}
+
+.rdw-dropdown-optionwrapper {
+    max-height: 200px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+
+@media screen and (max-width:1280px) {
+    #webframez-apps-wrapper2 {
+        grid-template-columns: 48% 48%;
+        gap: 30px;
+    }
+}
+
+@media screen and (max-width:644px) {
+    #webframez-apps-wrapper2 {
+        grid-template-columns: 100%;
+        gap: 30px;
+    }
+}
+
+
+
+
+
+
+
+
+/** Mobile Responsive  **/
+
+@media screen and (max-width:1280px) {
+    .wf-dashboard .Polaris-Page--fullWidth {
+        padding: 30px 30px 50px;
+    }
+
+    #boxx-shadow .Polaris-Grid-Cell,
+    .analytic-graph-bar .box-shadow,
+    .wf-wishlist-preview .wf-wishprev-inner,
+    .wf-style-wishbtn {
+        padding: 20px;
+        border-radius: 15px;
+    }
+
+    .wf-style-wishbtn .Polaris-Grid {
+        gap: 15px;
+    }
+
+    .wf-dashboard-buttonSetting h4,
+    .wf-wishlist-range-box label,
+    .border-input-field label {
+        font-size: 13px;
+        line-height: 20px;
+    }
+
+    .wf-style-wishbtn .input-field-colorpicker .Polaris-TextField input[type="text"] {
+        width: 60px;
+    }
+
+    .wf-style-wishbtn .color-selector {
+        width: 35px;
+    }
+}
+
+@media screen and (max-width:1024px) {
+
+    .wf-dashboard h1.Polaris-Header-Title,
+    .wf-dashboard-box .custom-margin h2,
+    .pricing-plan-table h2,
+    .wf-dashboard-analytic h2,
+    .wf-dashboard h2 {
+        font-size: 15px;
+        line-height: 24px;
+        letter-spacing: 0;
+        padding: 0;
+    }
+
+    .wf-dashboard .custom-margin p,
+    .wf-dashboard-box-inner p,
+    .wf-help-dashboard p,
+    .wf-dashboard-analytic p,
+    .wf-dashboard p,
+    .wf-dashboard-shareWishlist ul li {
+        font-size: 13px;
+        line-height: 20px;
+    }
+
+    .wf-dashboard .custom-margin span,
+    .wf-dashboard-box-inner p span,
+    .wf-dashboard-analytic h3,
+    .wf-dashboard-analytic h5 {
+        font-size: 14px;
+        line-height: 22px;
+    }
+
+    .wfq-dashboard-plane .note-div {
+        padding: 15px;
+        border-radius: 12px;
+        gap: 10px;
+        margin: 0 0 20px;
+    }
+
+    .wfq-dashboard-plane .note-div span.note-span {
+        border-radius: 10px;
+        max-width: 100%;
+        flex: 0 0 5rem;
+        padding: 0 10px;
+        height: 30px;
+        font-size: 13px;
+        line-height: 15px;
+    }
+
+    .wfq-dashboard-plane .note-div .Polaris-Text--headingXs {
+        font-size: 13px;
+        line-height: 18px;
+    }
+
+    .wf-dashboard-box .Polaris-ButtonGroup__Item button .Polaris-Button__Text,
+    .wf-help-dashboard button[type="button"] .Polaris-Button__Text,
+    .pricing-plan-table button[type="button"] .Polaris-Button__Text,
+    .overview-main select,
+    .overview-main button[type="button"] .Polaris-Button__Text,
+    .wg-style-tableHeading-wdt button[type="button"] .Polaris-Button__Text,
+    .analytic-view-btn button[type="button"] .Polaris-Button__Text,
+    .wf-style-wishbtn ul.Polaris-Tabs button[type="button"] span,
+    #PolarisPortalsContainer .Polaris-Button--primary .Polaris-Button__Text,
+    #PolarisPortalsContainer .Polaris-Modal-Dialog .Polaris-HorizontalStack .Polaris-Button .Polaris-Button__Text {
+        font-size: 11px;
+        line-height: 12px;
+        letter-spacing: 0;
+    }
+
+    .wf-dashboard-box .Polaris-ButtonGroup__Item button,
+    .wf-help-dashboard button[type="button"],
+    .lock-minor button[type="button"],
+    .pricing-plan-table button[type="button"],
+    .overview-main select,
+    .overview-main button[type="button"],
+    .analytic-view-btn button[type="button"],
+    .wg-style-tableHeading-wdt button[type="button"],
+    #PolarisPortalsContainer .Polaris-Button--primary,
+    #PolarisPortalsContainer .Polaris-Modal-Dialog .Polaris-HorizontalStack .Polaris-Button,
+    .upgradeButton {
+        height: 38px;
+        /* max-width: 160px; */
+    }
+
+    .wf-dashboard-boxplain .Polaris-ButtonGroup__Item:nth-child(1) button,
+    .pricing-plan-table button[type="button"],
+    .overview-main button[type="button"],
+    .wg-style-tableHeading-wdt button[type="button"],
+    .analytic-view-btn button[type="button"],
+    #PolarisPortalsContainer .Polaris-Button--primary,
+    #PolarisPortalsContainer .Polaris-Modal-Dialog .Polaris-HorizontalStack .Polaris-Button {
+        border-width: 0px 0px 3px;
+    }
+
+    .wf-dashboard .enable-app button[type="button"] .Polaris-Button__Text,
+    .wf-dashboard .disable-app button[type="button"] .Polaris-Button__Text,
+    .wf-dashboard-box-inner button[type="button"] .Polaris-Button__Text {
+        font-size: 11px;
+        letter-spacing: 0;
+        line-height: 12px;
+    }
+
+    .wf-dashboard .enable-app button[type="button"],
+    .wf-dashboard .disable-app button[type="button"],
+    .wf-dashboard-box-inner button[type="button"] {
+        border-width: 0px 0px 3px 0px;
+        height: 38px;
+        padding: 15px 20px;
+    }
+
+    .wf-dashboard-box .plan-div {
+        padding: 15px;
+        border-radius: 15px;
+        max-width: 100%;
+        width: 300px;
+    }
+
+    .wf-dashboard-box .plan-div>.custom-margin {
+        padding: 0 0 5px;
+        font-size: 13px;
+        line-height: 20px;
+        text-align: center;
+    }
+
+    .wf-dashboard-box .plan-div h5 {
+        padding: 60px 20px 20px;
+        border-radius: 10px;
+        font-size: 16px;
+        line-height: 18px;
+        letter-spacing: 0;
+        text-align: center;
+    }
+
+    .wf-dashboard-box .plan-div h5::before {
+        width: 40px;
+        height: 40px;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 10px;
+    }
+
+    .wf-dashboard-box .basic_plan_selected .plan-div h5::before {
+        background-size: 40px;
+    }
+
+    .wf-dashboard h1.Polaris-Header-Title,
+    .wf-dashboard-box .custom-margin h2,
+    .pricing-plan-table h2,
+    .wf-dashboard-analytic h2,
+    .wf-dashboard h2 {
+        font-size: 13px;
+        line-height: 22px;
+    }
+
+    .wf-dashboard .custom-margin span,
+    .wf-dashboard-box-inner p span,
+    .wf-dashboard-analytic h3,
+    .wf-dashboard-analytic h5 {
+        font-size: 13px;
+        line-height: 20px;
+    }
+
+    .wf-dashboard-box-inner .mandatorySpan img {
+        width: 30px;
+        height: 30px;
+    }
+
+    .basic-plan,
+    .pro-plan {
+        max-width: 60px;
+        height: 24px;
+        font-size: 12px;
+    }
+
+    .wf-dashboard-box-inner button[type="button"] {
+        border-width: 2px;
+        margin: 0 auto;
+    }
+
+    .wf-help-dashboard button[type="button"],
+    .lock-minor button[type="button"],
+    .upgradeButton {
+        border-width: 0px 0px 3px;
+    }
+
+    /* .wf-help-dashboard button[type="button"] {
+        max-width: 130px;
+    } */
+
+    .wf-help-dashboard-btn {
+        justify-content: flex-start;
+        max-width: 100%;
+    }
+
+    .wf-dashboard-box-inner>.Polaris-Box {
+        padding: 20px 0;
+    }
+
+    .wf-dashboard-box {
+        padding: 25px 25px 20px;
+    }
+
+    .wf-dashboard .Polaris-Page-Header__Row {
+        padding: 0 0 25px;
+        flex-direction: column-reverse;
+        gap: 10px;
+    }
+
+    .wf-dashboard .Polaris-Page-Header__Row .Polaris-Page-Header__RightAlign {
+        width: 100%;
+        margin: 0;
+    }
+
+    .wf-dashboard-box.wf-dashboard-boxplain .Polaris-Grid {
+        display: flex;
+        gap: 15px;
+        flex-direction: column-reverse;
+    }
+
+    .wf-dashboard-box.wf-dashboard-boxplain .Polaris-Grid .Polaris-ButtonGroup {
+        justify-content: center;
+    }
+
+    .wf-dashboard-box-inner .Polaris-Grid {
+        align-items: center;
+        grid-template-columns: 1fr;
+        gap: 0;
+        grid-row-gap: 15px;
+    }
+
+    .wf-help-dashboard::after {
+        width: 130px;
+        height: 100px;
+    }
+
+    .wf-dashboard .Polaris-Page--fullWidth {
+        padding: 20px 20px 30px;
+    }
+
+    .wf-dashboard-box-inner {
+        margin: 0;
+    }
+
+    .wf-dashboard-box-inner .wf-quick-access img {
+        width: 15px;
+        height: 15px;
+    }
+
+    .analytic-graph-bar,
+    .customer-recently-table {
+        grid-template-columns: 1fr;
+    }
+
+    #boxx-shadow .Polaris-Grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+    }
+
+    .wf-wishlist-preview {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 0 0 30px;
+    }
+
+    .wf-style-wishbtn .Polaris-Grid {
+        grid-template-columns: 1fr;
+    }
+
+    #add-to-cart-section.wf-style-wishbtn .Polaris-Grid,
+    .wishlist-ui-grid2 .Polaris-Grid {
+        grid-template-columns: 1fr;
+    }
+
+    .wf-dashboard h3,
+    #PolarisPortalsContainer h2,
+    #PolarisPortalsContainer caption.Polaris-DatePicker__Title {
+        font-size: 13px;
+        line-height: 22px;
+    }
+
+    .wf-wishlist-preview .buttonsGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .wf-collectionSetting .Polaris-Box.wf-collection-IconBtn {
+        grid-template-columns: 1fr;
+    }
+
+    .wf-collection-IconBtn .copyIcon img,
+    .wf-trending-page .copyIcon img {
+        width: 20px;
+        height: 20px;
+    }
+
+    .wf-style-wishbtn .Polaris-TextField input[type="text"],
+    .wf-style-wishbtn .Polaris-TextField input[type="number"],
+    .wf-advanceSetting textarea {
+        font-size: 12px;
+        line-height: 16px;
+    }
+
+    .wf-collection-IconSettion {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        padding-top: 15px;
+    }
+
+    .wf-pickWishlist-collection .custom-range-input {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .wf-pickWishlist-collection .wf-wishlist-range-box .Polaris-Choice__Control {
+        width: 18px;
+        height: 18px;
+    }
+
+    .wf-pickWishlist-collection .Polaris-RadioButton__Backdrop::before {
+        height: 8px;
+        width: 8px;
+    }
+
+    .wf-dashboard-report .Polaris-IndexTable__TableHeading,
+    .wf-dashboard-report .Polaris-IndexTable__StickyTableColumnHeader .Polaris-IndexTable__TableHeading {
+        background: #EDF5FF;
+        padding: 15px 10px;
+        font-size: 12px;
+        line-height: 18px;
+        color: #04468F;
+        font-weight: 700;
+        text-align: center;
+        text-transform: capitalize;
+    }
+
+
+    .wf-listingRecord {
+        padding: 25px 20px 0;
+        flex-direction: column;
+    }
+
+    .wf-dashboard-report .wf-listingRecord-inner {
+        width: 100%;
+    }
+
+    .wf-dashboard-report .wf-listingRecord-inner:last-child h2 {
+        text-align: right;
+    }
+
+    .wf-dashboard-report .Polaris-Select .Polaris-Select__Content {
+        height: 40px;
+        max-width: 130px;
+        margin: 5px 0 0 auto;
+    }
+
+    .wf-dashboard-report .Polaris-IndexFilters__ActionWrap {
+        padding: 0px 20px 0 0;
+        border: none;
+    }
+
+    .wf-dashboard-report .customer-recently-table .Polaris-IndexFilters.Polaris-IndexFilters__IndexFiltersSticky {
+        width: auto;
+        position: inherit;
+    }
+
+    .wf-dashboard-plane .note-div {
+        padding: 15px;
+        border-radius: 12px;
+        gap: 10px;
+        margin: 0 0 20px;
+    }
+
+    .wf-dashboard-plane .note-div span {
+        border-radius: 10px;
+        max-width: 100%;
+        flex: 0 0 5rem;
+        padding: 0 10px;
+        height: 30px;
+        font-size: 13px;
+        line-height: 15px;
+    }
+
+    .wf-dashboard-plane .note-div .Polaris-Text--headingXs {
+        font-size: 13px;
+        line-height: 18px;
+    }
+
+    .wf-dashboard-plane .toggle-paid-inner label,
+    .overview-main1 .Polaris-ButtonGroup button[type="button"],
+    .wf-style-wishbtn ul.Polaris-Tabs button[type="button"] {
+        font-size: 13px;
+        line-height: 15px;
+        letter-spacing: 0;
+        height: 36px;
+        padding: 8px;
+    }
+
+    .wf-dashboard-plane .toggle-paid-inner,
+    .overview-main1 .Polaris-ButtonGroup,
+    .wf-style-wishbtn ul.Polaris-Tabs {
+        border-width: 1px;
+        padding: 5px;
+        height: 48px;
+    }
+
+    .wf-dashboard-plane .toggle-paid-section p {
+        font-size: 12px;
+        line-height: 14px;
+        letter-spacing: 0;
+    }
+
+    .wf-dashboard-plane .toggle-paid-section {
+        gap: 10px;
+        margin: 0px 0 25px;
+    }
+
+    .pricing-plan-table .Polaris-Grid-Cell {
+        padding: 15px;
+        border-radius: 20px;
+    }
+
+    .pricing-plan-table img {
+        margin: 0 auto 5px;
+        max-width: 35px;
+    }
+
+    .pricing-plan-table h2 {
+        padding: 0 0 5px;
+    }
+
+    .pricing-plan-table .icon_div {
+        right: 10px;
+        top: 10px;
+    }
+
+    .pricing-plan-table .icon_div img {
+        max-width: 20px;
+    }
+
+    .pricing-plan-table .pricing-price {
+        height: 48px;
+        margin: 0 auto 30px;
+        font-size: 18px;
+        line-height: 24px;
+        letter-spacing: 0;
+        border-radius: 10px;
+    }
+
+    .pricing-plan-table ul li::before {
+        width: 10px;
+        height: 10px;
+        background-size: 10px;
+    }
+
+    .pricing-plan-table ul li {
+        font-size: 12px;
+        line-height: 22px;
+        padding: 0 0 2px 20px;
+    }
+
+    .pricing-plan-table .premiumPlanBox h4 {
+        font-size: 10px;
+        line-height: 14px;
+        height: 22px;
+        width: 85px;
+        border-radius: 4px;
+        padding: 2px;
+        margin: 0 auto 10px;
+    }
+
+    .pricing-plan-table {
+        grid-template-columns: 1fr;
+    }
+
+    .talkUsDivParent {
+        border-radius: 12px;
+        max-width: 100%;
+        height: 60px;
+    }
+
+    .talkUsDivParent img {
+        margin-right: 10px;
+        max-width: 12px;
+    }
+
+    .talkUsDivParent p {
+        letter-spacing: 0;
+    }
+
+    .talkUsDivParent a {
+        max-width: 115px;
+        height: 38px;
+        padding: 2px;
+        font-size: 11px;
+        line-height: 12px;
+        margin-left: 12px;
+    }
+
+    .developer-form-box a {
+        height: 38px;
+        padding: 5px;
+        font-size: 11px;
+        line-height: 12px;
+    }
+
+    .developer-form-box h2 {
+        padding: 0 0 5px;
+    }
+
+    .request-button-submit button[type="submit"] {
+        border-width: 0px 0px 3px;
+        max-width: 120px;
+        height: 38px;
+        padding: 5px 10px;
+    }
+
+    .request-button-submit button[type="submit"] .Polaris-Button__Text {
+        font-size: 11px;
+        letter-spacing: 0;
+        line-height: 12px;
+    }
+
+    .Polaris-Page-Header__BreadcrumbWrapper .Polaris-Breadcrumbs__Breadcrumb {
+        border-radius: 4px;
+        width: 20px;
+        height: 20px;
+        border-width: 0px 0px 1px;
+    }
+
+    .Polaris-Page-Header__BreadcrumbWrapper .Polaris-Breadcrumbs__Icon svg {
+        width: 14px;
+        display: block;
+        margin: 0 auto;
+    }
+
+    .Polaris-Page-Header__BreadcrumbWrapper .Polaris-Box {
+        top: 20px;
+    }
+
+    .wf-dashboard .Polaris-Page-Header__TitleWrapper {
+        padding-left: 30px;
+        margin: 0;
+    }
+
+    .wf-wishlist-range-box .Polaris-Labelled__LabelWrapper {
+        margin: 0;
+    }
+
+    .wf-dashboard #wishlist-ui-section h2 {
+        font-size: 13px;
+        line-height: 18px;
+        padding: 0 0 5px;
+    }
+
+    .wf-wishlist-range-box .Polaris-Choice__Control .Polaris-Checkbox {
+        width: 16px;
+        height: 16px;
+    }
+
+    .wf-wishlist-range-box .Polaris-Choice__Control .Polaris-Checkbox__Backdrop {
+        border-width: 1px;
+    }
+
+    .wf-wishlist-range-box .Polaris-Checkbox__Input:checked+.Polaris-Checkbox__Backdrop::before {
+        transform: scale(0.8);
+    }
+
+    .wf-dashboard-shareWishlist ul li {
+        word-wrap: break-word;
+    }
+
+}
+
+@media screen and (max-width:767px) {
+    #boxx-shadow .Polaris-Grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    div#basic-collapsible .wishlist-ui-grid2 {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .overview-main1 {
+        flex-direction: column;
+        justify-content: center;
+        gap: 25px;
+    }
+
+    .overview-main.overview-main1 .dates-for-graphical button[type="button"] {
+        margin: 0 auto;
+    }
+
+    .overview-main1 h3 {
+        text-align: center;
+    }
+
+    #add-to-wishlist-section .custom-range-input {
+        gap: 10% !important;
+    }
+
+    .wf-style-wishbtn .input-field-colorpicker .Polaris-TextField input[type="text"] {
+        width: 50px;
+    }
+
+    .wf-style-wishbtn .input-field-colorpicker {
+        gap: 2px;
+    }
+
+    .wf-style-wishbtn .color-selector {
+        width: 35px;
+        height: 38px;
+        border: none;
+    }
+
+    .wf-dashboard .Polaris-LegacyCard__Section {
+        padding-left: 0;
+        padding-right: 0;
+        padding-bottom: 0;
+    }
+
+    .wf-generalSetting .Polaris-MediaCard__ActionContainer {
+        padding-top: 5px;
+    }
+
+    .talkUsDivParent {
+        padding: 10px 15px;
+        height: auto;
+    }
+
+    .talkUsDivParent p {
+        text-align: left;
+    }
+
+    .developer-form-box {
+        grid-template-columns: 1fr;
+    }
+
+    .developer-form-box p {
+        margin: 0 0 10px;
+    }
+
+    #PolarisPortalsContainer .Polaris-Modal-Dialog__Modal {
+        border-radius: 12px;
+        width: 95%;
+        margin: 0 auto;
+        bottom: auto;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    #PolarisPortalsContainer .Polaris-Modal-CloseButton {
+        background: transparent;
+        margin: 0;
+        position: relative;
+        top: -15px;
+        right: -10px;
+    }
+
+    .customer-recently-table {
+        display: inherit;
+    }
+
+    .customer-recently-table .customer-recently-inner:not(:last-child) {
+        margin: 0 0 40px;
+    }
+
+    div#basic-collapsible\ collapse-wbl {
+        grid-template-columns: 1fr;
+    }
+
+    .wf-style-wishbtn #basic-collapsible .Polaris-Grid {
+        gap: 0;
+    }
+
+    .youtube-main-box {
+        display: block;
+    }
+
+    .youtube-main-box .wf-dashboard-box {
+        width: 100%;
+    }
+
+    .wf-language-main-btn img {
+        width: 100%;
+    }
+
+    .wf-trending-page .wishlistUi-TyleInner-3 {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .wf-trending-page .wishlistUi-TyleInner-3 .wf-wishlist-range-box,
+    .wf-trending-page .wishlistUi-TyleInner-3 .disableOneByOne .wf-wishlist-range-box {
+        padding: 0;
+    }
+}
+
+@media screen and (max-width:480px) {
+    .wf-trending-page .wishlistUi-TyleInner {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+@media screen and (max-width:480px) {
+    .wf-help-dashboard-btn {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
+
+
+/*new-dashboard-media*/
+
+@media screen and (max-width:1100px) {
+    .wf-new-dashboard .Polaris-Grid {
+        grid-template-columns: auto !important;
+    }
+
+    .wf-new-dashboard .wf-dashboard-box .Polaris-Grid {
+        display: flex;
+        gap: 15px;
+        flex-direction: row;
+        position: relative;
+    }
+
+    .wf-new-dashboard .wf-dashboard-box .Polaris-Grid:nth-child(2) {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+    }
+
+    .wf-new-dashboard h3 {
+        padding-left: 0;
+    }
+
+    .wf-new-dashboard .Polaris-Grid .Polaris-Grid-Cell:nth-child(3) {
+        display: block;
+    }
+
+    .wf-new-dashboard .wf-dashboard-box .new-dash-mobile .Polaris-Grid .Polaris-Grid-Cell:nth-child(3) {
+        margin-left: auto;
+    }
+
+
+    .wf-new-dashboard .wf-dashboard-box .new-dash-mobile .Polaris-Grid-Cell .disable-app,
+    .wf-new-dashboard .wf-dashboard-box .new-dash-mobile .Polaris-Grid-Cell .wf-dashboard-box-inner,
+    .wf-new-dashboard .new-dash-mobile .Polaris-Grid-Cell .wf-dashboard-ismultiwishlist {
+        position: absolute;
+        right: 0;
+        top: 0px;
+    }
+
+    .wf-new-dashboard .new-dash-bg.annouce-new-dash .Polaris-Grid {
+        justify-content: space-between;
+    }
+
+    .wf-new-dashboard .new-dash-bg.new-dash-mainplan .Polaris-Grid .Polaris-Grid-Cell {
+        width: 70%;
+    }
+
+    .wf-new-dashboard .new-dash-bg.new-dash-mainplan .Polaris-Grid .Polaris-Grid-Cell:nth-child(2) {
+        width: 30%;
+    }
+
+    .wf-new-dashboard .wf-dashboard-box.wf-dashboard-boxplain.new-dash-mobile .Polaris-Grid:nth-child(2) {
+        flex-direction: row;
+    }
+
+    .wf-new-dashboard .wf-dashboard-boxplain.lang-box .Polaris-Grid {
+        gap: 50px;
+    }
+
+    .wf-new-dashboard .lock-minor button[type="button"],
+    .wf-new-dashboard .wf-dashboard-box-inner button[type="button"] {
+        width: 70%;
+        margin: auto;
+    }
+
+    .wf-new-dashboard .lock-minor {
+        display: flex;
+        justify-content: center;
+    }
+
+    .wf-new-dashboard .new-dash-bg.new-dash-mainplan .Polaris-Grid button.Polaris-Button {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width:900px) {
+
+    .wf-new-dashboard .new-dash-bg.new-dash-mainplan .Polaris-Grid {
+        flex-direction: column;
+    }
+
+    .wf-new-dashboard .new-dash-bg.new-dash-mainplan .Polaris-Grid .Polaris-Grid-Cell {
+        width: 100%;
+    }
+
+    .wf-new-dashboard .new-dash-bg.new-dash-mainplan .Polaris-Grid .Polaris-Grid-Cell:nth-child(2) {
+        width: 100%;
+    }
+
+    .wf-new-dashboard .wf-dashboard-box.wf-dashboard-boxplain.new-dash-mobile .Polaris-Grid .Polaris-Grid-Cell {
+        width: 50%;
+    }
+
+    .wf-new-dashboard .new-dash-bg.new-dash-mainplan .Polaris-Grid .Polaris-Grid-Cell .plan-div {
+        margin: 0 auto;
+    }
+
+}
+
+
+@media screen and (max-width:767px) {
+
+    .wf-new-dashboard .wf-dashboard-box.wf-dashboard-boxplain.new-dash-mobile .Polaris-Grid-Cell .wf-dashboard-ismultiwishlist,
+    .wf-new-dashboard .wf-dashboard-boxplain.lang-box .new-dash-mobile .Polaris-Grid-Cell .disable-app,
+    .wf-dashboard-box.wf-dashboard-boxplain.new-sws .new-dash-mobile .Polaris-Grid .Polaris-Grid-Cell .wf-dashboard-box-inner {
+        position: relative;
+    }
+
+    .wf-new-dashboard .wf-dashboard-box.wf-dashboard-boxplain.new-dash-mobile .Polaris-Grid,
+    .wf-dashboard-box.wf-dashboard-boxplain.new-sws .new-dash-mobile .Polaris-Grid {
+        display: grid;
+    }
+
+    .wf-new-dashboard .wf-dashboard-box.wf-dashboard-boxplain.new-dash-mobile .Polaris-Grid-Cell {
+        width: 100% !important;
+    }
+
+    .wf-new-dashboard .wf-dashboard-boxplain.lang-box .new-dash-mobile .Polaris-Grid {
+        display: grid;
+        gap: 20px;
+        margin: 0 0 10px;
+    }
+
+    .wf-new-dashboard .wf-dashboard-boxplain.lang-box .Polaris-Grid {
+        gap: 20px;
+        display: grid;
+    }
+}
+
+
+@media screen and (max-width:500px) {
+
+    .wf-new-dashboard .lock-minor button[type="button"],
+    .wf-new-dashboard .wf-dashboard-box-inner button[type="button"] {
+        width: 100%;
+        margin: auto;
+    }
+}

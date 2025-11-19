@@ -1,0 +1,180 @@
+<script> 
+const currentShopDomain='{{ shop.domain }}';
+const cshopPlan= '{{ app.metafields.wishlist-app.current-plan.value }}';
+let currentShopPlan;
+const cButtonSettingVal ='{{ app.metafields.wishlist-app.wishlist-button-setting.value }}';
+const currentButtonSetting = JSON.parse(cButtonSettingVal);
+const cCollectionSettingVal= '{{ app.metafields.wishlist-app.collection-setting.value }}';
+const currentCollectionSeting   = JSON.parse(cCollectionSettingVal);
+// const cCustomLanguageSettingVal ='{{ app.metafields.wishlist-app.language-setting.value }}';
+// const customLanguageSetting =JSON.parse(cCustomLanguageSettingVal.replace(/~/g, "'"));
+const settingCurrentFilter = '{{ block.settings.selectCurrentFilter }}';
+const settingGridElement='{{ block.settings.productGridElement }}';
+const settingProductElement='{{ block.settings.productAnchorElement }}';
+const settingModalSelector = '{{ block.settings.modalGridElement }}';
+const settingModalOpenSelector = '{{ block.settings.modalOpenElement }}';
+const settingModalButtonAppend = '{{ block.settings.modalButtonAppend }}';
+const settingModalVariantSelector = '{{ block.settings.modalVariantSelector }}';
+const settingModalVariantSubSelector= '{{ block.settings.modalVariantSubSelector }}';
+const getThemeNameColl ='{{ app.metafields.wishlist-app.current-theme-name.value }}';
+const settingAppendIconElement = '{{ block.settings.iconElement }}';
+
+const settingButtonPrependBeforeElemnt= {{ block.settings.buttonPrependBeforeElemnt }};
+const settingAfterIcon= {{ block.settings.afterIcon }};
+const settingAppendIconCheck= {{ block.settings.appendIconCheck }};
+let isCollectionIcon = true;
+
+    if (!document.querySelector("#wf-current-product")) {
+        let currentProduct = document.createElement('div');
+        currentProduct.id = 'wf-current-product';
+        currentProduct.style.display ="none"
+        currentProduct.setAttribute('data-aj', '0');
+        currentProduct.setAttribute('data-product-handle','[]');
+        document.body.prepend(currentProduct);
+    }
+     if (!document.querySelector("#wf-modal-check-Product")) {
+        let checkProduct = document.createElement('div');
+        checkProduct.id = 'wf-modal-check-Product';
+        checkProduct.style.display ="none"
+        checkProduct.setAttribute('data-aj', '0');
+        checkProduct.setAttribute('data-product-handle','[]');
+        document.body.prepend(checkProduct);
+    }
+
+</script>
+
+
+{% liquid
+  # theme-check-disable AssetSizeJavaScript
+%}
+<script src="{{ 'collection-icon.js' | asset_url }}" defer ></script>
+{% liquid
+  # theme-check-enable AssetSizeJavaScript
+%}
+
+{% schema %}
+  {
+     "name": "Collection Icons",
+     "target": "body",
+     "settings": [
+       {
+         "type": "header",
+     "content": "Theme preset required ",
+     "info": "Collection icons rely on the theme preset in App Settings.In some cases a manual setup may be required. Used for manual setup."
+       },
+       {
+         "type": "select",
+         "id": "selectCurrentFilter",
+         "label": "Search & filter app preset",
+         "options": [
+           {
+             "value": "none",
+             "label": "None"
+           },
+           {
+             "value": "custom",
+             "label": "Custom"
+           },
+           {
+             "value": "boost",
+             "label": "AI Search, Filter Recommend by Boost"
+           },
+           {
+             "value": "sparq",
+             "label": "Sparq Product Filter & Search"
+           },  
+           {
+            "value": "searchanise",
+            "label": "Searchanise Search & Filter"
+          }
+         ],
+         "default": "none"
+       },{
+         "type": "checkbox",
+         "id": "afterIcon",
+         "label": "If you want to append an icon after Product Class",
+         "default": false
+       },{
+         "type": "checkbox",
+         "id": "appendIconCheck",
+         "label": "If you want to append an icon inside Product Class",
+         "default": false
+       },{
+         "type": "checkbox",
+         "id": "buttonPrependBeforeElemnt",
+         "label": "you can add a button as a child element inside a Product Grid Element",
+         "default": false
+       },
+       {
+         "type": "header",
+     "content": "Custom Selector",
+     "info": "If you are still not able to see Wishlist icons on collection pages then try adding custom selectors or contact us"
+       },
+           {
+         "type": "text",
+         "id": "productGridElement",
+         "label": "Product Grid Element",
+         "placeholder": "Enter product main div"
+        
+       },
+       {
+         "type": "text",
+         "id": "productAnchorElement",
+         "label": "Product Anchor Element",
+         "placeholder": "Enter product anchor div"
+        
+       },
+       {
+         "type": "text",
+         "id": "iconElement",
+         "label": "Product Class where you want to display your icons on collection page",
+         "placeholder": "Enter product div where you want to show icons on collection page"
+        
+       },
+ 
+       {
+         "type": "header",
+         "content": "Modal Icon Setting"
+       },
+       {
+         "type": "text",
+         "id": "modalGridElement",
+         "label": "Modal Grid Element",
+         "placeholder": "Enter product modal main class or id"
+        
+       },
+       {
+         "type": "text",
+         "id": "modalOpenElement",
+         "label": "Modal Open Element selector",
+         "placeholder": "Enter product modal open selector"
+        
+       },
+       {
+         "type": "header",
+         "content": "Use when button not shown in your modal. "
+       }, 
+       {
+         "type": "text",
+         "id": "modalButtonAppend",
+         "label": "Modal Button Append",
+         "placeholder": "Enter product modal open selector"
+         
+       },
+       {
+         "type": "text",
+         "id": "modalVariantSelector",
+         "label": "Modal variant class",
+         "placeholder": "Enter product modal variant selector"
+         
+       },
+        {
+         "type": "text",
+         "id": "modalVariantSubSelector",
+         "label": "Modal variant sub  class",
+         "placeholder": "Enter product modal variant selector"
+        
+       }
+     ]
+   }
+ {% endschema %}

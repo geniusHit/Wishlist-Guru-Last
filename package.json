@@ -1,0 +1,33 @@
+{
+  "name": "wishlist-guru-last",
+  "version": "1.0.0",
+  "main": "web/index.js",
+  "license": "UNLICENSED",
+  "scripts": {
+    "shopify": "shopify",
+    "build": "shopify app build",
+    "dev": "shopify app dev",
+    "info": "shopify app info",
+    "generate": "shopify app generate",
+    "deploy": "shopify app deploy"
+  },
+  "type": "module",
+  "dependencies": {
+    "@shopify/app": "^3.55.4",
+    "@shopify/cli": "^3.84.1",
+    "@shopify/shopify-api": "^12.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.2",
+    "jsonwebtoken": "^9.0.2",
+    "mysql": "^2.18.1",
+    "mysql2": "^3.15.1",
+    "nodemailer": "^7.0.6"
+  },
+  "author": "Ravi",
+  "private": true,
+  "workspaces": [
+    "extensions/*",
+    "web",
+    "web/frontend"
+  ]
+}

@@ -1,0 +1,17 @@
+export const sqlTables = {
+    user_table: "wishlist_users",
+    Wishlist_table: "wishlist",
+    product_table: "wishlist_items",
+    app_installation_table: "app_installation",
+    app_installation_log_table: "app_installation_logs",
+    wishlist_shared_stats: "wishlist_share_stats",
+    plan_table: "plan",
+    cart_table: "cart_items",
+    store_languages_table: "store_languages",
+    store_languages_url_table: "store_languages_url",
+    email_reminder_table: "email_reminder",
+    store_email_temp_table: "store_email_templates",
+    email_reports_table: "email_reports",
+    social_like_table: 'social_like',
+    klaviyo_table: "klaviyo",
+}
