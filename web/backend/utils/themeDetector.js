@@ -7368,7 +7368,7 @@ export default function detectThemeName(themeName, filter, customSettings) {
     }
 
 
-    else if (themeName === "Icon" || themeName === "Louis") {
+    else if (themeName === "Icon" || themeName === "Louis" || themeName === "Yves" || themeName === "Dolce") {
         // --------------------- For Header------------------------
 
         headerHeartIcon = ".nav-container ul.header__shopping-cart"
@@ -29082,6 +29082,73 @@ export default function detectThemeName(themeName, filter, customSettings) {
         // for header wishlist icon left , right position
         cart = ".right .cart";
         cartMobile = ""
+    }
+
+    else if (themeName === "Parallax") {
+        // --------------------- For Header------------------------
+        headerHeartIcon = ".header__secondary-navigation"
+        headerHeartIconClass = ""
+        headerHeartElementClass = ""
+        headerHeartIconCreateElement = "li"
+        headerHeartElementInsertAfter = false
+        headerHeartElementPrepend = false
+
+        headerHeartIconMobile = ".mobile-header"
+        headerHeartIconMobileClass = ""
+        headerHeartMobileElementClass = ""
+        headerHeartIconMobileCreateElement = "a"
+        headerHeartMobileInsertAfter = false
+        headerHeartMobileElementPrepend = false
+
+        headerMenuItem = ".header__navigation"
+        headerMenuItemClass = ".header__navigation .header__nav-item"
+        headerMenuElementClass = ""
+        headerMenuItemCreateElement = ""
+        headerHeartIconMobileCreateElement = ""
+        headerMenuElementInsertAfter = false;
+        // headerHeartMobileInsertAfter = false
+        headerMenuElementPrepend = false;
+        // headerHeartMobileElementPrepend = false
+
+        headerMenuItemMobile = "div#mm-2.mm-panel.mm-panel_has-navbar.mm-panel_opened .mm-listview"
+        headerMenuItemMobileClass = "div#mm-2.mm-panel.mm-panel_has-navbar.mm-panel_opened .mm-listview > .mm-listitem"
+        headerMenuMobileElementClass = ""
+        headerMenuItemMobileCreateElement = ""
+        headerMenuMobileInsertAfter = false
+        headerMenuMobileElementPrepend = false
+
+        // ------------------- Icons-----------------------
+
+        gridElement = '.container.main-wrapper .container .one-third, .product-recommendations .column';
+        appendIcon = '.container.main-wrapper .container .thumbnail__link, .product-recommendations .column .thumbnail__link';
+        afterIcon = false
+        appendIconCheck = false
+        buttonPrependBeforeElemnt = false
+        productLink = '.container.main-wrapper .container .one-third a, .product-recommendations .column .thumbnail__link';
+        beforeIcon = true
+
+        //--------------------------- For Quick Modal--------------
+
+        modelMainElement = "";
+        modalProductElement = "";
+        modalbuttonAppend = "";
+        modalButtonAppendOnImg = "";
+        modalbuttonAppendOnTitle = "";
+        modalVariantSelector = ""
+        modalVariantSubSelector = ""
+        modalVariantMatchedUndefinedParent = ""
+        checkModalVariantMatchedUndefinedParent = ""
+        modalVariantMatchedUndefinedSelector = "";
+        modalProductIdSelector = "";
+        modalProductIdValueSelector = "";
+
+        //icon on pdp image
+        pdpImageSelector = ".product-gallery__main .flickity-viewport"
+        pdpTitleSelector = ".product-block--title";
+        pdpAddToCartSelector = ".add_to_cart";
+        // for header wishlist icon left , right position
+        cart = ".cart";
+        cartMobile = ".mobile-header .icon-cart"
     }
 
     else {
