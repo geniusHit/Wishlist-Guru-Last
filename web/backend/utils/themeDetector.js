@@ -7790,7 +7790,7 @@ export default function detectThemeName(themeName, filter, customSettings) {
         headerHeartMobileInsertAfter = false
         headerHeartMobileElementPrepend = false
 
-        headerMenuItem = "header .header-item.header-item--navigation ul.site-nav.site-navigation"
+        headerMenuItem = "header .header-item.header-item--navigation ul.site-nav.site-navigation, .site-navigation"
         headerMenuItemClass = "site-nav__link"
         headerMenuElementClass = "site-nav__item site-nav__expanded-item"
         headerHeartIconMobileCreateElement = ""
@@ -7805,12 +7805,12 @@ export default function detectThemeName(themeName, filter, customSettings) {
         headerMenuMobileElementPrepend = false
 
         // ------------------- Icons-----------------------
-        gridElement = '.grid-product__content ';
-        appendIcon = 'a.grid-product__link';
+        gridElement = '.grid-product__content, .grid-product, .ct-product';
+        appendIcon = 'a.grid-product__link, .ct-product__link';
         afterIcon = true
         appendIconCheck = false
         buttonPrependBeforeElemnt = false
-        productLink = 'a.grid-product__link';
+        productLink = 'a.grid-product__link, .ct-product__link';
 
 
 
@@ -7831,13 +7831,13 @@ export default function detectThemeName(themeName, filter, customSettings) {
 
 
         //icon on pdp image
-        pdpImageSelector = ".product__main-photos .product-image-main image-element img";
-        pdpTitleSelector = ".product-block--header .product-single__title";
+        pdpImageSelector = ".product__main-photos .product-image-main image-element img, .product-image-main .image-wrap";
+        pdpTitleSelector = ".product-block--header .product-single__title, .product-single__title";
         pdpAddToCartSelector = ".payment-buttons .add-to-cart";
 
 
         // for header wishlist icon left , right position
-        cart = ".header--wrapper .header--secondary-nav .header--cart";
+        cart = ".header--wrapper .header--secondary-nav .header--cart, .js-drawer-open-cart";
     }
 
     else if (themeName === "Be Yours") {
