@@ -11327,7 +11327,7 @@ export default function detectThemeName(themeName, filter, customSettings) {
         headerHeartMobileInsertAfter = false
         headerHeartMobileElementPrepend = false
 
-        headerMenuItem = "div.header-section nav.navigation .nav-container ul#main-nav"
+        headerMenuItem = "div.header-section nav.navigation .nav-container ul#main-nav, .navigation__menu"
         headerMenuItemClass = "navigation__menulink js-menu-link is_upcase-true"
         headerMenuItemCreateElement = ""
         headerMenuElementClass = "navigation__menuitem js-doubletap-to-go"
@@ -11342,10 +11342,10 @@ export default function detectThemeName(themeName, filter, customSettings) {
         headerMenuMobileElementPrepend = false
 
         //   ------------------- Icons-----------------------
-        gridElement = "div#main-collection-product-grid .collection__page-product ";
-        appendIcon = ".js-product-image";
+        gridElement = "div#main-collection-product-grid .collection__page-product, .js-product-listing";
+        appendIcon = ".js-product-image a";
         afterIcon = false
-        appendIconCheck = true
+        appendIconCheck = false
         buttonPrependBeforeElemnt = false
         productLink = ".js-product-image  a";
 
@@ -12476,7 +12476,7 @@ export default function detectThemeName(themeName, filter, customSettings) {
         cart = ".site-header__wrapper__right .site-header__links li:nth-child(4)";
     }
 
-    else if (themeName === "Showcase") {
+    else if (themeName === "Showcase" || themeName === "Aria" || themeName === "Drake" || themeName === "Ava" || themeName === "Mila") {
 
         // --------------------- For Header------------------------
 
@@ -14168,11 +14168,11 @@ export default function detectThemeName(themeName, filter, customSettings) {
         cart = ".header__icons__customer .header__button.strong"
     }
 
-    else if (themeName === "Alchemy") {
+    else if (themeName === "Alchemy" || themeName === "Splice" || themeName === "Weave") {
 
         // --------------------- For Header------------------------
 
-        headerHeartIcon = "header#pageheader__contents .pageheader__layout .header-items"
+        headerHeartIcon = "header#pageheader__contents .pageheader__layout .header-items, .header-icons"
         headerHeartIconClass = ""
         headerHeartIconCreateElement = ""
         headerHeartElementClass = "header-items__item"
@@ -14186,14 +14186,14 @@ export default function detectThemeName(themeName, filter, customSettings) {
         headerHeartMobileInsertAfter = false
         headerHeartMobileElementPrepend = false
 
-        headerMenuItem = "header#pageheader__contents .header-left ul"
+        headerMenuItem = "header#pageheader__contents .header-left ul, .multi-level-nav > div > ul"
         headerMenuItemClass = "main-menu-link"
         headerMenuItemCreateElement = ""
         headerMenuElementClass = ""
         headerMenuElementInsertAfter = false
         headerMenuElementPrepend = false
 
-        headerMenuItemMobile = "div#modals-leftDrawer ul.mt-5 "
+        headerMenuItemMobile = "div#modals-leftDrawer ul.mt-5, .main-menu-links"
         headerMenuItemMobileClass = "block font-heading py-2.5"
         headerMenuItemMobileCreateElement = ""
         headerMenuMobileElementClass = "text-lg lg:text-xl"
@@ -14203,12 +14203,12 @@ export default function detectThemeName(themeName, filter, customSettings) {
 
         // ------------------- Icons-----------------------
 
-        gridElement = "div.card";
-        appendIcon = "div.card .card__image";
+        gridElement = "div.card, .slider__item, li:has(.card--product)";
+        appendIcon = "div.card .card__image, .card__media";
         afterIcon = false
         appendIconCheck = true
         buttonPrependBeforeElemnt = false
-        productLink = "a.card__link";
+        productLink = "a.card__link, a";
 
         //--------------------------- For Quick Modal--------------
 
@@ -14228,13 +14228,13 @@ export default function detectThemeName(themeName, filter, customSettings) {
 
 
         // icon on pdp image
-        pdpImageSelector = ".media-gallery__viewer picture img";
+        pdpImageSelector = ".gallery-zoom-open:not(html.gallery-zoom-open)";
         pdpTitleSelector = ".product-info__block--title .product-title";
         pdpAddToCartSelector = ".product-add .btn:nth-child(2)";
 
 
         // for header wishlist icon left , right position
-        cart = ".header__icons__customer .header__button.strong"
+        cart = ".header__icons__customer .header__button.strong, #cart-icon"
     }
 
     else if (themeName === "Gain" || themeName === "Maison" || themeName === "Sable" || themeName === "Lace" || themeName === "Mio") {
@@ -29084,7 +29084,7 @@ export default function detectThemeName(themeName, filter, customSettings) {
         cartMobile = ""
     }
 
-    else if (themeName === "Parallax") {
+    else if (themeName === "Parallax" || themeName === "Dash" || themeName === "Taproom" || themeName === "Canyon") {
         // --------------------- For Header------------------------
         headerHeartIcon = ".header__secondary-navigation"
         headerHeartIconClass = ""
@@ -29149,6 +29149,72 @@ export default function detectThemeName(themeName, filter, customSettings) {
         // for header wishlist icon left , right position
         cart = ".cart";
         cartMobile = ".mobile-header .icon-cart"
+    }
+
+    else if (themeName === "Startup" || themeName === "Duvet" || themeName === "Comfort" || themeName === "Travel") {
+        // --------------------- For Header------------------------
+        headerHeartIcon = ".site-header__controls--last"
+        headerHeartIconClass = ""
+        headerHeartElementClass = ""
+        headerHeartIconCreateElement = ""
+        headerHeartElementInsertAfter = false
+        headerHeartElementPrepend = false
+
+        headerHeartIconMobile = ""
+        headerHeartIconMobileClass = ""
+        headerHeartMobileElementClass = ""
+        headerHeartIconMobileCreateElement = ""
+        headerHeartMobileInsertAfter = false
+        headerHeartMobileElementPrepend = false
+
+        headerMenuItem = ".drawer-menu__tier-1-menu"
+        headerMenuItemClass = ".drawer-menu__tier-1-menu .drawer-menu__tier-1-item"
+        headerMenuElementClass = ""
+        headerMenuItemCreateElement = ""
+        headerHeartIconMobileCreateElement = ""
+        headerMenuElementInsertAfter = false;
+        // headerHeartMobileInsertAfter = false
+        headerMenuElementPrepend = false;
+        // headerHeartMobileElementPrepend = false
+
+        headerMenuItemMobile = ""
+        headerMenuItemMobileClass = ""
+        headerMenuMobileElementClass = ""
+        headerMenuItemMobileCreateElement = ""
+        headerMenuMobileInsertAfter = false
+        headerMenuMobileElementPrepend = false
+
+        // ------------------- Icons-----------------------
+
+        gridElement = '.collection-products .product-list-item';
+        appendIcon = '.collection-products .product-list-item .product-list-item-thumbnail';
+        afterIcon = false
+        appendIconCheck = false
+        buttonPrependBeforeElemnt = false
+        productLink = '.collection-products .product-list-item a';
+
+        //--------------------------- For Quick Modal--------------
+
+        modelMainElement = "";
+        modalProductElement = "";
+        modalbuttonAppend = "";
+        modalButtonAppendOnImg = "";
+        modalbuttonAppendOnTitle = "";
+        modalVariantSelector = ""
+        modalVariantSubSelector = ""
+        modalVariantMatchedUndefinedParent = ""
+        checkModalVariantMatchedUndefinedParent = ""
+        modalVariantMatchedUndefinedSelector = "";
+        modalProductIdSelector = "";
+        modalProductIdValueSelector = "";
+
+        //icon on pdp image
+        pdpImageSelector = ".product-gallery--media-wrapper img";
+        pdpTitleSelector = ".product__title";
+        pdpAddToCartSelector = ".add-to-cart__button";
+        // for header wishlist icon left , right position
+        cart = ".site-header__cart-button";
+        cartMobile = ""
     }
 
     else {

@@ -16,7 +16,7 @@ let customButton = localData?.customButton || JSON.parse(heartButton.getAttribut
 let customLanguage = localData?.customLanguage || JSON.parse(heartButton.getAttribute("language-setting").replace(/~/g, "'"));
 let generalSetting = localData?.generalSetting || JSON.parse(heartButton.getAttribute("general-setting"));
 // let getThemeName = localData?.getThemeName || JSON.parse(heartButton.getAttribute("theme-name"));
-let getThemeName = {themeName: "Parallax"}
+let getThemeName = {themeName: "Testament"}
 let advanceSetting = localData?.advanceSetting || JSON.parse(heartButton.getAttribute("advance-setting").replace(/~/g, "'"));
 let collectionBtnSetting = localData?.collectionBtnSetting || JSON.parse(heartButton.getAttribute("collection-btn-setting"));
 let currentPlan = localData?.currentPlan || JSON.parse(heartButton.getAttribute("current-plan"));
@@ -6615,6 +6615,7 @@ async function collectionIconClick(event, selectedId, handle) {
         matchedProductId = matchedElement.getAttribute('data-variant-id')
         // console.log('Found matching item-selected element:', matchedElement.getAttribute('data-variant-id'));
     }
+    event.preventDefault()
     event.stopPropagation();
     try {
         const collectionIconResponse = await fetch(`${wfGetDomain}products/${handle}.js`);
@@ -8359,9 +8360,9 @@ async function collectionBtnAddedRemoveWishlist(selectedId, productHandle, added
         let updateWishlistIconCollectionTitle = "";
         let updateWishlistIconCollectionCart = "";
 
-        updateWishlistIconCollection += `<div class="${addedText === 'added' ? "collection_icon_new_selected" : "collection_icon_new"} ${iconPosition.iconPosition}" style="${iconPosition.checkClassExist === true ? `top :${imgHeight}px;` : ''}"><div style="${addedText === 'added' ? `filter: ${colIconSelectedColor};` : `filter: ${colIconDefaultColor};`} ${collectionIconSize()}" onClick="collectionIconClickModal(event,${selectedId}, '${productHandle}')" class="${iconPosition.iconStyle}"><span class="span-hearticon"></span></div></div>`;
-        updateWishlistIconCollectionTitle += `<div class="${addedText === 'added' ? "collection_icon_new_selected" : "collection_icon_new"}  ${currentCollectionSeting.quickViewShowOptionTitle === true ? "modal-icon" : ""} "><div style="${addedText === 'added' ? `filter: ${colIconSelectedColor};` : `filter: ${colIconDefaultColor};`} ${collectionIconSize()}" onClick="collectionIconClickModal(event,${selectedId}, '${productHandle}')" class="${iconPosition.iconStyle}"><span class="span-hearticon"></span></div></div>`;
-        updateWishlistIconCollectionCart += `<div class="${addedText === 'added' ? "collection_icon_new_selected" : "collection_icon_new"} ${position === 'left-icon-position' ? "icon-cart-left" : position === 'right-icon-position' ? "icon-cart-right" : position === "center-icon-position" && "icon-cart-center"}"><div style="${addedText === 'added' ? `filter: ${colIconSelectedColor};` : `filter: ${colIconDefaultColor};`} ${collectionIconSize()}" onClick="collectionIconClickModal(event,${selectedId}, '${productHandle}')" class="${iconPosition.iconStyle}"><span class="span-hearticon"></span></div></div>`
+        updateWishlistIconCollection += `<div class="${addedText === 'added' ? "collection_icon_new_selected" : "collection_icon_new"} ${iconPosition.iconPosition}" style="${iconPosition.checkClassExist === true ? `top :${imgHeight}px;` : ''}"><div style="${addedText === 'added' ? `filter: ${colIconSelectedColor};` : `filter: ${colIconDefaultColor};`} ${collectionIconSize()}" onClick="collectionIconClickModal(${event},${selectedId}, '${productHandle}')" class="${iconPosition.iconStyle}"><span class="span-hearticon"></span></div></div>`;
+        updateWishlistIconCollectionTitle += `<div class="${addedText === 'added' ? "collection_icon_new_selected" : "collection_icon_new"}  ${currentCollectionSeting.quickViewShowOptionTitle === true ? "modal-icon" : ""} "><div style="${addedText === 'added' ? `filter: ${colIconSelectedColor};` : `filter: ${colIconDefaultColor};`} ${collectionIconSize()}" onClick="collectionIconClickModal(${event},${selectedId}, '${productHandle}')" class="${iconPosition.iconStyle}"><span class="span-hearticon"></span></div></div>`;
+        updateWishlistIconCollectionCart += `<div class="${addedText === 'added' ? "collection_icon_new_selected" : "collection_icon_new"} ${position === 'left-icon-position' ? "icon-cart-left" : position === 'right-icon-position' ? "icon-cart-right" : position === "center-icon-position" && "icon-cart-center"}"><div style="${addedText === 'added' ? `filter: ${colIconSelectedColor};` : `filter: ${colIconDefaultColor};`} ${collectionIconSize()}" onClick="collectionIconClickModal(${event},${selectedId}, '${productHandle}')" class="${iconPosition.iconStyle}"><span class="span-hearticon"></span></div></div>`
 
         if (collectionBtnSetting.isQuickViewShowOptionTitle) {
             const iconAppendOnTitle = document.querySelectorAll(`.wf-wishlist-collection-icon-modal.wf-title`);
@@ -8394,7 +8395,7 @@ async function collectionBtnAddedRemoveWishlist(selectedId, productHandle, added
         let addWishlistModalButton = document.createElement("div");
         addWishlistModalButton.style.zIndex = "10";
         addWishlistModalButton.style.position = "relative";
-        addWishlistModalButton.innerHTML = addedText === 'added' ? `<div onClick="collectionIconClickModal(event,${selectedId}, '${productHandle}')" class="modalButtonCollection" >${alreadyAddedToWishlistData}</div>` : `<div onClick="collectionIconClickModal(event,${selectedId}, '${productHandle}')" class="modalButtonCollection" >${addToWishlistData}</div>`
+        addWishlistModalButton.innerHTML = addedText === 'added' ? `<div onClick="collectionIconClickModal(${event},${selectedId}, '${productHandle}')" class="modalButtonCollection" >${alreadyAddedToWishlistData}</div>` : `<div onClick="collectionIconClickModal(${event},${selectedId}, '${productHandle}')" class="modalButtonCollection" >${addToWishlistData}</div>`
 
         if (currentCollectionSeting.quickViewShowOption === 'button-below') {
             const dddd = document.querySelector(themeSelectors.modalbuttonAppend).nextSibling
