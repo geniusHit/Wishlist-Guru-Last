@@ -17,7 +17,7 @@ const serverURL1 = 'http://localhost:5000'; // -------------- local
 
 
 // let getCurrentThemeName = JSON.parse(getThemeNameColl);
-let getCurrentThemeName = {themeName: "Testament"}
+let getCurrentThemeName = {themeName: "Responsive"}
 // let localDataC = JSON.parse(localStorage.getItem("wg-local-data"));
 // let getCurrentThemeName = localDataC?.getThemeName || JSON.parse(getThemeNameColl);
 
