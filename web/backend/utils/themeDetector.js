@@ -176,7 +176,7 @@ export default function detectThemeName(themeName, filter, customSettings) {
         headerHeartMobileInsertAfter = false
         headerHeartMobileElementPrepend = false
 
-        headerMenuItem = ".header_botom nav.header__inline-menu ul.list-menu,header.header nav ul.list-menu.list-menu--inline"
+        headerMenuItem = ".header_botom nav.header__inline-menu ul.list-menu,header.header nav ul.list-menu.list-menu--inline, .header__inline-menu .list-menu"
         headerMenuItemClass = "header__menu-item list-menu__item link link--text focus-inset"
         headerMenuElementClass = ""
         headerHeartIconMobileCreateElement = ""
@@ -7320,7 +7320,7 @@ export default function detectThemeName(themeName, filter, customSettings) {
         headerHeartMobileElementPrepend = false
 
         headerMenuItem = "header .header__content .header__line-bottom .header__nav nav .menu__panel, .header__nav .menu__panel, .site-header .menu-box .menu-main-container .main-menu, .jms-megamenu > .nav"
-        headerMenuItemClass = "header .header__content .header__line-bottom .header__nav nav .menu__panel > .menu__item, .header__nav .menu__panel > .menu__item, .site-header .menu-box .menu-main-container .main-menu > .menu-item, .jms-megamenu > .nav > .menu-item"
+        headerMenuItemClass = "header .header__content .header__line-bottom .header__nav nav .menu__panel > .menu__item, .header__nav .menu__panel > .menu__item, .site-header .menu-box .menu-main-container .main-menu > .menu-item, .jms-megamenu > .nav > .menu-item, .menu__panel"
         headerMenuElementClass = ""
         headerMenuItemCreateElement = "div"
         headerMenuElementInsertAfter = false;
@@ -7361,7 +7361,7 @@ export default function detectThemeName(themeName, filter, customSettings) {
         pdpAddToCartSelector = ".product-page-info__button-add-to-cart .js-product-button-add-to-cart, .add-to-cart, .product-page-info__button-add-to-cart .js-product-button-add-to-cart";
 
         // for header wishlist icon left , right position
-        cart = ".header__btn-cart, .right-icon-group > .addon-box:nth-child(4)";
+        cart = ".header__sidebar div:has(.header__btn-cart), .right-icon-group > .addon-box:nth-child(4)";
         cartMobile = ""
     }
 
@@ -8614,8 +8614,8 @@ export default function detectThemeName(themeName, filter, customSettings) {
         headerMenuMobileElementPrepend = false
 
         // ------------------- Icons-----------------------
-        gridElement = '.product-grid__item,.resource-list__item, .resource-list__slide';
-        appendIcon = '.product-card,.resource-list__item .product-media.resource-list__slide .card-gallery';
+        gridElement = '.product-grid__item,.resource-list__item, .resource-list__slide, .tabbco__card';
+        appendIcon = '.product-card,.resource-list__item .product-media.resource-list__slide .card-gallery, .tabbco__media';
         afterIcon = false
         appendIconCheck = false
         buttonPrependBeforeElemnt = false
@@ -8639,7 +8639,7 @@ export default function detectThemeName(themeName, filter, customSettings) {
         // pdpImageSelector = ".product-information .media-gallery__grid .product-media-container--image";
         pdpImageSelector = ".product-information .media-gallery__grid .product-media-container--image .product-media, .product-information__media .product-media img:not(.product-media__drag-zoom-wrapper img)";
         // pdpTitleSelector = ".h2 h1";
-        pdpTitleSelector = ".h2 h1, .h3 h1, .h3 p, .text-block h6";
+        pdpTitleSelector = ".h2 h1, .h3 h1, .h3 p, .text-block h6, .h4 h1, .h1 h1";
         // pdpAddToCartSelector = ".add-to-cart-text--added";
         pdpAddToCartSelector = ".add-to-cart-button";
 
@@ -11372,7 +11372,7 @@ export default function detectThemeName(themeName, filter, customSettings) {
         cart = ".shopping__cart-links .cart-links__link-cart";
     }
 
-    else if (themeName === "Fashionopolism") {
+    else if (themeName === "Fashionopolism" || themeName === "Haute" || themeName === "Horology" || themeName === "Salon") {
         headerHeartIcon = "header .header--container ul.shopping--cart_links"
         headerHeartIconClass = ""
         headerHeartIconCreateElement = "li"
@@ -11387,7 +11387,7 @@ export default function detectThemeName(themeName, filter, customSettings) {
         headerHeartMobileInsertAfter = false
         headerHeartMobileElementPrepend = false
 
-        headerMenuItem = "header .header--container nav .navigation__maincontainer ul#nav"
+        headerMenuItem = "header .header--container nav .navigation__maincontainer ul#nav, .navigation__maincontainer #nav"
         headerMenuItemClass = "navigation__menulink js-menu-link"
         headerMenuItemCreateElement = ""
         headerMenuElementClass = "navigation__menuitem"
@@ -11402,12 +11402,12 @@ export default function detectThemeName(themeName, filter, customSettings) {
         headerMenuMobileElementPrepend = false
 
         //   ------------------- Icons-----------------------
-        gridElement = "div#main-collection-product-grid .collection__page-product ";
-        appendIcon = ".js-product-image";
+        gridElement = "div#main-collection-product-grid .collection__page-product, .product-index";
+        appendIcon = ".js-product-image, .product-index .prod-image";
         afterIcon = false
         appendIconCheck = true
         buttonPrependBeforeElemnt = false
-        productLink = ".js-product-image  a";
+        productLink = ".js-product-image  a, a";
 
         //--------------------------- For Quick Modal--------------
         modelMainElement = "";
@@ -13725,7 +13725,7 @@ export default function detectThemeName(themeName, filter, customSettings) {
     else if (themeName === "District" || themeName === "Tempo" || themeName === "Coast") {
 
         // --------------------- For Header------------------------
-        headerHeartIcon = "header.header-top .header-top__right #cart-button, .header__icon-cart"
+        headerHeartIcon = "header.header-top .header-top__right #cart-button, .header__icon-cart, .right-wrapper"
         headerHeartIconClass = ""
         headerHeartIconCreateElement = ""
         headerHeartElementClass = ""
@@ -13740,14 +13740,14 @@ export default function detectThemeName(themeName, filter, customSettings) {
         headerHeartMobileInsertAfter = false
         headerHeartMobileElementPrepend = false
 
-        headerMenuItem = "header-section.block .header-secondary nav.header-secondary__navigation ul.header-secondary__menu"
+        headerMenuItem = "header-section.block .header-secondary nav.header-secondary__navigation ul.header-secondary__menu, .site-nav"
         headerMenuItemClass = "header-menu__link-item h-full"
         headerMenuItemCreateElement = ""
         headerMenuElementClass = "header-menu__list-item h-full"
         headerMenuElementInsertAfter = false
         headerMenuElementPrepend = false
 
-        headerMenuItemMobile = ".menu-drawer__menu"
+        headerMenuItemMobile = ".menu-drawer__menu, #menu .site-nav"
         headerMenuItemMobileClass = "drawer-menu__link-item h-full"
         headerMenuItemMobileCreateElement = ""
         headerMenuMobileElementClass = "drawer-menu__list-item"
@@ -13756,8 +13756,8 @@ export default function detectThemeName(themeName, filter, customSettings) {
 
         // ------------------- Icons-----------------------
 
-        gridElement = "div#ProductGridContainer li.collection__grid-item product-card.grid-item .product-card.relative, .product-recommendations__grid-item";
-        appendIcon = ".product-card__media";
+        gridElement = "div#ProductGridContainer li.collection__grid-item product-card.grid-item .product-card.relative, .product-recommendations__grid-item, .product";
+        appendIcon = ".product-card__media, .product-grid-item--center";
         afterIcon = false
         appendIconCheck = false
         buttonPrependBeforeElemnt = false
@@ -13781,13 +13781,14 @@ export default function detectThemeName(themeName, filter, customSettings) {
 
 
         // icon on pdp image
-        pdpImageSelector = ".product__media-container media-slideshow .splide__track--slide .splide__slide:not(.media__thumbnails-container .splide__slide)";
-        pdpTitleSelector = ".product__details .product__title";
-        pdpAddToCartSelector = ".product-form .product-form__buttons .product-form__submit";
+        pdpImageSelector = ".product__media-container media-slideshow .splide__track--slide .splide__slide:not(.media__thumbnails-container .splide__slide), .product-image--cell";
+        pdpTitleSelector = ".product__details .product__title, .product-title h1";
+        pdpAddToCartSelector = ".product-form .product-form__buttons .product-form__submit, .default-cart-button__button";
 
 
         // for header wishlist icon left , right position
-        cart = ".header-top__cart-button svg.icon, .header__icon-cart"
+        cart = ".header-top__cart-button svg.icon, .header__icon-cart, #CartButton"
+        cartMobile = "#AddToCart-product-template"
     }
 
     else if (themeName === "Concept") {
@@ -16274,7 +16275,7 @@ export default function detectThemeName(themeName, filter, customSettings) {
 
         // ------------------- Icons-----------------------
 
-        gridElement = '.product-grid__item';
+        gridElement = '.product-grid__item, .resource-list__slide';
         appendIcon = '.card-gallery';
         afterIcon = false
         appendIconCheck = false
@@ -23072,7 +23073,7 @@ export default function detectThemeName(themeName, filter, customSettings) {
         cart = ".header__cart-links--cart";
     }
 
-    else if (themeName === "Responsive") {
+    else if (themeName === "Responsive" || themeName === "Patina" || themeName === "Cycle" || themeName === "Contour") {
         headerHeartIcon = ".top-bar__menu"
         headerHeartIconClass = "top-bar__menu-link"
         headerHeartIconCreateElement = "li"
@@ -23102,12 +23103,13 @@ export default function detectThemeName(themeName, filter, customSettings) {
         headerMenuMobileElementPrepend = false
 
         //   ------------------- Icons-----------------------
-        gridElement = ".content-wrapper--collection .one-third.column.medium-down--one-whole.thumbnail";
+        gridElement = ".content-wrapper--collection .one-third.column.medium-down--one-whole.thumbnail, .one-third.column";
         appendIcon = "a";
-        afterIcon = true
+        afterIcon = false
         appendIconCheck = false
         buttonPrependBeforeElemnt = false
         productLink = "a";
+        beforeIcon = true
 
         //--------------------------- For Quick Modal--------------
         modelMainElement = "";
@@ -23122,6 +23124,14 @@ export default function detectThemeName(themeName, filter, customSettings) {
         modalVariantMatchedUndefinedSelector = "";
         modalProductIdSelector = "";
         modalProductIdValueSelector = "";
+
+        //icon on pdp image
+        pdpImageSelector = ".product-gallery__image a";
+        pdpTitleSelector = ".product__title";
+        pdpAddToCartSelector = ".add_to_cart";
+
+        // for header wishlist icon left , right position
+        cart = ".top-bar__menu-item:has(.cart_button)";
     }
 
     else if (themeName === "Retro") {
@@ -25556,7 +25566,7 @@ export default function detectThemeName(themeName, filter, customSettings) {
 
     // }
 
-    else if (themeName === "Sunrise") {
+    else if (themeName === "Sunrise" || themeName === "Cabana" || themeName === "Jellybean" || themeName === "Gleam") {
         // --------------------- For Header------------------------
         headerHeartIcon = "header .site-width .header-right .minicart-wrap, header .header__icons, .shopify-section .row.clearfix"
         headerHeartIconClass = ""
@@ -29349,6 +29359,73 @@ export default function detectThemeName(themeName, filter, customSettings) {
         pdpAddToCartSelector = ".product-details__add-to-cart-button"
         // for header wishlist icon left , right position
         cart = ".header-controls__cart";
+        cartMobile = ""
+    }
+
+    else if (themeName === "Expression" || themeName === "Ocean" || themeName === "Oxford" || themeName === "Expression") {
+        // --------------------- For Header------------------------
+        headerHeartIcon = ".utils__right"
+        headerHeartIconClass = ""
+        headerHeartElementClass = ""
+        headerHeartIconCreateElement = ""
+        headerHeartElementInsertAfter = false
+        headerHeartElementPrepend = false
+
+        headerHeartIconMobile = ""
+        headerHeartIconMobileClass = ""
+        headerHeartMobileElementClass = ""
+        headerHeartIconMobileCreateElement = ""
+        headerHeartMobileInsertAfter = false
+        headerHeartMobileElementPrepend = false
+
+        headerMenuItem = ".main-nav"
+        headerMenuItemClass = ""
+        headerMenuElementClass = ""
+        headerMenuItemCreateElement = ""
+        headerHeartIconMobileCreateElement = ""
+        headerMenuElementInsertAfter = false;
+        // headerHeartMobileInsertAfter = false
+        headerMenuElementPrepend = false;
+        // headerHeartMobileElementPrepend = false
+
+        headerMenuItemMobile = ""
+        headerMenuItemMobileClass = ""
+        headerMenuMobileElementClass = ""
+        headerMenuItemMobileCreateElement = ""
+        headerMenuMobileInsertAfter = false
+        headerMenuMobileElementPrepend = false
+
+        // ------------------- Icons-----------------------
+
+        gridElement = '.product-block';
+        appendIcon = '.product-block .product-block__link';
+        afterIcon = false
+        appendIconCheck = false
+        buttonPrependBeforeElemnt = false
+        productLink = 'a';
+        beforeIcon = true
+
+        //--------------------------- For Quick Modal--------------
+
+        modelMainElement = "";
+        modalProductElement = "";
+        modalbuttonAppend = "";
+        modalButtonAppendOnImg = "";
+        modalbuttonAppendOnTitle = "";
+        modalVariantSelector = ""
+        modalVariantSubSelector = ""
+        modalVariantMatchedUndefinedParent = ""
+        checkModalVariantMatchedUndefinedParent = ""
+        modalVariantMatchedUndefinedSelector = "";
+        modalProductIdSelector = "";
+        modalProductIdValueSelector = "";
+
+        //icon on pdp image
+        pdpImageSelector = ".product-image a";
+        pdpTitleSelector = ".product-form-block";
+        pdpAddToCartSelector = ".product-form-button-container button";
+        // for header wishlist icon left , right position
+        cart = ".cart";
         cartMobile = ""
     }
 
