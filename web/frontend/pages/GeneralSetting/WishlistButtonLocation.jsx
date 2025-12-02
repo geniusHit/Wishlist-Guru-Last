@@ -271,7 +271,8 @@ const WishlistButtonLocation = () => {
                             </div>
 
                             <Collapsible
-                                open={watchAllFields.wlbLocation3 || watchAllFields.wlbLocation2}
+                                // open={watchAllFields.wlbLocation3 || watchAllFields.wlbLocation2}
+                                open={true}
                                 id="basic-collapsible"
                                 transition={{ duration: '500ms', timingFunction: 'ease-in-out' }}
                                 expandOnPrint
@@ -351,8 +352,10 @@ const WishlistButtonLocation = () => {
                                         </div>
                                     </div>
 
-                                    <div className={`${!watchAllFields.wlbLocation2 && 'not-allowed-class'}`}>
-                                        <div className={`${!watchAllFields.wlbLocation2 && 'disable-block77'}`}>
+                                    {/* <div className={`${!watchAllFields.wlbLocation2 && 'not-allowed-class'}`}>
+                                        <div className={`${!watchAllFields.wlbLocation2 && 'disable-block77'}`}> */}
+                                    <div>
+                                        <div>
                                             <div className='wf-wishlist-range-box'>
                                                 <Text variant="headingMd" as="h2">{myLanguage.iconLocationHeaderIconHeading}</Text>
                                             </div>
@@ -530,9 +533,14 @@ const WishlistButtonLocation = () => {
 
                                 {/* <div className={`${currentPlan >= 2 ? "" : "disableEverything under-basic"}`} style={{ marginTop: "0" }}> */}
                                 <div className='wf-style-wishbtn wishlist-ui-grid2 wf-count-box-basic-second'>
-                                    <div className='floating_icon'>
-                                        <ColorPickerController control={control} controllerName={`floatingHeartIconCountBgcolor`} id={`floatingHeartIconCountBgcolor`} setSaveBar={setSaveBar} label={myLanguage.floatingIconCountBgText} />
-                                    </div>
+
+
+                                    <div className={`${!watchAllFields.wlbLocation3 && 'not-allowed-class'}`}>
+                                        <div className={`${!watchAllFields.wlbLocation3 && 'disable-block77'}`}>
+                                            <div className='floating_icon'>
+                                                <ColorPickerController control={control} controllerName={`floatingHeartIconCountBgcolor`} id={`floatingHeartIconCountBgcolor`} setSaveBar={setSaveBar} label={myLanguage.floatingIconCountBgText} />
+                                            </div>
+                                        </div></div>
 
                                     {/* <div className='floating_icon'>
                                             <ColorPickerController control={control} controllerName={`floatingHeartIconCountTextcolor`} id={`floatingHeartIconCountTextcolor`} setSaveBar={setSaveBar} label={myLanguage.floatingIconCountText} />
@@ -543,9 +551,12 @@ const WishlistButtonLocation = () => {
                                         <ColorPickerController control={control} controllerName={`headerHeartIconCountBgcolor`} id={`headerHeartIconCountBgcolor`} setSaveBar={setSaveBar} label={myLanguage.headerIconCountBgText} />
                                     </div>
 
-                                    <div className='floating_icon'>
-                                        <ColorPickerController control={control} controllerName={`floatingHeartIconCountTextcolor`} id={`floatingHeartIconCountTextcolor`} setSaveBar={setSaveBar} label={myLanguage.floatingIconCountText} />
-                                    </div>
+                                    <div className={`${!watchAllFields.wlbLocation3 && 'not-allowed-class'}`}>
+                                        <div className={`${!watchAllFields.wlbLocation3 && 'disable-block77'}`}>
+                                            <div className='floating_icon'>
+                                                <ColorPickerController control={control} controllerName={`floatingHeartIconCountTextcolor`} id={`floatingHeartIconCountTextcolor`} setSaveBar={setSaveBar} label={myLanguage.floatingIconCountText} />
+                                            </div>
+                                        </div></div>
 
                                     <div className='floating_icon'>
                                         <ColorPickerController control={control} controllerName={`headerHeartIconCountTextcolor`} id={`headerHeartIconCountTextcolor`} setSaveBar={setSaveBar} label={myLanguage.headerIconCountText} />
@@ -554,45 +565,46 @@ const WishlistButtonLocation = () => {
                                     <div className='floating_icon'></div>
                                     <div className='floating_icon'>
                                         <div className='Polaris-Label__Text'>
-                                            <span className='wf-wishlist-range-box wIconPos'>
-                                                <label>{myLanguage.headerIconPosition}</label>
-                                            </span>
-                                            <div style={{ columnCount: 3 }} >
-                                                <SingleFieldController
-                                                    name="headerIconPosition"
-                                                    control={control}>
-                                                    {({ field }) =>
-                                                        <RadioButton
-                                                            label={<span style={{ position: "relative", top: "", left: "10px" }}>{myLanguage.hiLeft}</span>}
-                                                            // label={myLanguage.iconOutline}
-                                                            value={false}
-                                                            id="left"
-                                                            checked={field.value === "left" && true} onChange={() => {
-                                                                field.onChange("left"),
-                                                                    setSaveBar(true);
-                                                            }}
-                                                        />
-                                                    }
-                                                </SingleFieldController>
+                                            <div className={`${currentPlan >= 2 ? "" : "disableEverything under-basic"}`} >
+                                                <span className='wf-wishlist-range-box wIconPos'>
+                                                    <label>{myLanguage.headerIconPosition}</label>
+                                                </span>
+                                                <div style={{ columnCount: 3 }} >
+                                                    <SingleFieldController
+                                                        name="headerIconPosition"
+                                                        control={control}>
+                                                        {({ field }) =>
+                                                            <RadioButton
+                                                                label={<span style={{ position: "relative", top: "", left: "10px" }}>{myLanguage.hiLeft}</span>}
+                                                                // label={myLanguage.iconOutline}
+                                                                value={false}
+                                                                id="left"
+                                                                checked={field.value === "left" && true} onChange={() => {
+                                                                    field.onChange("left"),
+                                                                        setSaveBar(true);
+                                                                }}
+                                                            />
+                                                        }
+                                                    </SingleFieldController>
 
-                                                <SingleFieldController
-                                                    name="headerIconPosition"
-                                                    control={control}  >
-                                                    {({ field }) =>
-                                                        <RadioButton
-                                                            label={<span style={{ position: "relative", top: "", left: "10px" }}>{myLanguage.hiRight}</span>}
-                                                            value={false}
-                                                            id="right"
-                                                            checked={field.value === "right" && true} onChange={() => {
-                                                                field.onChange("right"),
-                                                                    setSaveBar(true);
-                                                            }}
-                                                        />
-                                                    }
-                                                </SingleFieldController>
+                                                    <SingleFieldController
+                                                        name="headerIconPosition"
+                                                        control={control}  >
+                                                        {({ field }) =>
+                                                            <RadioButton
+                                                                label={<span style={{ position: "relative", top: "", left: "10px" }}>{myLanguage.hiRight}</span>}
+                                                                value={false}
+                                                                id="right"
+                                                                checked={field.value === "right" && true} onChange={() => {
+                                                                    field.onChange("right"),
+                                                                        setSaveBar(true);
+                                                                }}
+                                                            />
+                                                        }
+                                                    </SingleFieldController>
 
 
-                                                <SingleFieldController
+                                                    {/* <SingleFieldController
                                                     name="headerIconPosition"
                                                     control={control}  >
                                                     {({ field }) =>
@@ -606,13 +618,13 @@ const WishlistButtonLocation = () => {
                                                             }}
                                                         />
                                                     }
-                                                </SingleFieldController>
+                                                </SingleFieldController> */}
 
 
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-
 
 
 

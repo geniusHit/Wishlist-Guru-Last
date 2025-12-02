@@ -1244,5 +1244,17 @@ const chinese = {
     cowishTitle: "CoWish - 收藏愿望清单",
     cowishDesc: "愿望清单 - 允许用户收藏他们喜欢的系列",
     hideOnZero: "当为0时隐藏",
+
+    planBasicBFCM: "Basic 方案仅需 $4.99 —— 终身节省 $1",
+    planProBFCM: "Pro 方案仅需 $9.99 —— 终身节省 $3",
+    planPremiumBFCM: "Premium 方案仅需 $14.99 —— 终身节省 $4.99",
+    planAllBFCM: "所有年度方案享受终身 20% 折扣",
+    modalInnerDivBg: "弹窗内部背景颜色",
+    modalBottomDivBg: "弹窗底部按钮区域背景颜色",
+    styleMW: "多愿望清单样式",
+    styleMWSub: "您可以在此自定义多愿望清单的样式",
+    smwOne: "多愿望清单复选框背景颜色",
+    smwTwo: "多愿望清单复选框图标颜色",
+
 }
 export default chinese;

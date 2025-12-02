@@ -1266,5 +1266,17 @@ const german = {
   cowishTitle: "CoWish - Wunschliste für Kollektionen",
   cowishDesc: "Wunschliste - Ermöglichen Sie Nutzern, ihre Lieblingskollektionen hinzuzufügen",
   hideOnZero: "Ausblenden bei 0",
+
+  planBasicBFCM: "Erhalten Sie den Basic-Plan für nur $4.99 — Sparen Sie $1 ein Leben lang",
+  planProBFCM: "Erhalten Sie den Pro-Plan für nur $9.99 — Sparen Sie $3 ein Leben lang",
+  planPremiumBFCM: "Erhalten Sie den Premium-Plan für nur $14.99 — Sparen Sie $4.99 ein Leben lang",
+  planAllBFCM: "Erhalten Sie lebenslang 20 % Rabatt auf alle Jahrespläne",
+  modalInnerDivBg: "Hintergrundfarbe des inneren Modalfensters",
+  modalBottomDivBg: "Hintergrundfarbe des unteren Buttonbereichs im Modal",
+  styleMW: "Stile für die Multi-Wunschliste",
+  styleMWSub: "Hier können Sie die Stile der Multi-Wunschliste anpassen",
+  smwOne: "Hintergrundfarbe des Multi-Wunschlisten-Kontrollkästchens",
+  smwTwo: "Symbolfarbe des Multi-Wunschlisten-Kontrollkästchens",
+
 }
 export default german;

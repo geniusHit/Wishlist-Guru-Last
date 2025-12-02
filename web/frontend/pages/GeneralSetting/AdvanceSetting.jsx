@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 import loaderGif from "../loaderGreen.gif";
 import useSwal from '../../hooks/useSwal';
 import Footer from '../Footer';
+import SingleFieldController from "../../hooks/useSingleFieldController";
 
 const AdvanceSetting = () => {
     const utilityFunction = useUtilityFunction();
@@ -52,7 +53,8 @@ const AdvanceSetting = () => {
                     jsAfterAddToWishlist: dData.jsAfterAddToWishlist,
                     jsAfterRemovedFromWishlist: dData.jsAfterRemoveFromWishlist,
                     jsAfterItemsLoaded: dData?.jsAfterItemsLoaded || "",
-                    jsAfterAddToCart: dData?.jsAfterAddToCart || ""
+                    jsAfterAddToCart: dData?.jsAfterAddToCart || "",
+                    metaPixelApiKey: dData?.metaPixelApiKey || ""
                 })
             }
         }
@@ -71,6 +73,7 @@ const AdvanceSetting = () => {
             jsAfterRemoveFromWishlist: data.jsAfterRemovedFromWishlist,
             jsAfterItemsLoaded: data.jsAfterItemsLoaded,
             jsAfterAddToCart: data.jsAfterAddToCart,
+            metaPixelApiKey: data.metaPixelApiKey,
         }
         const getAppMetafieldId = await appMetafield.getAppMetafieldId();
         const appMetadata = {
@@ -203,10 +206,6 @@ const AdvanceSetting = () => {
                                 </div>
                             </Grid.Cell>
 
-
-
-
-
                             <Grid.Cell columnSpan={{ xs: 6, sm: 3, md: 3, lg: 6, xl: 6 }}>
                                 <div className={`${currentPlan >= 2 ? "" : "disableEverything under-basic"}`} >
                                     <div className='wf-style-wishbtn'>
@@ -225,12 +224,32 @@ const AdvanceSetting = () => {
                                     </div>
                                 </div>
                             </Grid.Cell>
-
-
-
-
-
                         </Grid>
+
+                        <Grid>
+                            <Grid.Cell columnSpan={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }}>
+
+                                <div className='wf-style-wishbtn wishlist-ui-grid2'>
+                                    <div className={`${currentPlan >= 3 ? "" : "disableEverything under-pro"}`} >
+                                        <div className='custom-margin'>
+                                            <Text variant="headingMd" as="h2">Meta Pixel Integration Settings</Text>
+                                            <p>Use this integration to track Add to Cart and Add to Wishlist events.</p>
+                                        </div>
+                                        <br />
+                                        <div >
+                                            <SingleFieldController name={`metaPixelApiKey`} control={control}  >
+                                                {({ field }) => (<TextField className='input-field-css' label={`Enter Your Meta Pixel API Key`} id='metaPixelApiKey' value={field.value} onChange={(newValue) => {
+                                                    setSaveBar(true);
+                                                    field.onChange(newValue);
+                                                }} />)}
+                                            </SingleFieldController>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </Grid.Cell>
+                        </Grid>
+
                         <div style={{ marginTop: "0px" }}>
                             <Footer myLanguage={myLanguage} />
                         </div>

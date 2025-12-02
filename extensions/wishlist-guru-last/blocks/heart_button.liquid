@@ -30,6 +30,9 @@
   isMultiwishlistTrue='{{ app.metafields.wishlist-app.is-Multi-wishlist }}'
   isVariantTrue='{{ app.metafields.wishlist-app.is-variant-wishlist.value }}'
   cur-data='{{ shop.currency }}'
+  currency-symbol='{{ shop.currency_symbol }}'
+  currency-format='{{ shop.money_format }}'
+
   ></div>
   <div id="wf-custom-wishBtn-inject" class="inject-button-pp" data-product-id={{ product.id }} data-product-handle='{{ product.handle }}' variant-id='{{ product.selected_or_first_available_variant.id }}' inject-code-automatic='{{ app.metafields.wishlist-app.inject-code-automatic.value }}'  ></div>
 
@@ -133,7 +136,7 @@
 <div class="our-sweetalert"></div>
 
   <script>
-    const wfCurrencyType = '{{ shop.money_format }}';
+    // const wfCurrencyType = '{{ shop.money_format }}';
     const currentPermanentDomain =  '{{ shop.permanent_domain }}';
     const currentLoginCustomerEmail = '{{ customer.email }}';
     localStorage.setItem("customer-email", currentLoginCustomerEmail); 
@@ -190,6 +193,45 @@
     }
 </script>
 <script src="{{ 'checkEvent.js' | asset_url }}" defer ></script>
+
+{% comment %} ----------this code is safe end of multiple body tags-------- {% endcomment %}
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const allBodies = document.getElementsByTagName("body");
+    if (allBodies.length <= 1) {
+        return;
+    }
+    const outerBody = allBodies[0];
+    const idsToMove = [
+        "heart",
+        "wf-custom-wishBtn-inject",
+        "wg-myModal",
+        "mySidenav",
+        "wg-myModalD",
+        "wg-myModal1",
+        "myshareModal",
+        "wg-multiWishlistMainDiv"
+    ];
+    idsToMove.forEach(id => {
+        const el = document.getElementById(id);
+        if (el && el.parentElement !== outerBody) {
+            outerBody.appendChild(el);
+        }
+    });
+    const classesToMove = [
+        "our-sweetalert",
+        "overlayy"
+    ];
+    classesToMove.forEach(cls => {
+        document.querySelectorAll("." + cls).forEach(el => {
+            if (el && el.parentElement !== outerBody) {
+                outerBody.appendChild(el);
+            }
+        });
+    });
+});
+</script>
+
 {% schema %}
   {
     "name": "App Configuration",

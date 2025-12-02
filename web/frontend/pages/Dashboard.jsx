@@ -372,9 +372,6 @@ export default function Dashboard() {
 
         setCurrentPlan(getCurrentPlan.currentPlan);
         const shopAPI = await ShopApi.shop();
-
-        console.log("shopAPI --- ", shopAPI)
-
         setShopApi(shopAPI);
         const tickData = await getGenData(allData);
         setGetGenDataInfo(tickData.genData);
@@ -426,11 +423,11 @@ export default function Dashboard() {
 
 
     function clarityFxn() {
-        // (function (c, l, a, r, i, t, y) {
-        //     c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
-        //     t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
-        //     y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
-        // })(window, document, "clarity", "script", "r0c9ecz3ii");
+        (function (c, l, a, r, i, t, y) {
+            c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
+            t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
+            y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+        })(window, document, "clarity", "script", "r0c9ecz3ii");
     }
 
     async function getEmailReminderAndLanguages(shopAPI) {
@@ -1191,8 +1188,6 @@ export default function Dashboard() {
         shopApi: shopApi,
         themeListMain: themeListMain
     }
-
-    // console.log("ccccc ",sendDataToSetupGuide )
 
     const goToSupppportMail = () => {
         window.open(`https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=support@webframez.com`, "_blank");

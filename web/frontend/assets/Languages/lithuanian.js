@@ -1191,6 +1191,18 @@ const lithunanian = {
     cowishTitle: "CoWish - Ønskeliste for kolleksjoner",
     cowishDesc: "Ønskeliste - La brukere legge til sine favorittkolleksjoner",
     hideOnZero: "Slėpti, kai 0",
+
+    planBasicBFCM: "Gaukite Basic planą tik už $4.99 -- Sutaupykite $1 visam gyvenimui",
+    planProBFCM: "Gaukite Pro planą tik už $9.99 -- Sutaupykite $3 visam gyvenimui",
+    planPremiumBFCM: "Gaukite Premium planą tik už $14.99 -- Sutaupykite $4.99 visam gyvenimui",
+    planAllBFCM: "Gaukite 20% nuolaidą visiems metiniams planams visam gyvenimui",
+    modalInnerDivBg: "Modalinio lango vidinės dalies fono spalva",
+    modalBottomDivBg: "Apatinio modalinio mygtuko skyriaus fono spalva",
+    styleMW: "Multiwishlist stiliai",
+    styleMWSub: "Čia galite pritaikyti multi wishlist stilius",
+    smwOne: "Multiwishlist žymimosios dėžutės fono spalva",
+    smwTwo: "Multiwishlist žymimosios dėžutės piktogramos spalva",
+
 }
 
 export default lithunanian

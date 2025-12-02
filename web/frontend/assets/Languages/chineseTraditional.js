@@ -1249,5 +1249,17 @@ const chineseTraditional = {
     cowishTitle: "CoWish - 收藏願望清單",
     cowishDesc: "願望清單 - 允許使用者收藏他們最喜愛的系列",
     hideOnZero: "當為0時隱藏",
+
+    planBasicBFCM: "Basic 方案僅需 $4.99 —— 終身節省 $1",
+    planProBFCM: "Pro 方案僅需 $9.99 —— 終身節省 $3",
+    planPremiumBFCM: "Premium 方案僅需 $14.99 —— 終身節省 $4.99",
+    planAllBFCM: "所有年度方案享有終身 20% 折扣",
+    modalInnerDivBg: "彈窗內部背景顏色",
+    modalBottomDivBg: "彈窗底部按鈕區背景顏色",
+    styleMW: "多願望清單樣式",
+    styleMWSub: "您可以在此自訂多願望清單的樣式",
+    smwOne: "多願望清單核取方塊背景顏色",
+    smwTwo: "多願望清單核取方塊圖示顏色",
+
 }
 export default chineseTraditional;

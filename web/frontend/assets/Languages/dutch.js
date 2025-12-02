@@ -1211,5 +1211,17 @@ const dutch = {
     cowishTitle: "CoWish - Collectie verlanglijst",
     cowishDesc: "Verlanglijst - Sta gebruikers toe hun favoriete collecties toe te voegen",
     hideOnZero: "Verbergen bij 0",
+
+    planBasicBFCM: "Krijg het Basic-plan voor slechts $4.99 — Bespaar $1 voor altijd",
+    planProBFCM: "Krijg het Pro-plan voor slechts $9.99 — Bespaar $3 voor altijd",
+    planPremiumBFCM: "Krijg het Premium-plan voor slechts $14.99 — Bespaar $4.99 voor altijd",
+    planAllBFCM: "Ontvang 20% korting op alle jaarplannen voor altijd",
+    modalInnerDivBg: "Achtergrondkleur van de binnenkant van de modal",
+    modalBottomDivBg: "Achtergrondkleur van het onderste knoppengebied van de modal",
+    styleMW: "Stijlen voor multiwishlist",
+    styleMWSub: "Hier kunt u de stijlen van de multiwishlist aanpassen",
+    smwOne: "Achtergrondkleur van het multiwishlist-selectievakje",
+    smwTwo: "Pictogramkleur van het multiwishlist-selectievakje",
+
 }
 export default dutch

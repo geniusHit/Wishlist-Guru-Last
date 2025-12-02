@@ -1225,5 +1225,17 @@ const portugueseBrazil = {
     cowishTitle: "CoWish - Lista de Desejos de Coleções",
     cowishDesc: "Lista de desejos - Permita que os usuários adicionem suas coleções favoritas",
     hideOnZero: "Ocultar quando 0",
+
+    planBasicBFCM: "Adquira o plano Basic por apenas $4.99 -- Economize $1 para a vida toda",
+    planProBFCM: "Adquira o plano Pro por apenas $9.99 -- Economize $3 para a vida toda",
+    planPremiumBFCM: "Adquira o plano Premium por apenas $14.99 -- Economize $4.99 para a vida toda",
+    planAllBFCM: "Obtenha 20% de desconto em todos os planos anuais para sempre",
+    modalInnerDivBg: "Cor de fundo interna do modal",
+    modalBottomDivBg: "Cor de fundo da área do botão inferior do modal",
+    styleMW: "Estilos para multiwishlist",
+    styleMWSub: "Aqui você pode personalizar os estilos do multi wishlist",
+    smwOne: "Cor de fundo da caixa de seleção do multiwishlist",
+    smwTwo: "Cor do ícone da caixa de seleção do multiwishlist",
+
 }
 export default portugueseBrazil;

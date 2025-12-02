@@ -1194,6 +1194,18 @@ const greek = {
     cowishTitle: "CoWish - Λίστα Επιθυμιών Συλλογών",
     cowishDesc: "Λίστα επιθυμιών - Επιτρέψτε στους χρήστες να προσθέτουν τις αγαπημένες τους συλλογές",
     hideOnZero: "Απόκρυψη όταν είναι 0",
+
+    planBasicBFCM: "Αποκτήστε το Basic πλάνο μόνο με $4.99 — Εξοικονομήστε $1 για πάντα",
+    planProBFCM: "Αποκτήστε το Pro πλάνο μόνο με $9.99 — Εξοικονομήστε $3 για πάντα",
+    planPremiumBFCM: "Αποκτήστε το Premium πλάνο μόνο με $14.99 — Εξοικονομήστε $4.99 για πάντα",
+    planAllBFCM: "Λάβετε 20% έκπτωση σε όλα τα ετήσια πλάνα για πάντα",
+    modalInnerDivBg: "Χρώμα φόντου του εσωτερικού του modal",
+    modalBottomDivBg: "Χρώμα φόντου της κάτω περιοχής κουμπιού του modal",
+    styleMW: "Στυλ για το multiwishlist",
+    styleMWSub: "Εδώ μπορείτε να προσαρμόσετε τα στυλ του multiwishlist",
+    smwOne: "Χρώμα φόντου του checkbox του multiwishlist",
+    smwTwo: "Χρώμα εικονιδίου του checkbox του multiwishlist",
+
 }
 
 export default greek

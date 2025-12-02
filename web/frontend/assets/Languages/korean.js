@@ -1179,6 +1179,18 @@ const korean = {
     cowishTitle: "CoWish - 컬렉션 위시리스트",
     cowishDesc: "위시리스트 - 사용자가 좋아하는 컬렉션을 추가할 수 있도록 허용",
     hideOnZero: "0일 때 숨기기",
+
+    planBasicBFCM: "Basic 플랜을 단 $4.99에 이용하세요 — 평생 $1 할인",
+    planProBFCM: "Pro 플랜을 단 $9.99에 이용하세요 — 평생 $3 할인",
+    planPremiumBFCM: "Premium 플랜을 단 $14.99에 이용하세요 — 평생 $4.99 할인",
+    planAllBFCM: "모든 연간 플랜 평생 20% 할인",
+    modalInnerDivBg: "모달 내부 배경색",
+    modalBottomDivBg: "모달 하단 버튼 영역 배경색",
+    styleMW: "멀티 위시리스트 스타일",
+    styleMWSub: "여기에서 멀티 위시리스트 스타일을 사용자 정의할 수 있습니다",
+    smwOne: "멀티 위시리스트 체크박스 배경색",
+    smwTwo: "멀티 위시리스트 체크박스 아이콘 색상",
+
 }
 
 export default korean;

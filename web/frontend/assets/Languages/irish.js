@@ -1196,6 +1196,18 @@ const irish = {
     cowishTitle: "CoWish - Liosta Mianta Bailiúchán",
     cowishDesc: "Liosta mianta - Ceadaigh d’úsáideoirí a mbailiúcháin is ansa leo a chur leis",
     hideOnZero: "Folaigh nuair atá sé 0",
+
+    planBasicBFCM: "Faigh an plean Bunúsach ar $4.99 amháin -- Sábháil $1 ar feadh an tsaoil",
+    planProBFCM: "Faigh an plean Pro ar $9.99 amháin -- Sábháil $3 ar feadh an tsaoil",
+    planPremiumBFCM: "Faigh an plean Préimhe ar $14.99 amháin -- Sábháil $4.99 ar feadh an tsaoil",
+    planAllBFCM: "Faigh lascaine 20% ar gach plean bliantúil ar feadh an tsaoil",
+    modalInnerDivBg: "Dath cúlra istigh an mhodail",
+    modalBottomDivBg: "Dath cúlra an div cnaipe íochtair sa mhodail",
+    styleMW: "Stíleanna don il-mianta",
+    styleMWSub: "Anseo is féidir leat stíleanna an il-wishlist a shaincheapadh",
+    smwOne: "Dath cúlra an ticbhosca il-mianta",
+    smwTwo: "Dath deilbhín an ticbhosca il-mianta",
+
 }
 
 export default irish

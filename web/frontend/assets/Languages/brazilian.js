@@ -1187,6 +1187,18 @@ const brazilian = {
   cowishDesc: "Lista de desejos - Permita que os usuários adicionem suas coleções favoritas",
 
   hideOnZero: "Ocultar quando 0",
+
+  planBasicBFCM: "Obtenha o plano Basic por apenas $4.99 -- Economize $1 para sempre",
+  planProBFCM: "Obtenha o plano Pro por apenas $9.99 -- Economize $3 para sempre",
+  planPremiumBFCM: "Obtenha o plano Premium por apenas $14.99 -- Economize $4.99 para sempre",
+  planAllBFCM: "Ganhe 20% de desconto em todos os planos anuais para sempre",
+  modalInnerDivBg: "Cor de fundo interna do modal",
+  modalBottomDivBg: "Cor de fundo da div do botão inferior do modal",
+  styleMW: "Estilos para multiwishlist",
+  styleMWSub: "Aqui você pode personalizar os estilos da multiwishlist",
+  smwOne: "Cor de fundo da caixa de seleção da multiwishlist",
+  smwTwo: "Cor do ícone da caixa de seleção da multiwishlist",
+
 }
 
 

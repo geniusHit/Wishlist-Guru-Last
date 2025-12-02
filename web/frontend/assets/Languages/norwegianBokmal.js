@@ -1180,5 +1180,17 @@ const norwegianBokmal = {
   cowishTitle: "CoWish - Ønskeliste for kolleksjoner",
   cowishDesc: "Ønskeliste - La brukere legge til sine favorittkolleksjoner",
   hideOnZero: "Skjul når 0",
+
+  planBasicBFCM: "Få Basic-planen for kun $4.99 -- Spar $1 for livet",
+  planProBFCM: "Få Pro-planen for kun $9.99 -- Spar $3 for livet",
+  planPremiumBFCM: "Få Premium-planen for kun $14.99 -- Spar $4.99 for livet",
+  planAllBFCM: "Få 20% rabatt på alle årlige planer for livet",
+  modalInnerDivBg: "Bakgrunnsfarge for modalens indre",
+  modalBottomDivBg: "Bakgrunnsfarge for modalens nederste knappområde",
+  styleMW: "Stiler for multiwishlist",
+  styleMWSub: "Her kan du tilpasse stilene til multi wishlist",
+  smwOne: "Bakgrunnsfarge for multiwishlist-avkrysningsboks",
+  smwTwo: "Ikonfarge for multiwishlist-avkrysningsboks",
+
 }
 export default norwegianBokmal;

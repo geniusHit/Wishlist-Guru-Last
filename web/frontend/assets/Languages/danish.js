@@ -1239,5 +1239,17 @@ const danish = {
   cowishTitle: "CoWish - Kollektion ønskeliste",
   cowishDesc: "Ønskeliste - Tillad brugere at tilføje deres yndlingskollektioner",
   hideOnZero: "Skjul ved 0",
+
+  planBasicBFCM: "Få Basic-planen for kun $4.99 — Spar $1 for livet",
+  planProBFCM: "Få Pro-planen for kun $9.99 — Spar $3 for livet",
+  planPremiumBFCM: "Få Premium-planen for kun $14.99 — Spar $4.99 for livet",
+  planAllBFCM: "Få 20% rabat på alle årlige planer for livet",
+  modalInnerDivBg: "Indvendig baggrundsfarve for modal",
+  modalBottomDivBg: "Baggrundsfarve for modalens bundknapområde",
+  styleMW: "Stilarter til multiwishlist",
+  styleMWSub: "Her kan du tilpasse stilarterne for multiwishlist",
+  smwOne: "Baggrundsfarve for multiwishlist-afkrydsningsfeltet",
+  smwTwo: "Ikonfarve for multiwishlist-afkrydsningsfeltet",
+
 }
 export default danish;

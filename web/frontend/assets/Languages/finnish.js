@@ -1197,6 +1197,18 @@ const finnish = {
     cowishTitle: "CoWish - Kokoelmalista",
     cowishDesc: "Toivelista - Salli käyttäjien lisätä suosikkikokoelmansa",
     hideOnZero: "Piilota, kun arvo on 0",
+
+    planBasicBFCM: "Hanki Basic-suunnitelma vain $4.99 — Säästä $1 ikuisesti",
+    planProBFCM: "Hanki Pro-suunnitelma vain $9.99 — Säästä $3 ikuisesti",
+    planPremiumBFCM: "Hanki Premium-suunnitelma vain $14.99 — Säästä $4.99 ikuisesti",
+    planAllBFCM: "Saat 20% alennuksen kaikista vuosittaisista suunnitelmista ikuisesti",
+    modalInnerDivBg: "Modaalin sisäosan taustaväri",
+    modalBottomDivBg: "Modaalin alaosan painikealueen taustaväri",
+    styleMW: "Tyylit multiwishlistille",
+    styleMWSub: "Täällä voit mukauttaa multiwishlistin tyylejä",
+    smwOne: "Multiwishlist-valintaruudun taustaväri",
+    smwTwo: "Multiwishlist-valintaruudun kuvakkeen väri",
+
 };
 
 export default finnish

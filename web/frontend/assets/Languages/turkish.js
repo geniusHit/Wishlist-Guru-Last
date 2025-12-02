@@ -1231,6 +1231,16 @@ const turkish = {
     cowishDesc: "İstek listesi - Kullanıcıların favori koleksiyonlarını eklemesine izin verin",
     hideOnZero: "0 olduğunda gizle",
 
+    planBasicBFCM: "Basic planını yalnızca $4.99'a alın -- Ömür boyu $1 tasarruf edin",
+    planProBFCM: "Pro planını yalnızca $9.99'a alın -- Ömür boyu $3 tasarruf edin",
+    planPremiumBFCM: "Premium planını yalnızca $14.99'a alın -- Ömür boyu $4.99 tasarruf edin",
+    planAllBFCM: "Tüm yıllık planlarda ömür boyu %20 indirim kazanın",
+    modalInnerDivBg: "Modal iç bölüm arka plan rengi",
+    modalBottomDivBg: "Modal alt buton bölümünün arka plan rengi",
+    styleMW: "Multiwishlist için stiller",
+    styleMWSub: "Buradan multi wishlist'in stillerini özelleştirebilirsiniz",
+    smwOne: "Multiwishlist onay kutusu arka plan rengi",
+    smwTwo: "Multiwishlist onay kutusu simge rengi",
 
 }
 export default turkish;

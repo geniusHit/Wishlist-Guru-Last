@@ -1218,6 +1218,18 @@ const albanian = {
     cowishDesc: "Lista e dëshirave - Lejo përdoruesit të shtojnë në lista koleksionet e tyre të preferuara",
 
     hideOnZero: "Fshih kur është 0",
+
+    planBasicBFCM: "Merrni planin Basic për vetëm $4.99 -- Kurseni $1 përgjithmonë",
+    planProBFCM: "Merrni planin Pro për vetëm $9.99 -- Kurseni $3 përgjithmonë",
+    planPremiumBFCM: "Merrni planin Premium për vetëm $14.99 -- Kurseni $4.99 përgjithmonë",
+    planAllBFCM: "Merrni 20% ulje në të gjitha planet vjetore përgjithmonë",
+    modalInnerDivBg: "Ngjyra e sfondit të brendshëm të modalit",
+    modalBottomDivBg: "Ngjyra e sfondit të div-it të butonit poshtë modalit",
+    styleMW: "Stilet për multiwishlist",
+    styleMWSub: "Këtu mund të personalizoni stilet e multiwishlist",
+    smwOne: "Ngjyra e sfondit të kutisë së multiwishlist",
+    smwTwo: "Ngjyra e ikonës së kutisë së multiwishlist",
+
 }
 
 export default albanian

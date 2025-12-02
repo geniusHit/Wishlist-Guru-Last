@@ -1239,5 +1239,17 @@ const swedish = {
   cowishTitle: "CoWish - Önskelista för kollektioner",
   cowishDesc: "Önskelista - Låt användare lägga till sina favoritkollektioner",
   hideOnZero: "Dölj när 0",
+
+  planBasicBFCM: "Få Basic-planen för endast $4.99 -- Spara $1 för livet",
+  planProBFCM: "Få Pro-planen för endast $9.99 -- Spara $3 för livet",
+  planPremiumBFCM: "Få Premium-planen för endast $14.99 -- Spara $4.99 för livet",
+  planAllBFCM: "Få 20% rabatt på alla årsplaner för livet",
+  modalInnerDivBg: "Bakgrundsfärg för modalens inre del",
+  modalBottomDivBg: "Bakgrundsfärg för modalens nedre knapptområde",
+  styleMW: "Stilar för multiwishlist",
+  styleMWSub: "Här kan du anpassa stilarna för multi wishlist",
+  smwOne: "Bakgrundsfärg för multiwishlist-kryssruta",
+  smwTwo: "Ikonfärg för multiwishlist-kryssruta",
+
 }
 export default swedish;

@@ -14,6 +14,8 @@ import { Editor } from "react-draft-wysiwyg";
 import draftToHtml from 'draftjs-to-html';
 import htmlToDraft from 'html-to-draftjs';
 import { Constants } from '../../../backend/constants/constant';
+import useApi from '../../hooks/useApi';
+
 
 const ShareWishlistSetting = () => {
     const { serverURL } = Constants;
@@ -27,7 +29,9 @@ const ShareWishlistSetting = () => {
     const [myLanguage, setMyLanguage] = useState({});
     const [editorStateFirst, setEditorStateFirst] = useState(EditorState.createEmpty());
     const [shareToAdminEditor, setShareToAdminEditor] = useState(EditorState.createEmpty());
-
+    const shopApi = useApi();
+    const [getShopApi, setGetShopApi] = useState(null);
+    const saveAdminEmailRef = useRef("");
     const watchAllFields = watch();
 
     useEffect(() => {
@@ -38,9 +42,34 @@ const ShareWishlistSetting = () => {
         await utilityFunction.getCurrentLanguage().then((res) => {
             setMyLanguage(res);
         });
+        let shop = await shopApi.shop();
+        setGetShopApi(shop);
+        await getShareToAdminEmail(shop);
         const getCurrentPlan = await appMetafield.getCurrentPlan();
         setCurrentPlan(parseInt(getCurrentPlan.currentPlan));
-        getAllAppDataMetafields();
+        await getAllAppDataMetafields();
+    }
+
+    async function getShareToAdminEmail(shop) {
+        try {
+            let response = await fetch(`${serverURL}/get-share-wishlist-to-admin-email`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    shopName: shop.shopName,
+                }),
+            });
+            let results = await response.json();
+            if (results?.data?.length > 0) {
+                saveAdminEmailRef.current = results?.data[0]?.shop_email || "";
+            } else {
+                saveAdminEmailRef.current = "";
+            }
+        } catch (error) {
+            console.log("error", error);
+        }
     }
 
 
@@ -69,6 +98,7 @@ const ShareWishlistSetting = () => {
                     dData.fbMessengerCheckIcon = true;
                 }
                 shouldSave && await saveMetaFxn(dData)
+
                 reset({
                     wishlistShareShowData: dData.wishlistShareShowData,
                     wishlistShareEmailSubject: returnNewData(dData.wishlistShareEmailSubject, "subject"),
@@ -86,6 +116,7 @@ const ShareWishlistSetting = () => {
 
                     shareWishlistToAdminSubject: returnNewData(dData?.shareWishlistToAdminSubject || dData.wishlistShareEmailSubject, "subject"),
                     shareWishlistToAdminTextEditor: dData?.shareWishlistToAdminTextEditor || dData.wishlistTextEditor,
+                    shareWishlistToAdminEmail: saveAdminEmailRef?.current || ""
 
                 })
                 setEditorStateFirst(htmlToDraftFxn(returnNewData(dData.wishlistTextEditor, "reciever") || ""));
@@ -152,6 +183,8 @@ const ShareWishlistSetting = () => {
         mergedData.shareWishlistToAdminSubject = data.shareWishlistToAdminSubject;
         mergedData.shareWishlistToAdminTextEditor = shareToAdminBodyData;
 
+        await saveDataInSql(data);
+
 
         await saveMetaFxn(mergedData).then((res) => {
             Swal.fire({
@@ -163,6 +196,27 @@ const ShareWishlistSetting = () => {
         });
         setSaveBar(false);
     };
+
+
+    async function saveDataInSql(data) {
+
+        try {
+            const response = await fetch(`${serverURL}/save-share-wishlist-to-admin-email`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    shopName: getShopApi.shopName,
+                    newEmail: data?.shareWishlistToAdminEmail || "",
+                }),
+            });
+            let result = response.json();
+        } catch (error) {
+            console.log("error ", error)
+        }
+
+    }
 
     async function saveMetaFxn(mergedData) {
         const getAppMetafieldId = await appMetafield.getAppMetafieldId();
@@ -385,6 +439,33 @@ const ShareWishlistSetting = () => {
                                                 />
                                             }
                                         </SingleFieldController>
+
+                                        {/*
+
+                                        {watchAllFields.shareWishlistToAdmin === "yes" &&
+                                            <div style={{ width: "50%" }}>
+                                                <SingleFieldController
+                                                    name="shareWishlistToAdminEmail"
+                                                    control={control}  >
+                                                    {({ field }) =>
+                                                        <TextField
+                                                            id={`shareWishlistToAdminEmail`}
+                                                            value={field.value}
+                                                            label={"Enter a valid email address where you want to receive these emails"}
+                                                            onChange={(newValue) => {
+                                                                setSaveBar(true);
+                                                                field.onChange(newValue);
+                                                            }}
+                                                        />
+                                                    }
+                                                </SingleFieldController>
+                                            </div>
+                                        }
+
+
+                                         */}
+
+
                                     </div>
                                 </div>
 
@@ -664,6 +745,22 @@ const ShareWishlistSetting = () => {
                                                 </div>
                                             }
                                         </div>
+
+                                        <SingleFieldController
+                                            name="shareWishlistToAdminEmail"
+                                            control={control}  >
+                                            {({ field }) =>
+                                                <TextField
+                                                    id={`shareWishlistToAdminEmail`}
+                                                    value={field.value}
+                                                    label={"Enter a valid email address where you want to receive these emails"}
+                                                    onChange={(newValue) => {
+                                                        setSaveBar(true);
+                                                        field.onChange(newValue);
+                                                    }}
+                                                />
+                                            }
+                                        </SingleFieldController>
 
                                         <SingleFieldController
                                             name="shareWishlistToAdminSubject"

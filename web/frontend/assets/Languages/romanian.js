@@ -1183,6 +1183,18 @@ const romanian = {
     cowishTitle: "CoWish - Lista de dorințe pentru colecții",
     cowishDesc: "Lista de dorințe - Permite utilizatorilor să adauge colecțiile lor preferate",
     hideOnZero: "Ascunde când este 0",
+
+    planBasicBFCM: "Obțineți planul Basic pentru doar $4.99 -- Economisiți $1 pe viață",
+    planProBFCM: "Obțineți planul Pro pentru doar $9.99 -- Economisiți $3 pe viață",
+    planPremiumBFCM: "Obțineți planul Premium pentru doar $14.99 -- Economisiți $4.99 pe viață",
+    planAllBFCM: "Obțineți o reducere de 20% la toate planurile anuale pentru toată viața",
+    modalInnerDivBg: "Culoarea de fundal a părții interioare a ferestrei modale",
+    modalBottomDivBg: "Culoarea de fundal a secțiunii butonului inferior al ferestrei modale",
+    styleMW: "Stiluri pentru multiwishlist",
+    styleMWSub: "Aici puteți personaliza stilurile multi wishlist",
+    smwOne: "Culoarea de fundal a căsuței de bifat multiwishlist",
+    smwTwo: "Culoarea pictogramei căsuței de bifat multiwishlist",
+
 }
 
 export default romanian

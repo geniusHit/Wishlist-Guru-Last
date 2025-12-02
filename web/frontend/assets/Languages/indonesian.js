@@ -1193,6 +1193,17 @@ const indonassian = {
     cowishDesc: "Daftar keinginan - Izinkan pengguna menambahkan koleksi favorit mereka",
     hideOnZero: "Sembunyikan saat 0",
 
+    planBasicBFCM: "Dapatkan paket Basic hanya $4.99 -- Hemat $1 seumur hidup",
+    planProBFCM: "Dapatkan paket Pro hanya $9.99 -- Hemat $3 seumur hidup",
+    planPremiumBFCM: "Dapatkan paket Premium hanya $14.99 -- Hemat $4.99 seumur hidup",
+    planAllBFCM: "Dapatkan diskon 20% untuk semua paket tahunan seumur hidup",
+    modalInnerDivBg: "Warna latar belakang bagian dalam modal",
+    modalBottomDivBg: "Warna latar belakang bagian tombol bawah modal",
+    styleMW: "Gaya untuk multiwishlist",
+    styleMWSub: "Di sini Anda dapat menyesuaikan gaya multi wishlist",
+    smwOne: "Warna latar belakang checkbox multiwishlist",
+    smwTwo: "Warna ikon checkbox multiwishlist",
+
 }
 
 export default indonassian

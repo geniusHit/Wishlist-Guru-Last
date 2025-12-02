@@ -142,6 +142,9 @@ const WishlistUiSetting = () => {
                 downloadCsv: generalData?.downloadCsv || "no",
                 modalLayerBgColor: generalData?.modalLayerBgColor || generalData.wlBgColor,
                 modalBottomButtonBgColor: generalData?.modalBottomButtonBgColor || generalData.wlBgColor,
+                mwCheckIconBg: generalData?.mwCheckIconBg || "",
+                mwCheckIconColor: generalData?.mwCheckIconColor || "",
+
 
                 ...(buttonData && {
                     cartButtonbgColor: buttonData.cartButtonStyle.bgColor,
@@ -260,6 +263,9 @@ const WishlistUiSetting = () => {
         mergedData.downloadCsv = data?.downloadCsv;
         mergedData.modalLayerBgColor = data?.modalLayerBgColor;
         mergedData.modalBottomButtonBgColor = data?.modalBottomButtonBgColor;
+        mergedData.mwCheckIconBg = data?.mwCheckIconBg;
+        mergedData.mwCheckIconColor = data?.mwCheckIconColor;
+
 
         // this is for the cart button style
         let mergedButttonSettingData = { ...existingButtonSettingData.current };
@@ -574,7 +580,7 @@ const WishlistUiSetting = () => {
                                                 control={control}
                                                 controllerName={`modalLayerBgColor`}
                                                 id={`modalLayerBgColor`}
-                                                label="Modal inner backgroundColor"
+                                                label={myLanguage.modalInnerDivBg}
                                                 setSaveBar={setSaveBar}
                                             />
 
@@ -589,7 +595,7 @@ const WishlistUiSetting = () => {
                                                 control={control}
                                                 controllerName={`modalBottomButtonBgColor`}
                                                 id={`modalBottomButtonBgColor`}
-                                                label="Modal bottom button's div background color"
+                                                label={myLanguage.modalBottomDivBg}
                                                 setSaveBar={setSaveBar}
                                             />
 
@@ -675,6 +681,38 @@ const WishlistUiSetting = () => {
 
                                         </Grid.Cell>
                                     </Grid>
+
+
+
+                                    <br />
+                                    <div className='custom-margin'>
+                                        <Text variant="headingMd" as="h2">{myLanguage.styleMW}</Text>
+                                        <p>{myLanguage.styleMWSub}</p>
+                                    </div>
+
+                                    <Grid>
+                                        <Grid.Cell columnSpan={{ xs: 6, sm: 6, md: 6, lg: 6, xl: 6 }}>
+                                            <ColorPickerController
+                                                control={control}
+                                                controllerName={`mwCheckIconBg`}
+                                                id={`mwCheckIconBg`}
+                                                label={myLanguage.smwOne}
+                                                setSaveBar={setSaveBar}
+                                            />
+                                        </Grid.Cell>
+
+                                        <Grid.Cell columnSpan={{ xs: 6, sm: 6, md: 6, lg: 6, xl: 6 }}>
+                                            <ColorPickerController
+                                                control={control}
+                                                controllerName={`mwCheckIconColor`}
+                                                id={`mwCheckIconColor`}
+                                                label={myLanguage.smwTwo}
+                                                setSaveBar={setSaveBar}
+                                            />
+                                        </Grid.Cell>
+                                    </Grid>
+
+
 
                                     <br />
                                     <div >

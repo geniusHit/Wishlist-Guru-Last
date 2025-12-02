@@ -1261,6 +1261,18 @@ const italian = {
   cowishTitle: "CoWish - Lista Desideri Collezioni",
   cowishDesc: "Lista desideri - Consenti agli utenti di aggiungere le loro collezioni preferite",
   hideOnZero: "Nascondi quando è 0",
+
+  planBasicBFCM: "Ottieni il piano Basic a soli $4.99 -- Risparmia $1 per sempre",
+  planProBFCM: "Ottieni il piano Pro a soli $9.99 -- Risparmia $3 per sempre",
+  planPremiumBFCM: "Ottieni il piano Premium a soli $14.99 -- Risparmia $4.99 per sempre",
+  planAllBFCM: "Ottieni uno sconto del 20% su tutti i piani annuali per sempre",
+  modalInnerDivBg: "Colore di sfondo interno della modale",
+  modalBottomDivBg: "Colore di sfondo del contenitore del pulsante inferiore della modale",
+  styleMW: "Stili per multiwishlist",
+  styleMWSub: "Qui puoi personalizzare gli stili del multi wishlist",
+  smwOne: "Colore di sfondo della casella multiwishlist",
+  smwTwo: "Colore dell'icona della casella multiwishlist",
+
 }
 
 export default italian;

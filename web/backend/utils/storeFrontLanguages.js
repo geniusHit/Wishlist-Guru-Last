@@ -185,7 +185,7 @@ export const storeFrontLanguages = {
         // ------share wishlist to admin ------
         swtaHeading: "Share Wishlist to Admin",
         swtaYourName: "Your name",
-        swtaYourEmail: "Your mail address",
+        swtaYourEmail: "Your Email address",
         swtaYourPhone: "Your phone number",
         AddressPostalCode: "Your address (Including Postal Code)",
         swtaYourMessage: "Message",
@@ -287,7 +287,7 @@ export const storeFrontLanguages = {
         // share wishlist to admin
         swtaHeading: "Partager la liste de souhaits avec l’administrateur",
         swtaYourName: "Nom et prénom",
-        swtaYourEmail: "Adresse courriel",
+        swtaYourEmail: "Votre adresse e-mail",
         swtaYourPhone: "Numéro de téléphone",
         AddressPostalCode: "Adresse (incluant le code postal)",
         swtaYourMessage: "Message",
@@ -489,7 +489,7 @@ export const storeFrontLanguages = {
 
         swtaHeading: "Wunschliste mit dem Administrator teilen",
         swtaYourName: "Dein Name",
-        swtaYourEmail: "Deine E-Mail-Adresse",
+        swtaYourEmail: "Ihre E-Mail-Adresse",
         swtaYourPhone: "Deine Telefonnummer",
         AddressPostalCode: "Deine Adresse (inkl. Postleitzahl)",
         swtaYourMessage: "Nachricht",
@@ -591,7 +591,7 @@ export const storeFrontLanguages = {
 
         swtaHeading: "分享心愿单给管理员",
         swtaYourName: "你的姓名",
-        swtaYourEmail: "你的邮箱地址",
+        swtaYourEmail: "您的电子邮箱地址",
         swtaYourPhone: "你的电话号码",
         AddressPostalCode: "你的地址（包括邮政编码）",
         swtaYourMessage: "留言",
@@ -996,7 +996,7 @@ export const storeFrontLanguages = {
 
         swtaHeading: "Compartir lista de deseos con el administrador",
         swtaYourName: "Tu nombre",
-        swtaYourEmail: "Tu correo electrónico",
+        swtaYourEmail: "Tu dirección de correo electrónico",
         swtaYourPhone: "Tu número de teléfono",
         AddressPostalCode: "Tu dirección (incluyendo código postal)",
         swtaYourMessage: "Mensaje",
@@ -1098,7 +1098,7 @@ export const storeFrontLanguages = {
 
         swtaHeading: "分享願望清單給管理員",
         swtaYourName: "你的姓名",
-        swtaYourEmail: "你的電子郵件地址",
+        swtaYourEmail: "您的電子郵件地址",
         swtaYourPhone: "你的電話號碼",
         AddressPostalCode: "你的地址（包含郵遞區號）",
         swtaYourMessage: "訊息",
@@ -1199,7 +1199,7 @@ export const storeFrontLanguages = {
 
         swtaHeading: "Sdílet seznam přání s administrátorem",
         swtaYourName: "Vaše jméno",
-        swtaYourEmail: "Váš e-mail",
+        swtaYourEmail: "Vaše e-mailová adresa",
         swtaYourPhone: "Vaše telefonní číslo",
         AddressPostalCode: "Vaše adresa (včetně PSČ)",
         swtaYourMessage: "Zpráva",
@@ -2522,7 +2522,7 @@ export const storeFrontLanguages = {
 
         swtaHeading: "Kívánságlista megosztása az adminisztrátorral",
         swtaYourName: "A neved",
-        swtaYourEmail: "Az email címed",
+        swtaYourEmail: "Az e-mail címed",
         swtaYourPhone: "A telefonszámod",
         AddressPostalCode: "A címed (beleértve az irányítószámot)",
         swtaYourMessage: "Üzenet",
@@ -3028,7 +3028,7 @@ export const storeFrontLanguages = {
 
         swtaHeading: "Partajează lista de dorințe cu administratorul",
         swtaYourName: "Numele tău",
-        swtaYourEmail: "Adresa ta de email",
+        swtaYourEmail: "Adresa ta de e-mail",
         swtaYourPhone: "Numărul tău de telefon",
         AddressPostalCode: "Adresa ta (inclusiv cod poștal)",
         swtaYourMessage: "Mesaj",
@@ -3129,7 +3129,7 @@ export const storeFrontLanguages = {
 
         swtaHeading: "Ibahagi ang Wishlist sa Admin",
         swtaYourName: "Ang iyong pangalan",
-        swtaYourEmail: "Ang iyong email address",
+        swtaYourEmail: "Iyong email address",
         swtaYourPhone: "Ang iyong numero ng telepono",
         AddressPostalCode: "Ang iyong address (kasama ang postal code)",
         swtaYourMessage: "Mensahe",
@@ -3534,7 +3534,7 @@ export const storeFrontLanguages = {
 
         swtaHeading: "Ndani listën e dëshirave me administratorin",
         swtaYourName: "Emri juaj",
-        swtaYourEmail: "Adresa juaj e email-it",
+        swtaYourEmail: "Adresa juaj e emailit",
         swtaYourPhone: "Numri juaj i telefonit",
         AddressPostalCode: "Adresa juaj (përfshirë kodi postar)",
         swtaYourMessage: "Mesazh",
@@ -3739,7 +3739,7 @@ export const storeFrontLanguages = {
         // ------share wishlist to admin ------
         swtaHeading: "Jaga soovinimekirja administraatoriga",
         swtaYourName: "Sinu nimi",
-        swtaYourEmail: "Sinu e-posti aadress",
+        swtaYourEmail: "Teie e-posti aadress",
         swtaYourPhone: "Sinu telefoninumber",
         AddressPostalCode: "Sinu aadress (sh postiindeks)",
         swtaYourMessage: "Sõnum",

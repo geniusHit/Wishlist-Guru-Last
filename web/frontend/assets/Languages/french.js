@@ -1232,6 +1232,18 @@ const french = {
     cowishTitle: "CoWish - Liste de souhaits de collections",
     cowishDesc: "Liste de souhaits - Permettez aux utilisateurs d’ajouter leurs collections préférées",
     hideOnZero: "Masquer lorsque 0",
+
+    planBasicBFCM: "Obtenez le plan Basic pour seulement 4,99 $ — Économisez 1 $ à vie",
+    planProBFCM: "Obtenez le plan Pro pour seulement 9,99 $ — Économisez 3 $ à vie",
+    planPremiumBFCM: "Obtenez le plan Premium pour seulement 14,99 $ — Économisez 4,99 $ à vie",
+    planAllBFCM: "Obtenez 20 % de réduction sur tous les plans annuels à vie",
+    modalInnerDivBg: "Couleur d'arrière-plan intérieure de la fenêtre modale",
+    modalBottomDivBg: "Couleur d'arrière-plan de la zone de bouton inférieure de la fenêtre modale",
+    styleMW: "Styles pour la multiwishlist",
+    styleMWSub: "Ici, vous pouvez personnaliser les styles de la multiwishlist",
+    smwOne: "Couleur d'arrière-plan de la case multiwishlist",
+    smwTwo: "Couleur de l'icône de la case multiwishlist",
+
 }
 
 export default french

@@ -16,11 +16,16 @@ let customButton = localData?.customButton || JSON.parse(heartButton.getAttribut
 let customLanguage = localData?.customLanguage || JSON.parse(heartButton.getAttribute("language-setting").replace(/~/g, "'"));
 let generalSetting = localData?.generalSetting || JSON.parse(heartButton.getAttribute("general-setting"));
 // let getThemeName = localData?.getThemeName || JSON.parse(heartButton.getAttribute("theme-name"));
-let getThemeName = {themeName: "Sunrise"}
+let getThemeName = {themeName: ""}
 let advanceSetting = localData?.advanceSetting || JSON.parse(heartButton.getAttribute("advance-setting").replace(/~/g, "'"));
 let collectionBtnSetting = localData?.collectionBtnSetting || JSON.parse(heartButton.getAttribute("collection-btn-setting"));
 let currentPlan = localData?.currentPlan || JSON.parse(heartButton.getAttribute("current-plan"));
+
+let wfCurrencyType = heartButton.getAttribute("currency-format");
 let currencyType = wfCurrencyType?.substring(0, wfCurrencyType?.indexOf("{{")).trim();
+let wfCurData = heartButton.getAttribute("cur-data");
+
+// let currencyType = wfCurrencyType?.substring(0, wfCurrencyType?.indexOf("{{")).trim();
 const getFontFamily = heartButton.getAttribute("get-font-family")?.replace(/^"(.*)"$/, "$1") ?? null;
 let getFontFamilyFallback = heartButton.getAttribute("get-font-family-fallback");
 let shopDomain = heartButton.getAttribute("shop-domain");
@@ -87,11 +92,36 @@ function onHeaderActionsRender(element) {
     showCountAll();
 }
 
+
+// this is for meta conversion
+(function () {
+    if (advanceSetting?.metaPixelApiKey?.trim() && currentPlan >= 3) {
+        const pixelScript = document.createElement("script");
+        pixelScript.type = "text/javascript";
+        pixelScript.text = `
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+
+        fbq('init', '${advanceSetting?.metaPixelApiKey.trim()}');
+        fbq('track', 'PageView');
+    `;
+        document.head.appendChild(pixelScript);
+    }
+})();
+
+
+
 let modalDrawerTextColor = generalSetting?.wlTextColor?.color ? generalSetting?.wlTextColor?.color : generalSetting.wlTextColor;
 document.addEventListener("DOMContentLoaded", getCurentPlanSql);
 
 const serverURL = "http://localhost:5000"; // -------------- local
-// const serverURL = "https://nurses-requests-prove-convicted.trycloudflare.com"; // -------------- local
+// const serverURL = "https://dividend-educational-threshold-translated.trycloudflare.com"; // -------------- local
 // const serverURL = 'https://wishlist-api.webframez.com'; // -------------- production
 // const serverURL = 'https://wishlist-guru-api.webframez.com'; // -------------- stagging
 
@@ -210,9 +240,6 @@ async function getCurentPlanSql() {
             }),
         });
         const result = await response.json();
-
-        // console.log("result ==== ", result)
-
         if (result?.planData.length > 0) {
             const prevToken = localStorage.getItem("wg-token");
             if (!prevToken || prevToken !== result.token) {
@@ -822,14 +849,20 @@ const wgLocalData = JSON.parse(localStorage.getItem("wg-local-data")) || {};
 let themeCurrentSelectors = wgLocalData?.getThemeSelector || {};
 // detechThemeName()
 //     .then((result) => {
-//         themeCurrentSelectors = result;
+//         // themeCurrentSelectors = result;
 
 if (getThemeName.themeName === "Fabric") {
     document.querySelector(`${themeCurrentSelectors?.headerMenuItem}`).style.display = "flex";
     document.querySelector(`${themeCurrentSelectors?.headerMenuItem}`).style.alignItems = "center";
     document.querySelector(`${themeCurrentSelectors?.headerMenuItem}`).style.gap = "20px";
-    document.querySelector(".wg-fabric-menuItem-desktop").style.fontSize = "16px";
-    document.querySelector(".wg-fabric-menuItem-desktop a").style.color = "#363636";
+    let elm1 = document.querySelector(".wg-fabric-menuItem-desktop");
+    if (elm1) {
+        elm1.style.fontSize = "16px";
+    }
+    let elm2 = document.querySelector(".wg-fabric-menuItem-desktop a");
+    if (elm2) {
+        elm2.style.color = "#363636";
+    }
 }
 // })
 // .catch((error) => {
@@ -1710,10 +1743,10 @@ async function showWishlistButtonType() {
                             createNewElementDiv.innerHTML = iconAppend;
                             // headerMainIconElement.after(createNewElementDiv);
 
-                            if (generalSetting?.headerIconPosition === "right" && getThemeSelector?.cart !== "") {
+                            if (generalSetting?.headerIconPosition === "right" && getThemeSelector?.cart !== "" && currentPlan > 1) {
                                 let insertRightafterCart = document.querySelector(getThemeSelector?.cart);
                                 insertRightafterCart?.after(createNewElementDiv);
-                            } else if (generalSetting?.headerIconPosition === "left" && getThemeSelector?.cart !== "") {
+                            } else if (generalSetting?.headerIconPosition === "left" && getThemeSelector?.cart !== "" && currentPlan > 1) {
 
 
 
@@ -1763,7 +1796,7 @@ async function showWishlistButtonType() {
                             createNewElementDiv.innerHTML = iconAppend;
 
                             // headerMainIconElement.appendChild(createNewElementDiv);
-                            if (generalSetting?.headerIconPosition === "right" && getThemeSelector?.cart !== "") {
+                            if (generalSetting?.headerIconPosition === "right" && getThemeSelector?.cart !== "" && currentPlan > 1) {
                                 // let insertRightafterCart = document.querySelector(getThemeSelector?.cart);
                                 // insertRightafterCart?.after(createNewElementDiv);
 
@@ -1772,7 +1805,7 @@ async function showWishlistButtonType() {
                                     element.after(createNewElementDiv.cloneNode(true));
                                 });
 
-                            } else if (generalSetting?.headerIconPosition === "left" && getThemeSelector?.cart !== "") {
+                            } else if (generalSetting?.headerIconPosition === "left" && getThemeSelector?.cart !== "" && currentPlan > 1) {
 
 
                                 // if (getThemeName.themeName === "Boost") {
@@ -1834,10 +1867,10 @@ async function showWishlistButtonType() {
                         createNewElementDiv.innerHTML = iconAppend;
                         if (getThemeSelector.headerHeartMobileInsertAfter) {
                             // getSelector.after(createNewElementDiv);
-                            if (generalSetting?.headerIconPosition === "right" && getThemeSelector?.cartMobile !== "") {
+                            if (generalSetting?.headerIconPosition === "right" && getThemeSelector?.cartMobile !== "" && currentPlan > 1) {
                                 let insertRightafterCart = document.querySelector(getThemeSelector?.cartMobile);
                                 insertRightafterCart?.after(createNewElementDiv);
-                            } else if (generalSetting?.headerIconPosition === "left" && getThemeSelector?.cartMobile !== "") {
+                            } else if (generalSetting?.headerIconPosition === "left" && getThemeSelector?.cartMobile !== "" && currentPlan > 1) {
 
                                 let insertBeforeCart = document.querySelector(getThemeSelector?.cartMobile);
                                 insertBeforeCart?.before(createNewElementDiv);
@@ -1849,14 +1882,12 @@ async function showWishlistButtonType() {
 
                         } else {
                             // getSelector.appendChild(createNewElementDiv);
-                            if (generalSetting?.headerIconPosition === "right" && getThemeSelector?.cartMobile !== "") {
+                            if (generalSetting?.headerIconPosition === "right" && getThemeSelector?.cartMobile !== "" && currentPlan > 1) {
                                 let insertRightafterCart = document.querySelector(getThemeSelector?.cartMobile);
                                 insertRightafterCart?.after(createNewElementDiv);
-                            } else if (generalSetting?.headerIconPosition === "left" && getThemeSelector?.cartMobile !== "") {
+                            } else if (generalSetting?.headerIconPosition === "left" && getThemeSelector?.cartMobile !== "" && currentPlan > 1) {
                                 let insertBeforeCart = document.querySelector(getThemeSelector?.cartMobile);
                                 insertBeforeCart?.before(createNewElementDiv);
-
-
                             } else {
                                 getSelector?.appendChild(createNewElementDiv);
                             }
@@ -2330,6 +2361,7 @@ async function heartButtonHandle() {
                 poweredByText[wf].innerHTML = "";
             }
         }
+
         if (generalSetting.wishlistDisplay === "modal") {
             document.body.style.overflow = "hidden";
             document.body.classList.add('wf-hide-scroll');
@@ -2772,49 +2804,137 @@ function pageTypeStyle() {
 }
 
 function changeMoney(cents) {
-    // const money_format = heartButton.getAttribute("currency-type");
-    const money_format = wfCurrencyType;
-    if (typeof cents === "string") {
-        cents = parseFloat(cents.replace(",", ""));
-    }
-    var value = "";
-    var placeholderRegex = /\{\{\s*(\w+)\s*\}\}/;
-    var formatString = money_format;
-    function defaultOption(opt, def) {
-        return typeof opt === "undefined" ? def : opt;
-    }
-    function formatWithDelimiters(number, precision, thousands, decimal) {
-        precision = defaultOption(precision, 2);
-        thousands = defaultOption(thousands, ",");
-        decimal = defaultOption(decimal, ".");
-        if (isNaN(number) || number === null) {
-            return "0";
+
+    if (
+        (
+            !wfCurrencyType.includes("amount") &&
+            !wfCurrencyType.includes("amount_no_decimals") &&
+            !wfCurrencyType.includes("amount_with_comma_separator") &&
+            !wfCurrencyType.includes("amount_no_decimals_with_comma_separator")
+        ) ||
+        (
+            permanentDomain.includes("fk-jewellers") ||
+            permanentDomain.includes("fkjewellers")
+        )
+    ) {
+
+        const moneySymbol = wfCurData;
+        if (typeof cents === "string") {
+            cents = parseFloat(cents.replace(",", ""));
         }
-        number = (number / 100.0).toFixed(precision);
-        var parts = number.split("."),
-            dollars = parts[0].replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1" + thousands),
-            cents = parts[1] ? decimal + parts[1] : "";
-        return dollars + cents;
-    }
-    let match = formatString.match(placeholderRegex);
-    if (match) {
-        switch (match[1]) {
-            case "amount":
-                value = formatWithDelimiters(cents, 2);
-                break;
-            case "amount_no_decimals":
-                value = formatWithDelimiters(cents, 0);
-                break;
-            case "amount_with_comma_separator":
-                value = formatWithDelimiters(cents, 2, ".", ",");
-                break;
-            case "amount_no_decimals_with_comma_separator":
-                value = formatWithDelimiters(cents, 0, ".", ",");
-                break;
+        function defaultOption(opt, def) {
+            return typeof opt === "undefined" ? def : opt;
         }
+        function formatWithDelimiters(number, precision, thousands, decimal) {
+            precision = defaultOption(precision, 2);
+            thousands = defaultOption(thousands, ",");
+            decimal = defaultOption(decimal, ".");
+            if (isNaN(number) || number === null) {
+                return "0";
+            }
+            number = (number / 100.0).toFixed(precision);
+            var parts = number.split(".");
+            var dollars = parts[0].replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1" + thousands);
+            var centsPart = parts[1] ? decimal + parts[1] : "";
+            return dollars + centsPart;
+        }
+
+        const value = formatWithDelimiters(cents, 2);
+        // ✅ Now simply prepend or append the symbol
+        return `${moneySymbol} ${value}`;
+
+    } else {
+
+        const money_format = wfCurrencyType;
+        if (typeof cents === "string") {
+            cents = parseFloat(cents.replace(",", ""));
+        }
+        var value = "";
+        var placeholderRegex = /\{\{\s*(\w+)\s*\}\}/;
+        var formatString = money_format;
+        function defaultOption(opt, def) {
+            return typeof opt === "undefined" ? def : opt;
+        }
+        function formatWithDelimiters(number, precision, thousands, decimal) {
+            precision = defaultOption(precision, 2);
+            thousands = defaultOption(thousands, ",");
+            decimal = defaultOption(decimal, ".");
+            if (isNaN(number) || number === null) {
+                return "0";
+            }
+            number = (number / 100.0).toFixed(precision);
+            var parts = number.split("."),
+                dollars = parts[0].replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1" + thousands),
+                cents = parts[1] ? decimal + parts[1] : "";
+            return dollars + cents;
+        }
+        let match = formatString.match(placeholderRegex);
+        if (match) {
+            switch (match[1]) {
+                case "amount":
+                    value = formatWithDelimiters(cents, 2);
+                    break;
+                case "amount_no_decimals":
+                    value = formatWithDelimiters(cents, 0);
+                    break;
+                case "amount_with_comma_separator":
+                    value = formatWithDelimiters(cents, 2, ".", ",");
+                    break;
+                case "amount_no_decimals_with_comma_separator":
+                    value = formatWithDelimiters(cents, 0, ".", ",");
+                    break;
+            }
+        }
+        return formatString.replace(placeholderRegex, value);
     }
-    return formatString.replace(placeholderRegex, value);
+
 }
+
+
+// function changeMoney(cents) {
+//     // const money_format = heartButton.getAttribute("currency-type");
+//     const money_format = wfCurrencyType;
+//     if (typeof cents === "string") {
+//         cents = parseFloat(cents.replace(",", ""));
+//     }
+//     var value = "";
+//     var placeholderRegex = /\{\{\s*(\w+)\s*\}\}/;
+//     var formatString = money_format;
+//     function defaultOption(opt, def) {
+//         return typeof opt === "undefined" ? def : opt;
+//     }
+//     function formatWithDelimiters(number, precision, thousands, decimal) {
+//         precision = defaultOption(precision, 2);
+//         thousands = defaultOption(thousands, ",");
+//         decimal = defaultOption(decimal, ".");
+//         if (isNaN(number) || number === null) {
+//             return "0";
+//         }
+//         number = (number / 100.0).toFixed(precision);
+//         var parts = number.split("."),
+//             dollars = parts[0].replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1" + thousands),
+//             cents = parts[1] ? decimal + parts[1] : "";
+//         return dollars + cents;
+//     }
+//     let match = formatString.match(placeholderRegex);
+//     if (match) {
+//         switch (match[1]) {
+//             case "amount":
+//                 value = formatWithDelimiters(cents, 2);
+//                 break;
+//             case "amount_no_decimals":
+//                 value = formatWithDelimiters(cents, 0);
+//                 break;
+//             case "amount_with_comma_separator":
+//                 value = formatWithDelimiters(cents, 2, ".", ",");
+//                 break;
+//             case "amount_no_decimals_with_comma_separator":
+//                 value = formatWithDelimiters(cents, 0, ".", ",");
+//                 break;
+//         }
+//     }
+//     return formatString.replace(placeholderRegex, value);
+// }
 
 // ---------------filter option function---------------
 function createFilterOptionInStructure() {
@@ -3510,7 +3630,7 @@ async function wfqChangeSelect(event, index, handle, value, prevValue, gridIndex
             let updatePMoveToCartButton = getdrawerAllDiv[gridIndex].querySelector(".movecart-button");
             if (updatePMoveToCartButton) {
                 updatePMoveToCartButton.innerHTML = updateData?.available
-                    ? `<div id="addItemToCart${updateData?.id}" class="cartButtonStyle" onClick="addToCartWf(event, ${updateData?.id}, ${userId}, ${updateData?.featured_image?.product_id}, '${updateData?.name?.replace(/'/g, '')}', ${updateData?.price}, '${updateData?.featured_image?.src}', '${handle}', '${index}', ${null} )">
+                    ? `<div id="addItemToCart${updateData?.id}" class="cartButtonStyle" onClick="addToCartWf(event, ${updateData?.id}, ${userId}, ${wgProductId}, '${updateData?.name?.replace(/'/g, '')}', ${updateData?.price}, '${updateData?.featured_image?.src || productDataJson?.featured_image}', '${handle}', '${index}', ${null} )">
                                         ${customLanguage?.addToCart}
                                       </div>`
                     : `<div class="cartButtonStyle wg-out-of-stock" style="cursor: not-allowed; opacity: 0.8">
@@ -3545,7 +3665,7 @@ async function wfqChangeSelect(event, index, handle, value, prevValue, gridIndex
             let updatePMoveToCartButton = getGrid[gridIndex].querySelector(".movecart-button");
             if (updatePMoveToCartButton) {
                 updatePMoveToCartButton.innerHTML = updateData?.available
-                    ? `<div id="addItemToCart${updateData?.id}" class="cartButtonStyle" onClick="addToCartWf(event, ${updateData?.id}, ${userId}, ${updateData?.featured_image?.product_id}, '${updateData?.name.replace(/'/g, '')}', ${updateData?.price}, '${updateData?.featured_image?.src}', '${handle}', '${index}', ${null} )">
+                    ? `<div id="addItemToCart${updateData?.id}" class="cartButtonStyle" onClick="addToCartWf(event, ${updateData?.id}, ${userId}, ${wgProductId}, '${updateData?.name.replace(/'/g, '')}', ${updateData?.price}, '${updateData?.featured_image?.src || productDataJson?.featured_image}', '${handle}', '${index}', ${null} )">
                                         ${customLanguage?.addToCart}
                                       </div>`
                     : `<div class="cartButtonStyle wg-out-of-stock" style="cursor: not-allowed; opacity: 0.8">
@@ -4151,6 +4271,11 @@ async function getFormData() {
     const formData = new FormData(form);
     const data = Object.fromEntries(formData.entries());
 
+    const submitBtn = form.querySelector('button');
+    submitBtn.disabled = true;
+    submitBtn.style.cursor = 'not-allowed';
+
+
     // Check for empty fields
     // const emptyFields = Object.entries(data).filter(([key, value]) => !value.trim());
     // const requiredFields = Array.from(form.elements).filter(el => el.hasAttribute('required'));
@@ -4176,6 +4301,8 @@ async function getFormData() {
     }
 
     if (hasEmptyFields) {
+        submitBtn.disabled = false;
+        submitBtn.style.cursor = 'pointer';
         document.getElementById("error-message").innerText = storeFrontDefLang?.allFieldsRequired || "All required fields must be filled!";
         return;
     }
@@ -5503,6 +5630,55 @@ async function refreshCart() {
                 console.error('Fetch error:', error);
             });
     }
+    else if (getThemeName.themeName == 'Shella') {
+        const oldDrawer = document.querySelector('[data-js-popup-ajax]');
+        const countDiv = document.querySelector('.header__btn-cart');
+        const countDesktop = countDiv?.querySelector('[data-js-cart-count-desktop]');
+        const countMobile = countDiv?.querySelector('[data-js-cart-count-mobile]');
+        try {
+            const response = await fetch(window.Shopify.routes.root, {
+                method: "GET",
+                headers: { "X-Requested-With": "XMLHttpRequest" }
+            });
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const htmlText = await response.text();
+            const doc = new DOMParser().parseFromString(htmlText, 'text/html');
+            const newDrawer = doc.querySelector('[data-js-popup-ajax]');
+            const newCountDiv = doc.querySelector('.header__btn-cart');
+            const newCountDesktop = newCountDiv?.querySelector('[data-js-cart-count-desktop]');
+            const newCountMobile = newCountDiv?.querySelector('[data-js-cart-count-mobile]');
+            if (oldDrawer && newDrawer) {
+                oldDrawer.innerHTML = newDrawer.innerHTML;
+            }
+            if (countDesktop && newCountDesktop) {
+                countDesktop.innerText = newCountDesktop.innerText;
+            }
+            if (countMobile && newCountMobile) {
+                countMobile.innerText = newCountMobile.innerText;
+            }
+            document.body.classList.add(
+                'offset-scrollHOLD',
+                'offset-scroll-padding',
+                'fixed-elem',
+                'overflow-hiddenHOLD',
+                'position-fixed',
+                'left-0',
+                'w-100',
+                'popup-opened'
+            );
+            document.body.style.top = '0px';
+            const popup = document.querySelector('.js-popup');
+            if (popup) popup.classList.add('active', 'show');
+            const popupBg = document.querySelector('[data-js-popup-bg]');
+            if (popupBg) popupBg.classList.add('show', 'visible');
+            const cartPopup = document.querySelector('[data-js-popup-name="cart"]');
+            if (cartPopup) cartPopup.classList.add('show', 'visible');
+        } catch (error) {
+            console.error('❌ Error updating cart drawer:', error);
+        }
+    }
 
     else {
         try {
@@ -5627,6 +5803,18 @@ async function addToCartWf(
     index,
     productOption = null
 ) {
+
+    // --------to track meta adds on the add-to-cart button-------- 
+    if (advanceSetting?.metaPixelApiKey?.trim() && currentPlan >= 3) {
+        fbq('trackCustom', 'WG-addToCart', {
+            content_ids: [productId],
+            content_name: title,
+            content_type: 'product',
+            // value: price,
+            // currency: wfCurData
+        });
+    }
+
     const currentHTML = event.target.innerHTML;
     // console.log("currentHTML ", currentHTML);
     event.target.innerHTML = storeFrontDefLang?.loadingText
@@ -5703,6 +5891,12 @@ async function addToCartWf(
         // event.target.innerHTML = customLanguage?.addToCart || "Move to Cart";
         event.target.innerHTML = currentHTML;
     }
+
+
+
+
+
+
 }
 
 
@@ -6615,7 +6809,6 @@ async function collectionIconClick(event, selectedId, handle) {
         matchedProductId = matchedElement.getAttribute('data-variant-id')
         // console.log('Found matching item-selected element:', matchedElement.getAttribute('data-variant-id'));
     }
-    event.preventDefault()
     event.stopPropagation();
     try {
         const collectionIconResponse = await fetch(`${wfGetDomain}products/${handle}.js`);
@@ -7005,6 +7198,34 @@ const wgStarliteCss = (getThemeName.themeName === "Starlite")
         `
     : '';
 
+const wgPitchCss = (getThemeName.themeName === "Pitch")
+    ? `
+        .header__column--right header-actions{
+            align-items:center;
+        }
+    `
+    : '';
+
+const wgVeenaCss = (getThemeName.themeName === "Veena")
+    ? `
+        .collection_icon_new_selected, .collection_icon_new{
+            z-index:3 !important;
+        }
+    `
+    : '';
+
+
+const wgFabricCss = (getThemeName.themeName === "Fabric")
+    ? `
+       nav overflow-list li:nth-last-child(2) {
+                display: flex !important;
+                align-items: center !important;
+                gap: 10px !important;
+}
+    `
+    : '';
+
+
 
 
 // const wgHyperCss = (getThemeName.themeName === "Hyper")
@@ -7134,7 +7355,18 @@ const wgGridCss = `
     opacity: 0.4;
 }
 
-`
+${generalSetting?.mwCheckIconBg ? `
+#dataList input[type="checkbox"]:checked {
+    background-color: ${generalSetting?.mwCheckIconBg || "#ff56a5"} !important;
+    border-color: ${generalSetting?.mwCheckIconBg || "#ff56a5"} !important;
+}` : ""}
+
+${generalSetting?.mwCheckIconColor ? `
+#dataList input[type="checkbox"]:checked::before {
+    color: ${generalSetting?.mwCheckIconColor || "#fff"} !important;
+}` : ""}
+
+`;
 
 function buttonStyleFxn() {
     const {
@@ -8183,6 +8415,12 @@ function buttonStyleFxn() {
 
         ${wgStarliteCss}
 
+        ${wgPitchCss}
+
+        ${wgVeenaCss}
+
+       ${permanentDomain === "anikrriti-com.myshopify.com" ? wgFabricCss : ""}
+
     `;
 
     localStorage.setItem("wg-button-style", buttonStyleHead.innerHTML);
@@ -8229,17 +8467,27 @@ async function SqlFunction(product) {
 
         // console.log("create user ---- ", result)
 
+        // // --------to track meta adds on the add-to-cart button-------- 
+        if (advanceSetting?.metaPixelApiKey?.trim() && currentPlan >= 3) {
+            if (result?.isAdded === "yes") {
+                fbq('trackCustom', 'WG-addToWishlist', {
+                    content_ids: [product.productId],
+                    content_name: product.title,
+                    content_type: 'product',
+                    // value: product.price,
+                    // currency: wfCurData
+                });
+            }
+        }
+
         const prevToken = localStorage.getItem("wg-token");
         const newToken = result?.token;
 
         // console.log("prevToken --- ", prevToken);
         // console.log("newToken --- ", newToken);
 
-
         if ((!prevToken || prevToken !== newToken) && newToken !== "" && newToken !== null && newToken !== undefined) {
-
             // console.log("-----UPDATING TOKEN-----");
-
             localStorage.setItem("wg-token", newToken);
         }
 
@@ -8360,9 +8608,9 @@ async function collectionBtnAddedRemoveWishlist(selectedId, productHandle, added
         let updateWishlistIconCollectionTitle = "";
         let updateWishlistIconCollectionCart = "";
 
-        updateWishlistIconCollection += `<div class="${addedText === 'added' ? "collection_icon_new_selected" : "collection_icon_new"} ${iconPosition.iconPosition}" style="${iconPosition.checkClassExist === true ? `top :${imgHeight}px;` : ''}"><div style="${addedText === 'added' ? `filter: ${colIconSelectedColor};` : `filter: ${colIconDefaultColor};`} ${collectionIconSize()}" onClick="collectionIconClickModal(${event},${selectedId}, '${productHandle}')" class="${iconPosition.iconStyle}"><span class="span-hearticon"></span></div></div>`;
-        updateWishlistIconCollectionTitle += `<div class="${addedText === 'added' ? "collection_icon_new_selected" : "collection_icon_new"}  ${currentCollectionSeting.quickViewShowOptionTitle === true ? "modal-icon" : ""} "><div style="${addedText === 'added' ? `filter: ${colIconSelectedColor};` : `filter: ${colIconDefaultColor};`} ${collectionIconSize()}" onClick="collectionIconClickModal(${event},${selectedId}, '${productHandle}')" class="${iconPosition.iconStyle}"><span class="span-hearticon"></span></div></div>`;
-        updateWishlistIconCollectionCart += `<div class="${addedText === 'added' ? "collection_icon_new_selected" : "collection_icon_new"} ${position === 'left-icon-position' ? "icon-cart-left" : position === 'right-icon-position' ? "icon-cart-right" : position === "center-icon-position" && "icon-cart-center"}"><div style="${addedText === 'added' ? `filter: ${colIconSelectedColor};` : `filter: ${colIconDefaultColor};`} ${collectionIconSize()}" onClick="collectionIconClickModal(${event},${selectedId}, '${productHandle}')" class="${iconPosition.iconStyle}"><span class="span-hearticon"></span></div></div>`
+        updateWishlistIconCollection += `<div class="${addedText === 'added' ? "collection_icon_new_selected" : "collection_icon_new"} ${iconPosition.iconPosition}" style="${iconPosition.checkClassExist === true ? `top :${imgHeight}px;` : ''}"><div style="${addedText === 'added' ? `filter: ${colIconSelectedColor};` : `filter: ${colIconDefaultColor};`} ${collectionIconSize()}" onClick="collectionIconClickModal(event,${selectedId}, '${productHandle}')" class="${iconPosition.iconStyle}"><span class="span-hearticon"></span></div></div>`;
+        updateWishlistIconCollectionTitle += `<div class="${addedText === 'added' ? "collection_icon_new_selected" : "collection_icon_new"}  ${currentCollectionSeting.quickViewShowOptionTitle === true ? "modal-icon" : ""} "><div style="${addedText === 'added' ? `filter: ${colIconSelectedColor};` : `filter: ${colIconDefaultColor};`} ${collectionIconSize()}" onClick="collectionIconClickModal(event,${selectedId}, '${productHandle}')" class="${iconPosition.iconStyle}"><span class="span-hearticon"></span></div></div>`;
+        updateWishlistIconCollectionCart += `<div class="${addedText === 'added' ? "collection_icon_new_selected" : "collection_icon_new"} ${position === 'left-icon-position' ? "icon-cart-left" : position === 'right-icon-position' ? "icon-cart-right" : position === "center-icon-position" && "icon-cart-center"}"><div style="${addedText === 'added' ? `filter: ${colIconSelectedColor};` : `filter: ${colIconDefaultColor};`} ${collectionIconSize()}" onClick="collectionIconClickModal(event,${selectedId}, '${productHandle}')" class="${iconPosition.iconStyle}"><span class="span-hearticon"></span></div></div>`
 
         if (collectionBtnSetting.isQuickViewShowOptionTitle) {
             const iconAppendOnTitle = document.querySelectorAll(`.wf-wishlist-collection-icon-modal.wf-title`);
@@ -8395,7 +8643,7 @@ async function collectionBtnAddedRemoveWishlist(selectedId, productHandle, added
         let addWishlistModalButton = document.createElement("div");
         addWishlistModalButton.style.zIndex = "10";
         addWishlistModalButton.style.position = "relative";
-        addWishlistModalButton.innerHTML = addedText === 'added' ? `<div onClick="collectionIconClickModal(${event},${selectedId}, '${productHandle}')" class="modalButtonCollection" >${alreadyAddedToWishlistData}</div>` : `<div onClick="collectionIconClickModal(${event},${selectedId}, '${productHandle}')" class="modalButtonCollection" >${addToWishlistData}</div>`
+        addWishlistModalButton.innerHTML = addedText === 'added' ? `<div onClick="collectionIconClickModal(event,${selectedId}, '${productHandle}')" class="modalButtonCollection" >${alreadyAddedToWishlistData}</div>` : `<div onClick="collectionIconClickModal(event,${selectedId}, '${productHandle}')" class="modalButtonCollection" >${addToWishlistData}</div>`
 
         if (currentCollectionSeting.quickViewShowOption === 'button-below') {
             const dddd = document.querySelector(themeSelectors.modalbuttonAppend).nextSibling
@@ -9306,6 +9554,7 @@ async function extractIdAndGetDataForTable(pageUrl) {
 };
 
 async function replaceTokens(str, data, newObj = null) {
+
     const sharedName = btoa('email');
     var pageUrl = await wishlistUrlCreator(sharedName);
     var tableData = await extractIdAndGetDataForTable(pageUrl);
@@ -9348,6 +9597,7 @@ async function replaceTokens(str, data, newObj = null) {
             `{wishlist_share_email_sender_name}`
         );
     }
+
     str = str.replace(/##wishlist_share_email_wishlist_url##/g, pageUrl);
     str = str.replace(/##wishlist_share_email_customer_message##/g, message);
     str = str.replace(/{wishlist_share_email_wishlist_url}/g, pageUrl);
@@ -11226,7 +11476,7 @@ function wgGetProductOptions() {
             if (field.value.trim() !== "") {
                 const { key, value } = extractKeyValue(field);
                 // if (key !== "_has_gpo" && key !== "_tpo_add_by") {
-                if (key !== "_has_gpo" && key !== "_tpo_add_by" && key !== "_acoFields" && key !== "_acpaHidden" && key !== "_acoPrice" && key !== "_acoCompatibility" && key !== "_acoValidationDone" && key !== "qg_variant" && key !== "__AeroId" && key !== "_mainProduct" && key !== "_uniqueOptionId") {
+                if (key !== "_has_gpo" && key !== "_tpo_add_by" && key !== "_acoFields" && key !== "_acpaHidden" && key !== "_acoPrice" && key !== "_acoCompatibility" && key !== "_acoValidationDone" && key !== "qg_variant" && key !== "__AeroId" && key !== "_mainProduct" && key !== "_uniqueOptionId" && key !== "_modifyPayloadQB" && key !== "_modifyPayloadPB") {
                     result[key] = value;
                 }
             }

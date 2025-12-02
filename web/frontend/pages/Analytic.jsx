@@ -523,7 +523,6 @@ export default function Analytic() {
     };
 
     const { selectedResources, allResourcesSelected, handleSelectionChange } = useIndexResourceState(topData);
-    console.log("topData = ", topData)
     const topDataTable = topData.map(
         ({ handle, title, image, totalCount }, index,) => (
             <IndexTable.Row id={index} key={index} position={index} >
@@ -864,23 +863,23 @@ export default function Analytic() {
                                     <Text variant="headingMd" as="h3">{myLanguage.itemGraph}</Text>
                                     {!loadGraph ? <div style={{ textAlign: 'center' }}><Spinner accessibilityLabel="Spinner example" size="large" /></div> :
                                         emptyArr.emptyItems === "zero" ? <div style={{ textAlign: "center" }}> ------ No Record Found ------ </div> :
-                                            <ResponsiveContainer width="100%" aspect={3.5}>
-                                                <LineChart width={500} height={300} data={itemGraph}
-                                                    margin={{
-                                                        top: -5,
-                                                        right: 30,
-                                                        left: -20,
-                                                        bottom: 25,
-                                                        // bottom: !activeButtonIndex ? -26 : -17
-                                                    }}>
-                                                    <CartesianGrid strokeDasharray="3 3" />
-                                                    <XAxis dataKey="date" angle={60} dx={20} dy={25} minTickGap={-400} />
-                                                    <YAxis />
-                                                    <Tooltip />
-                                                    <Legend />
-                                                    <Line type="monotone" dataKey="Items" stroke="#4867A9" activeDot={{ r: 6 }} />
-                                                </LineChart>
-                                            </ResponsiveContainer>
+                                            // <ResponsiveContainer width="100%" aspect={3.5}>
+                                            <LineChart width={1100} height={300} data={itemGraph}
+                                                margin={{
+                                                    top: -5,
+                                                    right: 30,
+                                                    left: -20,
+                                                    bottom: 25,
+                                                    // bottom: !activeButtonIndex ? -26 : -17
+                                                }}>
+                                                <CartesianGrid strokeDasharray="3 3" />
+                                                <XAxis dataKey="date" angle={60} dx={20} dy={25} minTickGap={-400} />
+                                                <YAxis />
+                                                <Tooltip />
+                                                <Legend />
+                                                <Line type="monotone" dataKey="Items" stroke="#4867A9" activeDot={{ r: 6 }} />
+                                            </LineChart>
+                                        // </ResponsiveContainer>
                                     }
                                 </div>
 
@@ -888,25 +887,26 @@ export default function Analytic() {
                                     <Text variant="headingMd" as="h3">{myLanguage.userGraph}</Text>
                                     {!loadGraph ? <div style={{ textAlign: 'center' }}><Spinner accessibilityLabel="Spinner example" size="large" /></div> :
                                         emptyArr.emptyUsers === "zero" ? <div style={{ textAlign: "center" }}> ------ No Record Found ------ </div> :
-                                            <ResponsiveContainer width="100%" aspect={3.5}>
-                                                <LineChart width={500} height={300} data={userGraph}
-                                                    margin={{
-                                                        top: 5,
-                                                        right: 30,
-                                                        left: -20,
-                                                        // bottom: -26,
-                                                        // bottom: -17,
-                                                        bottom: 25
-                                                        // bottom: !activeButtonIndex ? -26 : -17
-                                                    }}>
-                                                    <CartesianGrid strokeDasharray="3 3" />
-                                                    <XAxis dataKey="date" angle={60} dx={20} dy={25} minTickGap={-400} />
-                                                    <YAxis />
-                                                    <Tooltip />
-                                                    <Legend />
-                                                    <Line type="monotone" dataKey="Users" stroke="#7F50A7" activeDot={{ r: 6 }} />
-                                                </LineChart>
-                                            </ResponsiveContainer>}
+                                            // <ResponsiveContainer width="100%" aspect={3.5}>
+                                            <LineChart width={1100} height={300} data={userGraph}
+                                                margin={{
+                                                    top: 5,
+                                                    right: 30,
+                                                    left: -20,
+                                                    // bottom: -26,
+                                                    // bottom: -17,
+                                                    bottom: 25
+                                                    // bottom: !activeButtonIndex ? -26 : -17
+                                                }}>
+                                                <CartesianGrid strokeDasharray="3 3" />
+                                                <XAxis dataKey="date" angle={60} dx={20} dy={25} minTickGap={-400} />
+                                                <YAxis />
+                                                <Tooltip />
+                                                <Legend />
+                                                <Line type="monotone" dataKey="Users" stroke="#7F50A7" activeDot={{ r: 6 }} />
+                                            </LineChart>
+                                        // </ResponsiveContainer>
+                                    }
                                 </div>
                             </div>
                         </div>

@@ -11,13 +11,12 @@ document.addEventListener("DOMContentLoaded", getCurentPlanSql2);
 // console.log(" ---------------- collection page code render ----------------- ")
 
 const serverURL1 = 'http://localhost:5000'; // -------------- local
-// const serverURL1 = "https://nurses-requests-prove-convicted.trycloudflare.com"; // -------------- local
 // const serverURL1 = 'https://wishlist-api.webframez.com'; // -------------- production
 // const serverURL1 = 'https://wishlist-guru-api.webframez.com';  // -------------- stagging
 
 
 // let getCurrentThemeName = JSON.parse(getThemeNameColl);
-let getCurrentThemeName = {themeName: "Sunrise"}
+let getCurrentThemeName = {themeName: ""}
 // let localDataC = JSON.parse(localStorage.getItem("wg-local-data"));
 // let getCurrentThemeName = localDataC?.getThemeName || JSON.parse(getThemeNameColl);
 

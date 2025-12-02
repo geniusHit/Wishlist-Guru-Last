@@ -1191,6 +1191,18 @@ const vietnameese = {
     cowishTitle: "CoWish - Danh sách mong muốn bộ sưu tập",
     cowishDesc: "Danh sách mong muốn - Cho phép người dùng thêm bộ sưu tập yêu thích của họ",
     hideOnZero: "Ẩn khi là 0",
+
+    planBasicBFCM: "Nhận gói Basic chỉ với $4.99 -- Tiết kiệm $1 trọn đời",
+    planProBFCM: "Nhận gói Pro chỉ với $9.99 -- Tiết kiệm $3 trọn đời",
+    planPremiumBFCM: "Nhận gói Premium chỉ với $14.99 -- Tiết kiệm $4.99 trọn đời",
+    planAllBFCM: "Nhận giảm giá 20% cho tất cả các gói hàng năm trọn đời",
+    modalInnerDivBg: "Màu nền bên trong của cửa sổ modal",
+    modalBottomDivBg: "Màu nền cho phần nút phía dưới modal",
+    styleMW: "Kiểu dáng cho multiwishlist",
+    styleMWSub: "Tại đây bạn có thể tùy chỉnh kiểu của multi wishlist",
+    smwOne: "Màu nền của ô đánh dấu multiwishlist",
+    smwTwo: "Màu biểu tượng của ô đánh dấu multiwishlist",
+
 }
 
 export default vietnameese

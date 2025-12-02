@@ -1197,6 +1197,18 @@ const filipino = {
     cowishTitle: "CoWish - Koleksyon Wishlist",
     cowishDesc: "Wishlist - Payagan ang mga gumagamit na idagdag ang kanilang paboritong koleksyon",
     hideOnZero: "Itago kapag 0",
+
+    planBasicBFCM: "Kunin ang Basic plan sa $4.99 lang — Makatipid ng $1 habambuhay",
+    planProBFCM: "Kunin ang Pro plan sa $9.99 lang — Makatipid ng $3 habambuhay",
+    planPremiumBFCM: "Kunin ang Premium plan sa $14.99 lang — Makatipid ng $4.99 habambuhay",
+    planAllBFCM: "Kumuha ng 20% diskwento sa lahat ng yearly plans habambuhay",
+    modalInnerDivBg: "Background color ng loob ng modal",
+    modalBottomDivBg: "Background color ng ilalim na button section ng modal",
+    styleMW: "Mga estilo para sa multiwishlist",
+    styleMWSub: "Dito mo maaaring i-customize ang mga estilo ng multiwishlist",
+    smwOne: "Background color ng multiwishlist checkbox",
+    smwTwo: "Icon color ng multiwishlist checkbox",
+
 }
 
 export default filipino

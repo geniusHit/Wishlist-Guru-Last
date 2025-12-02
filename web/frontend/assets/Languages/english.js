@@ -1266,7 +1266,19 @@ const english = {
     preorderGuruDesc: "Preorder easily, skip queues, and enjoy smooth, simple service",
     cowishTitle: "CoWish - Collection Wishlist",
     cowishDesc: "Wishlist - Allow users to wishlist their favorite collection",
-
     hideOnZero: "Hide when 0",
+
+    planBasicBFCM: "Get Basic plan in $4.99 only -- Save $1 for lifetime",
+    planProBFCM: "Get Pro plan in $9.99 only -- Save $3 for lifetime",
+    planPremiumBFCM: "Get Premium plan in $14.99 only -- Save $4.99 for lifetime",
+    planAllBFCM: "Get 20% discount on all yearly plans for lifetime",
+    modalInnerDivBg: "Modal inner backgroundColor",
+    modalBottomDivBg: "Modal bottom button's div background color",
+    styleMW: "Styles for multiwishlist",
+    styleMWSub: "Here you can customize the styles of the multi wishlist",
+    smwOne: "Multiwishlist checkbox background color",
+    smwTwo: "Multiwishlist checkbox icon color",
+
+
 }
 export default english

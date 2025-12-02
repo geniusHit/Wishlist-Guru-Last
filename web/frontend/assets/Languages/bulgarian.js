@@ -1183,6 +1183,18 @@ const bulgarian = {
     cowishTitle: "CoWish - Списък с колекции",
     cowishDesc: "Списък с желания - Позволете на потребителите да добавят любимите си колекции",
     hideOnZero: "Скрий при 0",
+
+    planBasicBFCM: "Вземете Basic плана само за $4.99 -- Спестете $1 за цял живот",
+    planProBFCM: "Вземете Pro плана само за $9.99 -- Спестете $3 за цял живот",
+    planPremiumBFCM: "Вземете Premium плана само за $14.99 -- Спестете $4.99 за цял живот",
+    planAllBFCM: "Получете 20% отстъпка за всички годишни планове за цял живот",
+    modalInnerDivBg: "Фонов цвят на вътрешната част на модала",
+    modalBottomDivBg: "Фонов цвят на долния бутон в модала",
+    styleMW: "Стилове за multiwishlist",
+    styleMWSub: "Тук можете да персонализирате стиловете на multiwishlist",
+    smwOne: "Цвят на фона на multiwishlist отметката",
+    smwTwo: "Цвят на иконата на multiwishlist отметката",
+
 }
 
 export default bulgarian;

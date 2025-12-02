@@ -1193,6 +1193,18 @@ const russian = {
     cowishTitle: "CoWish - Список желаемых коллекций",
     cowishDesc: "Список желаний - Позвольте пользователям добавлять свои любимые коллекции",
     hideOnZero: "Скрыть, когда 0",
+
+    planBasicBFCM: "Получите план Basic всего за $4.99 — Экономьте $1 всю жизнь",
+    planProBFCM: "Получите план Pro всего за $9.99 — Экономьте $3 всю жизнь",
+    planPremiumBFCM: "Получите план Premium всего за $14.99 — Экономьте $4.99 всю жизнь",
+    planAllBFCM: "Получите 20% скидку на все годовые планы на всю жизнь",
+    modalInnerDivBg: "Фоновый цвет внутренней части модального окна",
+    modalBottomDivBg: "Фоновый цвет нижней области кнопок модального окна",
+    styleMW: "Стили для multiwishlist",
+    styleMWSub: "Здесь вы можете настроить стили multi wishlist",
+    smwOne: "Цвет фона чекбокса multiwishlist",
+    smwTwo: "Цвет иконки чекбокса multiwishlist",
+
 }
 
 export default russian

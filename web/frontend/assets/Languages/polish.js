@@ -1258,6 +1258,18 @@ const polish = {
   cowishTitle: "CoWish - Lista życzeń kolekcji",
   cowishDesc: "Lista życzeń - Pozwól użytkownikom dodawać ich ulubione kolekcje",
   hideOnZero: "Ukryj, gdy 0",
+
+  planBasicBFCM: "Zdobądź plan Basic za jedyne $4.99 -- Oszczędzaj $1 przez całe życie",
+  planProBFCM: "Zdobądź plan Pro za jedyne $9.99 -- Oszczędzaj $3 przez całe życie",
+  planPremiumBFCM: "Zdobądź plan Premium za jedyne $14.99 -- Oszczędzaj $4.99 przez całe życie",
+  planAllBFCM: "Otrzymaj 20% zniżki na wszystkie plany roczne na całe życie",
+  modalInnerDivBg: "Kolor tła wewnętrznej części okna modalnego",
+  modalBottomDivBg: "Kolor tła dolnej sekcji przycisku modalnego",
+  styleMW: "Style dla multiwishlist",
+  styleMWSub: "Tutaj możesz dostosować style multi wishlist",
+  smwOne: "Kolor tła pola wyboru multiwishlist",
+  smwTwo: "Kolor ikony pola wyboru multiwishlist",
+
 }
 
 export default polish;

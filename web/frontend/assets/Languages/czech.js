@@ -1180,5 +1180,17 @@ const czech = {
     cowishTitle: "CoWish - Seznam přání kolekcí",
     cowishDesc: "Seznam přání - Umožněte uživatelům přidat jejich oblíbené kolekce",
     hideOnZero: "Skrýt při 0",
+
+    planBasicBFCM: "Získejte plán Basic za pouhých $4.99 — Ušetřete $1 navždy",
+    planProBFCM: "Získejte plán Pro za pouhých $9.99 — Ušetřete $3 navždy",
+    planPremiumBFCM: "Získejte plán Premium za pouhých $14.99 — Ušetřete $4.99 navždy",
+    planAllBFCM: "Získejte 20% slevu na všechny roční plány navždy",
+    modalInnerDivBg: "Vnitřní barva pozadí modálního okna",
+    modalBottomDivBg: "Barva pozadí spodní části tlačítka modálního okna",
+    styleMW: "Styly pro multiwishlist",
+    styleMWSub: "Zde můžete upravit styly multiwishlistu",
+    smwOne: "Barva pozadí zaškrtávacího pole multiwishlistu",
+    smwTwo: "Barva ikony zaškrtávacího pole multiwishlistu",
+
 }
 export default czech;

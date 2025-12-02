@@ -147,7 +147,7 @@ const useAppMetafield = () => {
             return result.currentPlanData[0].plan_id
 
         } catch (err) {
-            console.log(err)
+            console.log("err")
         }
     }
 

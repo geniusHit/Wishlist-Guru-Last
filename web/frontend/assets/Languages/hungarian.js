@@ -1218,6 +1218,18 @@ const hungarian = {
     cowishTitle: "CoWish - Gyűjtemény kívánságlista",
     cowishDesc: "Kívánságlista - Engedélyezze a felhasználóknak, hogy hozzáadják kedvenc gyűjteményeiket",
     hideOnZero: "Elrejtés, ha 0",
+
+    planBasicBFCM: "Szerezze meg a Basic csomagot mindössze $4.99-ért — Takarítson meg $1-t egész életre",
+    planProBFCM: "Szerezze meg a Pro csomagot mindössze $9.99-ért — Takarítson meg $3-t egész életre",
+    planPremiumBFCM: "Szerezze meg a Premium csomagot mindössze $14.99-ért — Takarítson meg $4.99-t egész életre",
+    planAllBFCM: "20% kedvezmény minden éves csomagra egész életre",
+    modalInnerDivBg: "A modal belső háttérszíne",
+    modalBottomDivBg: "A modal alsó gombterületének háttérszíne",
+    styleMW: "Stílusok a multiwishlisthoz",
+    styleMWSub: "Itt testre szabhatja a multiwishlist stílusait",
+    smwOne: "A multiwishlist jelölőnégyzet háttérszíne",
+    smwTwo: "A multiwishlist jelölőnégyzet ikonjának színe",
+
 }
 
 export default hungarian

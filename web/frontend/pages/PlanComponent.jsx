@@ -22,6 +22,7 @@ import { useNavigate } from 'react-router-dom';
 import { DeleteMinor } from '@shopify/polaris-icons';
 import WebframezApps from './WebframezApps';
 // import bannerImage from '../assets/banner-image.png';
+import bannerImage from '../assets/BFCMimg.png';
 
 const PlanComponent = ({ setCurrentState }) => {
 
@@ -260,6 +261,10 @@ const PlanComponent = ({ setCurrentState }) => {
             imageUrl: loaderGif,
             showConfirmButton: false,
         });
+
+        console.log("validPromoValue ---- ", validPromoValue)
+
+
         if (validPromoValue?.promo_code) {
             const planNames = validPromoValue.plan_name.split(',').map(name => name.trim());
             // if (validPromoValue.plan_name !== "all" && validPromoValue.plan_name !== planType.planName) {
@@ -271,6 +276,8 @@ const PlanComponent = ({ setCurrentState }) => {
                 });
             }
             if (validPromoValue.previous_plan === "check") {
+
+                console.log("gggg ")
                 const response = await fetch(`${serverURL}/check-promo-code-prev-plan`, {
                     method: "POST",
                     headers: {
@@ -282,6 +289,8 @@ const PlanComponent = ({ setCurrentState }) => {
                     }),
                 });
                 const result = await response.json();
+
+                console.log("result == ", result)
 
                 if (result.data.length > 0) {
                     return Swal.fire({
@@ -297,6 +306,10 @@ const PlanComponent = ({ setCurrentState }) => {
 
 
     async function proccedToPayment(value, promoData = null) {
+
+        console.log("proccedToPayment   ")
+
+
         localStorage.setItem("wishlist-guru-inhouse", true);
         Swal.fire({
             text: "Please wait for a while...",
@@ -318,6 +331,9 @@ const PlanComponent = ({ setCurrentState }) => {
                 body: JSON.stringify({ price: value.amount, interval: value.interval, shop: shop.shopName, plan: value.planName, returnUrl: returnData, promoData: promoData }),
             });
             const result = await response.json();
+
+            console.log("result --- ", result)
+
             const urlName = result.data.confirmationUrl;
             const subscription = useSubscriptionUrl(urlName);
             subscription.ReloadPage();
@@ -656,7 +672,14 @@ const PlanComponent = ({ setCurrentState }) => {
                                 <div className='promo-code-list'>
                                     {/* <div className='wfq-main-promo'><span>Get 15 days trial</span> <span className='wfq-apply-span'><span className='bold-promo-list'>TRIAL15</span><div className='wfq-quote-form-btn disable-app'><Button size='slim' onClick={() => handleApplyPromo("TRIAL15")}>{myLanguage.applyNow}</Button></div></span></div> */}
 
-                                    {/* <div className='wfq-main-promo'><span>Flat 20% off on all plans</span> <span className='wfq-apply-span'><span className='bold-promo-list'>GET20OFF</span><div className='wfq-quote-form-btn disable-app'><Button size='slim' onClick={() => handleApplyPromo("GET20OFF")}>{myLanguage.applyNow}</Button></div></span></div> */}
+                                    {/* <div className='wfq-main-promo'><span>{myLanguage.planBasicBFCM}</span> <span className='wfq-apply-span'><span className='bold-promo-list'>BFCM-Basic</span><div className='wfq-quote-form-btn disable-app'><Button size='slim' onClick={() => handleApplyPromo("BFCM-Basic")}>{myLanguage.applyNow}</Button></div></span></div>
+
+                                    <div className='wfq-main-promo'><span>{myLanguage.planProBFCM}</span> <span className='wfq-apply-span'><span className='bold-promo-list'>BFCM-Pro</span><div className='wfq-quote-form-btn disable-app'><Button size='slim' onClick={() => handleApplyPromo("BFCM-Pro")}>{myLanguage.applyNow}</Button></div></span></div>
+
+                                    <div className='wfq-main-promo'><span>{myLanguage.planPremiumBFCM}</span> <span className='wfq-apply-span'><span className='bold-promo-list'>BFCM-Premium</span><div className='wfq-quote-form-btn disable-app'><Button size='slim' onClick={() => handleApplyPromo("BFCM-Premium")}>{myLanguage.applyNow}</Button></div></span></div>
+
+                                    <div className='wfq-main-promo'><span>{myLanguage.planAllBFCM}</span> <span className='wfq-apply-span'><span className='bold-promo-list'>BFCM-Yearly </span><div className='wfq-quote-form-btn disable-app'><Button size='slim' onClick={() => handleApplyPromo("BFCM-Yearly ")}>{myLanguage.applyNow}</Button></div></span></div> */}
+
 
                                     {getShopifyPlan === "partner_test" || getShopifyPlan === "affiliate" ?
                                         <div className='wfq-main-promo'><span>{myLanguage.partnerPromo}</span> <span className='wfq-apply-span'><span className='bold-promo-list'>PARTNER</span><div className='wfq-quote-form-btn disable-app'><Button size='slim' onClick={() => handleApplyPromo("PARTNER")}>{myLanguage.applyNow}</Button></div></span></div> :

@@ -12,8 +12,6 @@ import { storeFrontLanguages } from '../../backend/utils/storeFrontLanguages';
 import { setupGuideLanguage } from '../../backend/utils/setupGuide';
 
 const SetupGuide = ({ values }) => {
-
-    
     const { arabicMessage, englishMessage, frenchMessage, dutchMessage, germanMessage, chineseMessage, brazilianMessage, danishMessage, swedishMessage, spanishMessage, chineseTraditionalMessage, czechMessage, japaneseMessage, italianMessage, koreanMessage, norwegianBokmalMessage, polishMessage, portugueseBrazilMessage, portuguesePortugalMessage, thaiMessage, turkishMessage, finnishhMessage, hungarianMessage, herbewMessage, bulgarianMessage, ukrainianMessage, lithuanianMessage, greekMessage, irishMessage, romanianMessage, filipinoMessage, indonesianMessage, russianMessage, vietnameseMessage, albanianMessage, latvianMessage, estonianMessage } = storeFrontLanguages
     const navigate = useNavigate();
     const [switchTheme, setSwitchTheme] = useState(false);
@@ -180,11 +178,11 @@ const SetupGuide = ({ values }) => {
 
 
     function clarityFxn() {
-        // (function (c, l, a, r, i, t, y) {
-        //     c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
-        //     t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
-        //     y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
-        // })(window, document, "clarity", "script", "r0c9ecz3ii");
+        (function (c, l, a, r, i, t, y) {
+            c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
+            t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
+            y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+        })(window, document, "clarity", "script", "r0c9ecz3ii");
     }
 
     const themeToggle = async (themeId) => {

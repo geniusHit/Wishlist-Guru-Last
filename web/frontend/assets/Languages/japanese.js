@@ -1178,6 +1178,18 @@ const japanese = {
     cowishTitle: "CoWish - コレクションウィッシュリスト",
     cowishDesc: "ウィッシュリスト - ユーザーがお気に入りのコレクションを追加できるようにする",
     hideOnZero: "0のとき非表示",
+
+    planBasicBFCM: "Basicプランをわずか$4.99で入手 — 一生涯で$1節約",
+    planProBFCM: "Proプランをわずか$9.99で入手 — 一生涯で$3節約",
+    planPremiumBFCM: "Premiumプランをわずか$14.99で入手 — 一生涯で$4.99節約",
+    planAllBFCM: "すべての年間プランが生涯20%割引",
+    modalInnerDivBg: "モーダル内側の背景色",
+    modalBottomDivBg: "モーダル下部ボタンエリアの背景色",
+    styleMW: "マルチウィッシュリストのスタイル",
+    styleMWSub: "ここでマルチウィッシュリストのスタイルをカスタマイズできます",
+    smwOne: "マルチウィッシュリストのチェックボックス背景色",
+    smwTwo: "マルチウィッシュリストのチェックボックスアイコン色",
+
 }
 
 export default japanese;

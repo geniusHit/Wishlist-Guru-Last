@@ -114,7 +114,7 @@ const LanguageSwitcher = ({ data }) => {
                         }} />}
                     </SingleFieldController>
 
-                    <SingleFieldController name="createAccountEndingText" control={control} isRequired className='custom-margin'>
+                    <SingleFieldController name="createAccountEndingText" control={control} className='custom-margin'>
                         {({ field }) => <TextField type="text" label="After create account text" value={field.value} onChange={(value) => {
                             field.onChange(value),
                                 setSaveBar(true);
