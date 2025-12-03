@@ -1,4 +1,3 @@
-
 const heartButton = document.getElementById("heart");
 heartButton.addEventListener("click", heartButtonHandle);
 let modalWF = document.getElementById("wg-myModal");
@@ -16,7 +15,7 @@ let customButton = localData?.customButton || JSON.parse(heartButton.getAttribut
 let customLanguage = localData?.customLanguage || JSON.parse(heartButton.getAttribute("language-setting").replace(/~/g, "'"));
 let generalSetting = localData?.generalSetting || JSON.parse(heartButton.getAttribute("general-setting"));
 // let getThemeName = localData?.getThemeName || JSON.parse(heartButton.getAttribute("theme-name"));
-let getThemeName = {themeName: ""}
+let getThemeName = {themeName: "Dawn"}
 let advanceSetting = localData?.advanceSetting || JSON.parse(heartButton.getAttribute("advance-setting").replace(/~/g, "'"));
 let collectionBtnSetting = localData?.collectionBtnSetting || JSON.parse(heartButton.getAttribute("collection-btn-setting"));
 let currentPlan = localData?.currentPlan || JSON.parse(heartButton.getAttribute("current-plan"));
@@ -5856,7 +5855,12 @@ async function addToCartWf(
     //     quantity: quantity || 1,
     // };
 
-    const res = await cartFunction(data);
+    // const res = await cartFunction(data);
+
+    // Toast Image code starts
+    const res = await cartFunction(data, true, handle);
+    // Toast Image code ends
+
     if (res.message !== "Cart Error" && res.status !== 422) {
         await refreshCart();
 
@@ -6130,7 +6134,11 @@ async function allToCartFxn(allData, viewItemProducts = []) {
 
         await cartFunctionForAllItems(val, false);
         await refreshCart();
-        alertToast(customLanguage.alertAddAllToCart || storeFrontDefLang.alertAddAllToCart);
+        // alertToast(customLanguage.alertAddAllToCart || storeFrontDefLang.alertAddAllToCart);
+
+        // Toast image code starts
+        alertToast(customLanguage.alertAddAllToCart || storeFrontDefLang.alertAddAllToCart, null, "allToCart", null, "NoImage");
+        // Toast image code ends
 
         const parentDiv = document.querySelector(".wg-addalltocart");
         if (parentDiv) {
@@ -6338,7 +6346,7 @@ async function cartFunctionForAllItems(items, alertValue = true) {
 }
 
 
-async function cartFunction(data, alertValue = true) {
+async function cartFunction(data, alertValue = true, handle) {
     try {
         const response = await fetch("/cart/add.js", {
             body: JSON.stringify(data),
@@ -6356,7 +6364,11 @@ async function cartFunction(data, alertValue = true) {
             if (json.message === "Cart Error" || json.status === 422) {
                 alertContent(json.description);
             } else {
-                alertToast(`${customLanguage.alertForAddToCartButton}`);
+                // alertToast(`${customLanguage.alertForAddToCartButton}`);
+
+                // Toast image code starts
+                alertToast(`${customLanguage.alertForAddToCartButton}`, null, "cart", null, handle);
+                // Toast image code ends
             }
         }
 
@@ -7367,6 +7379,21 @@ ${generalSetting?.mwCheckIconColor ? `
 }` : ""}
 
 `;
+
+const wgResponsiveCss = (getThemeName.themeName === "Responsive") ?
+`
+.currencies-switcher{
+width: calc(21% - 8px);
+}
+.one-fourth.column.medium-down--one-whole:not(.top_bar_search){
+width: calc(37% - 20px);
+}
+.top_bar .container{
+display: flex;
+justify-content: space-between;
+}
+`:
+''
 
 function buttonStyleFxn() {
     const {
@@ -8818,133 +8845,525 @@ function styleForTooltipArrow() {
     document.getElementsByTagName("head")[0].appendChild(notificationStyle);
 };
 
-function notificationOfRemoved() {
+// Toast Image code starts
+async function notificationOfRemoved(fromWhere, productId, prodHandle) {
+// Toast Image code ends
 
     const notificationStyle = notificationStyleFxn();
     const notificationTextStyle = notificationTextStyleFxn()
     const notificationDivId = document.getElementById("notificationDiv")
     const notificationAbove = document.querySelector('.wf-text-notification-above')
     const notificationBelow = document.querySelector('.wf-text-notification-below')
+
+    // Toast Image code starts
+    if (fromWhere === "collection") {
+        let wishlistDivs = document.querySelectorAll(".wf-wishlist-collection-icon")
+        var productHandle, proId, wishlistDiv;
+        wishlistDivs.forEach((el) => {
+            productHandle = el.getAttribute("product-handle")
+            proId = el.getAttribute("product-id")
+            if (proId === productId) {
+                wishlistDiv = el
+            }
+        })
+
+        var productHandle = wishlistDiv.getAttribute("product-handle")
+    }
+    else if (fromWhere === "customIcon" || fromWhere === "inject" || fromWhere === "block") {
+        wishlistDiv = document.getElementById("wf-custom-wishBtn-inject");
+        productHandle = wishlistDiv.getAttribute("data-product-handle");
+    }
+    else if (fromWhere === "cart") {
+        productHandle = prodHandle;
+    }
+    else if (fromWhere === "allToCart") {
+        productHandle = ""
+    }
+
+    console.log("fromWhere = ", fromWhere)
+    console.log("productId = ", productId)
+    console.log("prodHandle = ", prodHandle)
+
+
+    if (productHandle !== "" && productHandle !== undefined && productHandle !== null) {
+        var { productPrice, variantId, variant_img, buttonJsonData } = await getProductData(productHandle);
+    }
+    // Toast Image code ends
+
     styleForTooltipArrow();
     if (generalSetting.wishlistOrNotification === "show-wishlist") {
         // console.log("item removed");
     }
     if (generalSetting.wishlistOrNotification === "show-notification") {
-        if (generalSetting.notificationTypeOption === "toast-center") {
+        // if (generalSetting.notificationTypeOption === "toast-center") {
+        //     notificationDivId.style.display = "block";
+        //     let toastCenter = `<div style="${notificationStyle}" class="toast-bottom-center toast-alignment">${customLanguage.removeFromWishlistNotification}</div>`;
+        //     notificationDivId.innerHTML = toastCenter;
+        // }
+        // else if (generalSetting.notificationTypeOption === "toast-left") {
+        //     notificationDivId.style.display = "block";
+        //     let toastLeft = `<div style="${notificationStyle}" class="toast-bottom-left toast-alignment">${customLanguage.removeFromWishlistNotification}</div>`;
+        //     notificationDivId.innerHTML = toastLeft;
+        // }
+        // else if (generalSetting.notificationTypeOption === "toast-right") {
+        //     notificationDivId.style.display = "block";
+        //     let toastRight = `<div style="${notificationStyle}" class="toast-bottom-right toast-alignment">${customLanguage.removeFromWishlistNotification}</div>`;
+        //     notificationDivId.innerHTML = toastRight;
+        // }
+        // else if (generalSetting.notificationTypeOption === "toast-top-right") {
+        //     notificationDivId.style.display = "block";
+        //     let toastRight = `<div style="${notificationStyle}" class="toast-top-right toast-alignment">${customLanguage.removeFromWishlistNotification}</div>`;
+        //     notificationDivId.innerHTML = toastRight;
+        // }
+        // else if (generalSetting.notificationTypeOption === "toast-top-left") {
+        //     notificationDivId.style.display = "block";
+        //     let toastRight = `<div style="${notificationStyle}" class="toast-top-left toast-alignment">${customLanguage.removeFromWishlistNotification}</div>`;
+        //     notificationDivId.innerHTML = toastRight;
+        // }
+        // else if (generalSetting.notificationTypeOption === "toast-top-center") {
+        //     notificationDivId.style.display = "block";
+        //     let toastRight = `<div style="${notificationStyle}" class="toast-top-center toast-alignment">${customLanguage.removeFromWishlistNotification}</div>`;
+        //     notificationDivId.innerHTML = toastRight;
+        // }
+
+        // Toast Image code starts
+        if (generalSetting.notificationTypeOption === "toastImage-center") {
             notificationDivId.style.display = "block";
             let toastCenter = `<div style="${notificationStyle}" class="toast-bottom-center toast-alignment">${customLanguage.removeFromWishlistNotification}</div>`;
             notificationDivId.innerHTML = toastCenter;
         }
-        else if (generalSetting.notificationTypeOption === "toast-left") {
+        else if (generalSetting.notificationTypeOption === "toastImage-left") {
             notificationDivId.style.display = "block";
             let toastLeft = `<div style="${notificationStyle}" class="toast-bottom-left toast-alignment">${customLanguage.removeFromWishlistNotification}</div>`;
             notificationDivId.innerHTML = toastLeft;
         }
-        else if (generalSetting.notificationTypeOption === "toast-right") {
+        else if (generalSetting.notificationTypeOption === "toastImage-right") {
             notificationDivId.style.display = "block";
             let toastRight = `<div style="${notificationStyle}" class="toast-bottom-right toast-alignment">${customLanguage.removeFromWishlistNotification}</div>`;
             notificationDivId.innerHTML = toastRight;
         }
-        else if (generalSetting.notificationTypeOption === "toast-top-right") {
+        else if (generalSetting.notificationTypeOption === "toastImage-top-right") {
             notificationDivId.style.display = "block";
-            let toastRight = `<div style="${notificationStyle}" class="toast-top-right toast-alignment">${customLanguage.removeFromWishlistNotification}</div>`;
-            notificationDivId.innerHTML = toastRight;
+            let toastTopRight = `<div style="${notificationStyle}" class="toast-top-right toast-alignment">${customLanguage.removeFromWishlistNotification}</div>`;
+            notificationDivId.innerHTML = toastTopRight;
         }
-        else if (generalSetting.notificationTypeOption === "toast-top-left") {
+        else if (generalSetting.notificationTypeOption === "toastImage-top-left") {
             notificationDivId.style.display = "block";
-            let toastRight = `<div style="${notificationStyle}" class="toast-top-left toast-alignment">${customLanguage.removeFromWishlistNotification}</div>`;
-            notificationDivId.innerHTML = toastRight;
+            let toastTopLeft = `<div style="${notificationStyle}" class="toast-top-left toast-alignment ">${customLanguage.removeFromWishlistNotification}</div>`;
+            notificationDivId.innerHTML = toastTopLeft;
+        }
+        else if (generalSetting.notificationTypeOption === "toastImage-top-center") {
+            notificationDivId.style.display = "block";
+            let toastTopCenter = `<div style="${notificationStyle}" class="toast-top-center toast-alignment">${customLanguage.removeFromWishlistNotification}</div>`;
+            notificationDivId.innerHTML = toastTopCenter;
+        }
+        else if (generalSetting.notificationTypeOption === "toast-top-right") {
+            // document.querySelector(".our-sweetalert").style.display = "block";
+            notificationDivId.style.display = "block";
+            let toastTopRight = `${fromWhere === "allToCart" ? `
+            <div style="${notificationStyle}" class="toast-top-right toast-alignment toast_img">
+                <span class='toast_img_text'>
+                    ${customLanguage.removeFromWishlistNotification}
+                </span>
+            </div>`
+                : `<div style="${notificationStyle}" class="toast-top-right toast-alignment toast_img">
+                <span class="imageWrapper">
+                    <img src='${buttonJsonData.images[0]}' width='50px' height='50px' class='toast_image'>
+                </span>
+                <span class='toast_img_text'>
+                    ${buttonJsonData.title}<br>
+                    ${customLanguage.removeFromWishlistNotification}
+                </span>
+            </div>`
+                }`;
+            notificationDivId.innerHTML = toastTopRight;
         }
         else if (generalSetting.notificationTypeOption === "toast-top-center") {
+            // document.querySelector(".our-sweetalert").style.display = "block";
             notificationDivId.style.display = "block";
-            let toastRight = `<div style="${notificationStyle}" class="toast-top-center toast-alignment">${customLanguage.removeFromWishlistNotification}</div>`;
+            let toastTopCenter = `${fromWhere === "allToCart" ? `
+            <div style="${notificationStyle}" class="toast-top-center toast-alignment toast_img">
+                <span class='toast_img_text'>
+                    ${customLanguage.removeFromWishlistNotification}
+                </span>
+            </div>`
+                : `<div style="${notificationStyle}" class="toast-top-center toast-alignment toast_img">
+                <span class="imageWrapper">
+                    <img src='${buttonJsonData.images[0]}' width='50px' height='50px' class='toast_image'>
+                </span>
+                <span class='toast_img_text'>
+                    ${buttonJsonData.title}<br>
+                    ${customLanguage.removeFromWishlistNotification}
+                </span>
+            </div>`
+                }`;
+            notificationDivId.innerHTML = toastTopCenter;
+        }
+        else if (generalSetting.notificationTypeOption === "toast-top-left") {
+            // document.querySelector(".our-sweetalert").style.display = "block";
+            notificationDivId.style.display = "block";
+            let toastTopLeft = `${fromWhere === "allToCart" ? `
+            <div style="${notificationStyle}" class="toast-top-left toast-alignment toast_img">
+                <span class='toast_img_text'>
+                    ${customLanguage.removeFromWishlistNotification}
+                </span>
+            </div>`
+                : `<div style="${notificationStyle}" class="toast-top-left toast-alignment toast_img">
+                <span class="imageWrapper">
+                    <img src='${buttonJsonData.images[0]}' width='50px' height='50px' class='toast_image'>
+                </span>
+                <span class='toast_img_text'>
+                    ${buttonJsonData.title}<br>
+                    ${customLanguage.removeFromWishlistNotification}
+                </span>
+            </div>`
+                }`;
+            notificationDivId.innerHTML = toastTopLeft;
+        }
+        else if (generalSetting.notificationTypeOption === "toast-right") {
+            // document.querySelector(".our-sweetalert").style.display = "block";
+            notificationDivId.style.display = "block";
+            let toastRight = `${fromWhere === "allToCart" ? `
+            <div style="${notificationStyle}" class="toast-bottom-right toast-alignment toast_img">
+                <span class='toast_img_text'>
+                    ${customLanguage.removeFromWishlistNotification}
+                </span>
+            </div>`
+                : `<div style="${notificationStyle}" class="toast-bottom-right toast-alignment toast_img">
+                <span class="imageWrapper">
+                    <img src='${buttonJsonData.images[0]}' width='50px' height='50px' class='toast_image'>
+                </span>
+                <span class='toast_img_text'>
+                    ${buttonJsonData.title}<br>
+                    ${customLanguage.removeFromWishlistNotification}
+                </span>
+            </div>`
+                }`;
             notificationDivId.innerHTML = toastRight;
         }
+        else if (generalSetting.notificationTypeOption === "toast-left") {
+            // document.querySelector(".our-sweetalert").style.display = "block";
+            notificationDivId.style.display = "block";
+            let toastLeft = `${fromWhere === "allToCart" ? `
+            <div style="${notificationStyle}" class="toast-bottom-left toast-alignment toast_img">
+                <span class='toast_img_text'>
+                    ${customLanguage.removeFromWishlistNotification}
+                </span>
+            </div>`
+                : `<div style="${notificationStyle}" class="toast-bottom-left toast-alignment toast_img">
+                <span class="imageWrapper">
+                    <img src='${buttonJsonData.images[0]}' width='50px' height='50px' class='toast_image'>
+                </span>
+                <span class='toast_img_text'>
+                    ${buttonJsonData.title}<br>
+                    ${customLanguage.removeFromWishlistNotification}
+                </span>
+            </div>`
+                }`;
+            notificationDivId.innerHTML = toastLeft;
+        }
+        else if (generalSetting.notificationTypeOption === "toast-center") {
+            notificationDivId.style.display = "block";
+            let toastImageCenter = `${fromWhere === "allToCart" ? `
+            <div style="${notificationStyle}" class="toast-bottom-center toast-alignment toast_img">
+                <span class='toast_img_text'>
+                    ${customLanguage.removeFromWishlistNotification}
+                </span>
+            </div>`
+                : `<div style="${notificationStyle}" class="toast-bottom-center toast-alignment toast_img">
+                <span class="imageWrapper">
+                    <img src='${buttonJsonData.images[0]}' width='50px' height='50px' class='toast_image'>
+                </span>
+                <span class='toast_img_text'>
+                    ${buttonJsonData.title}<br>
+                    ${customLanguage.removeFromWishlistNotification}
+                </span>
+            </div>`
+                }`;
+            notificationDivId.innerHTML = toastImageCenter;
+        }
+        // Toast Image code ends
+
         // notificationTextStyle
-        else if (generalSetting.notificationTypeOption === "text-above") {
-            notificationAbove.style.display = "block"
-            let tooltipAbove = `<span style="${notificationStyle}" class="text-above" >${customLanguage.removeFromWishlistNotification}</span>`;
-            document.querySelector('.wf-text-notification-above').innerHTML = tooltipAbove;
-        }
-        else if (generalSetting.notificationTypeOption === "text-below") {
-            notificationBelow.style.display = "block"
-            let tooltipRight = `<span style="${notificationStyle}" class="text-bottom" >${customLanguage.removeFromWishlistNotification}</span>`;
-            document.querySelector('.wf-text-notification-below').innerHTML = tooltipRight;
-        }
-        else if (generalSetting.notificationTypeOption === "tool-tip-above") {
-            let tooltipAbove = `<span style="${notificationStyle}" class="tooltiptext-above">${customLanguage.removeFromWishlistNotification}</span>`;
-            document.querySelector(".tooltip-above").innerHTML = tooltipAbove;
-        }
-        else {
-            let tooltipBelow = `<span style="${notificationStyle}" class="tooltiptext-below">${customLanguage.removeFromWishlistNotification}</span>`;
-            document.querySelector(".tooltip-below").innerHTML = tooltipBelow;
-        }
+        // else if (generalSetting.notificationTypeOption === "text-above") {
+        //     notificationAbove.style.display = "block"
+        //     let tooltipAbove = `<span style="${notificationStyle}" class="text-above" >${customLanguage.removeFromWishlistNotification}</span>`;
+        //     document.querySelector('.wf-text-notification-above').innerHTML = tooltipAbove;
+        // }
+        // else if (generalSetting.notificationTypeOption === "text-below") {
+        //     notificationBelow.style.display = "block"
+        //     let tooltipRight = `<span style="${notificationStyle}" class="text-bottom" >${customLanguage.removeFromWishlistNotification}</span>`;
+        //     document.querySelector('.wf-text-notification-below').innerHTML = tooltipRight;
+        // }
+        // else if (generalSetting.notificationTypeOption === "tool-tip-above") {
+        //     let tooltipAbove = `<span style="${notificationStyle}" class="tooltiptext-above">${customLanguage.removeFromWishlistNotification}</span>`;
+        //     document.querySelector(".tooltip-above").innerHTML = tooltipAbove;
+        // }
+        // else {
+        //     let tooltipBelow = `<span style="${notificationStyle}" class="tooltiptext-below">${customLanguage.removeFromWishlistNotification}</span>`;
+        //     document.querySelector(".tooltip-below").innerHTML = tooltipBelow;
+        // }
     }
     clearNotification();
 };
 
-function notificationOfAdded() {
+// Toast Image code starts
+async function notificationOfAdded(fromWhere, productId, prodHandle) {
+    // Toast Image code ends
 
     const notificationDivId = document.getElementById("notificationDiv")
     const notificationAbove = document.querySelector('.wf-text-notification-above')
     const notificationBelow = document.querySelector('.wf-text-notification-below')
     const notificationStyle = notificationStyleFxn();
     const notificationTextStyle = notificationTextStyleFxn()
+
+    // Toast Image code starts
+    if (fromWhere === "collection") {
+        let wishlistDivs = document.querySelectorAll(".wf-wishlist-collection-icon")
+        var productHandle, proId, wishlistDiv;
+        wishlistDivs.forEach((el) => {
+            productHandle = el.getAttribute("product-handle")
+            proId = el.getAttribute("product-id")
+            if (proId === productId) {
+                wishlistDiv = el
+            }
+        })
+
+        var productHandle = wishlistDiv.getAttribute("product-handle")
+    }
+    else if (fromWhere === "customIcon" || fromWhere === "inject" || fromWhere === "block") {
+        wishlistDiv = document.getElementById("wf-custom-wishBtn-inject");
+        productHandle = wishlistDiv.getAttribute("data-product-handle");
+    }
+    else if (fromWhere === "cart") {
+        productHandle = prodHandle;
+    }
+    else if (fromWhere === "allToCart") {
+        productHandle = ""
+    }
+
+    console.log("fromWhere = ", fromWhere)
+    console.log("productId = ", productId)
+    console.log("productHandle = ", productHandle)
+
+    if (productHandle !== "" && productHandle !== undefined && productHandle !== null) {
+        var { productPrice, variantId, variant_img, buttonJsonData } = await getProductData(productHandle);
+    }
+    // Toast Image code ends
+
     styleForTooltipArrow();
     if (generalSetting.wishlistOrNotification === "show-wishlist") {
         heartButtonHandle();
     }
     if (generalSetting.wishlistOrNotification === "show-notification") {
-        if (generalSetting.notificationTypeOption === "toast-center") {
+        // if (generalSetting.notificationTypeOption === "toast-center") {
+        //     notificationDivId.style.display = "block";
+        //     let toastCenter = `<div style="${notificationStyle}" class="toast-bottom-center toast-alignment">${customLanguage.addToWishlistNotification}</div>`;
+        //     notificationDivId.innerHTML = toastCenter;
+        // }
+        // else if (generalSetting.notificationTypeOption === "toast-left") {
+        //     notificationDivId.style.display = "block";
+        //     let toastLeft = `<div style="${notificationStyle}" class="toast-bottom-left toast-alignment">${customLanguage.addToWishlistNotification}</div>`;
+        //     notificationDivId.innerHTML = toastLeft;
+        // }
+        // else if (generalSetting.notificationTypeOption === "toast-right") {
+        //     notificationDivId.style.display = "block";
+        //     let toastRight = `<div style="${notificationStyle}" class="toast-bottom-right toast-alignment">${customLanguage.addToWishlistNotification}</div>`;
+        //     notificationDivId.innerHTML = toastRight;
+        // }
+        // else if (generalSetting.notificationTypeOption === "toast-top-right") {
+        //     notificationDivId.style.display = "block";
+        //     let toastRight = `<div style="${notificationStyle}" class="toast-top-right toast-alignment">${customLanguage.addToWishlistNotification}</div>`;
+        //     notificationDivId.innerHTML = toastRight;
+        // }
+        // else if (generalSetting.notificationTypeOption === "toast-top-left") {
+        //     notificationDivId.style.display = "block";
+        //     let toastRight = `<div style="${notificationStyle}" class="toast-top-left toast-alignment ">${customLanguage.addToWishlistNotification}</div>`;
+        //     notificationDivId.innerHTML = toastRight;
+        // }
+        // else if (generalSetting.notificationTypeOption === "toast-top-center") {
+        //     notificationDivId.style.display = "block";
+        //     let toastRight = `<div style="${notificationStyle}" class="toast-top-center toast-alignment">${customLanguage.addToWishlistNotification}</div>`;
+        //     notificationDivId.innerHTML = toastRight;
+        // }
+
+        // // notificationTextStyle
+        // else if (generalSetting.notificationTypeOption === "text-above") {
+        //     notificationAbove.style.display = "block"
+        //     let tooltipAbove = `<span style="${notificationStyle}" class="text-above" >${customLanguage.addToWishlistNotification}</span>`;
+        //     document.querySelector('.wf-text-notification-above').innerHTML = tooltipAbove;
+        // }
+        // else if (generalSetting.notificationTypeOption === "text-below") {
+        //     notificationBelow.style.display = "block"
+        //     let tooltipBelow = `<span style="${notificationStyle}" class="text-bottom" >${customLanguage.addToWishlistNotification}</span>`;
+        //     document.querySelector('.wf-text-notification-below').innerHTML = tooltipBelow;
+        // }
+        // else if (generalSetting.notificationTypeOption === "tool-tip-above") {
+        //     let tooltipAbove = `<span style="${notificationStyle}" class="tooltiptext-above">${customLanguage.addToWishlistNotification}</span>`;
+        //     document.querySelector(".tooltip-above").innerHTML = tooltipAbove;
+        // }
+        // else {
+        //     let tooltipBelow = `<span style="${notificationStyle}" class="tooltiptext-below">${customLanguage.addToWishlistNotification}</span>`;
+        //     document.querySelector(".tooltip-below").innerHTML = tooltipBelow;
+        // }
+
+        // Toast Image code starts
+        if (generalSetting.notificationTypeOption === "toastImage-center") {
             notificationDivId.style.display = "block";
             let toastCenter = `<div style="${notificationStyle}" class="toast-bottom-center toast-alignment">${customLanguage.addToWishlistNotification}</div>`;
             notificationDivId.innerHTML = toastCenter;
         }
-        else if (generalSetting.notificationTypeOption === "toast-left") {
+        else if (generalSetting.notificationTypeOption === "toastImage-left") {
             notificationDivId.style.display = "block";
             let toastLeft = `<div style="${notificationStyle}" class="toast-bottom-left toast-alignment">${customLanguage.addToWishlistNotification}</div>`;
             notificationDivId.innerHTML = toastLeft;
         }
-        else if (generalSetting.notificationTypeOption === "toast-right") {
+        else if (generalSetting.notificationTypeOption === "toastImage-right") {
             notificationDivId.style.display = "block";
             let toastRight = `<div style="${notificationStyle}" class="toast-bottom-right toast-alignment">${customLanguage.addToWishlistNotification}</div>`;
             notificationDivId.innerHTML = toastRight;
         }
-        else if (generalSetting.notificationTypeOption === "toast-top-right") {
+        else if (generalSetting.notificationTypeOption === "toastImage-top-right") {
             notificationDivId.style.display = "block";
-            let toastRight = `<div style="${notificationStyle}" class="toast-top-right toast-alignment">${customLanguage.addToWishlistNotification}</div>`;
-            notificationDivId.innerHTML = toastRight;
+            let toastTopRight = `<div style="${notificationStyle}" class="toast-top-right toast-alignment">${customLanguage.addToWishlistNotification}</div>`;
+            notificationDivId.innerHTML = toastTopRight;
         }
-        else if (generalSetting.notificationTypeOption === "toast-top-left") {
+        else if (generalSetting.notificationTypeOption === "toastImage-top-left") {
             notificationDivId.style.display = "block";
-            let toastRight = `<div style="${notificationStyle}" class="toast-top-left toast-alignment ">${customLanguage.addToWishlistNotification}</div>`;
-            notificationDivId.innerHTML = toastRight;
+            let toastTopLeft = `<div style="${notificationStyle}" class="toast-top-left toast-alignment ">${customLanguage.addToWishlistNotification}</div>`;
+            notificationDivId.innerHTML = toastTopLeft;
+        }
+        else if (generalSetting.notificationTypeOption === "toastImage-top-center") {
+            notificationDivId.style.display = "block";
+            let toastTopCenter = `<div style="${notificationStyle}" class="toast-top-center toast-alignment">${customLanguage.addToWishlistNotification}</div>`;
+            notificationDivId.innerHTML = toastTopCenter;
+        }
+        else if (generalSetting.notificationTypeOption === "toast-top-right") {
+            // document.querySelector(".our-sweetalert").style.display = "block";
+            notificationDivId.style.display = "block";
+            let toastTopRight = `${fromWhere === "allToCart" ? `
+            <div style="${notificationStyle}" class="toast-top-right toast-alignment toast_img">
+                <span class='toast_img_text'>
+                    ${customLanguage.addToWishlistNotification}
+                </span>
+            </div>`
+                : `<div style="${notificationStyle}" class="toast-top-right toast-alignment toast_img">
+                <span class="imageWrapper">
+                    <img src='${buttonJsonData.images[0]}' width='50px' height='50px' class='toast_image'>
+                </span>
+                <span class='toast_img_text'>
+                    ${buttonJsonData.title}<br>
+                    ${customLanguage.addToWishlistNotification}
+                </span>
+            </div>`
+                }`;
+            notificationDivId.innerHTML = toastTopRight;
         }
         else if (generalSetting.notificationTypeOption === "toast-top-center") {
+            // document.querySelector(".our-sweetalert").style.display = "block";
             notificationDivId.style.display = "block";
-            let toastRight = `<div style="${notificationStyle}" class="toast-top-center toast-alignment">${customLanguage.addToWishlistNotification}</div>`;
+            let toastTopCenter = `${fromWhere === "allToCart" ? `
+            <div style="${notificationStyle}" class="toast-top-center toast-alignment toast_img">
+                <span class='toast_img_text'>
+                    ${customLanguage.addToWishlistNotification}
+                </span>
+            </div>`
+                : `<div style="${notificationStyle}" class="toast-top-center toast-alignment toast_img">
+                <span class="imageWrapper">
+                    <img src='${buttonJsonData.images[0]}' width='50px' height='50px' class='toast_image'>
+                </span>
+                <span class='toast_img_text'>
+                    ${buttonJsonData.title}<br>
+                    ${customLanguage.addToWishlistNotification}
+                </span>
+            </div>`
+                }`;
+            notificationDivId.innerHTML = toastTopCenter;
+        }
+        else if (generalSetting.notificationTypeOption === "toast-top-left") {
+            // document.querySelector(".our-sweetalert").style.display = "block";
+            notificationDivId.style.display = "block";
+            let toastTopLeft = `${fromWhere === "allToCart" ? `
+            <div style="${notificationStyle}" class="toast-top-left toast-alignment toast_img">
+                <span class='toast_img_text'>
+                    ${customLanguage.addToWishlistNotification}
+                </span>
+            </div>`
+                : `<div style="${notificationStyle}" class="toast-top-left toast-alignment toast_img">
+                <span class="imageWrapper">
+                    <img src='${buttonJsonData.images[0]}' width='50px' height='50px' class='toast_image'>
+                </span>
+                <span class='toast_img_text'>
+                    ${buttonJsonData.title}<br>
+                    ${customLanguage.addToWishlistNotification}
+                </span>
+            </div>`
+                }`;
+            notificationDivId.innerHTML = toastTopLeft;
+        }
+        else if (generalSetting.notificationTypeOption === "toast-right") {
+            // document.querySelector(".our-sweetalert").style.display = "block";
+            notificationDivId.style.display = "block";
+            let toastRight = `${fromWhere === "allToCart" ? `
+            <div style="${notificationStyle}" class="toast-bottom-right toast-alignment toast_img">
+                <span class='toast_img_text'>
+                    ${customLanguage.addToWishlistNotification}
+                </span>
+            </div>`
+                : `<div style="${notificationStyle}" class="toast-bottom-right toast-alignment toast_img">
+                <span class="imageWrapper">
+                    <img src='${buttonJsonData.images[0]}' width='50px' height='50px' class='toast_image'>
+                </span>
+                <span class='toast_img_text'>
+                    ${buttonJsonData.title}<br>
+                    ${customLanguage.addToWishlistNotification}
+                </span>
+            </div>`
+                }`;
             notificationDivId.innerHTML = toastRight;
         }
-
-        // notificationTextStyle
-        else if (generalSetting.notificationTypeOption === "text-above") {
-            notificationAbove.style.display = "block"
-            let tooltipAbove = `<span style="${notificationStyle}" class="text-above" >${customLanguage.addToWishlistNotification}</span>`;
-            document.querySelector('.wf-text-notification-above').innerHTML = tooltipAbove;
+        else if (generalSetting.notificationTypeOption === "toast-left") {
+            // document.querySelector(".our-sweetalert").style.display = "block";
+            notificationDivId.style.display = "block";
+            let toastLeft = `${fromWhere === "allToCart" ? `
+            <div style="${notificationStyle}" class="toast-bottom-left toast-alignment toast_img">
+                <span class='toast_img_text'>
+                    ${customLanguage.addToWishlistNotification}
+                </span>
+            </div>`
+                : `<div style="${notificationStyle}" class="toast-bottom-left toast-alignment toast_img">
+                <span class="imageWrapper">
+                    <img src='${buttonJsonData.images[0]}' width='50px' height='50px' class='toast_image'>
+                </span>
+                <span class='toast_img_text'>
+                    ${buttonJsonData.title}<br>
+                    ${customLanguage.addToWishlistNotification}
+                </span>
+            </div>`
+                }`;
+            notificationDivId.innerHTML = toastLeft;
         }
-        else if (generalSetting.notificationTypeOption === "text-below") {
-            notificationBelow.style.display = "block"
-            let tooltipBelow = `<span style="${notificationStyle}" class="text-bottom" >${customLanguage.addToWishlistNotification}</span>`;
-            document.querySelector('.wf-text-notification-below').innerHTML = tooltipBelow;
+        else if (generalSetting.notificationTypeOption === "toast-center") {
+            notificationDivId.style.display = "block";
+            let toastImageCenter = `${fromWhere === "allToCart" ? `
+            <div style="${notificationStyle}" class="toast-bottom-center toast-alignment toast_img">
+                <span class='toast_img_text'>
+                    ${customLanguage.addToWishlistNotification}
+                </span>
+            </div>`
+                : `<div style="${notificationStyle}" class="toast-bottom-center toast-alignment toast_img">
+                <span class="imageWrapper">
+                    <img src='${buttonJsonData.images[0]}' width='50px' height='50px' class='toast_image'>
+                </span>
+                <span class='toast_img_text'>
+                    ${buttonJsonData.title}<br>
+                    ${customLanguage.addToWishlistNotification}
+                </span>
+            </div>`
+                }`;
+            notificationDivId.innerHTML = toastImageCenter;
         }
-        else if (generalSetting.notificationTypeOption === "tool-tip-above") {
-            let tooltipAbove = `<span style="${notificationStyle}" class="tooltiptext-above">${customLanguage.addToWishlistNotification}</span>`;
-            document.querySelector(".tooltip-above").innerHTML = tooltipAbove;
-        }
-        else {
-            let tooltipBelow = `<span style="${notificationStyle}" class="tooltiptext-below">${customLanguage.addToWishlistNotification}</span>`;
-            document.querySelector(".tooltip-below").innerHTML = tooltipBelow;
-        }
+        // Toast Image code ends
     }
     clearNotification();
 };
@@ -9403,32 +9822,207 @@ function closeNortiFxn() {
 }
 
 // --------------------- additional alert toast  ----------------
-function alertToast(text, msgggg) {
+// Toast Image code starts
+async function alertToast(text, msgggg, fromWhere, productId, prodHandle) {
+    if (fromWhere === "collection") {
+        let wishlistDivs = document.querySelectorAll(".wf-wishlist-collection-icon")
+        var productHandle, proId, wishlistDiv;
+        wishlistDivs.forEach((el) => {
+            productHandle = el.getAttribute("product-handle")
+            proId = el.getAttribute("product-id")
+            if (proId === productId) {
+                wishlistDiv = el
+            }
+        })
+
+        var productHandle = wishlistDiv.getAttribute("product-handle")
+    }
+    else if (fromWhere === "customIcon" || fromWhere === "inject") {
+        var wishlistDiv = document.getElementById("wf-custom-wishBtn-inject");
+        var productHandle = wishlistDiv.getAttribute("data-product-handle");
+    }
+    else if (fromWhere === "cart") {
+        productHandle = prodHandle;
+    }
+    else if (fromWhere === "allToCart") {
+        productHandle = ""
+    }
+
+    if (productHandle !== "" && productHandle !== undefined && productHandle !== null) {
+        var { productPrice, variantId, variant_img, buttonJsonData } = await getProductData(productHandle);
+    }
+    // Toast Image code ends
+
     if (generalSetting.wishlistOrNotification === "show-wishlist") {
         if (msgggg === "added") {
             heartButtonHandle();
         }
     } else {
         const notificationStyle = notificationStyleFxn();
-        if (generalSetting.notificationTypeOption === "toast-left") {
+        // if (generalSetting.notificationTypeOption === "toast-left") {
+        //     let toastLeft = `<div style="${notificationStyle}" class="toast-bottom-left toast-alignment">${text}</div>`;
+        //     document.querySelector(".our-sweetalert").innerHTML = toastLeft;
+        // } else if (generalSetting.notificationTypeOption === "toast-right") {
+        //     let toastRight = `<div style="${notificationStyle}" class="toast-bottom-right toast-alignment"> ${text}</div>`;
+        //     document.querySelector(".our-sweetalert").innerHTML = toastRight;
+        // } else if (generalSetting.notificationTypeOption === "toast-top-right") {
+        //     let toastRight = `<div style="${notificationStyle}" class="toast-top-right toast-alignment">${text}</div>`;
+        //     document.querySelector(".our-sweetalert").innerHTML = toastRight;
+        // } else if (generalSetting.notificationTypeOption === "toast-top-left") {
+        //     let toastRight = `<div style="${notificationStyle}" class="toast-top-left toast-alignment">${text}</div>`;
+        //     document.querySelector(".our-sweetalert").innerHTML = toastRight;
+        // } else if (generalSetting.notificationTypeOption === "toast-top-center") {
+        //     let toastRight = `<div style="${notificationStyle}" class="toast-top-center toast-alignment">${text}</div>`;
+        //     document.querySelector(".our-sweetalert").innerHTML = toastRight;
+        // } else {
+        //     let toastCenter = `<div style="${notificationStyle} background-color: ${generalSetting.bgColor}; " class="toast-bottom-center toast-alignment">${text}</div>`;
+        //     document.querySelector(".our-sweetalert").innerHTML = toastCenter;
+        // }
+
+        if (generalSetting.notificationTypeOption === "toastImage-left") {
             let toastLeft = `<div style="${notificationStyle}" class="toast-bottom-left toast-alignment">${text}</div>`;
             document.querySelector(".our-sweetalert").innerHTML = toastLeft;
-        } else if (generalSetting.notificationTypeOption === "toast-right") {
+        } else if (generalSetting.notificationTypeOption === "toastImage-right") {
             let toastRight = `<div style="${notificationStyle}" class="toast-bottom-right toast-alignment"> ${text}</div>`;
             document.querySelector(".our-sweetalert").innerHTML = toastRight;
-        } else if (generalSetting.notificationTypeOption === "toast-top-right") {
-            let toastRight = `<div style="${notificationStyle}" class="toast-top-right toast-alignment">${text}</div>`;
-            document.querySelector(".our-sweetalert").innerHTML = toastRight;
-        } else if (generalSetting.notificationTypeOption === "toast-top-left") {
-            let toastRight = `<div style="${notificationStyle}" class="toast-top-left toast-alignment">${text}</div>`;
-            document.querySelector(".our-sweetalert").innerHTML = toastRight;
-        } else if (generalSetting.notificationTypeOption === "toast-top-center") {
-            let toastRight = `<div style="${notificationStyle}" class="toast-top-center toast-alignment">${text}</div>`;
-            document.querySelector(".our-sweetalert").innerHTML = toastRight;
-        } else {
+        } else if (generalSetting.notificationTypeOption === "toastImage-center") {
             let toastCenter = `<div style="${notificationStyle} background-color: ${generalSetting.bgColor}; " class="toast-bottom-center toast-alignment">${text}</div>`;
             document.querySelector(".our-sweetalert").innerHTML = toastCenter;
+            console.log("alert toast else case is running")
+        } else if (generalSetting.notificationTypeOption === "toastImage-top-right") {
+            let toastRight = `<div style="${notificationStyle}" class="toast-top-right toast-alignment">${text}</div>`;
+            document.querySelector(".our-sweetalert").innerHTML = toastRight;
+        } else if (generalSetting.notificationTypeOption === "toastImage-top-left") {
+            let toastRight = `<div style="${notificationStyle}" class="toast-top-left toast-alignment">${text}</div>`;
+            document.querySelector(".our-sweetalert").innerHTML = toastRight;
+        } else if (generalSetting.notificationTypeOption === "toastImage-top-center") {
+            let toastRight = `<div style="${notificationStyle}" class="toast-top-center toast-alignment">${text}</div>`;
+            document.querySelector(".our-sweetalert").innerHTML = toastRight;
         }
+        // notification Toast Image starts
+        // toastImage-top-right
+        else if (generalSetting.notificationTypeOption === "toast-top-right") {
+            document.querySelector(".our-sweetalert").style.display = "block";
+            let toastLeft = `${fromWhere === "allToCart" ? `
+            <div style="${notificationStyle}" class="toast-top-right toast-alignment toast_img">
+                <span class='toast_img_text'>
+                    ${text}
+                </span>
+            </div>`
+                : `<div style="${notificationStyle}" class="toast-top-right toast-alignment toast_img">
+                <span class="imageWrapper">
+                    <img src='${buttonJsonData.images[0]}' width='50px' height='50px' class='toast_image'>
+                </span>
+                <span class='toast_img_text'>
+                    ${buttonJsonData.title}<br>
+                    ${text}
+                </span>
+            </div>`
+                }`;
+            document.querySelector(".our-sweetalert").innerHTML = toastLeft;
+        }
+        else if (generalSetting.notificationTypeOption === "toast-top-center") {
+            document.querySelector(".our-sweetalert").style.display = "block";
+            let toastLeft = `${fromWhere === "allToCart" ? `
+            <div style="${notificationStyle}" class="toast-top-center toast-alignment toast_img">
+                <span class='toast_img_text'>
+                    ${text}
+                </span>
+            </div>`
+                : `<div style="${notificationStyle}" class="toast-top-center toast-alignment toast_img">
+                <span class="imageWrapper">
+                    <img src='${buttonJsonData.images[0]}' width='50px' height='50px' class='toast_image'>
+                </span>
+                <span class='toast_img_text'>
+                    ${buttonJsonData.title}<br>
+                    ${text}
+                </span>
+            </div>`
+                }`;
+            document.querySelector(".our-sweetalert").innerHTML = toastLeft;
+        }
+        else if (generalSetting.notificationTypeOption === "toast-top-left") {
+            document.querySelector(".our-sweetalert").style.display = "block";
+            let toastLeft = `${fromWhere === "allToCart" ? `
+            <div style="${notificationStyle}" class="toast-top-left toast-alignment toast_img">
+                <span class='toast_img_text'>
+                    ${text}
+                </span>
+            </div>`
+                : `<div style="${notificationStyle}" class="toast-top-left toast-alignment toast_img">
+                <span class="imageWrapper">
+                    <img src='${buttonJsonData.images[0]}' width='50px' height='50px' class='toast_image'>
+                </span>
+                <span class='toast_img_text'>
+                    ${buttonJsonData.title}<br>
+                    ${text}
+                </span>
+            </div>`
+                }`;
+            document.querySelector(".our-sweetalert").innerHTML = toastLeft;
+        }
+        else if (generalSetting.notificationTypeOption === "toast-right") {
+            document.querySelector(".our-sweetalert").style.display = "block";
+            let toastLeft = `${fromWhere === "allToCart" ? `
+            <div style="${notificationStyle}" class="toast-bottom-right toast-alignment toast_img">
+                <span class='toast_img_text'>
+                    ${text}
+                </span>
+            </div>`
+                : `<div style="${notificationStyle}" class="toast-bottom-right toast-alignment toast_img">
+                <span class="imageWrapper">
+                    <img src='${buttonJsonData.images[0]}' width='50px' height='50px' class='toast_image'>
+                </span>
+                <span class='toast_img_text'>
+                    ${buttonJsonData.title}<br>
+                    ${text}
+                </span>
+            </div>`
+                }`;
+            document.querySelector(".our-sweetalert").innerHTML = toastLeft;
+        }
+        else if (generalSetting.notificationTypeOption === "toast-left") {
+            document.querySelector(".our-sweetalert").style.display = "block";
+            let toastLeft = `${fromWhere === "allToCart" ? `
+            <div style="${notificationStyle}" class="toast-bottom-left toast-alignment toast_img">
+                <span class='toast_img_text'>
+                    ${text}
+                </span>
+            </div>`
+                : `<div style="${notificationStyle}" class="toast-bottom-left toast-alignment toast_img">
+                <span class="imageWrapper">
+                    <img src='${buttonJsonData.images[0]}' width='50px' height='50px' class='toast_image'>
+                </span>
+                <span class='toast_img_text'>
+                    ${buttonJsonData.title}<br>
+                    ${text}
+                </span>
+            </div>`
+                }`;
+            document.querySelector(".our-sweetalert").innerHTML = toastLeft;
+        }
+        // notification Toast Image ends
+        else {
+            document.querySelector(".our-sweetalert").style.display = "block";
+            let toastImageCenter = `${fromWhere === "allToCart" ? `
+            <div style="${notificationStyle}" class="toast-bottom-center toast-alignment toast_img">
+                <span class='toast_img_text'>
+                    ${text}
+                </span>
+            </div>`
+                : `<div style="${notificationStyle}" class="toast-bottom-center toast-alignment toast_img">
+                <span class="imageWrapper">
+                    <img src='${buttonJsonData.images[0]}' width='50px' height='50px' class='toast_image'>
+                </span>
+                <span class='toast_img_text'>
+                    ${buttonJsonData.title}<br>
+                    ${text}
+                </span>
+            </div>`
+                }`;
+            document.querySelector(".our-sweetalert").innerHTML = toastImageCenter;
+        }
+
         setTimeout(() => {
             document.querySelector(".our-sweetalert").innerHTML = "";
         }, Number(generalSetting.notificationTimer) * 1000);
@@ -10742,7 +11336,13 @@ async function saveMainData(data, productId, fromWhere) {
             collectionIcon(productId, matchFound);
             currentPlan > 1 && (matchFound ? fxnAfterAddToWishlist() : fxnAfterRemoveFromWishlist());
         }
-        matchFound ? alertToast(notificationMsg, "added") : alertToast(customLanguage.removeFromWishlistNotification, "removed");
+        // matchFound ? alertToast(notificationMsg, "added") : alertToast(customLanguage.removeFromWishlistNotification, "removed");
+
+        // Toast Image code starts
+        // matchFound ? alertToast(notificationMsg, "added", fromWhere, productId) : alertToast(customLanguage.removeFromWishlistNotification, "removed", fromWhere, productId);
+        matchFound ? notificationOfAdded(fromWhere, productId) : notificationOfRemoved(fromWhere, productId);
+        // Toast Image code ends
+
         (currentPlan >= 3 && generalSetting?.trendingLayout) && await renderTrendingGridData();
 
     }

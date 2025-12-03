@@ -5252,7 +5252,7 @@ export default function detectThemeName(themeName, filter, customSettings) {
 
         // ------------------- Icons-----------------------
         gridElement = ".card-wrapper.product-card-wrapper";
-        appendIcon = ".card.card--card.card--media";
+        appendIcon = ".card.card--card.card--media, .card__media";
         afterIcon = false
         appendIconCheck = false
         buttonPrependBeforeElemnt = true
