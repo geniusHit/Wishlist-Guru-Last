@@ -715,6 +715,7 @@ const WishlistUiSetting = () => {
 
 
                                     <br />
+                                    rrrrrrrrr
                                     <div >
                                         <div className='custom-margin'>
                                             <Text variant="headingMd" as="h2">{myLanguage.atcStyleHeading}</Text>
@@ -727,7 +728,22 @@ const WishlistUiSetting = () => {
                                             </LegacyCard.Section>
                                         </Tabs>
                                     </div>
+                                    ttttttttttt
+                                </div>
 
+                                <div className='wf-style-wishbtn wishlist-ui-grid2'>
+                                    <div >
+                                        <div className='custom-margin'>
+                                            <Text variant="headingMd" as="h2">{myLanguage.atcStyleHeading}</Text>
+                                            <p>{myLanguage.atcStyleText}</p>
+                                        </div>
+
+                                        <Tabs tabs={cartBtnArr} selected={cartBtn} onSelect={cartBtnHandler} fitted>
+                                            <LegacyCard.Section >
+                                                {cartBtnArr[cartBtn].data}
+                                            </LegacyCard.Section>
+                                        </Tabs>
+                                    </div>
                                 </div>
 
                                 <div className='wf-style-wishbtn  wishlist-ui-grid1'>

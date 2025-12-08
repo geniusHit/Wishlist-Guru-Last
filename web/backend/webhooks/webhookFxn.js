@@ -14,7 +14,7 @@ import { KlaviyoCreateEventEmailRemainder } from "../controllers/controllersSql.
 
 const { app_installation_table, app_installation_log_table, user_table, Wishlist_table, product_table, store_email_temp_table, email_reminder_table, store_languages_table, store_languages_url_table, klaviyo_table } = sqlTables;
 
-const { supportEmail, backInStockKlaviyo, priceDropKlaviyo, lowInStockKlaviyo } = Constants;
+const { supportEmail, backInStockKlaviyo, priceDropKlaviyo, lowInStockKlaviyo, appName, extAppName } = Constants;
 
 export async function appDeletion(payload, shop) {
     try {
@@ -669,130 +669,188 @@ export async function updateShopDomain(payload, shop) {
     }
 }
 
-// ---------------------extra function that we are using in the webhooks---------------------
 export async function shopifyPlanUpdate(payload) {
-    console.log("SHOPIFY PLAN UPDATE ----- RUNNING ");
     try {
         const now = new Date();
         const formattedNow = now.toISOString().slice(0, 19).replace("T", " ");
-        const dbQuery = async (sql, params = []) => {
-            const [rows] = await database.query(sql, params);
-            return rows;
-        };
-        const mainResult = await dbQuery(
-            `SELECT shopify_plan, app_install_id, access_token 
-             FROM ${app_installation_table} 
-             WHERE shop_name = ?`,
+
+        const [mainResult] = await database.query(
+            `SELECT shopify_plan, app_install_id, access_token, store_type, active_plan_id, active_plan_name
+       FROM ${app_installation_table}
+       WHERE shop_name = ?`,
             [payload.myshopify_domain]
         );
+
         if (!mainResult || mainResult.length === 0) {
             console.warn(`No installation found for shop: ${payload.myshopify_domain}`);
             return;
         }
+
         const installation = mainResult[0];
+        const oldPlan = installation.shopify_plan;
+        const storeType = installation.store_type;
+        const newPlan = payload.plan_name;
+        if (oldPlan === newPlan) {
+            console.log("No plan change detected:", payload.myshopify_domain);
+            return;
+        }
+        if (newPlan === "frozen") {
+            console.log("Skipping – new plan is frozen:", newPlan);
+            return;
+        }
         if (
-            installation.shopify_plan !== "affiliate" &&
-            installation.shopify_plan !== "partner_test"
+            !["affiliate", "partner_test", "frozen"].includes(oldPlan) &&
+            storeType !== "test"
         ) {
-            console.log(`No plan change for shop 1: ${payload.myshopify_domain}`);
+            console.log(
+                `Skipping – not eligible old plan (${oldPlan}) or storeType (${storeType})`
+            );
             return;
         }
-
-        if (installation.shopify_plan === payload.plan_name) {
-            console.log(`No plan change for shop 2: ${payload.myshopify_domain}`);
-            return;
-        }
-
-        // 3️⃣ Update main installation table to FREE plan
-        const updateResult = await dbQuery(
-            `
-            UPDATE ${app_installation_table}
-            SET active_plan_name = ?, 
-                active_plan_id = ?, 
-                shopify_plan = ?, 
-                updated_date = ?, 
-                store_type = ?
-            WHERE shop_name = ?
-        `,
-            ["Free", 1, payload.plan_name, formattedNow, "live", payload.myshopify_domain]
-        );
-
-        // 4️⃣ If DB updated → Log plan change
-        if (updateResult.affectedRows > 0) {
-            try {
-                await dbQuery(
-                    `
-                    INSERT INTO ${app_installation_log_table}
-                    (app_install_id, plan_id, plan_name, payment_type, promo_code)
-                    VALUES (?, ?, ?, ?, ?)
-                `,
-                    [installation.app_install_id, 1, "Free", "live", null]
-                );
-
-                console.log("Plan change logged for shop:", payload.myshopify_domain);
-            } catch (logErr) {
-                console.error("Log insert error:", logErr);
-                logger.error(logErr);
-            }
-        }
-
-        // 5️⃣ Shopify Billing Cancellation
         const shopifyNodes = await authSession(
             payload.myshopify_domain,
             installation.access_token
         );
-
-        const activeCharges = await shopifyNodes.recurringApplicationCharge.list();
-        const currentPlan = activeCharges.filter((charge) => charge.status === "active");
-
-        await shopifyNodes.recurringApplicationCharge.delete(currentPlan[0]?.id);
-
-        // 6️⃣ Get Shopify Installation ID (GraphQL)
-        let dataQuery;
-        try {
-            dataQuery = await shopifyNodes.graphql(`
-                query {
-                    currentAppInstallation {
-                        id
-                    }
-                }
-            `);
-        } catch (graphqlErr) {
-            console.error("GraphQL query failed:", graphqlErr);
-            return;
+        const [updateResult] = await database.query(
+            `UPDATE ${app_installation_table} SET active_plan_name = ?, active_plan_id = ?, shopify_plan = ?, updated_date = ?, store_type = ?, store_published = ? WHERE shop_name = ?`, ["Free", 1, newPlan, formattedNow, "live", 1, payload.myshopify_domain]
+        );
+        if (updateResult.affectedRows > 0) {
+            await database.query(
+                `INSERT INTO ${app_installation_log_table}
+         (app_install_id, plan_id, plan_name, payment_type, promo_code)
+         VALUES (?, ?, ?, ?, ?)`,
+                [installation.app_install_id, 1, "Free", "live", null]
+            );
         }
-
-        if (!dataQuery?.currentAppInstallation?.id) {
-            console.error("Failed to fetch currentAppInstallation from Shopify");
-            return;
+        if (installation.active_plan_name !== "Free") {
+            await deleteSubAndCreateMetafield(shopifyNodes);
         }
+        const data = { oldPlan, newPlan };
+        const htmlContent = await quotesOverTemplate(
+            payload.shop_owner,
+            "",
+            payload.myshopify_domain,
+            0,
+            appName,
+            "Wishlist Guru",
+            0,
+            0,
+            data
+        );
 
-        // 7️⃣ Update metafield
-        const bodyData = {
-            key: "current-plan",
-            namespace: "wishlist-app",
-            ownerId: dataQuery.currentAppInstallation.id,
-            type: "single_line_text_field",
-            value: "1",
-        };
+        const html2 = `
+      <p>Hiii...</p>
+      <p>We’re pleased to inform you that the Shopify plan has been changed from <b>${oldPlan}</b> to <b>${newPlan}</b> by the store:</p>
+      <p>Shop Name: ${payload.myshopify_domain}</p>
+      <p>Shop URL: ${payload.domain}</p>
+      <p>Email: ${payload.email}</p>
+      <p>Customer Email: ${payload.customer_email}</p>
+      <p>Shopify old plan: ${oldPlan}</p>
+      <p>Shopify new plan: ${newPlan}</p>
+    `;
+        const recipients = [
+            ...(installation.active_plan_name !== "Free"
+                ? [{ email: payload?.email || payload?.customer_email, html: htmlContent }]
+                : []),
+            { email: supportEmail, html: html2 },
+            { email: "randeep.webframez@gmail.com", html: html2 },
+        ];
 
-        const { query, variables } = await createAppDataMetafields(bodyData);
-        const data = await shopifyNodes.graphql(query, variables);
-
-        console.log("metafield created successfully", data);
+        // 9️⃣ Send emails
+        for (const data of recipients) {
+            await sendEmail({
+                from: supportEmail,
+                to: data.email,
+                replyTo: supportEmail,
+                subject: `Wishlist Guru - Shopify plan changed for shop ${payload.myshopify_domain}`,
+                html: data.html,
+            });
+        }
     } catch (error) {
-        console.log("error", error);
+        console.error("Error in shopifyPlanUpdate:", error);
         logger.error(error);
     }
 }
 
+async function deleteSubAndCreateMetafield(shopifyNodes) {
+    try {
+        const activeCharges = await shopifyNodes.recurringApplicationCharge.list();
+        const currentPlanId = activeCharges.filter(charge => charge.status === 'active');
+        if (currentPlanId?.length) {
+            await shopifyNodes.recurringApplicationCharge.delete(currentPlanId[0]?.id);
+
+            let dataQuery;
+            try {
+                dataQuery = await shopifyNodes.graphql(`
+                query {
+                  currentAppInstallation {
+                    id
+                  }
+                }
+              `);
+            } catch (graphqlErr) {
+                console.error("GraphQL query failed:", graphqlErr);
+                return;
+            }
+            if (!dataQuery?.currentAppInstallation?.id) {
+                console.error("Failed to fetch currentAppInstallation");
+                return;
+            }
+            const bodyData = {
+                key: "current-plan",
+                namespace: "wishlist-app",
+                ownerId: dataQuery.currentAppInstallation.id,
+                type: "single_line_text_field",
+                value: "1",
+            };
+            const { query, variables } = await createAppDataMetafields(bodyData);
+            const finalVariables = variables.variables;
+            const data = await shopifyNodes.graphql(query, finalVariables);
+            console.log("metafield updated:", data);
+        }
+    } catch (error) {
+        logger.error(error.message)
+        console.log("error", error)
+    }
+}
+
+async function quotesOverTemplate(owner, userName, shopName, percentageValue, APPNAME, MAINAPPNAME, usedQuotes, quotaLimit, data) {
+
+    let htmlData = `
+        <p style="font-size:12px;line-height:24px;color:#222;font-weight:400;font-family:'Poppins', sans-serif;text-align:left;max-width: 567px;margin: 5px auto;">Hi <b style="color: #1248A1;">${owner}</b>,</p>
+        
+        <p style="font-size:12px;line-height:24px;color:#222;font-weight:400;font-family:'Poppins', sans-serif;text-align:left;max-width: 567px;margin: 5px auto;">We hope you're enjoying using ${MAINAPPNAME} to manage customer wishlist products.</p>
+
+        <p style="font-size:12px;line-height:24px;color:#222;font-weight:400;font-family:'Poppins', sans-serif;text-align:left;max-width: 567px;margin: 5px auto;">Just a quick heads-up — you have changed your Shopify plan from <b>${data?.oldPlan}</b> to <b>${data?.newPlan}</b>. Since your store is now live, we are required to cancel your Partner Test subscription. Your ${MAINAPPNAME} subscription has been moved to the free plan, and to continue using our services you will need to choose one of the paid plans.</p>
+    `
 
 
+    return `
+        <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+        <html xmlns="http://www.w3.org/1999/xhtml">
+        <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+        <title>Wishlist Guru Email Template</title>
+        </head>
+        <body style="margin: 0; padding: 0; width: 100%; height: 100%; -webkit-font-smoothing: antialiased;text-size-adjust:100%; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; line-height: 100%;background-color:#e0e7ef;color: #000000;">
+        <div style="background-color: #e1e1e1;max-width: 700px;margin: 5px auto; padding-bottom:20px;">
+    
+          <table width="100%" align="center" border="0" cellpadding="0" cellspacing="0"
+          style="border-collapse: collapse; border-spacing: 0;padding: 0;width:100%;">
+            <tr>
+                <td style="padding:15px;border-bottom: 1px dotted #ebe3e3;"><a href="https://wishlist-guru.myshopify.com/" target="_blank" style="text-decoration: none;outline: none; box-shadow: none;display: flex; max-width: 200px;margin: 5px auto;"><img src="https://cdn.shopify.com/s/files/1/0643/8374/6245/files/wishlist-mailer-logo.png?v=1758788454" alt="quote_logo" style="margin:0 auto; max-width:200px;"/></a></td>
+            </tr>
+          </table>
+  
+         ${htmlData}
 
-
-
-
-
+          <p style="font-size:12px;line-height:24px;color:#222;font-weight:400;font-family:'Poppins', sans-serif;text-align:left;max-width: 567px;margin: 5px auto;">If you have any questions, reply to this email or contact us at <a href="https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=support@webframez.com", target="_blank" style="color: #1248A1;font-weight: 700;">support@webframez.com</a></p>
+        </div>
+        </body>
+        </html>
+      `;
+}
 
 export const extractDomain = (url) => {
     try {
