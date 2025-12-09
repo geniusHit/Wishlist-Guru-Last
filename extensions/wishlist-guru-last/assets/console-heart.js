@@ -16,7 +16,7 @@ let customButton = localData?.customButton || JSON.parse(heartButton.getAttribut
 let customLanguage = localData?.customLanguage || JSON.parse(heartButton.getAttribute("language-setting").replace(/~/g, "'"));
 let generalSetting = localData?.generalSetting || JSON.parse(heartButton.getAttribute("general-setting"));
 // let getThemeName = localData?.getThemeName || JSON.parse(heartButton.getAttribute("theme-name"));
-let getThemeName = {themeName: "Xtra"}
+let getThemeName = { themeName: "Dawn" }
 let advanceSetting = localData?.advanceSetting || JSON.parse(heartButton.getAttribute("advance-setting").replace(/~/g, "'"));
 let collectionBtnSetting = localData?.collectionBtnSetting || JSON.parse(heartButton.getAttribute("collection-btn-setting"));
 let currentPlan = localData?.currentPlan || JSON.parse(heartButton.getAttribute("current-plan"));
@@ -7349,17 +7349,19 @@ const wgGridCss = `
 .searchData-main2 .cartButtonStyle,
 .modalContainer .cartButtonStyle,
 #wg-multiWishlist_div .cartButtonStyle {
-    background-color: ${customButton.cartButtonStyle.hover.bgColor};
-    color: ${customButton.cartButtonStyle.hover.textColor};
-    border: ${customButton.cartButtonStyle.hover.border.value}${customButton.cartButtonStyle.hover.border.unit} ${customButton.cartButtonStyle.hover.border.type} ${customButton.cartButtonStyle.hover.border.color};
+    background-color: ${generalSetting?.isModalSettingsOn==="yes"? generalSetting?.modalButtonbgColor : customButton.cartButtonStyle.hover.bgColor};
+
+    color: ${generalSetting?.isModalSettingsOn==="yes"? generalSetting?.modalButtontextColor: customButton.cartButtonStyle.hover.textColor};
+
+    border: ${generalSetting?.isModalSettingsOn==="yes"? generalSetting?.modalButtonborderInput: customButton.cartButtonStyle.hover.border.value}${generalSetting?.isModalSettingsOn==="yes"?generalSetting?.modalButtonborderInputUnit : customButton.cartButtonStyle.hover.border.unit} ${generalSetting?.isModalSettingsOn==="yes"? generalSetting?.modalButtonborderType : customButton.cartButtonStyle.hover.border.type} ${generalSetting?.isModalSettingsOn==="yes"? generalSetting?.modalButtonborderColor : customButton.cartButtonStyle.hover.border.color};
 }
 .modal-button-div .cartButtonStyle:hover,
 .searchData-main2 .cartButtonStyle:hover,
 .modalContainer .cartButtonStyle:hover,
 #wg-multiWishlist_div .cartButtonStyle:hover {
-    background-color: ${customButton.cartButtonStyle.bgColor};
-    color: ${customButton.cartButtonStyle.textColor};
-    border: ${customButton.cartButtonStyle.border.value}${customButton.cartButtonStyle.border.unit} ${customButton.cartButtonStyle.border.type} ${customButton.cartButtonStyle.border.color};
+    background-color: ${generalSetting?.isModalSettingsOn==="yes"? generalSetting?.modalButtonhoverBgColor : customButton.cartButtonStyle.bgColor};
+    color: ${generalSetting?.isModalSettingsOn==="yes"? generalSetting?.modalButtonhoverTextColor : customButton.cartButtonStyle.textColor};
+    border: ${generalSetting?.isModalSettingsOn==="yes"? generalSetting?.modalButtonhoverBorderInput : customButton.cartButtonStyle.border.value}${generalSetting?.isModalSettingsOn==="yes"?generalSetting?.modalButtonhoverBorderInputUnit : customButton.cartButtonStyle.border.unit} ${generalSetting?.isModalSettingsOn==="yes"? generalSetting?.modalButtonhoverBorderType : customButton.cartButtonStyle.border.type} ${generalSetting?.isModalSettingsOn==="yes"? generalSetting?.modalButtonhoverBorderColor : customButton.cartButtonStyle.border.color};
 }
 .wishlist-modal-box {
     margin-bottom: ${generalSetting.gridGap}px;
@@ -7610,23 +7612,32 @@ function buttonStyleFxn() {
             background-color: ${cartButtonStyle.bgColor};
             color: ${cartButtonStyle.textColor};
             max-width: 100%;
-            border: ${cartButtonStyle.border.value}${cartButtonStyle.border.unit
-        } ${cartButtonStyle.border.type} ${cartButtonStyle.border.color};
-            border-radius: ${cartButtonStyle.borderRadius.value}${cartButtonStyle.borderRadius.unit
-        };
-            font-size: ${cartButtonStyle.fontSize.value}${cartButtonStyle.fontSize.unit
-        } !important;
-            padding: ${cartButtonStyle.paddingTopBottom.value}${cartButtonStyle.paddingTopBottom.unit
-        } ${cartButtonStyle.paddingLeftRight.value}${cartButtonStyle.paddingLeftRight.unit
-        };
-            margin: ${cartButtonStyle.marginTopBottom.value}${cartButtonStyle.marginTopBottom.unit
-        } ${cartButtonStyle.marginLeftRight.value}${cartButtonStyle.marginLeftRight.unit
-        };
+            border: ${cartButtonStyle.border.value}${cartButtonStyle.border.unit} ${cartButtonStyle.border.type} ${cartButtonStyle.border.color};
+            border-radius: ${cartButtonStyle.borderRadius.value}${cartButtonStyle.borderRadius.unit};
+            font-size: ${cartButtonStyle.fontSize.value}${cartButtonStyle.fontSize.unit} !important;
+            padding: ${cartButtonStyle.paddingTopBottom.value}${cartButtonStyle.paddingTopBottom.unit} ${cartButtonStyle.paddingLeftRight.value}${cartButtonStyle.paddingLeftRight.unit};
+            margin: ${cartButtonStyle.marginTopBottom.value}${cartButtonStyle.marginTopBottom.unit} ${cartButtonStyle.marginLeftRight.value}${cartButtonStyle.marginLeftRight.unit};
             text-align: ${cartButtonStyle.textAlign};
             cursor: pointer;
             box-sizing: border-box;
             font-weight: ${getFontWt(cartButtonStyle.fontWeight, cartButtonStyle.fontWeight).textFw};
             font-family: ${cartButtonStyle.fontFamily};
+        }
+        .modal-button-div .cartButtonStyle, .searchData-main2 .cartButtonStyle, .modalContainer .cartButtonStyle {
+            background-color: ${generalSetting?.isModalSettingsOn==="yes"? generalSetting?.modalButtonbgColor : cartButtonStyle.bgColor};
+            color: ${generalSetting?.isModalSettingsOn==="yes"? generalSetting?.modalButtontextColor : cartButtonStyle.textColor};
+            max-width: 100%;
+            border: ${generalSetting?.isModalSettingsOn==="yes"? generalSetting?.modalButtonborderInput :  cartButtonStyle.border.value}${generalSetting?.isModalSettingsOn==="yes"? generalSetting?.modalButtonborderInputUnit : cartButtonStyle.border.unit} ${generalSetting?.isModalSettingsOn==="yes"? generalSetting?.modalButtonborderType : cartButtonStyle.border.type} ${generalSetting?.isModalSettingsOn==="yes"? generalSetting?.modalButtonborderColor : cartButtonStyle.border.color};
+            border-radius: ${generalSetting?.isModalSettingsOn==="yes"? generalSetting?.modalButtonborderRadius : cartButtonStyle.borderRadius.value}${generalSetting?.isModalSettingsOn==="yes"? generalSetting?.modalButtonborderRadiusUnit : cartButtonStyle.borderRadius.unit};
+            font-size: ${generalSetting?.isModalSettingsOn==="yes"? generalSetting?.modalButtonfontSize : cartButtonStyle.fontSize.value}${generalSetting?.isModalSettingsOn==="yes"? generalSetting?.modalButtonfontSizeUnit : cartButtonStyle.fontSize.unit} !important;
+            padding: ${generalSetting?.isModalSettingsOn==="yes"? generalSetting?.modalButtonpaddingTopBottom : cartButtonStyle.paddingTopBottom.value}${generalSetting?.isModalSettingsOn==="yes"? generalSetting?.modalButtonmarginTopBottomUnit : cartButtonStyle.paddingTopBottom.unit} ${generalSetting?.isModalSettingsOn==="yes"? generalSetting?.modalButtonpaddingLeftRight : cartButtonStyle.paddingLeftRight.value}${generalSetting?.isModalSettingsOn==="yes"? generalSetting?.modalButtonpaddingLeftRightUnit : cartButtonStyle.paddingLeftRight.unit};
+            margin: ${generalSetting?.isModalSettingsOn==="yes"? generalSetting?.modalButtonmarginTopBottom : cartButtonStyle.marginTopBottom.value}${generalSetting?.isModalSettingsOn==="yes"? generalSetting?.modalButtonmarginTopBottomUnit : cartButtonStyle.marginTopBottom.unit} ${generalSetting?.isModalSettingsOn==="yes"? generalSetting?.modalButtonmarginLeftRight : cartButtonStyle.marginLeftRight.value}${generalSetting?.isModalSettingsOn==="yes"? generalSetting?.modalButtonmarginLeftRightUnit : cartButtonStyle.marginLeftRight.unit};
+            text-align: ${generalSetting?.isModalSettingsOn==="yes"? generalSetting?.modalButtontextAlign : cartButtonStyle.textAlign};
+            cursor: pointer;
+            box-sizing: border-box;
+            font-weight: ${generalSetting?.isModalSettingsOn==="yes"? getFontWt(generalSetting?.modalButtonfontWeight, generalSetting.modalButtonfontWeight).textFw : getFontWt(cartButtonStyle.fontWeight, cartButtonStyle.fontWeight).textFw};
+            font-family: ${generalSetting?.isModalSettingsOn==="yes"? generalSetting?.modalButtonfontFamily : cartButtonStyle.fontFamily};
+            width:auto;
         }
         .shareButtonTextStyle {
             color: ${generalSetting.shareWishBtntextColor};
@@ -8152,9 +8163,12 @@ function buttonStyleFxn() {
             .cartButtonStyle:hover {
                 background-color: ${customButton.cartButtonStyle.hover.bgColor};
                 color: ${customButton.cartButtonStyle.hover.textColor};
-                border: ${customButton.cartButtonStyle.hover.border.value}${customButton.cartButtonStyle.hover.border.unit
-        } ${customButton.cartButtonStyle.hover.border.type} ${customButton.cartButtonStyle.hover.border.color
-        };
+                border: ${customButton.cartButtonStyle.hover.border.value}${customButton.cartButtonStyle.hover.border.unit} ${customButton.cartButtonStyle.hover.border.type} ${customButton.cartButtonStyle.hover.border.color};
+            }
+            .modal-button-div .cartButtonStyle:hover, .searchData-main2 .cartButtonStyle:hover, .modalContainer .cartButtonStyle:hover {
+                background-color: ${generalSetting?.isModalSettingsOn==="yes"? generalSetting?.modalButtonhoverBgColor : customButton.cartButtonStyle.hover.bgColor};
+                color: ${generalSetting?.isModalSettingsOn==="yes"? generalSetting?.modalButtonhoverTextColor : customButton.cartButtonStyle.hover.textColor};
+                border: ${generalSetting?.isModalSettingsOn==="yes"? generalSetting?.modalButtonhoverBorderInput : customButton.cartButtonStyle.hover.border.value}${generalSetting?.isModalSettingsOn==="yes"? generalSetting?.modalButtonhoverBorderInputUnit : customButton.cartButtonStyle.hover.border.unit} ${generalSetting?.isModalSettingsOn==="yes"? generalSetting?.modalButtonhoverBorderType : customButton.cartButtonStyle.hover.border.type} ${generalSetting?.isModalSettingsOn==="yes"? generalSetting?.modalButtonhoverBorderColor : customButton.cartButtonStyle.hover.border.color};
             }
 
             .shareButtonTextStyle:hover {

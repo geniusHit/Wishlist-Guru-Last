@@ -16,6 +16,9 @@ import Footer from '../Footer';
 import ColorPickerController from '../../hooks/useColorPickerController';
 import RangeController from '../../hooks/useRangeController';
 import BorderController from '../../hooks/useBorderController';
+import CustomStyle2 from '../CustomStyle2';
+import CustomHoverSetting2 from '../CustomHoverSetting2';
+import Toggle from 'react-toggle';
 
 const WishlistUiSetting = () => {
 
@@ -34,6 +37,9 @@ const WishlistUiSetting = () => {
     const [myLanguage, setMyLanguage] = useState({});
     const [shareModalBtn, setShareModalBtn] = useState(0);
     const [cartBtn, setCartBtn] = useState(0);
+    const [viewBtn, setViewBtn] = useState(0);
+    const [isHeaderIconTrue, setIsHeaderIconTrue] = useState(false);
+    let generalData = null;
 
 
     useEffect(() => {
@@ -70,8 +76,6 @@ const WishlistUiSetting = () => {
     async function getAllAppDataMetafields() {
         const dataArray = await appMetafield.getAllAppMetafields();
 
-
-        let generalData = null;
         let buttonData = null;
 
         for (let i = 0; i < dataArray.length; i++) {
@@ -98,6 +102,12 @@ const WishlistUiSetting = () => {
 
 
 
+        // console.log("buttonData = ", buttonData)
+        // console.log("generalData = ", generalData)
+
+        {/* Style for Modal buttons start*/ }
+        setIsHeaderIconTrue(generalData?.isModalSettingsOn === "yes" ? true : false)
+        {/* Style for Modal buttons end*/ }
 
 
         if (generalData) {
@@ -144,6 +154,37 @@ const WishlistUiSetting = () => {
                 modalBottomButtonBgColor: generalData?.modalBottomButtonBgColor || generalData.wlBgColor,
                 mwCheckIconBg: generalData?.mwCheckIconBg || "",
                 mwCheckIconColor: generalData?.mwCheckIconColor || "",
+                /* Style for Modal buttons start*/
+                modalBottomButtonBgColor: generalData?.modalBottomButtonBgColor,
+                modalButtonPaddingTopBottomUnit: generalData?.modalButtonPaddingTopBottomUnit,
+                modalButtonbgColor: generalData?.modalButtonbgColor,
+                modalButtonborderColor: generalData?.modalButtonborderColor,
+                modalButtonborderInput: generalData?.modalButtonborderInput,
+                modalButtonborderInputUnit: generalData?.modalButtonborderInputUnit,
+                modalButtonborderRadius: generalData?.modalButtonborderRadius,
+                modalButtonborderRadiusUnit: generalData?.modalButtonborderRadiusUnit,
+                modalButtonborderType: generalData?.modalButtonborderType,
+                modalButtonfontFamily: generalData?.modalButtonfontFamily,
+                modalButtonfontSize: generalData?.modalButtonfontSize,
+                modalButtonfontSizeUnit: generalData?.modalButtonfontSizeUnit,
+                modalButtonfontWeight: generalData?.modalButtonfontWeight,
+                modalButtonmarginLeftRight: generalData?.modalButtonmarginLeftRight,
+                modalButtonmarginLeftRightUnit: generalData?.modalButtonmarginLeftRightUnit,
+                modalButtonmarginTopBottom: generalData?.modalButtonmarginTopBottom,
+                modalButtonmarginTopBottomUnit: generalData?.modalButtonmarginTopBottomUnit,
+                modalButtonpaddingLeftRight: generalData?.modalButtonpaddingLeftRight,
+                modalButtonpaddingLeftRightUnit: generalData?.modalButtonpaddingLeftRightUnit,
+                modalButtonpaddingTopBottom: generalData?.modalButtonpaddingTopBottom,
+                modalButtontextAlign: generalData?.modalButtontextAlign,
+                modalButtontextColor: generalData?.modalButtontextColor,
+                modalLayerBgColor: generalData?.modalLayerBgColor,
+                modalButtonhoverBgColor: generalData?.modalButtonhoverBgColor,
+                modalButtonhoverBorderColor: generalData?.modalButtonhoverBorderColor,
+                modalButtonhoverBorderInput: generalData?.modalButtonhoverBorderInput,
+                modalButtonhoverBorderInputUnit: generalData?.modalButtonhoverBorderInputUnit,
+                modalButtonhoverBorderType: generalData?.modalButtonhoverBorderType,
+                modalButtonhoverTextColor: generalData?.modalButtonhoverTextColor,
+                /* Style for Modal buttons end*/
 
 
                 ...(buttonData && {
@@ -181,12 +222,34 @@ const WishlistUiSetting = () => {
                     cartButtoniconSize: buttonData.cartButtonStyle.iconSize,
                     cartButtoniconPosition: buttonData.cartButtonStyle.iconPosition,
 
-                    iconColor: convertColor(watchAllFields.iconColor)
-
+                    iconColor: convertColor(watchAllFields.iconColor),
                 }),
             })
         }
     }
+
+    {/* Style for Modal buttons start*/ }
+    async function handleChangeHeaderIcon(e) {
+        setIsHeaderIconTrue(e.target.checked);
+        Swal.fire({
+            text: myLanguage.swalWaiting,
+            imageUrl: loaderGif,
+            showConfirmButton: false,
+        });
+        let dataUpdate = { ...generalData, isModalSettingsOn: e.target.checked === true ? "yes" : "no" }
+        const getAppMetafieldId = await appMetafield.getAppMetafieldId();
+        const saveIconLocation = {
+            key: "general-setting",
+            namespace: "wishlist-app",
+            ownerId: getAppMetafieldId,
+            type: "single_line_text_field",
+            value: JSON.stringify(dataUpdate)
+        }
+        appMetafield.createAppMetafield(saveIconLocation).then(() => {
+            Swal.close();
+        });
+    }
+    /* Style for Modal buttons end*/
 
     const convertColor = (color) => {
         if (/^#[0-9A-F]{3}$/i.test(color)) {
@@ -218,6 +281,8 @@ const WishlistUiSetting = () => {
             imageUrl: loaderGif,
             showConfirmButton: false,
         });
+        console.log("data = ", data)
+        console.log("watch() = ", watch())
 
         const textColor = convertColor(watchAllFields.wlTextColor);
         let mergedData = { ...existingData.current };
@@ -265,6 +330,38 @@ const WishlistUiSetting = () => {
         mergedData.modalBottomButtonBgColor = data?.modalBottomButtonBgColor;
         mergedData.mwCheckIconBg = data?.mwCheckIconBg;
         mergedData.mwCheckIconColor = data?.mwCheckIconColor;
+
+        {/* Style for Modal buttons start*/ }
+        mergedData.modalBottomButtonBgColor = data?.modalBottomButtonBgColor;
+        mergedData.modalButtonPaddingTopBottomUnit = data?.modalButtonPaddingTopBottomUnit;
+        mergedData.modalButtonbgColor = data?.modalButtonbgColor;
+        mergedData.modalButtonborderColor = data?.modalButtonborderColor;
+        mergedData.modalButtonborderInput = data?.modalButtonborderInput;
+        mergedData.modalButtonborderInputUnit = data?.modalButtonborderInputUnit;
+        mergedData.modalButtonborderRadius = data?.modalButtonborderRadius;
+        mergedData.modalButtonborderRadiusUnit = data?.modalButtonborderRadiusUnit;
+        mergedData.modalButtonborderType = data?.modalButtonborderType;
+        mergedData.modalButtonfontFamily = data?.modalButtonfontFamily;
+        mergedData.modalButtonfontSize = data?.modalButtonfontSize;
+        mergedData.modalButtonfontSizeUnit = data?.modalButtonfontSizeUnit;
+        mergedData.modalButtonfontWeight = data?.modalButtonfontWeight;
+        mergedData.modalButtonmarginLeftRight = data?.modalButtonmarginLeftRight;
+        mergedData.modalButtonmarginLeftRightUnit = data?.modalButtonmarginLeftRightUnit;
+        mergedData.modalButtonmarginTopBottom = data?.modalButtonmarginTopBottom;
+        mergedData.modalButtonmarginTopBottomUnit = data?.modalButtonmarginTopBottomUnit;
+        mergedData.modalButtonpaddingLeftRight = data?.modalButtonpaddingLeftRight;
+        mergedData.modalButtonpaddingLeftRightUnit = data?.modalButtonpaddingLeftRightUnit;
+        mergedData.modalButtonpaddingTopBottom = data?.modalButtonpaddingTopBottom;
+        mergedData.modalButtontextAlign = data?.modalButtontextAlign;
+        mergedData.modalButtontextColor = data?.modalButtontextColor;
+        mergedData.modalLayerBgColor = data?.modalLayerBgColor;
+        mergedData.modalButtonhoverBgColor = data?.modalButtonhoverBgColor;
+        mergedData.modalButtonhoverBorderColor = data?.modalButtonhoverBorderColor;
+        mergedData.modalButtonhoverBorderInput = data?.modalButtonhoverBorderInput;
+        mergedData.modalButtonhoverBorderInputUnit = data?.modalButtonhoverBorderInputUnit;
+        mergedData.modalButtonhoverBorderType = data?.modalButtonhoverBorderType;
+        mergedData.modalButtonhoverTextColor = data?.modalButtonhoverTextColor;
+        {/* Style for Modal buttons end*/ }
 
 
         // this is for the cart button style
@@ -323,7 +420,6 @@ const WishlistUiSetting = () => {
                     unit: data.cartButtonhoverFontSizeUnit
                 }
             }
-
         }
 
         const getAppMetafieldId = await appMetafield.getAppMetafieldId();
@@ -354,6 +450,9 @@ const WishlistUiSetting = () => {
         });
 
         setSaveBar(false);
+
+        console.log("mergedData = ", mergedData)
+        console.log("mergedButttonSettingData = ", mergedButttonSettingData)
     };
 
     const showModalHanlder = useCallback(
@@ -393,9 +492,32 @@ const WishlistUiSetting = () => {
 
     ];
 
+    // Style for Modal buttons start
+    const ClearModalBtnArr = [
+        {
+            content: myLanguage.regular,
+            data: <CustomStyle2 reset={reset} isloading={isloading} Controller={Controller} control={control} hoverOption={true} myLanguage={myLanguage} formName={"modalButton"} setSaveBar={setSaveBar} watchAllFields={watchAllFields} />,
+            id: 'regular-1',
+        },
+        {
+            content: myLanguage.hover,
+            data: <CustomHoverSetting2 Controller={Controller} control={control} setSaveBar={setSaveBar} watchAllFields={watchAllFields} formName={"modalButton"} myLanguage={myLanguage} />,
+            id: 'hover-2',
+        },
+
+    ];
+    // Style for Modal buttons end
+
     const cartBtnHandler = useCallback(
         (selectedTabIndex) => {
             setCartBtn(selectedTabIndex)
+        },
+        []
+    );
+
+    const viewBtnHandler = useCallback(
+        (selectedTabIndex) => {
+            setViewBtn(selectedTabIndex)
         },
         []
     );
@@ -715,7 +837,6 @@ const WishlistUiSetting = () => {
 
 
                                     <br />
-                                    rrrrrrrrr
                                     <div >
                                         <div className='custom-margin'>
                                             <Text variant="headingMd" as="h2">{myLanguage.atcStyleHeading}</Text>
@@ -728,23 +849,31 @@ const WishlistUiSetting = () => {
                                             </LegacyCard.Section>
                                         </Tabs>
                                     </div>
-                                    ttttttttttt
                                 </div>
 
+                                {/* Style for Modal buttons start*/}
                                 <div className='wf-style-wishbtn wishlist-ui-grid2'>
                                     <div >
                                         <div className='custom-margin'>
-                                            <Text variant="headingMd" as="h2">{myLanguage.atcStyleHeading}</Text>
+                                            <div>
+                                                <Toggle
+                                                    checked={isHeaderIconTrue}
+                                                    onChange={handleChangeHeaderIcon}
+                                                    icons={false}
+                                                    disabled={false} />
+                                            </div>
+                                            <Text variant="headingMd" as="h2">Styles for the Clear Wishlist, Add all items to cart and View cart button</Text>
                                             <p>{myLanguage.atcStyleText}</p>
                                         </div>
 
-                                        <Tabs tabs={cartBtnArr} selected={cartBtn} onSelect={cartBtnHandler} fitted>
+                                        <Tabs tabs={ClearModalBtnArr} selected={viewBtn} onSelect={viewBtnHandler} fitted>
                                             <LegacyCard.Section >
-                                                {cartBtnArr[cartBtn].data}
+                                                {ClearModalBtnArr[viewBtn].data}
                                             </LegacyCard.Section>
                                         </Tabs>
                                     </div>
                                 </div>
+                                {/* Style for Modal buttons end */}
 
                                 <div className='wf-style-wishbtn  wishlist-ui-grid1'>
                                     <div className={`${currentPlan >= 2 ? "" : "disableEverything under-basic"}`} >

@@ -281,7 +281,7 @@ const NotificationSetting = () => {
                                             </Collapsible>
                                         </div>
 
-                                        <SingleFieldController
+                                        {/*<SingleFieldController
                                             name="notificationType"
                                             control={control}  >
                                             {({ field }) =>
@@ -406,7 +406,263 @@ const NotificationSetting = () => {
                                                 </SingleFieldController>
 
                                             </Collapsible>
+                                        </div>*/}
+
+                                        {/* Toast */}
+                                        <SingleFieldController
+                                            name="notificationType"
+                                            control={control}  >
+                                            {({ field }) =>
+                                                <RadioButton
+                                                    label={myLanguage.subNotificationValue2}
+                                                    value={field.value}
+                                                    id="toast"
+                                                    checked={field.value === "toast" && true}
+                                                    onChange={() => {
+                                                        field.onChange("toast"),
+                                                            setSaveBar(true);
+                                                        setcheckRadio(!checkRadio)
+                                                        setShowDiv(false);
+
+                                                    }}
+                                                />
+                                            }
+                                        </SingleFieldController>
+                                        <div className='notificationToastCollapsible'>
+                                            <Collapsible
+                                                open={watchAllFields.notificationType === "toast" ? true : false}
+                                                id="basic-collapsible"
+                                                transition={{
+                                                    duration: '500ms',
+                                                    timingFunction: 'ease-in-out'
+                                                }}
+                                                expandOnPrint
+                                            >
+                                                <SingleFieldController
+                                                    name="notificationTypeOption"
+                                                    control={control}  >
+                                                    {({ field }) =>
+                                                        <RadioButton
+                                                            label={myLanguage.subNotificationValue2Sub4}
+                                                            value={field.value} id="toast-top-center" checked={field.value === "toast-top-center" && true}
+                                                            onChange={() => {
+                                                                field.onChange("toast-top-center"),
+                                                                    setSaveBar(true);
+                                                            }}
+                                                        />
+                                                    }
+                                                </SingleFieldController>
+
+                                                <SingleFieldController
+                                                    name="notificationTypeOption"
+                                                    control={control}  >
+                                                    {({ field }) =>
+                                                        <RadioButton
+                                                            label={myLanguage.subNotificationValue2Sub5}
+                                                            value={field.value} id="toast-top-left" checked={field.value === "toast-top-left" && true}
+                                                            onChange={() => {
+                                                                field.onChange("toast-top-left"),
+                                                                    setSaveBar(true);
+                                                            }}
+                                                        />
+                                                    }
+                                                </SingleFieldController>
+
+                                                <SingleFieldController
+                                                    name="notificationTypeOption"
+                                                    control={control}>
+                                                    {({ field }) =>
+                                                        <RadioButton
+                                                            label={myLanguage.subNotificationValue2Sub6}
+                                                            value={field.value} id="toast-top-right" checked={field.value === "toast-top-right" && true}
+                                                            onChange={() => {
+                                                                field.onChange("toast-top-right"),
+                                                                    setSaveBar(true);
+                                                            }}
+                                                        />
+                                                    }
+                                                </SingleFieldController>
+
+                                                <SingleFieldController
+                                                    name="notificationTypeOption"
+                                                    control={control}  >
+                                                    {({ field }) =>
+                                                        <RadioButton
+                                                            label={myLanguage.subNotificationValue2Sub1}
+                                                            value={field.value}
+                                                            id="toast-center"
+                                                            checked={field.value === "toast-center" && true}
+                                                            onChange={() => {
+                                                                field.onChange("toast-center"),
+                                                                    setSaveBar(true);
+                                                            }}
+                                                        />
+                                                    }
+                                                </SingleFieldController>
+
+                                                <SingleFieldController
+                                                    name="notificationTypeOption"
+                                                    control={control}  >
+                                                    {({ field }) =>
+                                                        <RadioButton
+                                                            label={myLanguage.subNotificationValue2Sub2}
+                                                            value={field.value}
+                                                            id="toast-left"
+                                                            checked={field.value === "toast-left" && true}
+                                                            onChange={() => {
+                                                                field.onChange("toast-left"),
+                                                                    setSaveBar(true);
+                                                            }}
+                                                        />
+                                                    }
+                                                </SingleFieldController>
+
+                                                <SingleFieldController
+                                                    name="notificationTypeOption"
+                                                    control={control}  >
+                                                    {({ field }) =>
+                                                        <RadioButton
+                                                            label={myLanguage.subNotificationValue2Sub3}
+                                                            value={field.value} id="toast-right" checked={field.value === "toast-right" && true}
+                                                            onChange={() => {
+                                                                field.onChange("toast-right"),
+                                                                    setSaveBar(true);
+                                                            }}
+                                                        />
+                                                    }
+                                                </SingleFieldController>
+
+                                            </Collapsible>
                                         </div>
+                                        {/* Toast */}
+
+                                        {/* Toast with image starts */}
+                                        <SingleFieldController
+                                            name="notificationType"
+                                            control={control}  >
+                                            {({ field }) =>
+                                                <RadioButton
+                                                    label="As a toast with image"
+                                                    value={field.value}
+                                                    id="toastImage"
+                                                    checked={field.value === "toastImage" && true}
+                                                    onChange={() => {
+                                                        field.onChange("toastImage"),
+                                                            setSaveBar(true);
+                                                        setcheckRadio(!checkRadio)
+                                                        setShowDiv(false);
+
+                                                    }}
+                                                />
+                                            }
+                                        </SingleFieldController>
+                                        <div className='notificationToastImageCollapsible'>
+                                            <Collapsible
+                                                open={watchAllFields.notificationType === "toastImage" ? true : false}
+                                                id="basic-collapsible"
+                                                transition={{
+                                                    duration: '500ms',
+                                                    timingFunction: 'ease-in-out'
+                                                }}
+                                                expandOnPrint
+                                            >
+                                                <SingleFieldController
+                                                    name="notificationTypeOption"
+                                                    control={control}  >
+                                                    {({ field }) =>
+                                                        <RadioButton
+                                                            label={myLanguage.subNotificationValue2Sub4}
+                                                            value={field.value} id="toastImage-top-center" checked={field.value === "toastImage-top-center" && true}
+                                                            onChange={() => {
+                                                                field.onChange("toastImage-top-center"),
+                                                                    setSaveBar(true);
+                                                            }}
+                                                        />
+                                                    }
+                                                </SingleFieldController>
+
+                                                <SingleFieldController
+                                                    name="notificationTypeOption"
+                                                    control={control}  >
+                                                    {({ field }) =>
+                                                        <RadioButton
+                                                            label={myLanguage.subNotificationValue2Sub5}
+                                                            value={field.value} id="toastImage-top-left" checked={field.value === "toastImage-top-left" && true}
+                                                            onChange={() => {
+                                                                field.onChange("toastImage-top-left"),
+                                                                    setSaveBar(true);
+                                                            }}
+                                                        />
+                                                    }
+                                                </SingleFieldController>
+
+                                                <SingleFieldController
+                                                    name="notificationTypeOption"
+                                                    control={control}>
+                                                    {({ field }) =>
+                                                        <RadioButton
+                                                            label={myLanguage.subNotificationValue2Sub6}
+                                                            value={field.value} id="toastImage-top-right" checked={field.value === "toastImage-top-right" && true}
+                                                            onChange={() => {
+                                                                field.onChange("toastImage-top-right"),
+                                                                    setSaveBar(true);
+                                                            }}
+                                                        />
+                                                    }
+                                                </SingleFieldController>
+
+                                                <SingleFieldController
+                                                    name="notificationTypeOption"
+                                                    control={control}  >
+                                                    {({ field }) =>
+                                                        <RadioButton
+                                                            label={myLanguage.subNotificationValue2Sub1}
+                                                            value={field.value}
+                                                            id="toastImage-center"
+                                                            checked={field.value === "toastImage-center" && true}
+                                                            onChange={() => {
+                                                                field.onChange("toastImage-center"),
+                                                                    setSaveBar(true);
+                                                            }}
+                                                        />
+                                                    }
+                                                </SingleFieldController>
+
+                                                <SingleFieldController
+                                                    name="notificationTypeOption"
+                                                    control={control}  >
+                                                    {({ field }) =>
+                                                        <RadioButton
+                                                            label={myLanguage.subNotificationValue2Sub2}
+                                                            value={field.value}
+                                                            id="toastImage-left"
+                                                            checked={field.value === "toastImage-left" && true}
+                                                            onChange={() => {
+                                                                field.onChange("toastImage-left"),
+                                                                    setSaveBar(true);
+                                                            }}
+                                                        />
+                                                    }
+                                                </SingleFieldController>
+
+                                                <SingleFieldController
+                                                    name="notificationTypeOption"
+                                                    control={control}  >
+                                                    {({ field }) =>
+                                                        <RadioButton
+                                                            label={myLanguage.subNotificationValue2Sub3}
+                                                            value={field.value} id="toastImage-right" checked={field.value === "toastImage-right" && true}
+                                                            onChange={() => {
+                                                                field.onChange("toastImage-right"),
+                                                                    setSaveBar(true);
+                                                            }}
+                                                        />
+                                                    }
+                                                </SingleFieldController>
+
+                                            </Collapsible>
+                                        </div>
+                                        {/* Toast with image ends */}
 
                                         <SingleFieldController
                                             name="notificationType"

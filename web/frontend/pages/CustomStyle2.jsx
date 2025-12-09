@@ -5,15 +5,13 @@ import ColorPickerController from '../hooks/useColorPickerController';
 import RangeController from '../hooks/useRangeController';
 import SingleFieldController from '../hooks/useSingleFieldController'
 
-const CustomStyle = ({ aloneIcon, setSaveBar, control, showCount, formName, myLanguage, showLess, showWidth = false, onlyTextButton }) => {
+const CustomStyle2 = ({ aloneIcon, setSaveBar, control, showCount, formName, myLanguage, showLess, showWidth = false, onlyTextButton }) => {
 
     const units = [
         { value: "px", label: "px" },
         { value: "%", label: "%" },
         { value: "rem", label: "rem" }
     ];
-
-    console.log("formName from CustomStyle = ", formName)
 
     // const borderType = [
     //     { value: "dotted", label: myLanguage.borderDotted },
@@ -237,4 +235,4 @@ const CustomStyle = ({ aloneIcon, setSaveBar, control, showCount, formName, myLa
     )
 }
 
-export default CustomStyle;
+export default CustomStyle2;
