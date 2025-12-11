@@ -2220,12 +2220,12 @@ export default function detectThemeName(themeName, filter, customSettings) {
 
         // icon on pdp image
         pdpImageSelector = ".product__main modal-opener .product__media img.img-responsive";
-        pdpTitleSelector = "h1.product__title";
+        pdpTitleSelector = ".product__title";
         pdpAddToCartSelector = ".product-form__buttons .product-form__submit.button.button--tertiary.focus-inset";
 
 
         // for header wishlist icon left , right position
-        cart = ".header__right--part .header__cart";
+        cart = ".header__cart";
     }
 
     else if (themeName === "Soul" || themeName === "Boule" || themeName === "Stride" || themeName === "Hearth") {
@@ -9224,10 +9224,11 @@ export default function detectThemeName(themeName, filter, customSettings) {
 
         //   ------------------- Icons-----------------------
         gridElement = ".product-card";
-        appendIcon = ".product-card figure";
-        appendIconCheck = true
+        appendIcon = ".product-card figure a";
+        appendIconCheck = false
         productLink = ".product-card a";
         buttonPrependBeforeElemnt = false
+        beforeIcon = true
 
         //--------------------------- For Quick Modal--------------
         modelMainElement = "";

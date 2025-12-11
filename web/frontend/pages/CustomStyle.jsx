@@ -13,8 +13,6 @@ const CustomStyle = ({ aloneIcon, setSaveBar, control, showCount, formName, myLa
         { value: "rem", label: "rem" }
     ];
 
-    console.log("formName from CustomStyle = ", formName)
-
     // const borderType = [
     //     { value: "dotted", label: myLanguage.borderDotted },
     //     { value: "dashed", label: myLanguage.borderDashed },

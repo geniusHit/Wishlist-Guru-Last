@@ -115,8 +115,7 @@ body {
 
 .notificationToolTipCollapsible,
 .notificationToastCollapsible,
-.notificationTextCollapsible,
-.notificationToastImageCollapsible {
+.notificationTextCollapsible {
     padding-left: 25px;
 }
 

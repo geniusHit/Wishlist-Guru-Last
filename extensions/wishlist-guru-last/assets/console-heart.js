@@ -16,7 +16,7 @@ let customButton = localData?.customButton || JSON.parse(heartButton.getAttribut
 let customLanguage = localData?.customLanguage || JSON.parse(heartButton.getAttribute("language-setting").replace(/~/g, "'"));
 let generalSetting = localData?.generalSetting || JSON.parse(heartButton.getAttribute("general-setting"));
 // let getThemeName = localData?.getThemeName || JSON.parse(heartButton.getAttribute("theme-name"));
-let getThemeName = { themeName: "Dawn" }
+let getThemeName = {themeName: "Dawn"}
 let advanceSetting = localData?.advanceSetting || JSON.parse(heartButton.getAttribute("advance-setting").replace(/~/g, "'"));
 let collectionBtnSetting = localData?.collectionBtnSetting || JSON.parse(heartButton.getAttribute("collection-btn-setting"));
 let currentPlan = localData?.currentPlan || JSON.parse(heartButton.getAttribute("current-plan"));
@@ -120,9 +120,9 @@ function onHeaderActionsRender(element) {
 let modalDrawerTextColor = generalSetting?.wlTextColor?.color ? generalSetting?.wlTextColor?.color : generalSetting.wlTextColor;
 document.addEventListener("DOMContentLoaded", getCurentPlanSql);
 
-// const serverURL = "http://localhost:5000"; // -------------- local
+const serverURL = "http://localhost:5000"; // -------------- local
 // const serverURL = "https://writing-voltage-proportion-purchased.trycloudflare.com"; // -------------- local
-const serverURL = 'https://wishlist-api.webframez.com'; // -------------- production
+// const serverURL = 'https://wishlist-api.webframez.com'; // -------------- production
 // const serverURL = 'https://wishlist-guru-api.webframez.com'; // -------------- stagging
 
 const injectCoderr = document.getElementById("wf-custom-wishBtn-inject");
@@ -6957,31 +6957,31 @@ async function collectionIcon(selectedId, matchingOrNot) {
                         element.classList.remove("selected");
                     }
                     collectionIconSize();
-                    // if (isComboIcon) {
-                    //     const iconCombos = [
-                    //         {
-                    //             condition: isComboHeart,
-                    //             blank: "wg-heart-icon-blank",
-                    //             solid: "wg-heart-icon-solid",
-                    //         },
-                    //         {
-                    //             condition: isComboStar,
-                    //             blank: "wg-star-icon-blank",
-                    //             solid: "wg-star-icon-solid",
-                    //         },
-                    //         {
-                    //             condition: isComboSave,
-                    //             blank: "wg-save-icon-blank",
-                    //             solid: "wg-save-icon-solid",
-                    //         },
-                    //     ];
+                    if (isComboIcon) {
+                        const iconCombos = [
+                            {
+                                condition: isComboHeart,
+                                blank: "wg-heart-icon-blank",
+                                solid: "wg-heart-icon-solid",
+                            },
+                            {
+                                condition: isComboStar,
+                                blank: "wg-star-icon-blank",
+                                solid: "wg-star-icon-solid",
+                            },
+                            {
+                                condition: isComboSave,
+                                blank: "wg-save-icon-blank",
+                                solid: "wg-save-icon-solid",
+                            },
+                        ];
 
-                    //     iconCombos.forEach(({ condition, blank, solid }) => {
-                    //         if (condition) {
-                    //             toggleIconClass(element, blank, solid);
-                    //         }
-                    //     });
-                    // }
+                        iconCombos.forEach(({ condition, blank, solid }) => {
+                            if (condition) {
+                                toggleIconClass(element, blank, solid);
+                            }
+                        });
+                    }
                 }
             });
 
@@ -7350,10 +7350,8 @@ const wgGridCss = `
 .modalContainer .cartButtonStyle,
 #wg-multiWishlist_div .cartButtonStyle {
     background-color: ${generalSetting?.isModalSettingsOn==="yes"? generalSetting?.modalButtonbgColor : customButton.cartButtonStyle.hover.bgColor};
-
     color: ${generalSetting?.isModalSettingsOn==="yes"? generalSetting?.modalButtontextColor: customButton.cartButtonStyle.hover.textColor};
-
-    border: ${generalSetting?.isModalSettingsOn==="yes"? generalSetting?.modalButtonborderInput: customButton.cartButtonStyle.hover.border.value}${generalSetting?.isModalSettingsOn==="yes"?generalSetting?.modalButtonborderInputUnit : customButton.cartButtonStyle.hover.border.unit} ${generalSetting?.isModalSettingsOn==="yes"? generalSetting?.modalButtonborderType : customButton.cartButtonStyle.hover.border.type} ${generalSetting?.isModalSettingsOn==="yes"? generalSetting?.modalButtonborderColor : customButton.cartButtonStyle.hover.border.color};
+    border: ${generalSetting?.isModalSettingsOn==="yes"? generalSetting?.modalButtonborderInput: customButton.cartButtonStyle.hover.border.value}${generalSetting?.isModalSettingsOn==="yes"?generalSetting?.modalButtonborderInputUnit : customButton.cartButtonStyle.hover.border.unit} ${generalSetting?.isModalSettingsOn==="yes"? generalSetting?.modalButtonborderType : customButton.cartButtonStyle.hover.border.type} ${generalSetting?.isModalSettingsOn==="yes"? generalSetting?.modalButtonborderColor : customButton.cartButtonStyle.hover.border.color}
 }
 .modal-button-div .cartButtonStyle:hover,
 .searchData-main2 .cartButtonStyle:hover,
@@ -7612,11 +7610,18 @@ function buttonStyleFxn() {
             background-color: ${cartButtonStyle.bgColor};
             color: ${cartButtonStyle.textColor};
             max-width: 100%;
-            border: ${cartButtonStyle.border.value}${cartButtonStyle.border.unit} ${cartButtonStyle.border.type} ${cartButtonStyle.border.color};
-            border-radius: ${cartButtonStyle.borderRadius.value}${cartButtonStyle.borderRadius.unit};
-            font-size: ${cartButtonStyle.fontSize.value}${cartButtonStyle.fontSize.unit} !important;
-            padding: ${cartButtonStyle.paddingTopBottom.value}${cartButtonStyle.paddingTopBottom.unit} ${cartButtonStyle.paddingLeftRight.value}${cartButtonStyle.paddingLeftRight.unit};
-            margin: ${cartButtonStyle.marginTopBottom.value}${cartButtonStyle.marginTopBottom.unit} ${cartButtonStyle.marginLeftRight.value}${cartButtonStyle.marginLeftRight.unit};
+            border: ${cartButtonStyle.border.value}${cartButtonStyle.border.unit
+        } ${cartButtonStyle.border.type} ${cartButtonStyle.border.color};
+            border-radius: ${cartButtonStyle.borderRadius.value}${cartButtonStyle.borderRadius.unit
+        };
+            font-size: ${cartButtonStyle.fontSize.value}${cartButtonStyle.fontSize.unit
+        } !important;
+            padding: ${cartButtonStyle.paddingTopBottom.value}${cartButtonStyle.paddingTopBottom.unit
+        } ${cartButtonStyle.paddingLeftRight.value}${cartButtonStyle.paddingLeftRight.unit
+        };
+            margin: ${cartButtonStyle.marginTopBottom.value}${cartButtonStyle.marginTopBottom.unit
+        } ${cartButtonStyle.marginLeftRight.value}${cartButtonStyle.marginLeftRight.unit
+        };
             text-align: ${cartButtonStyle.textAlign};
             cursor: pointer;
             box-sizing: border-box;
@@ -8163,8 +8168,11 @@ function buttonStyleFxn() {
             .cartButtonStyle:hover {
                 background-color: ${customButton.cartButtonStyle.hover.bgColor};
                 color: ${customButton.cartButtonStyle.hover.textColor};
-                border: ${customButton.cartButtonStyle.hover.border.value}${customButton.cartButtonStyle.hover.border.unit} ${customButton.cartButtonStyle.hover.border.type} ${customButton.cartButtonStyle.hover.border.color};
+                border: ${customButton.cartButtonStyle.hover.border.value}${customButton.cartButtonStyle.hover.border.unit
+        } ${customButton.cartButtonStyle.hover.border.type} ${customButton.cartButtonStyle.hover.border.color
+        };
             }
+
             .modal-button-div .cartButtonStyle:hover, .searchData-main2 .cartButtonStyle:hover, .modalContainer .cartButtonStyle:hover {
                 background-color: ${generalSetting?.isModalSettingsOn==="yes"? generalSetting?.modalButtonhoverBgColor : customButton.cartButtonStyle.hover.bgColor};
                 color: ${generalSetting?.isModalSettingsOn==="yes"? generalSetting?.modalButtonhoverTextColor : customButton.cartButtonStyle.hover.textColor};
