@@ -19,7 +19,7 @@ export default function detectThemeName(themeName, filter, customSettings) {
         headerHeartMobileInsertAfter = false
         headerHeartMobileElementPrepend = false
 
-        headerMenuItem = ".header_botom nav.header__inline-menu ul.list-menu,header.header nav ul.list-menu.list-menu--inline"
+        headerMenuItem = ".header_botom nav.header__inline-menu ul.list-menu,header.header nav ul.list-menu.list-menu--inline, .menu-list"
         headerMenuItemClass = "header__menu-item list-menu__item link link--text focus-inset"
         headerMenuElementClass = ""
         headerHeartIconMobileCreateElement = ""
@@ -35,8 +35,8 @@ export default function detectThemeName(themeName, filter, customSettings) {
 
         // ------------------- Icons-----------------------
 
-        gridElement = ".card-wrapper.product-card-wrapper, li.splide__slide,.grid__item,.boost-sd__fallback-product-item, .product-grid .grid__item, .edps-card-wrapper, .products-list .products-list__grid-item, .pf-slide, .product_card, .swiper-slide";
-        appendIcon = ".card-wrapper.product-card-wrapper .card__inner, .boost-sd__fallback-product-item, .product-grid .grid__item .card__media .media, .edps-card-wrapper .product-single__media:not(.hddn-thmb), li.splide__slide > a, .products-list .products-list__grid-item .product-card__media .product-card__media-container, .multicolumn-card__image-wrapper .media, .pf-media-slider .pf-slide-main-media:first-child, .ft_img img, .swiper-slide > div > div";
+        gridElement = ".card-wrapper.product-card-wrapper, li.splide__slide,.grid__item,.boost-sd__fallback-product-item, .product-grid .grid__item, .edps-card-wrapper, .products-list .products-list__grid-item, .pf-slide, .product_card, .swiper-slide, .mixed-content-grid__item";
+        appendIcon = ".card-wrapper.product-card-wrapper .card__inner, .boost-sd__fallback-product-item, .product-grid .grid__item .card__media .media, .edps-card-wrapper .product-single__media:not(.hddn-thmb), li.splide__slide > a, .products-list .products-list__grid-item .product-card__media .product-card__media-container, .multicolumn-card__image-wrapper .media, .pf-media-slider .pf-slide-main-media:first-child, .ft_img img, .swiper-slide > div > div, .mixed-content-grid__item .card-gallery slideshow-component";
         afterIcon = false
         appendIconCheck = false
         buttonPrependBeforeElemnt = false
@@ -9029,7 +9029,7 @@ export default function detectThemeName(themeName, filter, customSettings) {
         headerMenuMobileElementPrepend = false
 
         //   ------------------- Icons-----------------------
-        gridElement = "div#mainCollectionProductContainer .clm.js-seq-animate .product.product-card";
+        gridElement = "div#mainCollectionProductContainer .clm.js-seq-animate .product.product-card, .js-carousel-item";
         appendIcon = ".card__media";
         afterIcon = false
         appendIconCheck = true
@@ -13938,7 +13938,7 @@ export default function detectThemeName(themeName, filter, customSettings) {
 
         //icon on pdp image
         pdpImageSelector = ".media-gallery__grid .product-media";
-        pdpTitleSelector = ".h2 h1";
+        pdpTitleSelector = ".h2 h1, .h5 h6";
         pdpAddToCartSelector = ".add-to-cart-button";
         // for header wishlist icon left , right position
         cart = ".cart-drawer";
