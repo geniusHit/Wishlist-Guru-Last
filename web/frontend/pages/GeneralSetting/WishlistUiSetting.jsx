@@ -105,7 +105,7 @@ const WishlistUiSetting = () => {
         // console.log("generalData = ", generalData)
 
         {/* Style for Modal buttons start*/ }
-        setIsHeaderIconTrue(generalData?.isModalSettingsOn === "yes" ? true : false)
+        setIsHeaderIconTrue(generalData?.modalButtonIsToggleOn)
         {/* Style for Modal buttons end*/ }
 
 
