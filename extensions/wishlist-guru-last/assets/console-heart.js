@@ -8886,9 +8886,13 @@ async function notificationOfRemoved(fromWhere, productId, prodHandle) {
     const notificationAbove = document.querySelector('.wf-text-notification-above')
     const notificationBelow = document.querySelector('.wf-text-notification-below')
 
+    console.log("fromWhere:",fromWhere)
+    console.log("productId = ", productId)
+    console.log("prodHandle = ", prodHandle)
+
     // Toast Image code starts
     if (fromWhere === "collection") {
-        let wishlistDivs = document.querySelectorAll(".wf-wishlist-collection-icon")
+        let wishlistDivs = document.querySelectorAll(".wf-wishlist-collection-icon") || document.querySelectorAll(".wf-wishlist")
         var productHandle, proId, wishlistDiv;
         wishlistDivs.forEach((el) => {
             productHandle = el.getAttribute("product-handle")
@@ -8899,16 +8903,38 @@ async function notificationOfRemoved(fromWhere, productId, prodHandle) {
         })
 
         var productHandle = wishlistDiv.getAttribute("product-handle")
+        console.log("c1")
     }
-    else if (fromWhere === "customIcon" || fromWhere === "inject" || fromWhere === "block") {
+    else if (fromWhere == "customIcon" || fromWhere === "inject" || fromWhere === "block") {
+        let wishlistDivs = document.querySelectorAll(".wf-wishlist-collection-icon") || document.querySelectorAll(".wf-wishlist")
+        var productHandle, proId, wishlistDiv2;
+        wishlistDivs.forEach((el) => {
+            proId = el.getAttribute("product-id")
+            console.log("proId = ", proId)
+            if (parseInt(proId) === productId) {
+                console.log("proId = ", proId)
+                wishlistDiv2 = el
+            }
+        })
+
         wishlistDiv = document.getElementById("wf-custom-wishBtn-inject");
-        productHandle = wishlistDiv.getAttribute("data-product-handle");
+        console.log("wishlistDiv2 = ", wishlistDiv2)
+        productHandle = wishlistDiv.getAttribute("data-product-handle") || wishlistDiv2.getAttribute("product-handle");
+
+        console.log("c2")
+
     }
     else if (fromWhere === "cart") {
         productHandle = prodHandle;
+        console.log("c3")
+
     }
     else if (fromWhere === "allToCart") {
         productHandle = ""
+        console.log("c4")
+    }
+    else{
+        console.log("c5")
     }
 
     if (productHandle !== "" && productHandle !== undefined && productHandle !== null) {
@@ -9142,9 +9168,13 @@ async function notificationOfAdded(fromWhere, productId, prodHandle) {
     const notificationStyle = notificationStyleFxn();
     const notificationTextStyle = notificationTextStyleFxn()
 
+    console.log("fromWhere:",fromWhere)
+    console.log("productId = ", productId)
+    console.log("prodHandle = ", prodHandle)
+
     // Toast Image code starts
     if (fromWhere === "collection") {
-        let wishlistDivs = document.querySelectorAll(".wf-wishlist-collection-icon")
+        let wishlistDivs = document.querySelectorAll(".wf-wishlist-collection-icon") || document.querySelectorAll(".wf-wishlist")
         var productHandle, proId, wishlistDiv;
         wishlistDivs.forEach((el) => {
             productHandle = el.getAttribute("product-handle")
@@ -9155,16 +9185,38 @@ async function notificationOfAdded(fromWhere, productId, prodHandle) {
         })
 
         var productHandle = wishlistDiv.getAttribute("product-handle")
+        console.log("c1")
     }
-    else if (fromWhere === "customIcon" || fromWhere === "inject" || fromWhere === "block") {
+    else if (fromWhere == "customIcon" || fromWhere === "inject" || fromWhere === "block") {
+        let wishlistDivs = document.querySelectorAll(".wf-wishlist-collection-icon") || document.querySelectorAll(".wf-wishlist")
+        var productHandle, proId, wishlistDiv2;
+        wishlistDivs.forEach((el) => {
+            proId = el.getAttribute("product-id")
+            console.log("proId = ", proId)
+            if (parseInt(proId) === productId) {
+                wishlistDiv2 = el
+                console.log("proId = ", proId)
+            }
+        })
+
         wishlistDiv = document.getElementById("wf-custom-wishBtn-inject");
-        productHandle = wishlistDiv.getAttribute("data-product-handle");
+        console.log("wishlistDiv2 = ", wishlistDiv2)
+        productHandle = wishlistDiv.getAttribute("data-product-handle") || wishlistDiv2.getAttribute("product-handle");
+
+        console.log("c2")
     }
     else if (fromWhere === "cart") {
         productHandle = prodHandle;
+        console.log("c3")
+
     }
     else if (fromWhere === "allToCart") {
         productHandle = ""
+        console.log("c4")
+
+    }
+    else{
+        console.log("c5")
     }
 
     console.log("fromWhere = ", fromWhere)
