@@ -26653,6 +26653,375 @@ export default function detectThemeName(themeName, filter, customSettings) {
 
     }
 
+    else if (themeName === "Metro") {
+        // --------------------- For Header------------------------
+        headerHeartIcon = ".header-icons"
+        headerHeartIconClass = ""
+        headerHeartElementClass = ""
+        headerHeartIconCreateElement = ""
+        headerHeartElementInsertAfter = false
+        headerHeartElementPrepend = false
+
+        headerHeartIconMobile = ""
+        headerHeartIconMobileClass = ""
+        headerHeartMobileElementClass = ""
+        headerHeartIconMobileCreateElement = ""
+        headerHeartMobileInsertAfter = false
+        headerHeartMobileElementPrepend = false
+
+        headerMenuItem = ".hamburger-navigation-list"
+        headerMenuItemClass = ""
+        headerMenuElementClass = ""
+        headerHeartIconMobileCreateElement = ""
+        headerHeartMobileInsertAfter = false
+        headerHeartMobileElementPrepend = false
+
+        headerMenuItemMobile = ".mobile-menu-list"
+        headerMenuItemMobileClass = ""
+        headerMenuMobileElementClass = ""
+        headerMenuItemMobileCreateElement = ""
+        headerMenuMobileInsertAfter = false
+        headerMenuMobileElementPrepend = false
+
+        // ------------------- Icons-----------------------
+
+        gridElement = ".collection-product-item";
+        appendIcon = ".product-card-media";
+        afterIcon = false
+        appendIconCheck = false
+        buttonPrependBeforeElemnt = false
+        productLink = "a"
+
+        //--------------------------- For Quick Modal--------------
+        // modelMainElement = "button[type='submit'][name='add']";
+        // modalProductElement = "quick-add-modal.quick-add-modal[open='']";
+        // modalbuttonAppend = "button.product-form__submit";
+        // modalButtonAppendOnImg = "slider-component.slider-mobile-gutter";
+        // modalbuttonAppendOnTitle = ".product__title";
+        // modalVariantSelector = ""
+        // modalVariantSubSelector = ""
+        // modalVariantMatchedUndefinedParent = ""
+        // checkModalVariantMatchedUndefinedParent = ""
+        // modalVariantMatchedUndefinedSelector = "";
+        // modalProductIdSelector = "[action='/cart/add'3]";
+        // modalProductIdValueSelector = "[name='id']";
+
+        // icon on pdp image
+        pdpImageSelector = ".main-product-media";
+        // pdpTitleSelector = ".product__title";
+        pdpTitleSelector = ".product-title";
+        pdpAddToCartSelector = ".addtocart-button";
+        // for header wishlist icon left , right position
+        cart = "a[href='/cart']"
+    }
+
+    else if (themeName === "Homage") {
+        // --------------------- For Header------------------------
+        headerHeartIcon = ".header-column--right.hide-mobile"
+        headerHeartIconClass = ""
+        headerHeartElementClass = ""
+        headerHeartIconCreateElement = ""
+        headerHeartElementInsertAfter = false
+        headerHeartElementPrepend = false
+
+        headerHeartIconMobile = ".header-column--right.hide-desktop"
+        headerHeartIconMobileClass = ""
+        headerHeartMobileElementClass = ""
+        headerHeartIconMobileCreateElement = ""
+        headerHeartMobileInsertAfter = false
+        headerHeartMobileElementPrepend = false
+
+        headerMenuItem = ".header__menu"
+        headerMenuItemClass = ""
+        headerMenuElementClass = ""
+        headerHeartIconMobileCreateElement = ""
+        headerHeartMobileInsertAfter = false
+        headerHeartMobileElementPrepend = false
+
+        headerMenuItemMobile = ".nav--mobile__column"
+        headerMenuItemMobileClass = ""
+        headerMenuMobileElementClass = ""
+        headerMenuItemMobileCreateElement = ""
+        headerMenuMobileInsertAfter = false
+        headerMenuMobileElementPrepend = false
+
+        // ------------------- Icons-----------------------
+
+        gridElement = ".card--product, .grid-content__column";
+        appendIcon = ".card__image";
+        afterIcon = false
+        appendIconCheck = false
+        buttonPrependBeforeElemnt = false
+        productLink = "a"
+
+        //--------------------------- For Quick Modal--------------
+        // modelMainElement = "button[type='submit'][name='add']";
+        // modalProductElement = "quick-add-modal.quick-add-modal[open='']";
+        // modalbuttonAppend = "button.product-form__submit";
+        // modalButtonAppendOnImg = "slider-component.slider-mobile-gutter";
+        // modalbuttonAppendOnTitle = ".product__title";
+        // modalVariantSelector = ""
+        // modalVariantSubSelector = ""
+        // modalVariantMatchedUndefinedParent = ""
+        // checkModalVariantMatchedUndefinedParent = ""
+        // modalVariantMatchedUndefinedSelector = "";
+        // modalProductIdSelector = "[action='/cart/add'3]";
+        // modalProductIdValueSelector = "[name='id']";
+
+        // icon on pdp image
+        pdpImageSelector = ".main-product-media";
+        // pdpTitleSelector = ".product__title";
+        pdpTitleSelector = ".main-product__title h1";
+        pdpAddToCartSelector = ".button--add-to-cart";
+        // for header wishlist icon left , right position
+        cart = "#cart-open-block"
+    }
+
+    else if (themeName === "Victory" || themeName === "Flip" || themeName === "Nitro" || themeName === "Athletica" || themeName === "Roast") {
+        // --------------------- For Header------------------------
+        headerHeartIcon = ".header__icons"
+        headerHeartIconClass = ""
+        headerHeartElementClass = ""
+        headerHeartIconCreateElement = ""
+        headerHeartElementInsertAfter = false
+        headerHeartElementPrepend = false
+
+        headerHeartIconMobile = ""
+        headerHeartIconMobileClass = ""
+        headerHeartMobileElementClass = ""
+        headerHeartIconMobileCreateElement = ""
+        headerHeartMobileInsertAfter = false
+        headerHeartMobileElementPrepend = false
+
+        headerMenuItem = ".header-menu-main__list"
+        headerMenuItemClass = ""
+        headerMenuElementClass = ""
+        headerHeartIconMobileCreateElement = ""
+        headerHeartMobileInsertAfter = false
+        headerHeartMobileElementPrepend = false
+
+        headerMenuItemMobile = ".header-mobile__menu-list"
+        headerMenuItemMobileClass = ""
+        headerMenuMobileElementClass = ""
+        headerMenuItemMobileCreateElement = ""
+        headerMenuMobileInsertAfter = false
+        headerMenuMobileElementPrepend = false
+
+        // ------------------- Icons-----------------------
+
+        gridElement = ".collection__item, .featured-products__col";
+        appendIcon = ".product-card__main";
+        afterIcon = false
+        appendIconCheck = false
+        buttonPrependBeforeElemnt = false
+        productLink = "a"
+
+        //--------------------------- For Quick Modal--------------
+        // modelMainElement = "button[type='submit'][name='add']";
+        // modalProductElement = "quick-add-modal.quick-add-modal[open='']";
+        // modalbuttonAppend = "button.product-form__submit";
+        // modalButtonAppendOnImg = "slider-component.slider-mobile-gutter";
+        // modalbuttonAppendOnTitle = ".product__title";
+        // modalVariantSelector = ""
+        // modalVariantSubSelector = ""
+        // modalVariantMatchedUndefinedParent = ""
+        // checkModalVariantMatchedUndefinedParent = ""
+        // modalVariantMatchedUndefinedSelector = "";
+        // modalProductIdSelector = "[action='/cart/add'3]";
+        // modalProductIdValueSelector = "[name='id']";
+
+        // icon on pdp image
+        pdpImageSelector = ".product-media__image";
+        // pdpTitleSelector = ".product__title";
+        pdpTitleSelector = ".product-title";
+        pdpAddToCartSelector = ".add-to-cart";
+        // for header wishlist icon left , right position
+        cart = ".header__icon--cart"
+    }
+
+    else if (themeName === "Vetro" || themeName === "Gario" || themeName === "Arrok") {
+        // --------------------- For Header------------------------
+        headerHeartIcon = ".hdt-header__icons-wrapper"
+        headerHeartIconClass = ""
+        headerHeartElementClass = ""
+        headerHeartIconCreateElement = ""
+        headerHeartElementInsertAfter = false
+        headerHeartElementPrepend = false
+
+        headerHeartIconMobile = ""
+        headerHeartIconMobileClass = ""
+        headerHeartMobileElementClass = ""
+        headerHeartIconMobileCreateElement = ""
+        headerHeartMobileInsertAfter = false
+        headerHeartMobileElementPrepend = false
+
+        headerMenuItem = ".hdt-header__inline-list"
+        headerMenuItemClass = ""
+        headerMenuElementClass = ""
+        headerHeartIconMobileCreateElement = ""
+        headerHeartMobileInsertAfter = false
+        headerHeartMobileElementPrepend = false
+
+        headerMenuItemMobile = ".hdt-menu-drawer__menu"
+        headerMenuItemMobileClass = ""
+        headerMenuMobileElementClass = ""
+        headerMenuItemMobileCreateElement = ""
+        headerMenuMobileInsertAfter = false
+        headerMenuMobileElementPrepend = false
+
+        // ------------------- Icons-----------------------
+
+        gridElement = ".hdt-card-product";
+        appendIcon = ".hdt-card-product__media";
+        afterIcon = false
+        appendIconCheck = false
+        buttonPrependBeforeElemnt = false
+        productLink = "a"
+
+        //--------------------------- For Quick Modal--------------
+        // modelMainElement = "button[type='submit'][name='add']";
+        // modalProductElement = "quick-add-modal.quick-add-modal[open='']";
+        // modalbuttonAppend = "button.product-form__submit";
+        // modalButtonAppendOnImg = "slider-component.slider-mobile-gutter";
+        // modalbuttonAppendOnTitle = ".product__title";
+        // modalVariantSelector = ""
+        // modalVariantSubSelector = ""
+        // modalVariantMatchedUndefinedParent = ""
+        // checkModalVariantMatchedUndefinedParent = ""
+        // modalVariantMatchedUndefinedSelector = "";
+        // modalProductIdSelector = "[action='/cart/add'3]";
+        // modalProductIdValueSelector = "[name='id']";
+
+        // icon on pdp image
+        pdpImageSelector = ".hdt-product__media img";
+        pdpTitleSelector = ".hdt-product__title .hdt-h5";
+        pdpAddToCartSelector = ".hdt-product-form__submit";
+        // for header wishlist icon left , right position
+        cart = "a[href='/cart']"
+    }
+
+    else if (themeName === "Sundrift" || themeName === "Flaunt") {
+        // --------------------- For Header------------------------
+        headerHeartIcon = ".header_action_icons"
+        headerHeartIconClass = ""
+        headerHeartElementClass = ""
+        headerHeartIconCreateElement = ""
+        headerHeartElementInsertAfter = false
+        headerHeartElementPrepend = false
+
+        headerHeartIconMobile = ""
+        headerHeartIconMobileClass = ""
+        headerHeartMobileElementClass = ""
+        headerHeartIconMobileCreateElement = ""
+        headerHeartMobileInsertAfter = false
+        headerHeartMobileElementPrepend = false
+
+        headerMenuItem = ""
+        headerMenuItemClass = ""
+        headerMenuElementClass = ""
+        headerHeartIconMobileCreateElement = ""
+        headerHeartMobileInsertAfter = false
+        headerHeartMobileElementPrepend = false
+
+        headerMenuItemMobile = ""
+        headerMenuItemMobileClass = ""
+        headerMenuMobileElementClass = ""
+        headerMenuItemMobileCreateElement = ""
+        headerMenuMobileInsertAfter = false
+        headerMenuMobileElementPrepend = false
+
+        // ------------------- Icons-----------------------
+
+        gridElement = ".main_collection_product";
+        appendIcon = ".product_card_img";
+        afterIcon = false
+        appendIconCheck = false
+        buttonPrependBeforeElemnt = false
+        productLink = "a"
+
+        //--------------------------- For Quick Modal--------------
+        // modelMainElement = "button[type='submit'][name='add']";
+        // modalProductElement = "quick-add-modal.quick-add-modal[open='']";
+        // modalbuttonAppend = "button.product-form__submit";
+        // modalButtonAppendOnImg = "slider-component.slider-mobile-gutter";
+        // modalbuttonAppendOnTitle = ".product__title";
+        // modalVariantSelector = ""
+        // modalVariantSubSelector = ""
+        // modalVariantMatchedUndefinedParent = ""
+        // checkModalVariantMatchedUndefinedParent = ""
+        // modalVariantMatchedUndefinedSelector = "";
+        // modalProductIdSelector = "[action='/cart/add'3]";
+        // modalProductIdValueSelector = "[name='id']";
+
+        // icon on pdp image
+        pdpImageSelector = ".product_media a";
+        pdpTitleSelector = ".product_title .h4";
+        pdpAddToCartSelector = ".add_to_cart_button";
+        // for header wishlist icon left , right position
+        cart = ".header_cart"
+    }
+
+    else if (themeName === "Camp" || themeName === "Flaunt") {
+        // --------------------- For Header------------------------
+        headerHeartIcon = ".header__icons"
+        headerHeartIconClass = ""
+        headerHeartElementClass = ""
+        headerHeartIconCreateElement = ""
+        headerHeartElementInsertAfter = false
+        headerHeartElementPrepend = false
+
+        headerHeartIconMobile = ""
+        headerHeartIconMobileClass = ""
+        headerHeartMobileElementClass = ""
+        headerHeartIconMobileCreateElement = ""
+        headerHeartMobileInsertAfter = false
+        headerHeartMobileElementPrepend = false
+
+        headerMenuItem = ".header__bottom_menu .list-menu"
+        headerMenuItemClass = ""
+        headerMenuElementClass = ""
+        headerHeartIconMobileCreateElement = ""
+        headerHeartMobileInsertAfter = false
+        headerHeartMobileElementPrepend = false
+
+        headerMenuItemMobile = ""
+        headerMenuItemMobileClass = ""
+        headerMenuMobileElementClass = ""
+        headerMenuItemMobileCreateElement = ""
+        headerMenuMobileInsertAfter = false
+        headerMenuMobileElementPrepend = false
+
+        // ------------------- Icons-----------------------
+
+        gridElement = ".main_collection_product";
+        appendIcon = ".product_card_img";
+        afterIcon = false
+        appendIconCheck = false
+        buttonPrependBeforeElemnt = false
+        productLink = "a"
+
+        //--------------------------- For Quick Modal--------------
+        // modelMainElement = "button[type='submit'][name='add']";
+        // modalProductElement = "quick-add-modal.quick-add-modal[open='']";
+        // modalbuttonAppend = "button.product-form__submit";
+        // modalButtonAppendOnImg = "slider-component.slider-mobile-gutter";
+        // modalbuttonAppendOnTitle = ".product__title";
+        // modalVariantSelector = ""
+        // modalVariantSubSelector = ""
+        // modalVariantMatchedUndefinedParent = ""
+        // checkModalVariantMatchedUndefinedParent = ""
+        // modalVariantMatchedUndefinedSelector = "";
+        // modalProductIdSelector = "[action='/cart/add'3]";
+        // modalProductIdValueSelector = "[name='id']";
+
+        // icon on pdp image
+        pdpImageSelector = ".product_media a";
+        pdpTitleSelector = ".product_title .h4";
+        pdpAddToCartSelector = ".add_to_cart_button";
+        // for header wishlist icon left , right position
+        cart = ".header_cart"
+    }
+
     else {
 
         headerHeartIcon = "header .header__icons"
