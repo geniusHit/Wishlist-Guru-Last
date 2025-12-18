@@ -3523,7 +3523,7 @@ export default function detectThemeName(themeName, filter, customSettings) {
 
         // ------------------- Icons-----------------------
 
-        gridElement = '.slick-track .slick-slide';
+        gridElement = '.slick-track .slick-slide:not(.slick-cloned, .wg-lisa_eldridge-custom-css .slidertemplate--24729770197368__le_module_product_carousel_bB3FR9 .slick-track .slick-slide)';
         appendIcon = '.slick-track .slick-slide > div';
         afterIcon = false
         appendIconCheck = false

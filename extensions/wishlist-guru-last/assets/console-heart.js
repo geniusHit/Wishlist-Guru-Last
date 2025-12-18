@@ -1,3 +1,4 @@
+// const e = require("cors");
 
 const heartButton = document.getElementById("heart");
 heartButton.addEventListener("click", heartButtonHandle);
@@ -16,7 +17,7 @@ let customButton = localData?.customButton || JSON.parse(heartButton.getAttribut
 let customLanguage = localData?.customLanguage || JSON.parse(heartButton.getAttribute("language-setting").replace(/~/g, "'"));
 let generalSetting = localData?.generalSetting || JSON.parse(heartButton.getAttribute("general-setting"));
 // let getThemeName = localData?.getThemeName || JSON.parse(heartButton.getAttribute("theme-name"));
-let getThemeName = {themeName: "Dawn"}
+let getThemeName = { themeName: "Dawn" }
 let advanceSetting = localData?.advanceSetting || JSON.parse(heartButton.getAttribute("advance-setting").replace(/~/g, "'"));
 let collectionBtnSetting = localData?.collectionBtnSetting || JSON.parse(heartButton.getAttribute("collection-btn-setting"));
 let currentPlan = localData?.currentPlan || JSON.parse(heartButton.getAttribute("current-plan"));
@@ -563,15 +564,21 @@ async function customCodeButtonClickLaGirl(selectedId, imgHandle, productTitle, 
             renderPopupLoader()
             if (allWishlistData.length > 0 && matchFound) {
                 buttonClickData.isDelete = "yes";
-                openMultiWishlist(buttonClickData, selectedId, "customIcon")
+                // Toast image code starts
+                openMultiWishlist(buttonClickData, selectedId, "customIcon", selectedId, productHandle)
+                // Toast image code ends
             } else {
-                openMultiWishlist(buttonClickData, selectedId, "customIcon")
+                // Toast image code starts
+                openMultiWishlist(buttonClickData, selectedId, "customIcon", selectedId, productHandle)
+                // Toast image code ends
             }
         } else {
             buttonClickData.wishlistName = matchFound ? ["wfNotMulti"] : ["favourites"];
             await checkCollectionCounterData(selectedId, !matchFound ? "add" : "remove")
             customIconAddedRemoveToWishlistLaGirl(selectedId, matchFound ? false : true);
-            saveMainData(buttonClickData, selectedId, "customIcon")
+            // Toast image code starts
+            saveMainData(buttonClickData, selectedId, "customIcon", selectedId, productHandle)
+            // Toast image code ends
         }
     } catch (error) {
         console.error("Error:", error);
@@ -1008,17 +1015,25 @@ async function injectButtonClick(selectedId, handle, varId) {
         const matchFound = await checkFound(allWishlistData, selectedId, varId)
         if (isMultiwishlistTrue) {
             renderPopupLoader();
+            console.log("varId = ", varId)
+            console.log("handle = ", handle)
             if (allWishlistData.length > 0 && matchFound) {
                 buttonData.isDelete = "yes";
-                openMultiWishlist(buttonData, selectedId, "inject", varId)
+                // Toast image code starts
+                openMultiWishlist(buttonData, selectedId, "inject", varId, handle)
+                // Toast image code ends
             } else {
-                openMultiWishlist(buttonData, selectedId, "inject", varId)
+                // Toast image code starts
+                openMultiWishlist(buttonData, selectedId, "inject", varId, handle)
+                // Toast image code ends
             }
         } else {
             buttonData.wishlistName = matchFound ? ["wfNotMulti"] : ["favourites"];
             await checkCounterData(selectedId, !matchFound ? "add" : "remove")
             injectButtonAddedRemoveWishlist(selectedId, matchFound ? false : true)
-            saveMainData(buttonData, selectedId, "inject");
+            // Toast image code starts
+            saveMainData(buttonData, selectedId, "inject", varId, handle);
+            // Toast image code starts
         }
     } catch (error) {
         console.error("Error:", error);
@@ -6507,6 +6522,7 @@ async function customCodeButtonClick(event, selectedId, getHandle, selectedVaria
             saveVariantId = wishlistDiv ? wishlistDiv : selectedVariantId === "null" ? buttonClickproductData?.variants[0].id : selectedVariantId || buttonClickproductData?.variants[0].id;
             const resultFind = variantArr.find(data => data.id === parseInt(selectedVariantId));
             saveImage = resultFind?.featured_image?.src || buttonClickproductData?.images[0];
+            console.log("saveImage = ", saveImage)
         } else {
             saveVariantId = buttonClickproductData.variants[0].id;
             saveImage = buttonClickproductData?.images[0];
@@ -6537,17 +6553,25 @@ async function customCodeButtonClick(event, selectedId, getHandle, selectedVaria
 
         if (isMultiwishlistTrue) {
             renderPopupLoader()
+            console.log("saveVariantId = ", saveVariantId)
+            console.log("getHandle = ", getHandle)
             if (allWishlistData.length > 0 && matchFound) {
                 buttonClickData.isDelete = "yes";
-                openMultiWishlist(buttonClickData, selectedId, "customIcon", saveVariantId)
+                // Toast image code starts
+                openMultiWishlist(buttonClickData, selectedId, "customIcon", saveVariantId, getHandle)
+                // Toast image code ends
             } else {
-                openMultiWishlist(buttonClickData, selectedId, "customIcon", saveVariantId)
+                // Toast image code starts
+                openMultiWishlist(buttonClickData, selectedId, "customIcon", saveVariantId, getHandle)
+                // Toast image code ends
             }
         } else {
             buttonClickData.wishlistName = matchFound ? ["wfNotMulti"] : ["favourites"];
             await checkCollectionCounterData(selectedId, !matchFound ? "add" : "remove")
             customIconAddedRemoveToWishlist(selectedId, matchFound ? false : true, saveVariantId)
-            saveMainData(buttonClickData, selectedId, "customIcon")
+            // Toast image code starts
+            saveMainData(buttonClickData, selectedId, "customIcon", selectedVariantId, getHandle)
+            // Toast image code ends
         }
     } catch (error) {
         console.error("Error:", error);
@@ -6752,18 +6776,26 @@ async function buttonColectionClick(selectedId, handle, selectedVariantId) {
         const matchFound = await checkFound(allWishlistData, selectedId, saveVariantId);
 
         if (isMultiwishlistTrue) {
+            console.log("saveVariantId = ", saveVariantId)
+            console.log("handle = ", handle)
             renderPopupLoader()
             if (allWishlistData.length > 0 && matchFound) {
                 buttonData.isDelete = "yes";
-                openMultiWishlist(buttonData, selectedId, "customButton", saveVariantId)
+                // Toast image code starts
+                openMultiWishlist(buttonData, selectedId, "customButton", saveVariantId, handle)
+                // Toast image code ends
             } else {
-                openMultiWishlist(buttonData, selectedId, "customButton", saveVariantId)
+                // Toast image code starts
+                openMultiWishlist(buttonData, selectedId, "customButton", saveVariantId, handle)
+                // Toast image code ends
             }
         } else {
             buttonData.wishlistName = matchFound ? ["wfNotMulti"] : ["favourites"];
             await checkCollectionCounterData(selectedId, !matchFound ? "add" : "remove")
             buttonAddedRemoveWishlist(selectedId, matchFound ? false : true, "load")
-            saveMainData(buttonData, selectedId, "customButton");
+            // Toast image code starts
+            saveMainData(buttonData, selectedId, "customButton", selectedVariantId, handle);
+            // Toast image code ends
         }
     } catch (error) {
         console.error("Error:", error);
@@ -6872,15 +6904,21 @@ async function collectionIconClick(event, selectedId, handle) {
             renderPopupLoader()
             if (allWishlistData.length > 0 && matchFound) {
                 collectionIconData.isDelete = "yes";
-                openMultiWishlist(collectionIconData, selectedId, "collection");
+                // Toast image code starts
+                openMultiWishlist(collectionIconData, selectedId, "collection", matchedProductId, handle);
+                // Toast image code ends
             } else {
-                openMultiWishlist(collectionIconData, selectedId, "collection");
+                // Toast image code starts
+                openMultiWishlist(collectionIconData, selectedId, "collection", matchedProductId, handle);
+                // Toast image code ends
             }
         } else {
             collectionIconData.wishlistName = matchFound ? ["wfNotMulti"] : ["favourites"];
             await checkCollectionCounterData(selectedId, !matchFound ? "add" : "remove")
             collectionIcon(selectedId, matchFound ? false : true)
-            saveMainData(collectionIconData, selectedId, "collection");
+            // Toast image code starts
+            saveMainData(collectionIconData, selectedId, "collection", matchedProductId, handle);
+            // Toast image code ends
         }
     } catch (error) {
         console.error("Error:", error);
@@ -7359,17 +7397,17 @@ const wgGridCss = `
 .searchData-main2 .cartButtonStyle,
 .modalContainer .cartButtonStyle,
 #wg-multiWishlist_div .cartButtonStyle {
-    background-color: ${generalSetting?.modalButtonIsToggleOn? generalSetting?.modalButtonbgColor : customButton.cartButtonStyle.hover.bgColor};
-    color: ${generalSetting?.modalButtonIsToggleOn? generalSetting?.modalButtontextColor: customButton.cartButtonStyle.hover.textColor};
-    border: ${generalSetting?.modalButtonIsToggleOn? generalSetting?.modalButtonborderInput: customButton.cartButtonStyle.hover.border.value}${generalSetting?.modalButtonIsToggleOn?generalSetting?.modalButtonborderInputUnit : customButton.cartButtonStyle.hover.border.unit} ${generalSetting?.modalButtonIsToggleOn? generalSetting?.modalButtonborderType : customButton.cartButtonStyle.hover.border.type} ${generalSetting?.modalButtonIsToggleOn? generalSetting?.modalButtonborderColor : customButton.cartButtonStyle.hover.border.color}
+    background-color: ${generalSetting?.modalButtonIsToggleOn ? generalSetting?.modalButtonbgColor : customButton.cartButtonStyle.hover.bgColor};
+    color: ${generalSetting?.modalButtonIsToggleOn ? generalSetting?.modalButtontextColor : customButton.cartButtonStyle.hover.textColor};
+    border: ${generalSetting?.modalButtonIsToggleOn ? generalSetting?.modalButtonborderInput : customButton.cartButtonStyle.hover.border.value}${generalSetting?.modalButtonIsToggleOn ? generalSetting?.modalButtonborderInputUnit : customButton.cartButtonStyle.hover.border.unit} ${generalSetting?.modalButtonIsToggleOn ? generalSetting?.modalButtonborderType : customButton.cartButtonStyle.hover.border.type} ${generalSetting?.modalButtonIsToggleOn ? generalSetting?.modalButtonborderColor : customButton.cartButtonStyle.hover.border.color}
 }
 .modal-button-div .cartButtonStyle:hover,
 .searchData-main2 .cartButtonStyle:hover,
 .modalContainer .cartButtonStyle:hover,
 #wg-multiWishlist_div .cartButtonStyle:hover {
-    background-color: ${generalSetting?.modalButtonIsToggleOn? generalSetting?.modalButtonhoverBgColor : customButton.cartButtonStyle.bgColor};
-    color: ${generalSetting?.modalButtonIsToggleOn? generalSetting?.modalButtonhoverTextColor : customButton.cartButtonStyle.textColor};
-    border: ${generalSetting?.modalButtonIsToggleOn? generalSetting?.modalButtonhoverBorderInput : customButton.cartButtonStyle.border.value}${generalSetting?.modalButtonIsToggleOn?generalSetting?.modalButtonhoverBorderInputUnit : customButton.cartButtonStyle.border.unit} ${generalSetting?.modalButtonIsToggleOn? generalSetting?.modalButtonhoverBorderType : customButton.cartButtonStyle.border.type} ${generalSetting?.modalButtonIsToggleOn? generalSetting?.modalButtonhoverBorderColor : customButton.cartButtonStyle.border.color};
+    background-color: ${generalSetting?.modalButtonIsToggleOn ? generalSetting?.modalButtonhoverBgColor : customButton.cartButtonStyle.bgColor};
+    color: ${generalSetting?.modalButtonIsToggleOn ? generalSetting?.modalButtonhoverTextColor : customButton.cartButtonStyle.textColor};
+    border: ${generalSetting?.modalButtonIsToggleOn ? generalSetting?.modalButtonhoverBorderInput : customButton.cartButtonStyle.border.value}${generalSetting?.modalButtonIsToggleOn ? generalSetting?.modalButtonhoverBorderInputUnit : customButton.cartButtonStyle.border.unit} ${generalSetting?.modalButtonIsToggleOn ? generalSetting?.modalButtonhoverBorderType : customButton.cartButtonStyle.border.type} ${generalSetting?.modalButtonIsToggleOn ? generalSetting?.modalButtonhoverBorderColor : customButton.cartButtonStyle.border.color};
 }
 .wishlist-modal-box {
     margin-bottom: ${generalSetting.gridGap}px;
@@ -7639,19 +7677,19 @@ function buttonStyleFxn() {
             font-family: ${cartButtonStyle.fontFamily};
         }
         .modal-button-div .cartButtonStyle, .searchData-main2 .cartButtonStyle, .modalContainer .cartButtonStyle {
-            background-color: ${generalSetting?.modalButtonIsToggleOn? generalSetting?.modalButtonbgColor : cartButtonStyle.bgColor};
-            color: ${generalSetting?.modalButtonIsToggleOn? generalSetting?.modalButtontextColor : cartButtonStyle.textColor};
+            background-color: ${generalSetting?.modalButtonIsToggleOn ? generalSetting?.modalButtonbgColor : cartButtonStyle.bgColor};
+            color: ${generalSetting?.modalButtonIsToggleOn ? generalSetting?.modalButtontextColor : cartButtonStyle.textColor};
             max-width: 100%;
-            border: ${generalSetting?.modalButtonIsToggleOn? generalSetting?.modalButtonborderInput :  cartButtonStyle.border.value}${generalSetting?.modalButtonIsToggleOn? generalSetting?.modalButtonborderInputUnit : cartButtonStyle.border.unit} ${generalSetting?.modalButtonIsToggleOn? generalSetting?.modalButtonborderType : cartButtonStyle.border.type} ${generalSetting?.modalButtonIsToggleOn? generalSetting?.modalButtonborderColor : cartButtonStyle.border.color};
-            border-radius: ${generalSetting?.modalButtonIsToggleOn? generalSetting?.modalButtonborderRadius : cartButtonStyle.borderRadius.value}${generalSetting?.modalButtonIsToggleOn? generalSetting?.modalButtonborderRadiusUnit : cartButtonStyle.borderRadius.unit};
-            font-size: ${generalSetting?.modalButtonIsToggleOn? generalSetting?.modalButtonfontSize : cartButtonStyle.fontSize.value}${generalSetting?.modalButtonIsToggleOn? generalSetting?.modalButtonfontSizeUnit : cartButtonStyle.fontSize.unit} !important;
-            padding: ${generalSetting?.modalButtonIsToggleOn? generalSetting?.modalButtonpaddingTopBottom : cartButtonStyle.paddingTopBottom.value}${generalSetting?.modalButtonIsToggleOn? generalSetting?.modalButtonmarginTopBottomUnit : cartButtonStyle.paddingTopBottom.unit} ${generalSetting?.modalButtonIsToggleOn? generalSetting?.modalButtonpaddingLeftRight : cartButtonStyle.paddingLeftRight.value}${generalSetting?.modalButtonIsToggleOn? generalSetting?.modalButtonpaddingLeftRightUnit : cartButtonStyle.paddingLeftRight.unit};
-            margin: ${generalSetting?.modalButtonIsToggleOn? generalSetting?.modalButtonmarginTopBottom : cartButtonStyle.marginTopBottom.value}${generalSetting?.modalButtonIsToggleOn? generalSetting?.modalButtonmarginTopBottomUnit : cartButtonStyle.marginTopBottom.unit} ${generalSetting?.modalButtonIsToggleOn? generalSetting?.modalButtonmarginLeftRight : cartButtonStyle.marginLeftRight.value}${generalSetting?.modalButtonIsToggleOn? generalSetting?.modalButtonmarginLeftRightUnit : cartButtonStyle.marginLeftRight.unit};
-            text-align: ${generalSetting?.modalButtonIsToggleOn? generalSetting?.modalButtontextAlign : cartButtonStyle.textAlign};
+            border: ${generalSetting?.modalButtonIsToggleOn ? generalSetting?.modalButtonborderInput : cartButtonStyle.border.value}${generalSetting?.modalButtonIsToggleOn ? generalSetting?.modalButtonborderInputUnit : cartButtonStyle.border.unit} ${generalSetting?.modalButtonIsToggleOn ? generalSetting?.modalButtonborderType : cartButtonStyle.border.type} ${generalSetting?.modalButtonIsToggleOn ? generalSetting?.modalButtonborderColor : cartButtonStyle.border.color};
+            border-radius: ${generalSetting?.modalButtonIsToggleOn ? generalSetting?.modalButtonborderRadius : cartButtonStyle.borderRadius.value}${generalSetting?.modalButtonIsToggleOn ? generalSetting?.modalButtonborderRadiusUnit : cartButtonStyle.borderRadius.unit};
+            font-size: ${generalSetting?.modalButtonIsToggleOn ? generalSetting?.modalButtonfontSize : cartButtonStyle.fontSize.value}${generalSetting?.modalButtonIsToggleOn ? generalSetting?.modalButtonfontSizeUnit : cartButtonStyle.fontSize.unit} !important;
+            padding: ${generalSetting?.modalButtonIsToggleOn ? generalSetting?.modalButtonpaddingTopBottom : cartButtonStyle.paddingTopBottom.value}${generalSetting?.modalButtonIsToggleOn ? generalSetting?.modalButtonmarginTopBottomUnit : cartButtonStyle.paddingTopBottom.unit} ${generalSetting?.modalButtonIsToggleOn ? generalSetting?.modalButtonpaddingLeftRight : cartButtonStyle.paddingLeftRight.value}${generalSetting?.modalButtonIsToggleOn ? generalSetting?.modalButtonpaddingLeftRightUnit : cartButtonStyle.paddingLeftRight.unit};
+            margin: ${generalSetting?.modalButtonIsToggleOn ? generalSetting?.modalButtonmarginTopBottom : cartButtonStyle.marginTopBottom.value}${generalSetting?.modalButtonIsToggleOn ? generalSetting?.modalButtonmarginTopBottomUnit : cartButtonStyle.marginTopBottom.unit} ${generalSetting?.modalButtonIsToggleOn ? generalSetting?.modalButtonmarginLeftRight : cartButtonStyle.marginLeftRight.value}${generalSetting?.modalButtonIsToggleOn ? generalSetting?.modalButtonmarginLeftRightUnit : cartButtonStyle.marginLeftRight.unit};
+            text-align: ${generalSetting?.modalButtonIsToggleOn ? generalSetting?.modalButtontextAlign : cartButtonStyle.textAlign};
             cursor: pointer;
             box-sizing: border-box;
-            font-weight: ${generalSetting?.modalButtonIsToggleOn? getFontWt(generalSetting?.modalButtonfontWeight, generalSetting.modalButtonfontWeight).textFw : getFontWt(cartButtonStyle.fontWeight, cartButtonStyle.fontWeight).textFw};
-            font-family: ${generalSetting?.modalButtonIsToggleOn? generalSetting?.modalButtonfontFamily : cartButtonStyle.fontFamily};
+            font-weight: ${generalSetting?.modalButtonIsToggleOn ? getFontWt(generalSetting?.modalButtonfontWeight, generalSetting.modalButtonfontWeight).textFw : getFontWt(cartButtonStyle.fontWeight, cartButtonStyle.fontWeight).textFw};
+            font-family: ${generalSetting?.modalButtonIsToggleOn ? generalSetting?.modalButtonfontFamily : cartButtonStyle.fontFamily};
             width:auto;
         }
         .shareButtonTextStyle {
@@ -8184,9 +8222,9 @@ function buttonStyleFxn() {
             }
 
             .modal-button-div .cartButtonStyle:hover, .searchData-main2 .cartButtonStyle:hover, .modalContainer .cartButtonStyle:hover {
-                background-color: ${generalSetting?.modalButtonIsToggleOn? generalSetting?.modalButtonhoverBgColor : customButton.cartButtonStyle.hover.bgColor};
-                color: ${generalSetting?.modalButtonIsToggleOn? generalSetting?.modalButtonhoverTextColor : customButton.cartButtonStyle.hover.textColor};
-                border: ${generalSetting?.modalButtonIsToggleOn? generalSetting?.modalButtonhoverBorderInput : customButton.cartButtonStyle.hover.border.value}${generalSetting?.modalButtonIsToggleOn? generalSetting?.modalButtonhoverBorderInputUnit : customButton.cartButtonStyle.hover.border.unit} ${generalSetting?.modalButtonIsToggleOn? generalSetting?.modalButtonhoverBorderType : customButton.cartButtonStyle.hover.border.type} ${generalSetting?.modalButtonIsToggleOn? generalSetting?.modalButtonhoverBorderColor : customButton.cartButtonStyle.hover.border.color};
+                background-color: ${generalSetting?.modalButtonIsToggleOn ? generalSetting?.modalButtonhoverBgColor : customButton.cartButtonStyle.hover.bgColor};
+                color: ${generalSetting?.modalButtonIsToggleOn ? generalSetting?.modalButtonhoverTextColor : customButton.cartButtonStyle.hover.textColor};
+                border: ${generalSetting?.modalButtonIsToggleOn ? generalSetting?.modalButtonhoverBorderInput : customButton.cartButtonStyle.hover.border.value}${generalSetting?.modalButtonIsToggleOn ? generalSetting?.modalButtonhoverBorderInputUnit : customButton.cartButtonStyle.hover.border.unit} ${generalSetting?.modalButtonIsToggleOn ? generalSetting?.modalButtonhoverBorderType : customButton.cartButtonStyle.hover.border.type} ${generalSetting?.modalButtonIsToggleOn ? generalSetting?.modalButtonhoverBorderColor : customButton.cartButtonStyle.hover.border.color};
             }
 
             .shareButtonTextStyle:hover {
@@ -8878,7 +8916,7 @@ function styleForTooltipArrow() {
 };
 
 // Toast Image code starts
-async function notificationOfRemoved(fromWhere, productId, prodHandle) {
+async function notificationOfRemoved(fromWhere, productId, prodHandle, variantId) {
     // Toast Image code ends
     const notificationStyle = notificationStyleFxn();
     const notificationTextStyle = notificationTextStyleFxn()
@@ -8887,63 +8925,8 @@ async function notificationOfRemoved(fromWhere, productId, prodHandle) {
     const notificationBelow = document.querySelector('.wf-text-notification-below')
 
     // Toast Image code starts
-    if (fromWhere === "collection") {
-        let wishlistDivs = document.querySelectorAll(".wf-wishlist-collection-icon") || document.querySelectorAll(".wf-wishlist")
-        var productHandle, proId, wishlistDiv;
-        wishlistDivs.forEach((el) => {
-            productHandle = el.getAttribute("product-handle")
-            proId = el.getAttribute("product-id")
-            if (proId === productId) {
-                wishlistDiv = el
-            }
-        })
-
-        var productHandle = wishlistDiv.getAttribute("product-handle")
-        console.log("c1")
-    }
-    else if (fromWhere == "customIcon" || fromWhere === "inject" || fromWhere === "block") {
-        console.log("c2")
-        let wishlistDivs = document.querySelectorAll(".wf-wishlist-collection-icon")
-        if(wishlistDivs.length===0){
-            wishlistDivs = document.querySelectorAll(".wf-wishlist")
-        }
-        console.log("wishlistDivs = ", wishlistDivs)
-        var productHandle, proId, wishlistDiv2;
-        wishlistDivs.forEach((el) => {
-            proId = el.getAttribute("product-id")
-            console.log("proId = ", proId)
-            if (parseInt(proId) === productId) {
-                console.log("proId = ", proId)
-                wishlistDiv2 = el
-            }
-        })
-
-        wishlistDiv = document.getElementById("wf-custom-wishBtn-inject");
-        console.log("wishlistDiv2 = ", wishlistDiv2)
-        productHandle = wishlistDiv.getAttribute("data-product-handle") || wishlistDiv2.getAttribute("product-handle");
-    }
-    else if (fromWhere === "cart") {
-        productHandle = prodHandle;
-        console.log("c3")
-
-    }
-    else if (fromWhere === "allToCart") {
-        productHandle = ""
-        console.log("c4")
-    }
-    else if (fromWhere === "customButton"){
-        console.log("c5")
-
-        let wishlistButton = document.querySelector(".wf-wishlist-button")
-        productHandle = wishlistButton.getAttribute("product-handle")
-    }
-
-    console.log("fromWhere:",fromWhere)
-    console.log("productId = ", productId)
-    console.log("prodHandle = ", prodHandle)
-
-    if (productHandle !== "" && productHandle !== undefined && productHandle !== null) {
-        var { productPrice, variantId, variant_img, buttonJsonData } = await getProductData(productHandle);
+    if (prodHandle !== "" && prodHandle !== undefined && prodHandle !== null) {
+        var { productPrice, variantId2, variant_img, buttonJsonData } = await getProductData(prodHandle);
     }
     // Toast Image code ends
 
@@ -9042,9 +9025,9 @@ async function notificationOfRemoved(fromWhere, productId, prodHandle) {
                     ${customLanguage.removeFromWishlistNotification}
                 </span>
             </div>`
-                : `<div style="${notificationStyle}" class="toast-top-right toast-alignment toast_img">
+                : `<div style="${notificationStyle}" class="removed-notification toast-top-right toast-alignment toast_img">
                 <span class="imageWrapper">
-                    <img src='${buttonJsonData.images[0]}' width='50px' class='toast_image'>
+                    <img src='${isVariantWishlistTrue ? getSelectedVariantImg(variantId, buttonJsonData) : buttonJsonData.images[0]}' width='50px' class='toast_image'>
                 </span>
                 <span class='toast_img_text'>
                     ${buttonJsonData.title}<br>
@@ -9063,9 +9046,9 @@ async function notificationOfRemoved(fromWhere, productId, prodHandle) {
                     ${customLanguage.removeFromWishlistNotification}
                 </span>
             </div>`
-                : `<div style="${notificationStyle}" class="toast-top-center toast-alignment toast_img">
+                : `<div style="${notificationStyle}" class="removed-notification toast-top-center toast-alignment toast_img">
                 <span class="imageWrapper">
-                    <img src='${buttonJsonData.images[0]}' width='50px' class='toast_image'>
+                    <img src='${isVariantWishlistTrue ? getSelectedVariantImg(variantId, buttonJsonData) : buttonJsonData.images[0]}' width='50px' class='toast_image'>
                 </span>
                 <span class='toast_img_text'>
                     ${buttonJsonData.title}<br>
@@ -9084,9 +9067,9 @@ async function notificationOfRemoved(fromWhere, productId, prodHandle) {
                     ${customLanguage.removeFromWishlistNotification}
                 </span>
             </div>`
-                : `<div style="${notificationStyle}" class="toast-top-left toast-alignment toast_img">
+                : `<div style="${notificationStyle}" class="removed-notification toast-top-left toast-alignment toast_img">
                 <span class="imageWrapper">
-                    <img src='${buttonJsonData.images[0]}' width='50px' class='toast_image'>
+                    <img src='${isVariantWishlistTrue ? getSelectedVariantImg(variantId, buttonJsonData) : buttonJsonData.images[0]}' width='50px' class='toast_image'>
                 </span>
                 <span class='toast_img_text'>
                     ${buttonJsonData.title}<br>
@@ -9105,9 +9088,9 @@ async function notificationOfRemoved(fromWhere, productId, prodHandle) {
                     ${customLanguage.removeFromWishlistNotification}
                 </span>
             </div>`
-                : `<div style="${notificationStyle}" class="toast-bottom-right toast-alignment toast_img">
+                : `<div style="${notificationStyle}" class="removed-notification toast-bottom-right toast-alignment toast_img">
                 <span class="imageWrapper">
-                    <img src='${buttonJsonData.images[0]}' width='50px' class='toast_image'>
+                    <img src='${isVariantWishlistTrue ? getSelectedVariantImg(variantId, buttonJsonData) : buttonJsonData.images[0]}' width='50px' class='toast_image'>
                 </span>
                 <span class='toast_img_text'>
                     ${buttonJsonData.title}<br>
@@ -9126,9 +9109,9 @@ async function notificationOfRemoved(fromWhere, productId, prodHandle) {
                     ${customLanguage.removeFromWishlistNotification}
                 </span>
             </div>`
-                : `<div style="${notificationStyle}" class="toast-bottom-left toast-alignment toast_img">
+                : `<div style="${notificationStyle}" class="removed-notification toast-bottom-left toast-alignment toast_img">
                 <span class="imageWrapper">
-                    <img src='${buttonJsonData.images[0]}' width='50px' class='toast_image'>
+                    <img src='${isVariantWishlistTrue ? getSelectedVariantImg(variantId, buttonJsonData) : buttonJsonData.images[0]}' width='50px' class='toast_image'>
                 </span>
                 <span class='toast_img_text'>
                     ${buttonJsonData.title}<br>
@@ -9146,9 +9129,9 @@ async function notificationOfRemoved(fromWhere, productId, prodHandle) {
                     ${customLanguage.removeFromWishlistNotification}
                 </span>
             </div>`
-                : `<div style="${notificationStyle}" class="toast-bottom-center toast-alignment toast_img">
+                : `<div style="${notificationStyle}" class="removed-notification toast-bottom-center toast-alignment toast_img">
                 <span class="imageWrapper">
-                    <img src='${buttonJsonData.images[0]}' width='50px' class='toast_image'>
+                    <img src='${isVariantWishlistTrue ? getSelectedVariantImg(variantId, buttonJsonData) : buttonJsonData.images[0]}' width='50px' class='toast_image'>
                 </span>
                 <span class='toast_img_text'>
                     ${buttonJsonData.title}<br>
@@ -9164,7 +9147,7 @@ async function notificationOfRemoved(fromWhere, productId, prodHandle) {
 };
 
 // Toast Image code starts
-async function notificationOfAdded(fromWhere, productId, prodHandle) {
+async function notificationOfAdded(fromWhere, productId, prodHandle, variantId) {
     // Toast Image code ends
 
     const notificationDivId = document.getElementById("notificationDiv")
@@ -9174,66 +9157,12 @@ async function notificationOfAdded(fromWhere, productId, prodHandle) {
     const notificationTextStyle = notificationTextStyleFxn()
 
     // Toast Image code starts
-    if (fromWhere === "collection") {
-        let wishlistDivs = document.querySelectorAll(".wf-wishlist-collection-icon") || document.querySelectorAll(".wf-wishlist")
-        var productHandle, proId, wishlistDiv;
-        wishlistDivs.forEach((el) => {
-            productHandle = el.getAttribute("product-handle")
-            proId = el.getAttribute("product-id")
-            if (proId === productId) {
-                wishlistDiv = el
-            }
-        })
-
-        var productHandle = wishlistDiv.getAttribute("product-handle")
-        console.log("c1")
-    }
-    else if (fromWhere == "customIcon" || fromWhere === "inject" || fromWhere === "block") {
-        console.log("c2")
-        let wishlistDivs = document.querySelectorAll(".wf-wishlist-collection-icon")
-        if(wishlistDivs.length===0){
-            wishlistDivs = document.querySelectorAll(".wf-wishlist")
-        }
-        console.log("wishlistDivs = ", wishlistDivs)
-        var productHandle, proId, wishlistDiv2;
-        wishlistDivs.forEach((el) => {
-            proId = el.getAttribute("product-id")
-            console.log("proId = ", proId)
-            if (parseInt(proId) === productId) {
-                wishlistDiv2 = el
-                console.log("proId = ", proId)
-            }
-        })
-
-        wishlistDiv = document.getElementById("wf-custom-wishBtn-inject");
-        console.log("wishlistDiv2 = ", wishlistDiv2)
-        productHandle = wishlistDiv.getAttribute("data-product-handle") || wishlistDiv2.getAttribute("product-handle");
-    }
-    else if (fromWhere === "cart") {
-        productHandle = prodHandle;
-        console.log("c3")
-
-    }
-    else if (fromWhere === "allToCart") {
-        productHandle = ""
-        console.log("c4")
-
-    }
-    else if (fromWhere === "customButton"){
-        console.log("c5")
-
-        let wishlistButton = document.querySelector(".wf-wishlist-button")
-        productHandle = wishlistButton.getAttribute("product-handle")
-    }
-
-    console.log("fromWhere = ", fromWhere)
-    console.log("productId = ", productId)
-    console.log("productHandle = ", productHandle)
-
-    if (productHandle !== "" && productHandle !== undefined && productHandle !== null) {
-        var { productPrice, variantId, variant_img, buttonJsonData } = await getProductData(productHandle);
+    if (prodHandle !== "" && prodHandle !== undefined && prodHandle !== null) {
+        var { productPrice, variantId2, variant_img, buttonJsonData } = await getProductData(prodHandle);
     }
     // Toast Image code ends
+
+    console.log("buttonJsonData = ", buttonJsonData)
 
     styleForTooltipArrow();
     if (generalSetting.wishlistOrNotification === "show-wishlist") {
@@ -9291,7 +9220,7 @@ async function notificationOfAdded(fromWhere, productId, prodHandle) {
         //     document.querySelector(".tooltip-below").innerHTML = tooltipBelow;
         // }
 
-         // Toast Image code starts
+        // Toast Image code starts
         if (generalSetting.notificationTypeOption === "toastImage-center") {
             notificationDivId.style.display = "block";
             let toastCenter = `<div style="${notificationStyle}" class="toast-bottom-center toast-alignment">${customLanguage.addToWishlistNotification}</div>`;
@@ -9331,9 +9260,9 @@ async function notificationOfAdded(fromWhere, productId, prodHandle) {
                     ${customLanguage.addToWishlistNotification}
                 </span>
             </div>`
-                : `<div style="${notificationStyle}" class="toast-top-right toast-alignment toast_img">
+                : `<div style="${notificationStyle}" class="added-notification toast-top-right toast-alignment toast_img">
                 <span class="imageWrapper">
-                    <img src='${buttonJsonData.images[0]}' width='50px' class='toast_image'>
+                    <img src='${isVariantWishlistTrue ? getSelectedVariantImg(variantId, buttonJsonData) : buttonJsonData.images[0]}' width='50px' class='toast_image'>
                 </span>
                 <span class='toast_img_text'>
                     ${buttonJsonData.title}<br>
@@ -9352,9 +9281,9 @@ async function notificationOfAdded(fromWhere, productId, prodHandle) {
                     ${customLanguage.addToWishlistNotification}
                 </span>
             </div>`
-                : `<div style="${notificationStyle}" class="toast-top-center toast-alignment toast_img">
+                : `<div style="${notificationStyle}" class="added-notification toast-top-center toast-alignment toast_img">
                 <span class="imageWrapper">
-                    <img src='${buttonJsonData.images[0]}' width='50px' class='toast_image'>
+                    <img src='${isVariantWishlistTrue ? getSelectedVariantImg(variantId, buttonJsonData) : buttonJsonData.images[0]}' width='50px' class='toast_image'>
                 </span>
                 <span class='toast_img_text'>
                     ${buttonJsonData.title}<br>
@@ -9373,9 +9302,9 @@ async function notificationOfAdded(fromWhere, productId, prodHandle) {
                     ${customLanguage.addToWishlistNotification}
                 </span>
             </div>`
-                : `<div style="${notificationStyle}" class="toast-top-left toast-alignment toast_img">
+                : `<div style="${notificationStyle}" class="added-notification toast-top-left toast-alignment toast_img">
                 <span class="imageWrapper">
-                    <img src='${buttonJsonData.images[0]}' width='50px' class='toast_image'>
+                    <img src='${isVariantWishlistTrue ? getSelectedVariantImg(variantId, buttonJsonData) : buttonJsonData.images[0]}' width='50px' class='toast_image'>
                 </span>
                 <span class='toast_img_text'>
                     ${buttonJsonData.title}<br>
@@ -9394,9 +9323,9 @@ async function notificationOfAdded(fromWhere, productId, prodHandle) {
                     ${customLanguage.addToWishlistNotification}
                 </span>
             </div>`
-                : `<div style="${notificationStyle}" class="toast-bottom-right toast-alignment toast_img">
+                : `<div style="${notificationStyle}" class="added-notification toast-bottom-right toast-alignment toast_img">
                 <span class="imageWrapper">
-                    <img src='${buttonJsonData.images[0]}' width='50px' class='toast_image'>
+                    <img src='${isVariantWishlistTrue ? getSelectedVariantImg(variantId, buttonJsonData) : buttonJsonData.images[0]}' width='50px' class='toast_image'>
                 </span>
                 <span class='toast_img_text'>
                     ${buttonJsonData.title}<br>
@@ -9415,9 +9344,9 @@ async function notificationOfAdded(fromWhere, productId, prodHandle) {
                     ${customLanguage.addToWishlistNotification}
                 </span>
             </div>`
-                : `<div style="${notificationStyle}" class="toast-bottom-left toast-alignment toast_img">
+                : `<div style="${notificationStyle}" class="added-notification toast-bottom-left toast-alignment toast_img">
                 <span class="imageWrapper">
-                    <img src='${buttonJsonData.images[0]}' width='50px' class='toast_image'>
+                    <img src='${isVariantWishlistTrue ? getSelectedVariantImg(variantId, buttonJsonData) : buttonJsonData.images[0]}' width='50px' class='toast_image'>
                 </span>
                 <span class='toast_img_text'>
                     ${buttonJsonData.title}<br>
@@ -9435,9 +9364,9 @@ async function notificationOfAdded(fromWhere, productId, prodHandle) {
                     ${customLanguage.addToWishlistNotification}
                 </span>
             </div>`
-                : `<div style="${notificationStyle}" class="toast-bottom-center toast-alignment toast_img">
+                : `<div style="${notificationStyle}" class="added-notification toast-bottom-center toast-alignment toast_img">
                 <span class="imageWrapper">
-                    <img src='${buttonJsonData.images[0]}' width='50px' class='toast_image'>
+                    <img src='${isVariantWishlistTrue ? getSelectedVariantImg(variantId, buttonJsonData) : buttonJsonData.images[0]}' width='50px' class='toast_image'>
                 </span>
                 <span class='toast_img_text'>
                     ${buttonJsonData.title}<br>
@@ -9451,6 +9380,14 @@ async function notificationOfAdded(fromWhere, productId, prodHandle) {
     }
     clearNotification();
 };
+
+// Toast image code starts
+function getSelectedVariantImg(variantId, buttonJsonData) {
+    let foundVariant = buttonJsonData.variants.find(el => parseInt(variantId) === el.id)
+    console.log("foundVariant = ", foundVariant)
+    return foundVariant !== undefined ? (foundVariant?.featured_image !== null? foundVariant?.featured_image?.src: buttonJsonData.images[0]): buttonJsonData.images[0]
+}
+// Toast image code ends
 
 function clearNotification() {
     const notificationDivId = document.getElementById("notificationDiv")
@@ -11108,7 +11045,7 @@ async function executeMe2(wishName, fromWhere) {
     let result = await userData.json();
 }
 
-async function openMultiWishlist(data, productId, fromWhere, variantId = null) {
+async function openMultiWishlist(data, productId, fromWhere, variantId = null, handle) {
     closeMultiWishlist();
     getMultiWishlistDiv.style.display = "block";
     const dataToSend = fromWhere === "shared" ? {
@@ -11117,10 +11054,10 @@ async function openMultiWishlist(data, productId, fromWhere, variantId = null) {
         customerEmail: data.customerEmail,
     } : "";
     const multiArrayData = await getMultiwishlistData(dataToSend)
-    await renderData(multiArrayData, data, productId, fromWhere, variantId);
+    await renderData(multiArrayData, data, productId, fromWhere, variantId, handle);
 }
 
-async function renderData(multiArray, data, productId, fromWhere, variantId = null) {
+async function renderData(multiArray, data, productId, fromWhere, variantId = null, handle) {
     const newDataArray = allWishlistData;
     const isDeleteMode = data.isDelete === "yes";
     const checkedArr = [];
@@ -11182,14 +11119,16 @@ async function renderData(multiArray, data, productId, fromWhere, variantId = nu
                 ${wishlistItems}
             </ul>
         </div>`;
+    // Toast image code starts
     const saveButton = multiArray.length > 0
         ? `<button class="saveBtn cartButtonStyle" id="${isDeleteMode ? "saveDelWishlistBtn" : "saveWishlistBtn"}"
-              onclick="${isDeleteMode ? "saveDelteWishlists" : "saveWishlists"}(event, ${productId}, '${fromWhere}')">
+              onclick="${isDeleteMode ? "saveDelteWishlists" : "saveWishlists"}(event, ${productId}, '${fromWhere}', ${variantId}, '${handle}')">
               ${isDeleteMode
             ? customLanguage.editBtn || storeFrontDefLang.editBtn
             : customLanguage.saveWishlistBtn || storeFrontDefLang.saveWishlistBtn}
            </button>`
         : "";
+    // Toast image code ends
 
     const multiWishlistData = `
         <div>
@@ -11303,7 +11242,9 @@ async function handleDeleteCheckboxClick(event) {
     document.getElementById("saveDelWishlistBtn").disabled = disableButton;
 }
 
-async function saveWishlists(event, productId, fromWhere) {
+// Toast image code starts
+async function saveWishlists(event, productId, fromWhere, variantId, handle) {
+    // Toast image code ends
     if (checkedItems.length === 0) {
         await showErrorPara(customLanguage?.mwChooseWishlistToSave || storeFrontDefLang.chooseWishlist);
         return;
@@ -11314,7 +11255,9 @@ async function saveWishlists(event, productId, fromWhere) {
     if (newData.shopName) {
         saveSharedWishlist(newData);
     } else {
-        saveMainData(newData, productId, fromWhere)
+        // Toast image code starts
+        saveMainData(newData, productId, fromWhere, variantId, handle)
+        // Toast image code ends
     }
     checkedItems = [];
     nonCheckedItems = [];
@@ -11329,21 +11272,27 @@ async function showErrorPara(msg) {
     }
 }
 
-async function saveDelteWishlists(event, productId, fromWhere) {
+// Toast image code starts
+async function saveDelteWishlists(event, productId, fromWhere, variantId, handle) {\
+    // Toast image code ends
     const parentElement = event.target.parentNode;
     const dataValue = parentElement.querySelector("#hiddenDiv").dataset.prodata;
     const newData = { ...JSON.parse(dataValue), wishlistName: checkedItems, DelWishlistName: nonCheckedItems };
     if (fromWhere === "shared") {
         saveSharedWishlist(newData);
     } else {
-        saveMainData(newData, productId, fromWhere)
+        // Toast image code starts
+        saveMainData(newData, productId, fromWhere, variantId, handle)
+        // Toast image code ends
     }
     checkedItems = [];
     nonCheckedItems = [];
     getMultiWishlistDiv.style.display = "none";
 }
 
-async function saveMainData(data, productId, fromWhere) {
+// Toast image code starts
+async function saveMainData(data, productId, fromWhere, variantId, handle) {
+    // Toast image code starts
     let result = await SqlFunction(data);
     const proId = injectCoderr.getAttribute("data-product-id");
     if (result.msg === "item updated") {
@@ -11392,7 +11341,6 @@ async function saveMainData(data, productId, fromWhere) {
             buttonAddedRemoveWishlist(productId, matchFound)
             customIconAddedRemoveToWishlist(productId, matchFound);
             currentPlan > 1 && (matchFound ? fxnAfterAddToWishlist() : fxnAfterRemoveFromWishlist());
-
         } else if (fromWhere === "customButton") {
             isMultiwishlistTrue && buttonAddedRemoveWishlist(productId, matchFound)
             injectButtonAddedRemoveWishlist(productId, matchFound);
@@ -11421,7 +11369,7 @@ async function saveMainData(data, productId, fromWhere) {
         }
         // matchFound ? alertToast(notificationMsg, "added") : alertToast(customLanguage.removeFromWishlistNotification, "removed");
         // Toast Image code starts
-        matchFound ? notificationOfAdded(fromWhere, productId) : notificationOfRemoved(fromWhere, productId);
+        matchFound ? notificationOfAdded(fromWhere, productId, handle, variantId) : notificationOfRemoved(fromWhere, productId, handle, variantId);
         // Toast Image code ends
         (currentPlan >= 3 && generalSetting?.trendingLayout) && await renderTrendingGridData();
 
