@@ -17,7 +17,7 @@ let customButton = localData?.customButton || JSON.parse(heartButton.getAttribut
 let customLanguage = localData?.customLanguage || JSON.parse(heartButton.getAttribute("language-setting").replace(/~/g, "'"));
 let generalSetting = localData?.generalSetting || JSON.parse(heartButton.getAttribute("general-setting"));
 // let getThemeName = localData?.getThemeName || JSON.parse(heartButton.getAttribute("theme-name"));
-let getThemeName = { themeName: "Dawn" }
+let getThemeName = { themeName: "Savor" }
 let advanceSetting = localData?.advanceSetting || JSON.parse(heartButton.getAttribute("advance-setting").replace(/~/g, "'"));
 let collectionBtnSetting = localData?.collectionBtnSetting || JSON.parse(heartButton.getAttribute("collection-btn-setting"));
 let currentPlan = localData?.currentPlan || JSON.parse(heartButton.getAttribute("current-plan"));
@@ -557,6 +557,16 @@ async function customCodeButtonClickLaGirl(selectedId, imgHandle, productTitle, 
             quantity: 1,
             language: wfGetDomain,
         };
+        const notificationData = {
+            fromWhere: null,
+            image: imgHandle,
+            title: productTitle,
+        }
+
+        const productData = {
+            handle: handle,
+            variantId: variant_id,
+        }
         const res = await showLoginPopup(selectedId);
         if (res) return;
         const matchFound = await checkFound(allWishlistData, selectedId)
@@ -577,7 +587,8 @@ async function customCodeButtonClickLaGirl(selectedId, imgHandle, productTitle, 
             await checkCollectionCounterData(selectedId, !matchFound ? "add" : "remove")
             customIconAddedRemoveToWishlistLaGirl(selectedId, matchFound ? false : true);
             // Toast image code starts
-            saveMainData(buttonClickData, selectedId, "customIcon", selectedId, productHandle)
+            // saveMainData(buttonClickData, selectedId, "customIcon", selectedId, productHandle)
+            saveMainData(buttonClickData, selectedId, "customIcon", notificationData, productData)
             // Toast image code ends
         }
     } catch (error) {
@@ -1010,6 +1021,17 @@ async function injectButtonClick(selectedId, handle, varId) {
             productOption: JSON.stringify(getProductOption)
         };
 
+        const notificationData = {
+            fromWhere: null,
+            image: saveImage,
+            title: buttonJsonData.title,
+        }
+
+        const productData = {
+            handle: buttonJsonData.handle,
+            variantId: saveVariantId,
+        }
+
         const res = await showLoginPopup(selectedId);
         if (res) return;
         const matchFound = await checkFound(allWishlistData, selectedId, varId)
@@ -1032,7 +1054,8 @@ async function injectButtonClick(selectedId, handle, varId) {
             await checkCounterData(selectedId, !matchFound ? "add" : "remove")
             injectButtonAddedRemoveWishlist(selectedId, matchFound ? false : true)
             // Toast image code starts
-            saveMainData(buttonData, selectedId, "inject", varId, handle);
+            // saveMainData(buttonData, selectedId, "inject", varId, handle);
+            saveMainData(buttonData, selectedId, "inject", notificationData, productData);
             // Toast image code ends
         }
     } catch (error) {
@@ -4971,6 +4994,17 @@ async function addToMyWishlist(
         referral_id: sharedId
     };
 
+    const notificationData = {
+        fromWhere: null,
+        image: image,
+        title: title,
+    }
+
+    const productData = {
+        handle: handle,
+        variantId: variant_id,
+    }
+
     if (isMultiwishlistTrue && !matchFound) {
         renderPopupLoader()
         if (wishlistDataInSql.length === 0 || !matchFound) {
@@ -4978,7 +5012,10 @@ async function addToMyWishlist(
             event.target.innerHTML = customLanguage.sharedPageItemAdded;
             event.target.classList.add("added");
         } else {
-            alertToast(`${customLanguage.sharedPageAlreadyAdded}`, null, null, product_id, handle, variant_id);
+            // Toast image code starts
+            // alertToast(`${customLanguage.sharedPageAlreadyAdded}`, null, null, product_id, handle, variant_id);
+            alertToast(`${customLanguage.sharedPageAlreadyAdded}`, null, notificationData, productData);
+            // Toast image code ends
             event.target.innerHTML = customLanguage.sharedPageAlreadyAdded;
             event.target.classList.add("already-added");
         }
@@ -4990,7 +5027,10 @@ async function addToMyWishlist(
             event.target.classList.add("added");
         } else {
             // alertToast(`${customLanguage.sharedPageAlreadyAdded}`);
-            alertToast(`${customLanguage.sharedPageAlreadyAdded}`, null, null, product_id, handle, variant_id);
+            // Toast image code starts
+            // alertToast(`${customLanguage.sharedPageAlreadyAdded}`, null, null, product_id, handle, variant_id);
+            alertToast(`${customLanguage.sharedPageAlreadyAdded}`, null, notificationData, productData);
+            // Toast image code ends
             event.target.innerHTML = customLanguage.sharedPageAlreadyAdded;
             event.target.classList.add("already-added");
         }
@@ -5025,15 +5065,32 @@ async function saveSharedWishlist(data) {
             }),
         })
 
+        const notificationData = {
+            fromWhere: null,
+            image: data.image,
+            title: data.title,
+        }
+
+        const productData = {
+            handle: data.handle,
+            variantId: data.variantId,
+        }
+
 
         let result = await userData.json();
         if (result.msg === "item updated" && result.isAdded === "yes") {
             await showCountAll();
-            alertToast(`${customLanguage.sharedPageItemAdded}`, null, null, data.productId, data.handle, data.variantId);
+            // Toast image code starts
+            // alertToast(`${customLanguage.sharedPageItemAdded}`, null, null, data.productId, data.handle, data.variantId);
+            alertToast(`${customLanguage.sharedPageItemAdded}`, null, notificationData, productData);
+            // Toast image code ends
             await renderAddToWishlistIcon(data.productId);
         } else if (result.msg === "already added") {
             // alertToast(`${customLanguage.sharedPageAlreadyAdded}`);
-            alertToast(`${customLanguage.sharedPageItemAdded}`, null, null, data.productId, data.handle, data.variantId);
+            // Toast image code starts
+            // alertToast(`${customLanguage.sharedPageItemAdded}`, null, null, data.productId, data.handle, data.variantId);
+            alertToast(`${customLanguage.sharedPageItemAdded}`, null, notificationData, productData);
+            // Toast image code ends
         }
         if (result.msg === "limit cross") {
             alertContent(customLanguage?.quotaLimitAlert || "Wishlist Quota of this store reached its monthly limit, We have notified store owner to upgrade their plan. Sorry for the inconvenience");
@@ -5128,6 +5185,16 @@ async function removeItem(
             }),
         });
 
+        const notificationData = {
+            fromWhere: null,
+            image: null,
+            title: null,
+        }
+        const productData = {
+            handle: handle,
+            variantId: variant_id,
+        }
+
         let result = await userData.json();
         // console.log("ERRRORR ", result)
 
@@ -5141,7 +5208,9 @@ async function removeItem(
 
             createFilterOptionInStructure();
 
-            showAlert === true && !isMultiwishlistTrue && alertToast(`${customLanguage.alertForRemoveButton}`, null, null, product_id, handle, variant_id);
+            // Toast image code starts
+            showAlert === true && !isMultiwishlistTrue && alertToast(`${customLanguage.alertForRemoveButton}`, null, notificationData, productData);
+            // Toast image code ends
 
             const arrayList = isMultiwishlistTrue
                 ? allWishlistData
@@ -6149,12 +6218,24 @@ async function allToCartFxn(allData, viewItemProducts = []) {
         //     console.error("Error processing cart items:", error);
         // }
 
+        const notificationData = {
+            fromWhere: "allToCart",
+            image: null,
+            title: null,
+        }
+
+        const productData = {
+            handle: null,
+            variantId: null,
+        }
 
         await cartFunctionForAllItems(val, false);
         await refreshCart();
         // alertToast(customLanguage.alertAddAllToCart || storeFrontDefLang.alertAddAllToCart);
         // Toast image code starts
-        alertToast(customLanguage.alertAddAllToCart || storeFrontDefLang.alertAddAllToCart, null, "allToCart", null, null);
+        // alertToast(customLanguage.alertAddAllToCart || storeFrontDefLang.alertAddAllToCart, null, "allToCart", null, null);
+        alertToast(customLanguage.alertAddAllToCart || storeFrontDefLang.alertAddAllToCart, null, notificationData, productData);
+
         // Toast image code ends
 
         const parentDiv = document.querySelector(".wg-addalltocart");
@@ -6376,7 +6457,19 @@ async function cartFunction(data, alertValue = true, handle) {
             method: "POST",
         });
 
+        console.log("data from cartFunction = ", data)
         const json = await response.json();
+
+        const notificationData = {
+            fromWhere: null,
+            image: json.image,
+            title: json.title,
+        }
+
+        const productData = {
+            handle: json.handle,
+            variantId: json.variant_id,
+        }
 
         if (alertValue) {
             if (json.message === "Cart Error" || json.status === 422) {
@@ -6384,7 +6477,7 @@ async function cartFunction(data, alertValue = true, handle) {
             } else {
                 // alertToast(`${customLanguage.alertForAddToCartButton}`);
                 // Toast image code starts
-                alertToast(`${customLanguage.alertForAddToCartButton}`, null, "cart", null, handle);
+                alertToast(`${customLanguage.alertForAddToCartButton}`, null, notificationData, productData);
                 // Toast image code ends
             }
         }
@@ -6548,6 +6641,17 @@ async function customCodeButtonClick(event, selectedId, getHandle, selectedVaria
             language: wfGetDomain,
         };
 
+        const notificationData = {
+            fromWhere: null,
+            image: saveImage || "",
+            title: buttonClickproductData.title,
+        }
+
+        const productData = {
+            handle: buttonClickproductData.handle,
+            variantId: saveVariantId,
+        }
+
         const res = await showLoginPopup(selectedId);
         if (res) return;
 
@@ -6574,7 +6678,8 @@ async function customCodeButtonClick(event, selectedId, getHandle, selectedVaria
             await checkCollectionCounterData(selectedId, !matchFound ? "add" : "remove")
             customIconAddedRemoveToWishlist(selectedId, matchFound ? false : true, saveVariantId)
             // Toast image code starts
-            saveMainData(buttonClickData, selectedId, "customIcon", selectedVariantId, getHandle)
+            // saveMainData(buttonClickData, selectedId, "customIcon", selectedVariantId, getHandle)
+            saveMainData(buttonClickData, selectedId, "customIcon", notificationData, productData)
             // Toast image code ends
         }
     } catch (error) {
@@ -6774,6 +6879,17 @@ async function buttonColectionClick(selectedId, handle, selectedVariantId) {
 
         };
 
+        const notificationData = {
+            fromWhere: null,
+            image: saveImage || "",
+            title: buttonJsonData.title,
+        }
+
+        const productData = {
+            handle: buttonJsonData.handle,
+            variantId: saveVariantId,
+        }
+
         const res = await showLoginPopup(selectedId);
         if (res) return;
 
@@ -6798,7 +6914,8 @@ async function buttonColectionClick(selectedId, handle, selectedVariantId) {
             await checkCollectionCounterData(selectedId, !matchFound ? "add" : "remove")
             buttonAddedRemoveWishlist(selectedId, matchFound ? false : true, "load")
             // Toast image code starts
-            saveMainData(buttonData, selectedId, "customButton", selectedVariantId, handle);
+            // saveMainData(buttonData, selectedId, "customButton", selectedVariantId, handle);
+            saveMainData(buttonData, selectedId, "customButton", notificationData, productData);
             // Toast image code ends
         }
     } catch (error) {
@@ -6899,6 +7016,17 @@ async function collectionIconClick(event, selectedId, handle) {
             language: wfGetDomain
         }
 
+        const notificationData = {
+            fromWhere: null,
+            image: matchedElement !== null ? variant_img : collectionIconJsonData.images[0] ? collectionIconJsonData.images[0] : "",
+            title: collectionIconJsonData.title,
+        }
+
+        const productData = {
+            handle: collectionIconJsonData.handle,
+            variantId: matchedElement !== null ? matchedProductId : collectionIconJsonData.variants[0].id,
+        }
+
         const res = await showLoginPopup(selectedId);
         if (res) return;
 
@@ -6921,7 +7049,8 @@ async function collectionIconClick(event, selectedId, handle) {
             await checkCollectionCounterData(selectedId, !matchFound ? "add" : "remove")
             collectionIcon(selectedId, matchFound ? false : true)
             // Toast image code starts
-            saveMainData(collectionIconData, selectedId, "collection", matchedProductId, handle);
+            // saveMainData(collectionIconData, selectedId, "collection", matchedProductId, handle);
+            saveMainData(collectionIconData, selectedId, "collection", notificationData, productData);
             // Toast image code ends
         }
     } catch (error) {
@@ -8800,9 +8929,23 @@ async function collectionIconClickModal(event, selectedId, handle) {
                 quantity: 1,
                 language: wfGetDomain
             }
+
+            const notificationData = {
+                fromWhere: null,
+                image: filteredImages.length != 0 ? filteredImages[0] : "",
+                title: jsonData.title,
+            }
+
+            const productData = {
+                handle: jsonData.handle,
+                variantId: productVariantValue,
+            }
+
             let result = await SqlFunction(data);
             if (result.msg === "item added") {
-                alertToast(`${customLanguage.addToWishlistNotification}`, null, null, jsonData.id, jsonData.handle, productVariantValue);
+                // Toast image code starts
+                alertToast(`${customLanguage.addToWishlistNotification}`, null, notificationData, productData);
+                // Toast image code ends
                 collectionBtnAddedRemoveWishlist(selectedId, handle, "added")
                 customIconAddedRemoveToWishlist(selectedId, "filter")
                 buttonAddedRemoveWishlist(selectedId, "added")
@@ -8812,7 +8955,10 @@ async function collectionIconClickModal(event, selectedId, handle) {
                 (currentPlan > 1) && fxnAfterAddToWishlist();
             }
             if (result.msg === "item removed") {
-                alertToast(`${customLanguage.removeFromWishlistNotification}`, null, null, jsonData.id, jsonData.handle, productVariantValue);
+                // Toast image code starts
+                // alertToast(`${customLanguage.removeFromWishlistNotification}`, null, null, jsonData.id, jsonData.handle, productVariantValue);
+                alertToast(`${customLanguage.addToWishlistNotification}`, null, notificationData, productData);
+                // Toast image code ends
                 collectionBtnAddedRemoveWishlist(selectedId, handle, "")
                 customIconAddedRemoveToWishlist(selectedId, "")
                 buttonAddedRemoveWishlist(selectedId, "")
@@ -8920,7 +9066,7 @@ function styleForTooltipArrow() {
 };
 
 // Toast Image code starts
-async function notificationOfRemoved(fromWhere, productId, prodHandle, variantId) {
+async function notificationOfRemoved(fromWhere, notificationData, productData) {
     // Toast Image code ends
     const notificationStyle = notificationStyleFxn();
     const notificationTextStyle = notificationTextStyleFxn()
@@ -8929,8 +9075,10 @@ async function notificationOfRemoved(fromWhere, productId, prodHandle, variantId
     const notificationBelow = document.querySelector('.wf-text-notification-below')
 
     // Toast Image code starts
-    if (prodHandle !== "" && prodHandle !== undefined && prodHandle !== null) {
-        var { productPrice, variantId2, variant_img, buttonJsonData } = await getProductData(prodHandle);
+    if (notificationData.image === null || notificationData.title === null) {
+        if (productData.handle !== "" && productData.handle !== undefined && productData.handle !== null) {
+            var { buttonJsonData } = await getProductData(productData.handle);
+        }
     }
     // Toast Image code ends
 
@@ -9023,18 +9171,16 @@ async function notificationOfRemoved(fromWhere, productId, prodHandle, variantId
         else if (generalSetting.notificationTypeOption === "toast-top-right") {
             // document.querySelector(".our-sweetalert").style.display = "block";
             notificationDivId.style.display = "block";
-            let toastTopRight = `${fromWhere === "allToCart" || fromWhere === "copyUrl" ? `
+            let toastTopRight = `${notificationData.fromWhere === "allToCart" || notificationData.fromWhere === "copyUrl" ? `
             <div style="${notificationStyle}" class="toast-top-right toast-alignment toast_img">
-                <span class='toast_img_text'>
-                    ${customLanguage.removeFromWishlistNotification}
-                </span>
+                ${customLanguage.removeFromWishlistNotification}
             </div>`
                 : `<div style="${notificationStyle}" class="removed-notification toast-top-right toast-alignment toast_img">
                 <span class="imageWrapper">
-                    <img src='${isVariantWishlistTrue ? getSelectedVariantImg(variantId, buttonJsonData) : buttonJsonData.images[0]}' width='50px' class='toast_image'>
+                    <img src='${buttonJsonData ? getSelectedVariantImg(productData.variantId, buttonJsonData) : notificationData.image}' width='50px' class='toast_image'>
                 </span>
                 <span class='toast_img_text'>
-                    ${buttonJsonData.title}<br>
+                    ${buttonJsonData ? buttonJsonData.title : notificationData.title}<br>
                     ${customLanguage.removeFromWishlistNotification}
                 </span>
             </div>`
@@ -9044,18 +9190,16 @@ async function notificationOfRemoved(fromWhere, productId, prodHandle, variantId
         else if (generalSetting.notificationTypeOption === "toast-top-center") {
             // document.querySelector(".our-sweetalert").style.display = "block";
             notificationDivId.style.display = "block";
-            let toastTopCenter = `${fromWhere === "allToCart" || fromWhere === "copyUrl" ? `
+            let toastTopCenter = `${notificationData.fromWhere === "allToCart" || notificationData.fromWhere === "copyUrl" ? `
             <div style="${notificationStyle}" class="toast-top-center toast-alignment toast_img">
-                <span class='toast_img_text'>
-                    ${customLanguage.removeFromWishlistNotification}
-                </span>
+                ${customLanguage.removeFromWishlistNotification}
             </div>`
                 : `<div style="${notificationStyle}" class="removed-notification toast-top-center toast-alignment toast_img">
                 <span class="imageWrapper">
-                    <img src='${isVariantWishlistTrue ? getSelectedVariantImg(variantId, buttonJsonData) : buttonJsonData.images[0]}' width='50px' class='toast_image'>
+                    <img src='${buttonJsonData ? getSelectedVariantImg(productData.variantId, buttonJsonData) : notificationData.image}' width='50px' class='toast_image'>
                 </span>
                 <span class='toast_img_text'>
-                    ${buttonJsonData.title}<br>
+                    ${buttonJsonData ? buttonJsonData.title : notificationData.title}<br>
                     ${customLanguage.removeFromWishlistNotification}
                 </span>
             </div>`
@@ -9065,18 +9209,16 @@ async function notificationOfRemoved(fromWhere, productId, prodHandle, variantId
         else if (generalSetting.notificationTypeOption === "toast-top-left") {
             // document.querySelector(".our-sweetalert").style.display = "block";
             notificationDivId.style.display = "block";
-            let toastTopLeft = `${fromWhere === "allToCart" || fromWhere === "copyUrl" ? `
+            let toastTopLeft = `${notificationData.fromWhere === "allToCart" || notificationData.fromWhere === "copyUrl" ? `
             <div style="${notificationStyle}" class="toast-top-left toast-alignment toast_img">
-                <span class='toast_img_text'>
-                    ${customLanguage.removeFromWishlistNotification}
-                </span>
+                ${customLanguage.removeFromWishlistNotification}
             </div>`
                 : `<div style="${notificationStyle}" class="removed-notification toast-top-left toast-alignment toast_img">
                 <span class="imageWrapper">
-                    <img src='${isVariantWishlistTrue ? getSelectedVariantImg(variantId, buttonJsonData) : buttonJsonData.images[0]}' width='50px' class='toast_image'>
+                    <img src='${buttonJsonData ? getSelectedVariantImg(productData.variantId, buttonJsonData) : notificationData.image}' width='50px' class='toast_image'>
                 </span>
                 <span class='toast_img_text'>
-                    ${buttonJsonData.title}<br>
+                    ${buttonJsonData ? buttonJsonData.title : notificationData.title}<br>
                     ${customLanguage.removeFromWishlistNotification}
                 </span>
             </div>`
@@ -9086,18 +9228,16 @@ async function notificationOfRemoved(fromWhere, productId, prodHandle, variantId
         else if (generalSetting.notificationTypeOption === "toast-right") {
             // document.querySelector(".our-sweetalert").style.display = "block";
             notificationDivId.style.display = "block";
-            let toastRight = `${fromWhere === "allToCart" || fromWhere === "copyUrl" ? `
+            let toastRight = `${notificationData.fromWhere === "allToCart" || notificationData.fromWhere === "copyUrl" ? `
             <div style="${notificationStyle}" class="toast-bottom-right toast-alignment toast_img">
-                <span class='toast_img_text'>
-                    ${customLanguage.removeFromWishlistNotification}
-                </span>
+                ${customLanguage.removeFromWishlistNotification}
             </div>`
                 : `<div style="${notificationStyle}" class="removed-notification toast-bottom-right toast-alignment toast_img">
                 <span class="imageWrapper">
-                    <img src='${isVariantWishlistTrue ? getSelectedVariantImg(variantId, buttonJsonData) : buttonJsonData.images[0]}' width='50px' class='toast_image'>
+                    <img src='${buttonJsonData ? getSelectedVariantImg(productData.variantId, buttonJsonData) : notificationData.image}' width='50px' class='toast_image'>
                 </span>
                 <span class='toast_img_text'>
-                    ${buttonJsonData.title}<br>
+                    ${buttonJsonData ? buttonJsonData.title : notificationData.title}<br>
                     ${customLanguage.removeFromWishlistNotification}
                 </span>
             </div>`
@@ -9107,18 +9247,16 @@ async function notificationOfRemoved(fromWhere, productId, prodHandle, variantId
         else if (generalSetting.notificationTypeOption === "toast-left") {
             // document.querySelector(".our-sweetalert").style.display = "block";
             notificationDivId.style.display = "block";
-            let toastLeft = `${fromWhere === "allToCart" || fromWhere === "copyUrl" ? `
+            let toastLeft = `${notificationData.fromWhere === "allToCart" || notificationData.fromWhere === "copyUrl" ? `
             <div style="${notificationStyle}" class="toast-bottom-left toast-alignment toast_img">
-                <span class='toast_img_text'>
-                    ${customLanguage.removeFromWishlistNotification}
-                </span>
+                ${customLanguage.removeFromWishlistNotification}
             </div>`
                 : `<div style="${notificationStyle}" class="removed-notification toast-bottom-left toast-alignment toast_img">
                 <span class="imageWrapper">
-                    <img src='${isVariantWishlistTrue ? getSelectedVariantImg(variantId, buttonJsonData) : buttonJsonData.images[0]}' width='50px' class='toast_image'>
+                    <img src='${buttonJsonData ? getSelectedVariantImg(productData.variantId, buttonJsonData) : notificationData.image}' width='50px' class='toast_image'>
                 </span>
                 <span class='toast_img_text'>
-                    ${buttonJsonData.title}<br>
+                    ${buttonJsonData ? buttonJsonData.title : notificationData.title}<br>
                     ${customLanguage.removeFromWishlistNotification}
                 </span>
             </div>`
@@ -9127,18 +9265,16 @@ async function notificationOfRemoved(fromWhere, productId, prodHandle, variantId
         }
         else if (generalSetting.notificationTypeOption === "toast-center") {
             notificationDivId.style.display = "block";
-            let toastImageCenter = `${fromWhere === "allToCart" || fromWhere === "copyUrl" ? `
+            let toastImageCenter = `${notificationData.fromWhere === "allToCart" || notificationData.fromWhere === "copyUrl" ? `
             <div style="${notificationStyle}" class="toast-bottom-center toast-alignment toast_img">
-                <span class='toast_img_text'>
-                    ${customLanguage.removeFromWishlistNotification}
-                </span>
+                ${customLanguage.removeFromWishlistNotification}
             </div>`
                 : `<div style="${notificationStyle}" class="removed-notification toast-bottom-center toast-alignment toast_img">
                 <span class="imageWrapper">
-                    <img src='${isVariantWishlistTrue ? getSelectedVariantImg(variantId, buttonJsonData) : buttonJsonData.images[0]}' width='50px' class='toast_image'>
+                    <img src='${buttonJsonData ? getSelectedVariantImg(productData.variantId, buttonJsonData) : notificationData.image}' width='50px' class='toast_image'>
                 </span>
                 <span class='toast_img_text'>
-                    ${buttonJsonData.title}<br>
+                    ${buttonJsonData ? buttonJsonData.title : notificationData.title}<br>
                     ${customLanguage.removeFromWishlistNotification}
                 </span>
             </div>`
@@ -9151,7 +9287,7 @@ async function notificationOfRemoved(fromWhere, productId, prodHandle, variantId
 };
 
 // Toast Image code starts
-async function notificationOfAdded(fromWhere, productId, prodHandle, variantId) {
+async function notificationOfAdded(fromWhere, notificationData, productData) {
     // Toast Image code ends
 
     const notificationDivId = document.getElementById("notificationDiv")
@@ -9161,8 +9297,10 @@ async function notificationOfAdded(fromWhere, productId, prodHandle, variantId) 
     const notificationTextStyle = notificationTextStyleFxn()
 
     // Toast Image code starts
-    if (prodHandle !== "" && prodHandle !== undefined && prodHandle !== null) {
-        var { productPrice, variantId2, variant_img, buttonJsonData } = await getProductData(prodHandle);
+    if (notificationData.image === null || notificationData.title === null) {
+        if (productData.handle !== "" && productData.handle !== undefined && productData.handle !== null) {
+            var { buttonJsonData } = await getProductData(productData.handle);
+        }
     }
     // Toast Image code ends
 
@@ -9258,18 +9396,16 @@ async function notificationOfAdded(fromWhere, productId, prodHandle, variantId) 
         else if (generalSetting.notificationTypeOption === "toast-top-right") {
             // document.querySelector(".our-sweetalert").style.display = "block";
             notificationDivId.style.display = "block";
-            let toastTopRight = `${fromWhere === "allToCart" || fromWhere === "copyUrl" ? `
+            let toastTopRight = `${notificationData.fromWhere === "allToCart" || notificationData.fromWhere === "copyUrl" ? `
             <div style="${notificationStyle}" class="toast-top-right toast-alignment toast_img">
-                <span class='toast_img_text'>
-                    ${customLanguage.addToWishlistNotification}
-                </span>
+                ${customLanguage.addToWishlistNotification}
             </div>`
                 : `<div style="${notificationStyle}" class="added-notification toast-top-right toast-alignment toast_img">
                 <span class="imageWrapper">
-                    <img src='${isVariantWishlistTrue ? getSelectedVariantImg(variantId, buttonJsonData) : buttonJsonData.images[0]}' width='50px' class='toast_image'>
+                    <img src='${buttonJsonData ? getSelectedVariantImg(productData.variantId, buttonJsonData) : notificationData.image}' width='50px' class='toast_image'>
                 </span>
                 <span class='toast_img_text'>
-                    ${buttonJsonData.title}<br>
+                    ${buttonJsonData ? buttonJsonData.title : notificationData.title}<br>
                     ${customLanguage.addToWishlistNotification}
                 </span>
             </div>`
@@ -9279,18 +9415,16 @@ async function notificationOfAdded(fromWhere, productId, prodHandle, variantId) 
         else if (generalSetting.notificationTypeOption === "toast-top-center") {
             // document.querySelector(".our-sweetalert").style.display = "block";
             notificationDivId.style.display = "block";
-            let toastTopCenter = `${fromWhere === "allToCart" || fromWhere === "copyUrl" ? `
+            let toastTopCenter = `${notificationData.fromWhere === "allToCart" || notificationData.fromWhere === "copyUrl" ? `
             <div style="${notificationStyle}" class="toast-top-center toast-alignment toast_img">
-                <span class='toast_img_text'>
-                    ${customLanguage.addToWishlistNotification}
-                </span>
+                ${customLanguage.addToWishlistNotification}
             </div>`
                 : `<div style="${notificationStyle}" class="added-notification toast-top-center toast-alignment toast_img">
                 <span class="imageWrapper">
-                    <img src='${isVariantWishlistTrue ? getSelectedVariantImg(variantId, buttonJsonData) : buttonJsonData.images[0]}' width='50px' class='toast_image'>
+                    <img src='${buttonJsonData ? getSelectedVariantImg(productData.variantId, buttonJsonData) : notificationData.image}' width='50px' class='toast_image'>
                 </span>
                 <span class='toast_img_text'>
-                    ${buttonJsonData.title}<br>
+                    ${buttonJsonData ? buttonJsonData.title : notificationData.title}<br>
                     ${customLanguage.addToWishlistNotification}
                 </span>
             </div>`
@@ -9300,18 +9434,16 @@ async function notificationOfAdded(fromWhere, productId, prodHandle, variantId) 
         else if (generalSetting.notificationTypeOption === "toast-top-left") {
             // document.querySelector(".our-sweetalert").style.display = "block";
             notificationDivId.style.display = "block";
-            let toastTopLeft = `${fromWhere === "allToCart" || fromWhere === "copyUrl" ? `
+            let toastTopLeft = `${notificationData.fromWhere === "allToCart" || notificationData.fromWhere === "copyUrl" ? `
             <div style="${notificationStyle}" class="toast-top-left toast-alignment toast_img">
-                <span class='toast_img_text'>
-                    ${customLanguage.addToWishlistNotification}
-                </span>
+                ${customLanguage.addToWishlistNotification}
             </div>`
                 : `<div style="${notificationStyle}" class="added-notification toast-top-left toast-alignment toast_img">
                 <span class="imageWrapper">
-                    <img src='${isVariantWishlistTrue ? getSelectedVariantImg(variantId, buttonJsonData) : buttonJsonData.images[0]}' width='50px' class='toast_image'>
+                    <img src='${buttonJsonData ? getSelectedVariantImg(productData.variantId, buttonJsonData) : notificationData.image}' width='50px' class='toast_image'>
                 </span>
                 <span class='toast_img_text'>
-                    ${buttonJsonData.title}<br>
+                    ${buttonJsonData ? buttonJsonData.title : notificationData.title}<br>
                     ${customLanguage.addToWishlistNotification}
                 </span>
             </div>`
@@ -9321,18 +9453,16 @@ async function notificationOfAdded(fromWhere, productId, prodHandle, variantId) 
         else if (generalSetting.notificationTypeOption === "toast-right") {
             // document.querySelector(".our-sweetalert").style.display = "block";
             notificationDivId.style.display = "block";
-            let toastRight = `${fromWhere === "allToCart" || fromWhere === "copyUrl" ? `
+            let toastRight = `${notificationData.fromWhere === "allToCart" || notificationData.fromWhere === "copyUrl" ? `
             <div style="${notificationStyle}" class="toast-bottom-right toast-alignment toast_img">
-                <span class='toast_img_text'>
-                    ${customLanguage.addToWishlistNotification}
-                </span>
+                ${customLanguage.addToWishlistNotification}
             </div>`
                 : `<div style="${notificationStyle}" class="added-notification toast-bottom-right toast-alignment toast_img">
                 <span class="imageWrapper">
-                    <img src='${isVariantWishlistTrue ? getSelectedVariantImg(variantId, buttonJsonData) : buttonJsonData.images[0]}' width='50px' class='toast_image'>
+                    <img src='${buttonJsonData ? getSelectedVariantImg(productData.variantId, buttonJsonData) : notificationData.image}' width='50px' class='toast_image'>
                 </span>
                 <span class='toast_img_text'>
-                    ${buttonJsonData.title}<br>
+                    ${buttonJsonData ? buttonJsonData.title : notificationData.title}<br>
                     ${customLanguage.addToWishlistNotification}
                 </span>
             </div>`
@@ -9342,18 +9472,16 @@ async function notificationOfAdded(fromWhere, productId, prodHandle, variantId) 
         else if (generalSetting.notificationTypeOption === "toast-left") {
             // document.querySelector(".our-sweetalert").style.display = "block";
             notificationDivId.style.display = "block";
-            let toastLeft = `${fromWhere === "allToCart" || fromWhere === "copyUrl" ? `
+            let toastLeft = `${notificationData.fromWhere === "allToCart" || notificationData.fromWhere === "copyUrl" ? `
             <div style="${notificationStyle}" class="toast-bottom-left toast-alignment toast_img">
-                <span class='toast_img_text'>
-                    ${customLanguage.addToWishlistNotification}
-                </span>
+                ${customLanguage.addToWishlistNotification}
             </div>`
                 : `<div style="${notificationStyle}" class="added-notification toast-bottom-left toast-alignment toast_img">
                 <span class="imageWrapper">
-                    <img src='${isVariantWishlistTrue ? getSelectedVariantImg(variantId, buttonJsonData) : buttonJsonData.images[0]}' width='50px' class='toast_image'>
+                    <img src='${buttonJsonData ? getSelectedVariantImg(productData.variantId, buttonJsonData) : notificationData.image}' width='50px' class='toast_image'>
                 </span>
                 <span class='toast_img_text'>
-                    ${buttonJsonData.title}<br>
+                    ${buttonJsonData ? buttonJsonData.title : notificationData.title}<br>
                     ${customLanguage.addToWishlistNotification}
                 </span>
             </div>`
@@ -9362,18 +9490,16 @@ async function notificationOfAdded(fromWhere, productId, prodHandle, variantId) 
         }
         else if (generalSetting.notificationTypeOption === "toast-center") {
             notificationDivId.style.display = "block";
-            let toastImageCenter = `${fromWhere === "allToCart" || fromWhere === "copyUrl" ? `
+            let toastImageCenter = `${notificationData.fromWhere === "allToCart" || notificationData.fromWhere === "copyUrl" ? `
             <div style="${notificationStyle}" class="toast-bottom-center toast-alignment toast_img">
-                <span class='toast_img_text'>
-                    ${customLanguage.addToWishlistNotification}
-                </span>
+                ${customLanguage.addToWishlistNotification}
             </div>`
                 : `<div style="${notificationStyle}" class="added-notification toast-bottom-center toast-alignment toast_img">
                 <span class="imageWrapper">
-                    <img src='${isVariantWishlistTrue ? getSelectedVariantImg(variantId, buttonJsonData) : buttonJsonData.images[0]}' width='50px' class='toast_image'>
+                    <img src='${buttonJsonData ? getSelectedVariantImg(productData.variantId, buttonJsonData) : notificationData.image}' width='50px' class='toast_image'>
                 </span>
                 <span class='toast_img_text'>
-                    ${buttonJsonData.title}<br>
+                    ${buttonJsonData ? buttonJsonData.title : notificationData.title}<br>
                     ${customLanguage.addToWishlistNotification}
                 </span>
             </div>`
@@ -9389,7 +9515,7 @@ async function notificationOfAdded(fromWhere, productId, prodHandle, variantId) 
 function getSelectedVariantImg(variantId, buttonJsonData) {
     let foundVariant = buttonJsonData.variants.find(el => parseInt(variantId) === el.id)
     console.log("foundVariant = ", foundVariant)
-    return foundVariant !== undefined ? (foundVariant?.featured_image !== null? foundVariant?.featured_image?.src: buttonJsonData.images[0]): buttonJsonData.images[0]
+    return foundVariant !== undefined ? (foundVariant?.featured_image !== null ? foundVariant?.featured_image?.src : buttonJsonData.images[0]) : buttonJsonData.images[0]
 }
 // Toast image code ends
 
@@ -9765,7 +9891,19 @@ async function createShareWishlistLink(singleWishlist = "") {
 
 function copyUrl(data) {
     navigator.clipboard.writeText(data);
-    alertToast(`${customLanguage.alertForLinkCopied}`, null, "copyUrl", null, null, null);
+    // Toast image code starts
+    const notificationData = {
+        fromWhere: "copyUrl",
+        image: null,
+        title: null,
+    }
+
+    const productData = {
+        handle: null,
+        variantId: null,
+    }
+    alertToast(`${customLanguage.alertForLinkCopied}`, null, notificationData, productData);
+    // Toast image code ends
 }
 
 function notificationStyleFxn() {
@@ -9848,18 +9986,24 @@ function closeNortiFxn() {
 
 // --------------------- additional alert toast  ----------------
 // Toast Image code starts
-async function alertToast(text, msgggg, fromWhere, productId, prodHandle, variantId2) {
-    console.log("text = ", text)
-    console.log("msgggg = ", msgggg)
-    console.log("fromWhere = ", fromWhere)
-    console.log("productId = ", productId)
-    console.log("prodHandle = ", prodHandle)
-    console.log("variantId2 = ", variantId2)
+//async function alertToast(text, msgggg, fromWhere, productId, prodHandle, variantId2) {
+async function alertToast(text, msgggg, notificationData, productData) {
 
+    // if (prodHandle !== "" && prodHandle !== undefined && prodHandle !== null) {
+    //     var { productPrice, variantId, variant_img, buttonJsonData } = await getProductData(prodHandle);
+    // }
 
-    if (prodHandle !== "" && prodHandle !== undefined && prodHandle !== null) {
-        var { productPrice, variantId, variant_img, buttonJsonData } = await getProductData(prodHandle);
+    console.log("notificationData = ", notificationData)
+    console.log("productData = ", productData)
+
+    if (notificationData.image === null || notificationData.title === null) {
+        if (productData.handle !== "" && productData.handle !== undefined && productData.handle !== null) {
+            var { buttonJsonData } = await getProductData(productData.handle);
+        }
     }
+    // var { buttonJsonData } = await getProductData(productData.handle);
+    console.log("buttonJsonData = ", buttonJsonData)
+
     // Toast Image code ends
 
     if (generalSetting.wishlistOrNotification === "show-wishlist") {
@@ -10051,18 +10195,16 @@ async function alertToast(text, msgggg, fromWhere, productId, prodHandle, varian
         else if (generalSetting.notificationTypeOption === "toast-top-right") {
             document.querySelector(".our-sweetalert").style.display = "block";
             // notificationDivId.style.display = "block";
-            let toastTopRight = `${fromWhere === "allToCart" || fromWhere === "copyUrl" ? `
+            let toastTopRight = `${notificationData.fromWhere === "allToCart" || notificationData.fromWhere === "copyUrl" ? `
             <div style="${notificationStyle}" class="toast-top-right toast-alignment toast_img">
-                <span class='toast_img_text'>
-                    ${text}
-                </span>
+                ${text}
             </div>`
                 : `<div style="${notificationStyle}" class="removed-notification toast-top-right toast-alignment toast_img">
                 <span class="imageWrapper">
-                    <img src='${isVariantWishlistTrue ? getSelectedVariantImg(variantId2, buttonJsonData) : buttonJsonData.images[0]}' width='50px' class='toast_image'>
+                    <img src='${buttonJsonData ? getSelectedVariantImg(productData.variantId, buttonJsonData) : notificationData.image}' width='50px' class='toast_image'>
                 </span>
                 <span class='toast_img_text'>
-                    ${buttonJsonData.title}<br>
+                    ${buttonJsonData ? buttonJsonData.title : notificationData.title}<br>
                     ${text}
                 </span>
             </div>`
@@ -10072,18 +10214,16 @@ async function alertToast(text, msgggg, fromWhere, productId, prodHandle, varian
         else if (generalSetting.notificationTypeOption === "toast-top-center") {
             document.querySelector(".our-sweetalert").style.display = "block";
             // notificationDivId.style.display = "block";
-            let toastTopCenter = `${fromWhere === "allToCart"  || fromWhere === "copyUrl" ? `
+            let toastTopCenter = `${notificationData.fromWhere === "allToCart" || notificationData.fromWhere === "copyUrl" ? `
             <div style="${notificationStyle}" class="toast-top-center toast-alignment toast_img">
-                <span class='toast_img_text'>
-                    ${text}
-                </span>
+                ${text}
             </div>`
                 : `<div style="${notificationStyle}" class="removed-notification toast-top-center toast-alignment toast_img">
                 <span class="imageWrapper">
-                    <img src='${isVariantWishlistTrue ? getSelectedVariantImg(variantId2, buttonJsonData) : buttonJsonData.images[0]}' width='50px' class='toast_image'>
+                    <img src='${buttonJsonData ? getSelectedVariantImg(productData.variantId, buttonJsonData) : notificationData.image}' width='50px' class='toast_image'>
                 </span>
                 <span class='toast_img_text'>
-                    ${buttonJsonData.title}<br>
+                    ${buttonJsonData ? buttonJsonData.title : notificationData.title}<br>
                     ${text}
                 </span>
             </div>`
@@ -10093,18 +10233,16 @@ async function alertToast(text, msgggg, fromWhere, productId, prodHandle, varian
         else if (generalSetting.notificationTypeOption === "toast-top-left") {
             document.querySelector(".our-sweetalert").style.display = "block";
             // notificationDivId.style.display = "block";
-            let toastTopLeft = `${fromWhere === "allToCart" || fromWhere === "copyUrl" ? `
+            let toastTopLeft = `${notificationData.fromWhere === "allToCart" || notificationData.fromWhere === "copyUrl" ? `
             <div style="${notificationStyle}" class="toast-top-left toast-alignment toast_img">
-                <span class='toast_img_text'>
-                    ${text}
-                </span>
+                ${text}
             </div>`
                 : `<div style="${notificationStyle}" class="removed-notification toast-top-left toast-alignment toast_img">
                 <span class="imageWrapper">
-                    <img src='${isVariantWishlistTrue ? getSelectedVariantImg(variantId2, buttonJsonData) : buttonJsonData.images[0]}' width='50px' class='toast_image'>
+                    <img src='${buttonJsonData ? getSelectedVariantImg(productData.variantId, buttonJsonData) : notificationData.image}' width='50px' class='toast_image'>
                 </span>
                 <span class='toast_img_text'>
-                    ${buttonJsonData.title}<br>
+                    ${buttonJsonData ? buttonJsonData.title : notificationData.title}<br>
                     ${text}
                 </span>
             </div>`
@@ -10114,18 +10252,16 @@ async function alertToast(text, msgggg, fromWhere, productId, prodHandle, varian
         else if (generalSetting.notificationTypeOption === "toast-right") {
             document.querySelector(".our-sweetalert").style.display = "block";
             // notificationDivId.style.display = "block";
-            let toastRight = `${fromWhere === "allToCart" || fromWhere === "copyUrl" ? `
+            let toastRight = `${notificationData.fromWhere === "allToCart" || notificationData.fromWhere === "copyUrl" ? `
             <div style="${notificationStyle}" class="toast-bottom-right toast-alignment toast_img">
-                <span class='toast_img_text'>
-                    ${text}
-                </span>
+                ${text}
             </div>`
                 : `<div style="${notificationStyle}" class="removed-notification toast-bottom-right toast-alignment toast_img">
                 <span class="imageWrapper">
-                    <img src='${isVariantWishlistTrue ? getSelectedVariantImg(variantId2, buttonJsonData) : buttonJsonData.images[0]}' width='50px' class='toast_image'>
+                    <img src='${buttonJsonData ? getSelectedVariantImg(productData.variantId, buttonJsonData) : notificationData.image}' width='50px' class='toast_image'>
                 </span>
                 <span class='toast_img_text'>
-                    ${buttonJsonData.title}<br>
+                    ${buttonJsonData ? buttonJsonData.title : notificationData.title}<br>
                     ${text}
                 </span>
             </div>`
@@ -10135,18 +10271,16 @@ async function alertToast(text, msgggg, fromWhere, productId, prodHandle, varian
         else if (generalSetting.notificationTypeOption === "toast-left") {
             document.querySelector(".our-sweetalert").style.display = "block";
             // notificationDivId.style.display = "block";
-            let toastLeft = `${fromWhere === "allToCart" || fromWhere === "copyUrl" ? `
+            let toastLeft = `${notificationData.fromWhere === "allToCart" || notificationData.fromWhere === "copyUrl" ? `
             <div style="${notificationStyle}" class="toast-bottom-left toast-alignment toast_img">
-                <span class='toast_img_text'>
-                    ${text}
-                </span>
+                ${text}
             </div>`
                 : `<div style="${notificationStyle}" class="removed-notification toast-bottom-left toast-alignment toast_img">
                 <span class="imageWrapper">
-                    <img src='${isVariantWishlistTrue ? getSelectedVariantImg(variantId2, buttonJsonData) : buttonJsonData.images[0]}' width='50px' class='toast_image'>
+                    <img src='${buttonJsonData ? getSelectedVariantImg(productData.variantId, buttonJsonData) : notificationData.image}' width='50px' class='toast_image'>
                 </span>
                 <span class='toast_img_text'>
-                    ${buttonJsonData.title}<br>
+                    ${buttonJsonData ? buttonJsonData.title : notificationData.title}<br>
                     ${text}
                 </span>
             </div>`
@@ -10158,23 +10292,20 @@ async function alertToast(text, msgggg, fromWhere, productId, prodHandle, varian
             document.querySelector(".our-sweetalert").style.display = "block";
             let toastImageCenter = `${fromWhere === "allToCart" || fromWhere === "copyUrl" ? `
             <div style="${notificationStyle}" class="toast-bottom-center toast-alignment toast_img">
-                <span class='toast_img_text'>
-                    ${text}
-                </span>
+                ${text}
             </div>`
                 : `<div style="${notificationStyle}" class="removed-notification toast-bottom-center toast-alignment toast_img">
                 <span class="imageWrapper">
-                    <img src='${isVariantWishlistTrue ? getSelectedVariantImg(variantId2, buttonJsonData) : buttonJsonData.images[0]}' width='50px' class='toast_image'>
+                    <img src='${buttonJsonData ? getSelectedVariantImg(productData.variantId, buttonJsonData) : notificationData.image}' width='50px' class='toast_image'>
                 </span>
                 <span class='toast_img_text'>
-                    ${buttonJsonData.title}<br>
+                    ${buttonJsonData ? buttonJsonData.title : notificationData.title}<br>
                     ${text}
                 </span>
             </div>`
                 }`;
             document.querySelector(".our-sweetalert").innerHTML = toastImageCenter;
         }
-
         // Toast Image code ends
         setTimeout(() => {
             document.querySelector(".our-sweetalert").innerHTML = "";
@@ -11256,7 +11387,7 @@ async function renderData(multiArray, data, productId, fromWhere, variantId = nu
     // Toast image code starts
     const saveButton = multiArray.length > 0
         ? `<button class="saveBtn cartButtonStyle" id="${isDeleteMode ? "saveDelWishlistBtn" : "saveWishlistBtn"}"
-              onclick="${isDeleteMode ? "saveDelteWishlists" : "saveWishlists"}(event, ${productId}, '${fromWhere}', ${variantId}, '${handle}')">
+              onclick="${isDeleteMode ? "saveDelteWishlists" : "saveWishlists"}(event, ${productId}, '${fromWhere}')">
               ${isDeleteMode
             ? customLanguage.editBtn || storeFrontDefLang.editBtn
             : customLanguage.saveWishlistBtn || storeFrontDefLang.saveWishlistBtn}
@@ -11377,7 +11508,7 @@ async function handleDeleteCheckboxClick(event) {
 }
 
 // Toast image code starts
-async function saveWishlists(event, productId, fromWhere, variantId, handle) {
+async function saveWishlists(event, productId, fromWhere) {
     // Toast image code ends
     if (checkedItems.length === 0) {
         await showErrorPara(customLanguage?.mwChooseWishlistToSave || storeFrontDefLang.chooseWishlist);
@@ -11386,11 +11517,23 @@ async function saveWishlists(event, productId, fromWhere, variantId, handle) {
     const parentElement = event.target.parentNode;
     const dataValue = parentElement.querySelector("#hiddenDiv").dataset.prodata;
     const newData = { ...JSON.parse(dataValue), wishlistName: checkedItems };
+    console.log("newData from saveWishlists = ", newData)
     if (newData.shopName) {
         saveSharedWishlist(newData);
     } else {
         // Toast image code starts
-        saveMainData(newData, productId, fromWhere, variantId, handle)
+        const notificationData = {
+            fromWhere: null,
+            image: newData.image,
+            title: newData.title,
+        }
+
+        const productData = {
+            handle: newData.handle,
+            variantId: newData.variantId,
+        }
+
+        saveMainData(newData, productId, fromWhere, notificationData, productData)
         // Toast image code ends
     }
     checkedItems = [];
@@ -11407,16 +11550,28 @@ async function showErrorPara(msg) {
 }
 
 // Toast image code starts
-async function saveDelteWishlists(event, productId, fromWhere, variantId, handle) {
+async function saveDelteWishlists(event, productId, fromWhere) {
     // Toast image code ends
     const parentElement = event.target.parentNode;
     const dataValue = parentElement.querySelector("#hiddenDiv").dataset.prodata;
     const newData = { ...JSON.parse(dataValue), wishlistName: checkedItems, DelWishlistName: nonCheckedItems };
+    console.log("newData = ", newData)
     if (fromWhere === "shared") {
         saveSharedWishlist(newData);
     } else {
         // Toast image code starts
-        saveMainData(newData, productId, fromWhere, variantId, handle)
+        const notificationData = {
+            fromWhere: null,
+            image: newData.image,
+            title: newData.title,
+        }
+
+        const productData = {
+            handle: newData.handle,
+            variantId: newData.variantId,
+        }
+
+        saveMainData(newData, productId, fromWhere, notificationData, productData)
         // Toast image code ends
     }
     checkedItems = [];
@@ -11425,7 +11580,7 @@ async function saveDelteWishlists(event, productId, fromWhere, variantId, handle
 }
 
 // Toast image code starts
-async function saveMainData(data, productId, fromWhere, variantId, handle) {
+async function saveMainData(data, productId, fromWhere, notificationData, productData) {
     // Toast image code starts
     let result = await SqlFunction(data);
     const proId = injectCoderr.getAttribute("data-product-id");
@@ -11501,9 +11656,11 @@ async function saveMainData(data, productId, fromWhere, variantId, handle) {
             collectionIcon(productId, matchFound);
             currentPlan > 1 && (matchFound ? fxnAfterAddToWishlist() : fxnAfterRemoveFromWishlist());
         }
-        matchFound ? alertToast(notificationMsg, "added", fromWhere, productId, handle, variantId) : alertToast(customLanguage.removeFromWishlistNotification, "removed", fromWhere, productId, handle, variantId);
+
+
         // Toast Image code starts
-        // matchFound ? notificationOfAdded(fromWhere, productId, handle, variantId) : notificationOfRemoved(fromWhere, productId, handle, variantId);
+        // matchFound ? alertToast(notificationMsg, "added", notificationData, productData) : alertToast(customLanguage.removeFromWishlistNotification, "removed", notificationData, productData);
+        matchFound ? notificationOfAdded(fromWhere, notificationData, productData) : notificationOfRemoved(fromWhere, notificationData, productData);
         // Toast Image code ends
         (currentPlan >= 3 && generalSetting?.trendingLayout) && await renderTrendingGridData();
 

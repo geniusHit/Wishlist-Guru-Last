@@ -13710,12 +13710,12 @@ export default function detectThemeName(themeName, filter, customSettings) {
 
         // ------------------- Icons-----------------------
 
-        gridElement = '.product-grid__item';
-        appendIcon = '.product-grid__item slideshow-component';
+        gridElement = '.resource-list__item, .product-grid__item';
+        appendIcon = '.card-gallery';
         afterIcon = false
         appendIconCheck = false
         buttonPrependBeforeElemnt = false
-        productLink = '.product-grid__item .product-card__link';
+        productLink = '.product-grid__item .product-card__link, a';
 
         //--------------------------- For Quick Modal--------------
 
@@ -27020,6 +27020,67 @@ export default function detectThemeName(themeName, filter, customSettings) {
         pdpAddToCartSelector = ".add_to_cart_button";
         // for header wishlist icon left , right position
         cart = ".header_cart"
+    }
+
+    else if (themeName === "Vinova Emillia" || themeName === "Diwera Jewels") {
+        // --------------------- For Header------------------------
+        headerHeartIcon = ".header-group-item"
+        headerHeartIconClass = ""
+        headerHeartElementClass = ""
+        headerHeartIconCreateElement = ""
+        headerHeartElementInsertAfter = false
+        headerHeartElementPrepend = false
+
+        headerHeartIconMobile = ""
+        headerHeartIconMobileClass = ""
+        headerHeartMobileElementClass = ""
+        headerHeartIconMobileCreateElement = ""
+        headerHeartMobileInsertAfter = false
+        headerHeartMobileElementPrepend = false
+
+        headerMenuItem = ".site-nav"
+        headerMenuItemClass = ""
+        headerMenuElementClass = ""
+        headerHeartIconMobileCreateElement = ""
+        headerHeartMobileInsertAfter = false
+        headerHeartMobileElementPrepend = false
+
+        headerMenuItemMobile = "#canvas-main-menu .site-nav-mobile"
+        headerMenuItemMobileClass = ""
+        headerMenuMobileElementClass = ""
+        headerMenuItemMobileCreateElement = ""
+        headerMenuMobileInsertAfter = false
+        headerMenuMobileElementPrepend = false
+
+        // ------------------- Icons-----------------------
+
+        gridElement = ".swiper-slide, .product--item, .grid__item";
+        appendIcon = ".thumbnail-container";
+        afterIcon = false
+        appendIconCheck = false
+        buttonPrependBeforeElemnt = false
+        productLink = "a"
+
+        //--------------------------- For Quick Modal--------------
+        // modelMainElement = "button[type='submit'][name='add']";
+        // modalProductElement = "quick-add-modal.quick-add-modal[open='']";
+        // modalbuttonAppend = "button.product-form__submit";
+        // modalButtonAppendOnImg = "slider-component.slider-mobile-gutter";
+        // modalbuttonAppendOnTitle = ".product__title";
+        // modalVariantSelector = ""
+        // modalVariantSubSelector = ""
+        // modalVariantMatchedUndefinedParent = ""
+        // checkModalVariantMatchedUndefinedParent = ""
+        // modalVariantMatchedUndefinedSelector = "";
+        // modalProductIdSelector = "[action='/cart/add'3]";
+        // modalProductIdValueSelector = "[name='id']";
+
+        // icon on pdp image
+        pdpImageSelector = ".respone_image img";
+        pdpTitleSelector = ".product-single__title";
+        pdpAddToCartSelector = ".btnAddToCart";
+        // for header wishlist icon left , right position
+        cart = ".contentsticky_cart"
     }
 
     else {
