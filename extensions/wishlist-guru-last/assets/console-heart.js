@@ -17,7 +17,7 @@ let customButton = localData?.customButton || JSON.parse(heartButton.getAttribut
 let customLanguage = localData?.customLanguage || JSON.parse(heartButton.getAttribute("language-setting").replace(/~/g, "'"));
 let generalSetting = localData?.generalSetting || JSON.parse(heartButton.getAttribute("general-setting"));
 // let getThemeName = localData?.getThemeName || JSON.parse(heartButton.getAttribute("theme-name"));
-let getThemeName = { themeName: "Savor" }
+let getThemeName = { themeName: "Dawn" }
 let advanceSetting = localData?.advanceSetting || JSON.parse(heartButton.getAttribute("advance-setting").replace(/~/g, "'"));
 let collectionBtnSetting = localData?.collectionBtnSetting || JSON.parse(heartButton.getAttribute("collection-btn-setting"));
 let currentPlan = localData?.currentPlan || JSON.parse(heartButton.getAttribute("current-plan"));
@@ -1971,47 +1971,47 @@ async function showWishlistButtonType() {
         }
 
 
-        if (currentPlan > 1) {
-            if (generalSetting.paidWlbLocation === "yes") {
-                // let getCustomDiv = document.querySelector(".custom-wishlist-icon");
-                const customDivs = document.querySelectorAll(".custom-wishlist-icon");
-                customDivs.forEach((getCustomDiv) => {
-                    // if (getCustomDiv !== null) {
-                    if (getCustomDiv && getCustomDiv.innerHTML.trim() === "") {
+        // if (currentPlan > 1) {
+        //     if (generalSetting.paidWlbLocation === "yes") {
+        //         // let getCustomDiv = document.querySelector(".custom-wishlist-icon");
+        //         const customDivs = document.querySelectorAll(".custom-wishlist-icon");
+        //         customDivs.forEach((getCustomDiv) => {
+        //             // if (getCustomDiv !== null) {
+        //             if (getCustomDiv && getCustomDiv.innerHTML.trim() === "") {
 
-                        let iconType = getCustomDiv.getAttribute("wishlist-type");
-                        // console.log("hhhh ... ", iconType)
-                        if (iconType === "text") {
-                            getCustomDiv.innerHTML = `<a tabindex="0" role="button" aria-haspopup="dialog" aria-controls="wishlist-dialog" aria-expanded="false" onClick="heartButtonHandle()" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); heartButtonHandle(); }" >${customLanguage?.headerMenuWishlist || storeFrontDefLang?.headerMenuWishlist || "Wishlist"}</a>`
-                        } else {
-                            getCustomDiv.innerHTML = `<div tabindex="0" role="button" aria-haspopup="dialog" aria-controls="wishlist-dialog" aria-expanded="false" onClick="heartButtonHandle()" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); heartButtonHandle(); }" class="header-heart-position ${getThemeSelector.headerHeartIconMobileClass
-                                }" > <div class="red-heart  ${customButton.iconType === "star"
-                                    ? generalSetting.headerIconType === "fillHeaderIcon"
-                                        ? "starICON2"
-                                        : generalSetting.headerIconType === "outlineHeaderIcon"
-                                            ? "starICON"
-                                            : "starICON"
-                                    : ""
-                                } ${customButton.iconType === "save"
-                                    ? generalSetting.headerIconType === "fillHeaderIcon"
-                                        ? "saveICON2"
-                                        : generalSetting.headerIconType === "outlineHeaderIcon"
-                                            ? "saveICON"
-                                            : "saveICON"
-                                    : ""
-                                } ${customButton.iconType === "heart"
-                                    ? generalSetting.headerIconType === "fillHeaderIcon"
-                                        ? "heartICON2"
-                                        : generalSetting.headerIconType === "outlineHeaderIcon"
-                                            ? "heartICON"
-                                            : "heartICON"
-                                    : ""
-                                } "  ><span></span> </div>   <span class="count-span"> </span> </div>`;
-                        }
-                    }
-                })
-            }
-        }
+        //                 let iconType = getCustomDiv.getAttribute("wishlist-type");
+        //                 // console.log("hhhh ... ", iconType)
+        //                 if (iconType === "text") {
+        //                     getCustomDiv.innerHTML = `<a tabindex="0" role="button" aria-haspopup="dialog" aria-controls="wishlist-dialog" aria-expanded="false" onClick="heartButtonHandle()" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); heartButtonHandle(); }" >${customLanguage?.headerMenuWishlist || storeFrontDefLang?.headerMenuWishlist || "Wishlist"}</a>`
+        //                 } else {
+        //                     getCustomDiv.innerHTML = `<div tabindex="0" role="button" aria-haspopup="dialog" aria-controls="wishlist-dialog" aria-expanded="false" onClick="heartButtonHandle()" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); heartButtonHandle(); }" class="header-heart-position ${getThemeSelector.headerHeartIconMobileClass
+        //                         }" > <div class="red-heart  ${customButton.iconType === "star"
+        //                             ? generalSetting.headerIconType === "fillHeaderIcon"
+        //                                 ? "starICON2"
+        //                                 : generalSetting.headerIconType === "outlineHeaderIcon"
+        //                                     ? "starICON"
+        //                                     : "starICON"
+        //                             : ""
+        //                         } ${customButton.iconType === "save"
+        //                             ? generalSetting.headerIconType === "fillHeaderIcon"
+        //                                 ? "saveICON2"
+        //                                 : generalSetting.headerIconType === "outlineHeaderIcon"
+        //                                     ? "saveICON"
+        //                                     : "saveICON"
+        //                             : ""
+        //                         } ${customButton.iconType === "heart"
+        //                             ? generalSetting.headerIconType === "fillHeaderIcon"
+        //                                 ? "heartICON2"
+        //                                 : generalSetting.headerIconType === "outlineHeaderIcon"
+        //                                     ? "heartICON"
+        //                                     : "heartICON"
+        //                             : ""
+        //                         } "  ><span></span> </div>   <span class="count-span"> </span> </div>`;
+        //                 }
+        //             }
+        //         })
+        //     }
+        // }
         headerIconStyle();
     }
 }
@@ -7407,6 +7407,22 @@ const wgFabricCss = (getThemeName.themeName === "Fabric")
     : '';
 
 
+const wgMotionCss = (getThemeName.themeName === "Motion")
+    ? `
+       .wf-wishlist.pdp-img-icon-bottom-right {
+            bottom:22px !important;
+       }
+       .wf-wishlist.pdp-img-icon-bottom-left {
+            left: 0;
+            bottom: 22px;
+       }
+       .wf-wishlist.pdp-img-icon-top-left {
+            left: 0;
+        }
+    `
+    : '';
+
+
 const wgResponsiveCss = (getThemeName.themeName === "Responsive")
     ? `
 
@@ -8651,6 +8667,7 @@ function buttonStyleFxn() {
 
        ${wgResponsiveCss}
 
+       ${wgMotionCss}
     `;
 
     localStorage.setItem("wg-button-style", buttonStyleHead.innerHTML);
