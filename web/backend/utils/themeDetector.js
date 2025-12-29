@@ -4280,14 +4280,15 @@ export default function detectThemeName(themeName, filter, customSettings) {
     }
 
     else if (themeName === "Impulse" || themeName === "Dune" || themeName === "Terrain") {
-        headerHeartIcon = "header .header-layout .header-item--icons div.site-nav__icons"
+        headerHeartIcon = "header .header-layout .header-item--icons div.site-nav__icons:not(#shopify-section-sections--24163348545804__header header .header-layout .header-item--icons div.site-nav__icons), .header-wrapper .text-center"
+        // headerHeartIcon = document.querySelector('meta[content="SCENT ESSENT "]')? ".site-header .text-center": "header .header-layout .header-item--icons div.site-nav__icons"
         headerHeartIconClass = ""
         headerHeartIconCreateElement = "a"
         headerHeartElementClass = "site-nav__link site-nav__link--icon"
         headerHeartElementInsertAfter = false
         headerHeartElementPrepend = false
 
-        headerHeartIconMobile = ""
+        headerHeartIconMobile = "header .header-layout .header-item--icons div.site-nav__icons"
         headerHeartIconMobileClass = ""
         headerHeartIconMobileCreateElement = ""
         headerHeartMobileElementClass = ""
@@ -4830,7 +4831,7 @@ export default function detectThemeName(themeName, filter, customSettings) {
         headerHeartMobileInsertAfter = false
         headerHeartMobileElementPrepend = false
 
-        headerMenuItem = "header .header__inline-menu ul "
+        headerMenuItem = "header .header__inline-menu ul"
         headerMenuItemClass = "header__menu-item list-menu__item link link--text focus-inset "
         headerMenuElementClass = ""
         headerHeartIconMobileCreateElement = ""
@@ -11557,7 +11558,7 @@ export default function detectThemeName(themeName, filter, customSettings) {
     else if (themeName === "Aurora" || themeName === "Stella" || themeName === "Vega" || themeName === "Auriga" || themeName === "Astra") {
         // --------------------- For Header------------------------
 
-        headerHeartIcon = "div#header-component .icon-list.header__icons-right"
+        headerHeartIcon = "div#header-component .icon-list.header__icons-right, .header__icons"
         headerHeartIconClass = ""
         headerHeartIconCreateElement = ""
         headerHeartElementClass = ""
@@ -11571,7 +11572,7 @@ export default function detectThemeName(themeName, filter, customSettings) {
         headerHeartMobileInsertAfter = false
         headerHeartMobileElementPrepend = false
 
-        headerMenuItem = "div#header-component .header__nav"
+        headerMenuItem = ".header__nav"
         headerMenuItemClass = "underline-text header__item"
         headerMenuItemCreateElement = ""
         headerMenuElementClass = "header__dropdown-toggle"
@@ -11597,8 +11598,8 @@ export default function detectThemeName(themeName, filter, customSettings) {
         // productLink = "div#ShopProducts a.product-card__link ";
 
 
-        gridElement = "div#ShopProducts .shop__grid-item product-card.product-card, .slider-grid-track .slider-grid__slide";
-        appendIcon = "div#ShopProducts .shop__grid-item product-card.product-card .product-card__inner .product-card__images-wrapper, .slider-grid-track .slider-grid__slide .product-card__images-wrapper";
+        gridElement = "div#ShopProducts .shop__grid-item product-card.product-card, .slider-grid-track .slider-grid__slide, .card-carousel__slide";
+        appendIcon = "div#ShopProducts .shop__grid-item product-card.product-card .product-card__inner .product-card__images-wrapper, .slider-grid-track .slider-grid__slide .product-card__images-wrapper, .product-card__images-wrapper";
         afterIcon = false
         appendIconCheck = false
         buttonPrependBeforeElemnt = false
@@ -11621,14 +11622,14 @@ export default function detectThemeName(themeName, filter, customSettings) {
 
 
         // icon on pdp image
-        pdpImageSelector = ".product-media__image-wrapper product-modal-button img";
+        pdpImageSelector = ".product-media__image-wrapper product-modal-button img, .product-media__image";
         pdpTitleSelector = ".product-general-info-block .h2";
         pdpAddToCartSelector = ".product-form__btn-wrapper .product-form__btn";
 
 
         // for header wishlist icon left , right position
         // cart = ".header__icons-right sidebar-button:nth-child(3)"
-        cart = ".header__icons-right sidebar-button:last-child"
+        cart = ".header__icons-right sidebar-button:last-child, sidebar-button:has(.header__icon .header__cart-icon)"
     }
 
     else if (themeName === "Bake in Turquoise") {
@@ -27081,6 +27082,68 @@ export default function detectThemeName(themeName, filter, customSettings) {
         pdpAddToCartSelector = ".btnAddToCart";
         // for header wishlist icon left , right position
         cart = ".contentsticky_cart"
+    }
+
+    else if (themeName === "Theme Author: Shantanu" || themeName === "Estailo Final - Fastrr") {
+        // --------------------- For Header------------------------
+        headerHeartIcon = ".header__secondary-nav .header__icon-list"
+        headerHeartIconClass = ""
+        headerHeartElementClass = ""
+        headerHeartIconCreateElement = ""
+        headerHeartElementInsertAfter = false
+        headerHeartElementPrepend = false
+
+        headerHeartIconMobile = ""
+        headerHeartIconMobileClass = ""
+        headerHeartMobileElementClass = ""
+        headerHeartIconMobileCreateElement = ""
+        headerHeartMobileInsertAfter = false
+        headerHeartMobileElementPrepend = false
+
+        headerMenuItem = ".header__link-list > .contents"
+        headerMenuItemClass = ""
+        headerMenuElementClass = ""
+        headerHeartIconMobileCreateElement = ""
+        headerHeartMobileInsertAfter = false
+        headerHeartMobileElementPrepend = false
+
+        headerMenuItemMobile = ".navigation-drawer .panel__scroller .v-stack"
+        headerMenuItemMobileClass = ""
+        headerMenuMobileElementClass = ""
+        headerMenuItemMobileCreateElement = ""
+        headerMenuMobileInsertAfter = false
+        headerMenuMobileElementPrepend = false
+
+        // ------------------- Icons-----------------------
+        gridElement = ".product-card";
+        appendIcon = ".product-card__figure";
+        afterIcon = false
+        appendIconCheck = false
+        buttonPrependBeforeElemnt = true
+        productLink = 'a';
+
+        //--------------------------- For Quick Modal--------------
+        modelMainElement = "";
+        modalProductElement = "";
+        modalbuttonAppend = "";
+        modalButtonAppendOnImg = "";
+        modalbuttonAppendOnTitle = "";
+        modalVariantSelector = ""
+        modalVariantSubSelector = ""
+        modalVariantMatchedUndefinedParent = ""
+        checkModalVariantMatchedUndefinedParent = ""
+        modalVariantMatchedUndefinedSelector = "";
+        modalProductIdSelector = "";
+        modalProductIdValueSelector = "";
+
+
+        // icon on pdp image
+        pdpImageSelector = ".product-gallery__media img";
+        pdpTitleSelector = ".product-info__title";
+        pdpAddToCartSelector = ".buy-buttons .button";
+
+        // for header wishlist icon left , right position
+        cart = "a[href='/cart']";
     }
 
     else {

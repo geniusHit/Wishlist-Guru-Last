@@ -186,7 +186,8 @@ if (!wfGetDomain.endsWith("/")) {
     isMultiwishlistTrue = isMultiwishlistTrueValue1 === "yes" && currentPlan > 3;
     console.log(" ---- optimizing WG 2.O ---- ");
     // ------- to show the header icon with custom code -------
-    currentPlan > 1 && showCustomHeaderIcon1();
+
+    // currentPlan > 1 && showCustomHeaderIcon1();
     showWishlistButtonType();
     // -------to show the collection icon and button with custom code-------
     currentPlan > 1 && wishlistIcon1();
@@ -2016,64 +2017,64 @@ async function showWishlistButtonType() {
     }
 }
 
-function showCustomHeaderIcon1() {
-    const wgLocalData = JSON.parse(localStorage.getItem("wg-local-data")) || {};
-    const getThemeSelector = wgLocalData?.getThemeSelector;
-    if (generalSetting.paidWlbLocation === "yes") {
-        // const getCustomDiv = document.querySelector(".custom-wishlist-icon");
-        const customDivs = document.querySelectorAll(".custom-wishlist-icon");
-        customDivs.forEach((getCustomDiv) => {
-            if (getCustomDiv) {
-                // If already rendered, just exit (avoid duplicate injection)
-                if (getCustomDiv.querySelector(".header-heart-position")) {
-                    return;
-                }
-                // Wrapper div
-                const wrapper = document.createElement("div");
-                wrapper.tabIndex = 0;
-                wrapper.role = "button";
-                wrapper.setAttribute("aria-haspopup", "dialog");
-                wrapper.setAttribute("aria-controls", "wishlist-dialog");
-                wrapper.setAttribute("aria-expanded", "false");
-                wrapper.className = `header-heart-position ${getThemeSelector?.headerHeartIconMobileClass || ""}`;
-                wrapper.onclick = heartButtonHandle;
-                wrapper.onkeydown = (e) => {
-                    if (e.key === "Enter" || e.key === " ") {
-                        e.preventDefault();
-                        heartButtonHandle();
-                    }
-                };
-                // Icon div
-                const iconDiv = document.createElement("div");
-                iconDiv.classList.add("red-heart");
-                if (customButton.iconType === "star") {
-                    iconDiv.classList.add(
-                        generalSetting.headerIconType === "fillHeaderIcon" ? "starICON2" : "starICON"
-                    );
-                } else if (customButton.iconType === "save") {
-                    iconDiv.classList.add(
-                        generalSetting.headerIconType === "fillHeaderIcon" ? "saveICON2" : "saveICON"
-                    );
-                } else if (customButton.iconType === "heart") {
-                    iconDiv.classList.add(
-                        generalSetting.headerIconType === "fillHeaderIcon" ? "heartICON2" : "heartICON"
-                    );
-                }
-                const spanInner = document.createElement("span");
-                iconDiv.appendChild(spanInner);
+// function showCustomHeaderIcon1() {
+//     const wgLocalData = JSON.parse(localStorage.getItem("wg-local-data")) || {};
+//     const getThemeSelector = wgLocalData?.getThemeSelector;
+//     if (generalSetting.paidWlbLocation === "yes") {
+//         // const getCustomDiv = document.querySelector(".custom-wishlist-icon");
+//         const customDivs = document.querySelectorAll(".custom-wishlist-icon");
+//         customDivs.forEach((getCustomDiv) => {
+//             if (getCustomDiv) {
+//                 // If already rendered, just exit (avoid duplicate injection)
+//                 if (getCustomDiv.querySelector(".header-heart-position")) {
+//                     return;
+//                 }
+//                 // Wrapper div
+//                 const wrapper = document.createElement("div");
+//                 wrapper.tabIndex = 0;
+//                 wrapper.role = "button";
+//                 wrapper.setAttribute("aria-haspopup", "dialog");
+//                 wrapper.setAttribute("aria-controls", "wishlist-dialog");
+//                 wrapper.setAttribute("aria-expanded", "false");
+//                 wrapper.className = `header-heart-position ${getThemeSelector?.headerHeartIconMobileClass || ""}`;
+//                 wrapper.onclick = heartButtonHandle;
+//                 wrapper.onkeydown = (e) => {
+//                     if (e.key === "Enter" || e.key === " ") {
+//                         e.preventDefault();
+//                         heartButtonHandle();
+//                     }
+//                 };
+//                 // Icon div
+//                 const iconDiv = document.createElement("div");
+//                 iconDiv.classList.add("red-heart");
+//                 if (customButton.iconType === "star") {
+//                     iconDiv.classList.add(
+//                         generalSetting.headerIconType === "fillHeaderIcon" ? "starICON2" : "starICON"
+//                     );
+//                 } else if (customButton.iconType === "save") {
+//                     iconDiv.classList.add(
+//                         generalSetting.headerIconType === "fillHeaderIcon" ? "saveICON2" : "saveICON"
+//                     );
+//                 } else if (customButton.iconType === "heart") {
+//                     iconDiv.classList.add(
+//                         generalSetting.headerIconType === "fillHeaderIcon" ? "heartICON2" : "heartICON"
+//                     );
+//                 }
+//                 const spanInner = document.createElement("span");
+//                 iconDiv.appendChild(spanInner);
 
-                const countSpan = document.createElement("span");
-                countSpan.className = "count-span";
+//                 const countSpan = document.createElement("span");
+//                 countSpan.className = "count-span";
 
-                wrapper.appendChild(iconDiv);
-                wrapper.appendChild(countSpan);
+//                 wrapper.appendChild(iconDiv);
+//                 wrapper.appendChild(countSpan);
 
-                // Replace children instantly without emptying
-                getCustomDiv.replaceChildren(wrapper);
-            }
-        })
-    }
-}
+//                 // Replace children instantly without emptying
+//                 getCustomDiv.replaceChildren(wrapper);
+//             }
+//         })
+//     }
+// }
 
 async function handleSearchData(event) {
     const searchValue = event.target.value.trim().toLowerCase();
@@ -3127,11 +3128,20 @@ async function pageTypeFunction() {
 
             if ((generalSetting?.hideLoginText === false || generalSetting?.hideLoginText === undefined || generalSetting?.hideLoginText === "")) {
                 document.querySelector(".modal-page-auth").innerHTML = `
-                ${customLanguage?.loginTextForWishlist || storeFrontDefLang.loginTextForWishlist} <a href ="/account">${customLanguage?.loginTextAnchor || storeFrontDefLang?.loginTextAnchor}</a> ${customLanguage?.orText || storeFrontDefLang.orText} <a href="/account/register"> ${customLanguage?.createAccountAnchor || storeFrontDefLang.createAccountAnchor}</a> ${customLanguage?.createAccountEndingText || ""}`;
+                ${customLanguage?.loginTextForWishlist || storeFrontDefLang.loginTextForWishlist} <a href ="/account">${customLanguage?.loginTextAnchor || storeFrontDefLang?.loginTextAnchor}</a> ${customLanguage?.orText || storeFrontDefLang.orText} <a href="/account/register"> ${customLanguage?.createAccountAnchor || storeFrontDefLang.createAccountAnchor}</a> ${customLanguage?.createAccountEndingText || ""}  <label class="toggle"><input type="checkbox" id="toggleBtn"><span class="slider"></span></label>`;
             }
 
             document.querySelector(".modal-page-auth").style.textAlign = generalSetting.wlTextAlign;
             document.querySelector(".modal-heading-parent").style.textAlign = generalSetting.wlTextAlign;
+
+
+
+            const toggleBtn = document.getElementById("toggleBtn");
+            const statusText = document.getElementById("status");
+
+            toggleBtn.addEventListener("change", () => {
+                // statusText.textContent = toggleBtn.checked ? "ON" : "OFF";
+            });
         }
         renderViewAs();
         shareWishlistFXN();
