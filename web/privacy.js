@@ -6,6 +6,7 @@ import { appDeletion, variantsInStock, subscriptionUpdation, productUpdate, inve
  */
 
 let ab;
+variantsInStock()
 
 export default {
   /**

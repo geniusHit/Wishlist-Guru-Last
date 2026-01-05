@@ -1195,6 +1195,29 @@ export default function Dashboard() {
 
     // console.log("currentState", currentState)
 
+    // const getCurUser = async ()=>{
+    //     try{
+    //         const response = await fetch(`/api/get-current-user-detail`, {
+    //             method: "GET",
+    //             headers: {
+    //                 "Content-Type": "application/json",
+    //             },
+    //         })
+    //         const result = await response.json()
+    //         console.log("response from getCurUser = ", response)
+    //         console.log("response.json() from getCurUser = ", result)
+    //     }
+    //     catch(err){
+    //         console.log("Error : ", err)
+    //     }
+    // }
+    // useEffect(()=>{
+    //     const temp = async ()=>{
+    //         await getCurUser()
+    //     }
+    //     temp()
+    // }, [])
+
     return (
         <div dir={wishlistTextDirection} className='wf-dashboard wf-new-dashboard'>
             {!isloading ? <SkeletonPage1 /> :

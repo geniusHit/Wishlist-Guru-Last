@@ -155,6 +155,41 @@ async function addCreateWishlist(req, res, emailOrToken, guestOrUser) {
     }
 }
 
+
+
+
+
+export async function getWishlistUsers(req, res) {
+    try{
+        const selectQuery = `SELECT * FROM ${user_table}`
+        const [result] = await database.query(selectQuery)
+        res.send(result)
+    }
+    catch(err){
+        console.log("Error : ", err)
+    }
+}
+
+export async function sendEmailOnOff(req, res) {
+    try{
+        const updateQuery = `UPDATE wishlist_users SET send_emails=? WHERE email=?`
+        let send_emails = req.body.send_emails === true? "true": "false"
+        database.query(updateQuery, [send_emails, req.body.email])
+        // console.log("req.body.send_emails = ", req.body.send_emails)
+        // console.log("req.body.email = ", req.body.email)
+        console.log("req.body.send_emails = ", req.body.send_emails)
+        // console.log("parseInt(req.body.send_emails) = ", parseInt(req.body.send_emails))
+    }
+    catch(err){
+        console.log("Error: ", err)
+    }
+}
+
+
+
+
+
+
 export const copyToWishlist = async (req, res) => {
     if (req.body.customerEmail === "") {
         await CopyMultiWishlist(req, res, req.body.currentToken);
@@ -1807,6 +1842,7 @@ export const getAllUsersCount = async (req, res) => {
             FROM ${user_table} AS u 
             JOIN ${Wishlist_table} AS w ON u.id = w.wishlist_user_id WHERE u.shop_name = ?;`;
         const [result] = await database.query(mainQuery, [shopName]);
+        console.log("result", result)
         if (!res.headersSent) {
             res.json({ data: result });
         }
@@ -1822,6 +1858,7 @@ export const getAllUsersCount = async (req, res) => {
 export const getCurrentPlanSql = async (req, res) => {
     let roughToken = "";
     const shopName = req.body.shopName;
+    console.log("shopName", shopName)
     const wfGetDomain = req.body.wfGetDomain;
     const normalDomain = req.body.normalDomain;
     const customerEmail = req.headers["wg-user"];
@@ -1863,6 +1900,7 @@ export const getCurrentPlanSql = async (req, res) => {
             WHERE s.shop_name = ? AND su.url = ?
         `;
         const [languageData] = await database.query(langQuery, [shopName, langUrl]);
+        console.log("language", languageData)
         res.json({
             planData: planResult.length > 0 ? planResult : [{ active_plan_id: 1 }],
             languageData,
@@ -3721,6 +3759,7 @@ export const updateDataAppInstallation = async (req, res) => {
 export const appInstallation = async (req, res) => {
     try {
         const nameParts = req.body.currentPlanName.split("/");
+        console.log("nameParts", nameParts)
         const currentPlanName = nameParts[0];
         const oldPlanType =
             currentPlanName === "Free" || currentPlanName === "No plan"

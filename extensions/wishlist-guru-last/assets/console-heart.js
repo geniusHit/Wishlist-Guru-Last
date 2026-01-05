@@ -17,7 +17,7 @@ let customButton = localData?.customButton || JSON.parse(heartButton.getAttribut
 let customLanguage = localData?.customLanguage || JSON.parse(heartButton.getAttribute("language-setting").replace(/~/g, "'"));
 let generalSetting = localData?.generalSetting || JSON.parse(heartButton.getAttribute("general-setting"));
 // let getThemeName = localData?.getThemeName || JSON.parse(heartButton.getAttribute("theme-name"));
-let getThemeName = { themeName: "Dawn" }
+let getThemeName = { themeName: "Rise" }
 let advanceSetting = localData?.advanceSetting || JSON.parse(heartButton.getAttribute("advance-setting").replace(/~/g, "'"));
 let collectionBtnSetting = localData?.collectionBtnSetting || JSON.parse(heartButton.getAttribute("collection-btn-setting"));
 let currentPlan = localData?.currentPlan || JSON.parse(heartButton.getAttribute("current-plan"));
@@ -66,6 +66,8 @@ let currentSelectedKey = "";
 let newArrayAfterSelection = [];
 
 // let wgLastClickTime = 0;
+
+console.log("customerEmail = ", customerEmail)
 
 setTimeout(() => {
     document.documentElement.style.setProperty('--add-to-wishlist', `"${customLanguage?.addToWishlist}"`);
@@ -356,17 +358,102 @@ function updateLanguageFxn() {
                                         <span class="wg-search-icon"></span>
                                         <input id="search-input" class="searchbar_Input" placeholder="" onkeyup="handleSearchData(event)" value=""/>
                                     </div>
-                                    <div class="searchData-main2">
-                                        <div class="vcb-width wg-clearwishlist">
-                                            <div onclick="clearAllWishlist()" class="cartButtonStyle addAllToCartButton">
-                                            ${customLanguage.clearAllWishlist || storeFrontDefLang.clearAllWishlist}
-                                            </div>  
+                                    <div class="searchData-main-right">
+                                        <div class="searchData-main2">
+                                            <div class="vcb-width wg-clearwishlist">
+                                                <div onclick="clearAllWishlist()" class="cartButtonStyle addAllToCartButton">
+                                                ${customLanguage.clearAllWishlist || storeFrontDefLang.clearAllWishlist}
+                                                </div>
+                                            </div>
                                         </div>
+
+                                        <div class='settings' id='settings'><span><span></div>
                                     </div>
                                 </div>`
 
 
         // `<input id="search-input" class="searchbar_Input" placeholder="" onkeyup="handleSearchData(event)" value=""/>`;
+
+        const settings = document.getElementById("settings")
+        settings.addEventListener("click", () => {
+            let settingsModal = document.getElementById("mysettingsModal")
+            settingsModal.style.display = "block"
+            document.querySelector(".closeByShareModal").style.filter = generalSetting.wlCrossFilter;
+        })
+
+        const toggleBtn = document.getElementById("toggleBtn");
+        const toggle = document.querySelector(".toggle")
+        const accountModal = document.getElementById("accountModal")
+        const accountContent = document.querySelector(".modal-account-content")
+        if(!customerEmail){
+            toggleBtn.disabled = true
+
+            toggle.addEventListener("click", async () => {
+                console.log("Toggle button clicked")
+                //await showLoginPopup();
+                const newDivData = `
+                <h3>You need to login first to edit settings</h3>
+                <span class="closeByAccountModal" onclick="closeAccountModal()"></span>
+                <div class="wg-islogin-buttons">
+                    <button onClick="goToRegister()" class="wg-register-btn">
+                        ${customLanguage?.createAccountAnchor || storeFrontDefLang.createAccountAnchor}
+                    </button>
+                    <button onClick="goToAccount()" class="wg-login-btn">
+                        ${customLanguage?.loginTextAnchor || storeFrontDefLang?.loginTextAnchor}
+                    </button>
+                </div>`;
+
+                accountContent.innerHTML = newDivData
+                accountModal.style.display = "block"
+            })
+        }
+        const setCustomerPreferences = async () => {
+            let curEmail, wishlistUsers, wishlistUsersRresult;
+            curEmail = await getCurrentLoginFxn()
+
+            wishlistUsers = await fetch(`${serverURL}/getWishlistUsers`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+
+            wishlistUsersRresult = await wishlistUsers.json()
+            console.log("wishlistUsersRresult = ", wishlistUsersRresult)
+
+            wishlistUsersRresult.map((el) => {
+                if (curEmail === el.email) {
+                    console.log("curEmail matched = ", el.email)
+                    if (toggleBtn) {
+                        toggleBtn.checked = el.send_emails === "true" ? true : false
+                    }
+                }
+            })
+
+
+
+            toggleBtn.addEventListener("change", async () => {
+                if (true) {
+                    curEmail = await getCurrentLoginFxn()
+
+                    wishlistUsersRresult.map(async (el) => {
+                        if (curEmail === el.email) {
+                            console.log("curEmail matched = ", el.email)
+                            await fetch(`${serverURL}/send-email-on-off`, {
+                                method: "POST",
+                                headers: { "Content-Type": "application/json" },
+                                body: JSON.stringify({
+                                    "send_emails": toggleBtn.checked,
+                                    "email": curEmail
+                                })
+                            })
+                        }
+                    })
+                }
+            });
+        }
+
+        setCustomerPreferences()
     }
 
     var searchPlaceholder = document.querySelectorAll(".searchData input");
@@ -444,6 +531,11 @@ function updateLanguageFxn() {
     if (allowedThemes.includes(getThemeName?.themeName)) {
         document.body.classList.add("wg-grid-relative-forcely");
     }
+}
+
+function closeAccountModal(){
+    const accountModal = document.getElementById("accountModal")
+    accountModal.style.display = "none"
 }
 
 function goToAccount() {
@@ -3073,6 +3165,8 @@ async function pageTypeFunction() {
             ? localStorage.getItem("isLoginProductId")
             : null;
 
+        console.log("getLocalId = ", getLocalId)
+
         if (!customerEmail && getLocalId) {
             document.querySelector(".modal-page-auth").style.display = "none";
             document.querySelector(".grid-outer-main").style.display = "none";
@@ -3128,20 +3222,11 @@ async function pageTypeFunction() {
 
             if ((generalSetting?.hideLoginText === false || generalSetting?.hideLoginText === undefined || generalSetting?.hideLoginText === "")) {
                 document.querySelector(".modal-page-auth").innerHTML = `
-                ${customLanguage?.loginTextForWishlist || storeFrontDefLang.loginTextForWishlist} <a href ="/account">${customLanguage?.loginTextAnchor || storeFrontDefLang?.loginTextAnchor}</a> ${customLanguage?.orText || storeFrontDefLang.orText} <a href="/account/register"> ${customLanguage?.createAccountAnchor || storeFrontDefLang.createAccountAnchor}</a> ${customLanguage?.createAccountEndingText || ""}  <label class="toggle"><input type="checkbox" id="toggleBtn"><span class="slider"></span></label>`;
+                ${customLanguage?.loginTextForWishlist || storeFrontDefLang.loginTextForWishlist} <a href ="/account">${customLanguage?.loginTextAnchor || storeFrontDefLang?.loginTextAnchor}</a> ${customLanguage?.orText || storeFrontDefLang.orText} <a href="/account/register"> ${customLanguage?.createAccountAnchor || storeFrontDefLang.createAccountAnchor}</a> ${customLanguage?.createAccountEndingText || ""}`;
             }
 
             document.querySelector(".modal-page-auth").style.textAlign = generalSetting.wlTextAlign;
             document.querySelector(".modal-heading-parent").style.textAlign = generalSetting.wlTextAlign;
-
-
-
-            const toggleBtn = document.getElementById("toggleBtn");
-            const statusText = document.getElementById("status");
-
-            toggleBtn.addEventListener("change", () => {
-                // statusText.textContent = toggleBtn.checked ? "ON" : "OFF";
-            });
         }
         renderViewAs();
         shareWishlistFXN();
@@ -10416,6 +10501,11 @@ function closeShareModal() {
     if (errorMessage) errorMessage.innerText = "";
 
     shareModal.style.display = "none";
+}
+
+function closeSettingsModal() {
+    let mysettingsModal = document.getElementById("mysettingsModal")
+    mysettingsModal.style.display = "none"
 }
 
 async function extractIdAndGetDataForTable(pageUrl) {

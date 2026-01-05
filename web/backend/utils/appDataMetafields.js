@@ -17,6 +17,8 @@ export default async function createAppDataMetafields(data) {
         }
       }`
 
+  console.log("data.namespace = ", data.namespace)
+
   let variables = {
     variables: {
       "metafields":

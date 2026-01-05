@@ -5,7 +5,7 @@ export default function detectThemeName(themeName, filter, customSettings) {
 
     if (themeName === "Dawn") {
         // --------------------- For Header------------------------
-        headerHeartIcon = "header .header__icons"
+        headerHeartIcon = "header .header__icons, .header__right"
         headerHeartIconClass = ""
         headerHeartElementClass = "header__icon"
         headerHeartIconCreateElement = ""
@@ -1355,13 +1355,13 @@ export default function detectThemeName(themeName, filter, customSettings) {
 
 
         // icon on pdp image
-        pdpImageSelector = ".js-product-media-item-variant .product-media__image";
-        pdpTitleSelector = ".product-title";
-        pdpAddToCartSelector = ".product-add-to-cart .add-to-cart";
+        pdpImageSelector = ".js-product-media-item-variant .product-media__image, .featured-image-only";
+        pdpTitleSelector = ".product-title, gp-product-title";
+        pdpAddToCartSelector = ".product-add-to-cart .add-to-cart, .gp-button-atc";
 
 
         // for header wishlist icon left , right position
-        cart = "button.header__icon.header__icon--cart";
+        cart = ".header__icon.header__icon--cart";
     }
 
     else if (themeName === "Eclipse" || themeName === "Ripple" || themeName === "Coastal") {
@@ -27144,6 +27144,68 @@ export default function detectThemeName(themeName, filter, customSettings) {
 
         // for header wishlist icon left , right position
         cart = "a[href='/cart']";
+    }
+
+    else if (themeName === "Olivia") {
+        // --------------------- For Header------------------------
+        headerHeartIcon = "header .header__icons"
+        headerHeartIconClass = ""
+        headerHeartElementClass = ""
+        headerHeartIconCreateElement = ""
+        headerHeartElementInsertAfter = false
+        headerHeartElementPrepend = false
+
+        headerHeartIconMobile = ""
+        headerHeartIconMobileClass = ""
+        headerHeartMobileElementClass = ""
+        headerHeartIconMobileCreateElement = ""
+        headerHeartMobileInsertAfter = false
+        headerHeartMobileElementPrepend = false
+
+        headerMenuItem = ""
+        headerMenuItemClass = ""
+        headerMenuElementClass = ""
+        headerHeartIconMobileCreateElement = ""
+        headerHeartMobileInsertAfter = false
+        headerHeartMobileElementPrepend = false
+
+        headerMenuItemMobile = ".menu-drawer__menu"
+        headerMenuItemMobileClass = ""
+        headerMenuMobileElementClass = ""
+        headerMenuItemMobileCreateElement = ""
+        headerMenuMobileInsertAfter = false
+        headerMenuMobileElementPrepend = false
+
+        // ------------------- Icons-----------------------
+
+        gridElement = ".product-grid .grid__item";
+        appendIcon = ".product-grid .grid__item .card__inner";
+        afterIcon = false
+        appendIconCheck = false
+        buttonPrependBeforeElemnt = false
+        productLink = "a"
+
+        //--------------------------- For Quick Modal--------------
+        // modelMainElement = "button[type='submit'][name='add']";
+        // modalProductElement = "quick-add-modal.quick-add-modal[open='']";
+        // modalbuttonAppend = "button.product-form__submit";
+        // modalButtonAppendOnImg = "slider-component.slider-mobile-gutter";
+        // modalbuttonAppendOnTitle = ".product__title";
+        // modalVariantSelector = ""
+        // modalVariantSubSelector = ""
+        // modalVariantMatchedUndefinedParent = ""
+        // checkModalVariantMatchedUndefinedParent = ""
+        // modalVariantMatchedUndefinedSelector = "";
+        // modalProductIdSelector = "[action='/cart/add'3]";
+        // modalProductIdValueSelector = "[name='id']";
+
+        // icon on pdp image
+        pdpImageSelector = ".product__media img";
+        // pdpTitleSelector = ".product__title";
+        pdpTitleSelector = ".product__vendor-buttons, .product__title";
+        pdpAddToCartSelector = ".product-form__buttons .product-form__submit";
+        // for header wishlist icon left , right position
+        cart = ".header__icon--cart"
     }
 
     else {
