@@ -334,6 +334,7 @@ async function getMultiWishlist(req, res, emailOrToken) {
 
 export const createUser = async (req, res) => {
     const newPrice = await getProductPrice(req, res);
+    console.log("req.body = ", req.body)
     if (req.body.price !== null) {
         req.body.price = newPrice || req.body.price;
     }
@@ -716,7 +717,7 @@ async function checkQuotaAndAddItem(req, res, selectedUserId, sendRes, list, pla
                             subject: "Wishlist Guru App Quota limit crossed.. Update Plan NOW!!!",
                             html: mailHtml,
                         };
-                        // sendEmail(emailContent); // Assuming sendEmail is available
+                        sendEmail(emailContent); // Assuming sendEmail is available
                     }
                 }
             });
@@ -3826,7 +3827,7 @@ export const appInstallation = async (req, res) => {
                         Customer Email: ${req.body.customerEmail}<br><br>
                         Thank you. Best regards`,
                 };
-                sendEmail(emailContent);
+                // sendEmail(emailContent);
             }
             return res.json({ msg: "Plan updated in our database" });
         }
@@ -5581,3 +5582,42 @@ export const klaviyoAuthCallback = async (req, res) => {
 
 }
 
+export const getLanguages = async (req, res)=>{
+    try{
+        const query = `SELECT lang_name, type
+                       FROM ${store_languages_table} AS s
+                       INNER JOIN ${store_languages_url_table} AS su
+                       ON s.lang_id=su.lang_id
+                       WHERE s.shop_name=?`;
+        const [result] = await database.query(query, [req.params.shopName])
+        res.send(result)
+    }
+    catch(err){
+        console.log("Error in fetching store languages : ", err)
+    }
+}
+
+export const setPreferredLanguage = async (req, res)=>{
+    try{
+        const query = `UPDATE ${user_table}
+                       SET preferred_language=?
+                       WHERE shop_name=? AND email=?`;
+        const [result] = await database.query(query, [req.body.preferredLanguage, req.body.shopDomain, req.body.customerEmail])
+        res.status(200).send("Preferred language set successfully")
+    }
+    catch(err){
+        console.log("Error in setting preferred language : ", err)
+    }
+}
+
+export const getPreferredLanguage = async (req, res)=>{
+    try{
+        const query = `SELECT preferred_language FROM ${user_table}
+                       WHERE shop_name=? AND email=?`;
+        const [result] = await database.query(query, [req.params.shopDomain, req.params.customerEmail])
+        res.send(result)
+    }
+    catch(err){
+        console.log("Error in fetching preferred language : ", err)
+    }
+}

@@ -17,7 +17,7 @@ let customButton = localData?.customButton || JSON.parse(heartButton.getAttribut
 let customLanguage = localData?.customLanguage || JSON.parse(heartButton.getAttribute("language-setting").replace(/~/g, "'"));
 let generalSetting = localData?.generalSetting || JSON.parse(heartButton.getAttribute("general-setting"));
 // let getThemeName = localData?.getThemeName || JSON.parse(heartButton.getAttribute("theme-name"));
-let getThemeName = { themeName: "Rise" }
+let getThemeName = { themeName: "Dawn" }
 let advanceSetting = localData?.advanceSetting || JSON.parse(heartButton.getAttribute("advance-setting").replace(/~/g, "'"));
 let collectionBtnSetting = localData?.collectionBtnSetting || JSON.parse(heartButton.getAttribute("collection-btn-setting"));
 let currentPlan = localData?.currentPlan || JSON.parse(heartButton.getAttribute("current-plan"));
@@ -375,26 +375,17 @@ function updateLanguageFxn() {
         // `<input id="search-input" class="searchbar_Input" placeholder="" onkeyup="handleSearchData(event)" value=""/>`;
 
         const settings = document.getElementById("settings")
+        if(currentPlan<2){
+            settings.style.display = "none"
+        }
         settings.addEventListener("click", () => {
-            let settingsModal = document.getElementById("mysettingsModal")
-            settingsModal.style.display = "block"
-            document.querySelector(".closeByShareModal").style.filter = generalSetting.wlCrossFilter;
-        })
-
-        const toggleBtn = document.getElementById("toggleBtn");
-        const toggle = document.querySelector(".toggle")
-        const accountModal = document.getElementById("accountModal")
-        const accountContent = document.querySelector(".modal-account-content")
-        if(!customerEmail){
-            toggleBtn.disabled = true
-
-            toggle.addEventListener("click", async () => {
-                console.log("Toggle button clicked")
-                //await showLoginPopup();
+            if (!customerEmail) {
+                const accountModal = document.getElementById("accountModal")
+                const accountContent = document.querySelector(".modal-account-content")
                 const newDivData = `
-                <h3>You need to login first to edit settings</h3>
+                <h3>You need to login first to edit Customer Preferences</h3>
                 <span class="closeByAccountModal" onclick="closeAccountModal()"></span>
-                <div class="wg-islogin-buttons">
+                <div class="wg-islogin-buttons-for-cp">
                     <button onClick="goToRegister()" class="wg-register-btn">
                         ${customLanguage?.createAccountAnchor || storeFrontDefLang.createAccountAnchor}
                     </button>
@@ -405,8 +396,68 @@ function updateLanguageFxn() {
 
                 accountContent.innerHTML = newDivData
                 accountModal.style.display = "block"
-            })
-        }
+                let consoleBtn = document.getElementById("console-style")
+                consoleBtn.innerHTML += `.wg-islogin-buttons-for-cp{display:flex; justify-content:center; gap:15px;}
+                
+                .wg-islogin-buttons-for-cp .wg-register-btn{text-transform:uppercase;
+                cursor: pointer;
+            box-sizing: border-box;
+            text-transform: uppercase; background-color: ${currentPlan>2? generalSetting?.userLogin?.bgColor : customButton.cartButtonStyle.hover.bgColor};
+    color: ${currentPlan>2? generalSetting?.userLogin?.textColor : customButton.cartButtonStyle.hover.textColor};
+    max-width: 100%;
+    border: ${currentPlan>2? generalSetting?.userLogin?.border.value : customButton.cartButtonStyle.hover.border.value}${currentPlan>2? generalSetting?.userLogin?.border.unit : customButton.cartButtonStyle.hover.border.unit} ${currentPlan>2? generalSetting?.userLogin?.border.type : customButton.cartButtonStyle.hover.border.type} ${currentPlan>2? generalSetting?.userLogin?.border.color : customButton.cartButtonStyle.hover.border.color};
+    border-radius: ${currentPlan>2? generalSetting?.userLogin?.borderRadius.value : customButton.cartButtonStyle.borderRadius.value}${currentPlan>2? generalSetting?.userLogin?.borderRadius.unit : customButton.cartButtonStyle.borderRadius.unit};
+            font-size: ${currentPlan>2? generalSetting?.userLogin?.fontSize.value : customButton.cartButtonStyle.fontSize.value}${currentPlan>2? generalSetting?.userLogin?.fontSize.unit : customButton.cartButtonStyle.fontSize.unit} !important;
+            padding: ${currentPlan>2? generalSetting?.userLogin?.paddingTopBottom.value : customButton.cartButtonStyle.paddingTopBottom.value}${currentPlan>2? generalSetting?.userLogin?.paddingTopBottom.unit : customButton.cartButtonStyle.paddingTopBottom.unit} ${currentPlan>2? generalSetting?.userLogin?.paddingLeftRight.value : customButton.cartButtonStyle.paddingLeftRight.value}${currentPlan>2? generalSetting?.userLogin?.paddingLeftRight.unit : customButton.cartButtonStyle.paddingLeftRight.unit};
+            margin: ${currentPlan>2? generalSetting?.userLogin?.marginTopBottom.value : customButton.cartButtonStyle.marginTopBottom.value}${currentPlan>2? generalSetting?.userLogin?.marginTopBottom.unit : customButton.cartButtonStyle.marginTopBottom.unit} ${currentPlan>2? generalSetting?.userLogin?.marginLeftRight.value : customButton.cartButtonStyle.marginLeftRight.value}${currentPlan>2? generalSetting?.userLogin?.marginTopBottom.unit : customButton.cartButtonStyle.marginLeftRight.unit};
+            text-align: ${currentPlan>2? generalSetting?.userLogin?.textAlign : customButton.cartButtonStyle.textAlign};
+            cursor: pointer;
+            box-sizing: border-box;
+            font-weight: ${getFontWt(customButton.cartButtonStyle.fontWeight, customButton.cartButtonStyle.fontWeight).textFw};
+            font-family: ${currentPlan>2? generalSetting?.userLogin?.fontFamily : customButton.cartButtonStyle.fontFamily};
+            width:auto;
+    }
+
+
+        .wg-islogin-buttons-for-cp .wg-login-btn{background-color: ${currentPlan>2?generalSetting?.guestLogin?.bgColor : customButton.cartButtonStyle.hover.bgColor};
+    color: ${currentPlan>2? generalSetting?.guestLogin?.textColor : customButton.cartButtonStyle.hover.textColor};
+    border: ${currentPlan>2? generalSetting?.guestLogin?.border.value : customButton.cartButtonStyle.hover.border.value}${currentPlan>2? generalSetting?.guestLogin?.border.unit : customButton.cartButtonStyle.hover.border.unit} ${currentPlan>2? generalSetting?.guestLogin?.border.type : customButton.cartButtonStyle.hover.border.type} ${currentPlan>2? generalSetting?.guestLogin?.border.color : customButton.cartButtonStyle.hover.border.color};
+    border-radius: ${currentPlan>2? generalSetting?.guestLogin?.borderRadius.value : customButton.cartButtonStyle.borderRadius.value}${currentPlan>2? generalSetting?.guestLogin?.borderRadius.unit : customButton.cartButtonStyle.borderRadius.unit};
+            font-size: ${currentPlan>2? generalSetting?.guestLogin?.fontSize.value : customButton.cartButtonStyle.fontSize.value}${currentPlan>2? generalSetting?.guestLogin?.fontSize.unit : customButton.cartButtonStyle.fontSize.unit} !important;
+            padding: ${currentPlan>2? generalSetting?.guestLogin?.paddingTopBottom.value : customButton.cartButtonStyle.paddingTopBottom.value}${currentPlan>2? generalSetting?.guestLogin?.paddingTopBottom.unit : customButton.cartButtonStyle.paddingTopBottom.unit} ${currentPlan>2? generalSetting?.guestLogin?.paddingLeftRight.value : customButton.cartButtonStyle.paddingLeftRight.value}${currentPlan>2? generalSetting?.guestLogin?.paddingLeftRight.unit : customButton.cartButtonStyle.paddingLeftRight.unit};
+            margin: ${currentPlan>2? generalSetting?.guestLogin?.marginTopBottom.value : customButton.cartButtonStyle.marginTopBottom.value}${currentPlan>2? generalSetting?.guestLogin?.marginTopBottom.unit : customButton.cartButtonStyle.marginTopBottom.unit} ${currentPlan>2? generalSetting?.guestLogin?.marginLeftRight.value : customButton.cartButtonStyle.marginLeftRight.value}${currentPlan>2? generalSetting?.guestLogin?.marginTopBottom.unit : customButton.cartButtonStyle.marginLeftRight.unit};
+            text-align: ${currentPlan>2? generalSetting?.guestLogin?.textAlign : customButton.cartButtonStyle.textAlign};
+            cursor: pointer;
+            box-sizing: border-box;
+            font-weight: ${getFontWt(customButton.cartButtonStyle.fontWeight, customButton.cartButtonStyle.fontWeight).textFw};
+            font-family: ${currentPlan>2? generalSetting?.guestLogin?.fontFamily : customButton.cartButtonStyle.fontFamily}, ${getFontFamily}, ${getFontFamilyFallback};
+            width:auto;
+            text-transform: uppercase;
+    }
+
+
+                    .wg-islogin-buttons-for-cp .wg-register-btn:hover{background-color: ${currentPlan>2? generalSetting?.userLogin?.hover.bgColor : customButton.cartButtonStyle.bgColor};
+    color: ${currentPlan>2? generalSetting?.userLogin?.hover.textColor : customButton.cartButtonStyle.textColor};
+    border: ${currentPlan>2? generalSetting?.userLogin?.hover.border.value : customButton.cartButtonStyle.border.value}${currentPlan>2? generalSetting?.userLogin?.hover.border.unit : customButton.cartButtonStyle.border.unit} ${currentPlan>2? generalSetting?.userLogin?.hover.border.type : customButton.cartButtonStyle.border.type} ${currentPlan>2? generalSetting?.userLogin?.hover.border.color : customButton.cartButtonStyle.border.color}}
+    
+    .wg-islogin-buttons-for-cp .wg-login-btn:hover{
+    background-color: ${currentPlan>2? generalSetting?.guestLogin?.hover.bgColor : customButton.cartButtonStyle.bgColor};
+    color: ${currentPlan>2? generalSetting?.guestLogin?.hover.textColor : customButton.cartButtonStyle.textColor};
+    border: ${currentPlan>2? generalSetting?.guestLogin?.hover.border.value : customButton.cartButtonStyle.border.value}${currentPlan>2? generalSetting?.guestLogin?.hover.border.unit : customButton.cartButtonStyle.border.unit} ${currentPlan>2? generalSetting?.guestLogin?.hover.border.type : customButton.cartButtonStyle.border.type} ${currentPlan>2? generalSetting?.guestLogin?.hover.border.color : customButton.cartButtonStyle.border.color};
+    }
+    `;
+            }
+            else {
+                let settingsModal = document.getElementById("mysettingsModal")
+                settingsModal.style.display = "block"
+                document.querySelector(".closeByShareModal").style.filter = generalSetting.wlCrossFilter;
+            }
+        })
+
+        const toggleBtn = document.getElementById("toggleBtn");
+        const toggle = document.querySelector(".toggle")
+        const accountModal = document.getElementById("accountModal")
+        const accountContent = document.querySelector(".modal-account-content")
         const setCustomerPreferences = async () => {
             let curEmail, wishlistUsers, wishlistUsersRresult;
             curEmail = await getCurrentLoginFxn()
@@ -430,25 +481,27 @@ function updateLanguageFxn() {
                 }
             })
 
-
-
             toggleBtn.addEventListener("change", async () => {
-                if (true) {
-                    curEmail = await getCurrentLoginFxn()
+                curEmail = await getCurrentLoginFxn()
 
-                    wishlistUsersRresult.map(async (el) => {
-                        if (curEmail === el.email) {
-                            console.log("curEmail matched = ", el.email)
-                            await fetch(`${serverURL}/send-email-on-off`, {
-                                method: "POST",
-                                headers: { "Content-Type": "application/json" },
-                                body: JSON.stringify({
-                                    "send_emails": toggleBtn.checked,
-                                    "email": curEmail
-                                })
+                wishlistUsersRresult.map(async (el) => {
+                    if (curEmail === el.email) {
+                        console.log("curEmail matched = ", el.email)
+                        await fetch(`${serverURL}/send-email-on-off`, {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({
+                                "send_emails": toggleBtn.checked,
+                                "email": curEmail
                             })
-                        }
-                    })
+                        })
+                    }
+                })
+
+                if (toggleBtn.checked) {
+                    alertToast("You will receive emails!", null, null, null)
+                } else {
+                    alertToast("You will not receive emails!", null, null, null)
                 }
             });
         }
@@ -533,7 +586,7 @@ function updateLanguageFxn() {
     }
 }
 
-function closeAccountModal(){
+function closeAccountModal() {
     const accountModal = document.getElementById("accountModal")
     accountModal.style.display = "none"
 }
@@ -1933,11 +1986,13 @@ async function showWishlistButtonType() {
                                 // let insertRightafterCart = document.querySelector(getThemeSelector?.cart);
                                 // insertRightafterCart?.after(createNewElementDiv);
 
-                                const insertRightafterCartList = document.querySelectorAll(getThemeSelector?.cart);
-                                insertRightafterCartList.forEach((element) => {
-                                    element.after(createNewElementDiv.cloneNode(true));
-                                });
+                                // const insertRightafterCartList = document.querySelectorAll(getThemeSelector?.cart);
+                                // insertRightafterCartList.forEach((element) => {
+                                //     element.after(createNewElementDiv.cloneNode(true));
+                                // });
 
+                                const insertRightafterCartList = document.querySelector(getThemeSelector?.cart);
+                                insertRightafterCartList.after(createNewElementDiv);
                             } else if (generalSetting?.headerIconPosition === "left" && getThemeSelector?.cart !== "" && currentPlan > 1) {
 
 
@@ -7540,6 +7595,14 @@ const wgResponsiveCss = (getThemeName.themeName === "Responsive")
     `
     : '';
 
+const wgDawnCss = (getThemeName.themeName === "Dawn")
+    ? `
+        .collection_icon_new_selected, .collection_icon_new{
+            z-index:2 !important;
+        }
+    `
+    : ''
+
 
 
 
@@ -8120,7 +8183,7 @@ function buttonStyleFxn() {
             border-radius: ${generalSetting?.userLogin?.borderRadius.value}${generalSetting?.userLogin?.borderRadius.unit
         }; 
             font-size: ${generalSetting?.userLogin?.fontSize.value}${generalSetting?.userLogin?.fontSize.unit
-        } !important; 
+        } !important;
             font-family: ${generalSetting?.userLogin?.fontFamily
         }, ${getFontFamily}, ${getFontFamilyFallback};
             padding: ${generalSetting?.userLogin?.paddingTopBottom.value}${generalSetting?.userLogin?.paddingTopBottom.unit
@@ -8140,7 +8203,7 @@ function buttonStyleFxn() {
         }
 
         .wg-islogin-buttons .wg-login-btn{
-            background-color: ${generalSetting?.guestLogin?.bgColor}; 
+            background-color: ${generalSetting?.guestLogin?.bgColor};
             color: ${generalSetting?.guestLogin?.textColor}; 
             max-width: 100%;
             border: ${generalSetting?.guestLogin?.border.value}${generalSetting?.guestLogin?.border.unit
@@ -8763,6 +8826,8 @@ function buttonStyleFxn() {
        ${wgResponsiveCss}
 
        ${wgMotionCss}
+
+       ${wgDawnCss}
     `;
 
     localStorage.setItem("wg-button-style", buttonStyleHead.innerHTML);
@@ -8773,6 +8838,7 @@ function buttonStyleFxn() {
 
 async function SqlFunction(product) {
     let returnMsg;
+    console.log("product = ", product)
     let { accessToken, accessEmail } = getAccessToken();
 
     try {
@@ -8807,7 +8873,7 @@ async function SqlFunction(product) {
         });
         let result = await userData.json();
 
-        // console.log("create user ---- ", result)
+        console.log("create user ---- ", result)
 
         // // --------to track meta adds on the add-to-cart button-------- 
         if (advanceSetting?.metaPixelApiKey?.trim() && currentPlan >= 3) {
@@ -10108,321 +10174,324 @@ async function alertToast(text, msgggg, notificationData, productData) {
     console.log("notificationData = ", notificationData)
     console.log("productData = ", productData)
 
-    if (notificationData.image === null || notificationData.title === null) {
-        if (productData.handle !== "" && productData.handle !== undefined && productData.handle !== null) {
-            var { buttonJsonData } = await getProductData(productData.handle);
+    const notificationStyle = notificationStyleFxn();
+    if (notificationData && (notificationData?.image === null || notificationData?.title === null) && (productData?.handle !== "" && productData?.handle !== undefined && productData?.handle !== null)) {
+        var { buttonJsonData } = await getProductData(productData?.handle);
+
+        if (generalSetting.wishlistOrNotification === "show-wishlist") {
+            if (msgggg === "added") {
+                heartButtonHandle();
+            }
+        } else {
+            // if (generalSetting.notificationTypeOption === "toastImage-left") {
+            //     let toastLeft = `<div style="${notificationStyle}" class="toast-bottom-left toast-alignment">${text}</div>`;
+            //     document.querySelector(".our-sweetalert").innerHTML = toastLeft;
+            // } else if (generalSetting.notificationTypeOption === "toastImage-right") {
+            //     let toastRight = `<div style="${notificationStyle}" class="toast-bottom-right toast-alignment"> ${text}</div>`;
+            //     document.querySelector(".our-sweetalert").innerHTML = toastRight;
+            // } else if (generalSetting.notificationTypeOption === "toastImage-center") {
+            //     let toastCenter = `<div style="${notificationStyle} background-color: ${generalSetting.bgColor}; " class="toast-bottom-center toast-alignment">${text}</div>`;
+            //     document.querySelector(".our-sweetalert").innerHTML = toastCenter;
+            //     console.log("alert toast else case is running")
+            // } else if (generalSetting.notificationTypeOption === "toastImage-top-right") {
+            //     let toastRight = `<div style="${notificationStyle}" class="toast-top-right toast-alignment">${text}</div>`;
+            //     document.querySelector(".our-sweetalert").innerHTML = toastRight;
+            // } else if (generalSetting.notificationTypeOption === "toastImage-top-left") {
+            //     let toastRight = `<div style="${notificationStyle}" class="toast-top-left toast-alignment">${text}</div>`;
+            //     document.querySelector(".our-sweetalert").innerHTML = toastRight;
+            // } else if (generalSetting.notificationTypeOption === "toastImage-top-center") {
+            //     let toastRight = `<div style="${notificationStyle}" class="toast-top-center toast-alignment">${text}</div>`;
+            //     document.querySelector(".our-sweetalert").innerHTML = toastRight;
+            // }
+            // // toastImage-top-right
+            // else if (generalSetting.notificationTypeOption === "toast-top-right") {
+            //     document.querySelector(".our-sweetalert").style.display = "block";
+            //     let toastLeft = `${fromWhere === "allToCart" ? `
+            //     <div style="${notificationStyle}" class="toast-top-right toast-alignment toast_img">
+            //         <span class='toast_img_text'>
+            //             ${text}
+            //         </span>
+            //     </div>`
+            //         : `<div style="${notificationStyle}" class="toast-top-right toast-alignment toast_img">
+            //         <span class="imageWrapper">
+            //             <img src='${buttonJsonData.images[0]}' width='50px' class='toast_image'>
+            //         </span>
+            //         <span class='toast_img_text'>
+            //             ${buttonJsonData.title}<br>
+            //             ${text}
+            //         </span>
+            //     </div>`
+            //         }`;
+            //     document.querySelector(".our-sweetalert").innerHTML = toastLeft;
+            // }
+            // else if (generalSetting.notificationTypeOption === "toast-top-center") {
+            //     document.querySelector(".our-sweetalert").style.display = "block";
+            //     let toastLeft = `${fromWhere === "allToCart" ? `
+            //     <div style="${notificationStyle}" class="toast-top-center toast-alignment toast_img">
+            //         <span class='toast_img_text'>
+            //             ${text}
+            //         </span>
+            //     </div>`
+            //         : `<div style="${notificationStyle}" class="toast-top-center toast-alignment toast_img">
+            //         <span class="imageWrapper">
+            //             <img src='${buttonJsonData.images[0]}' width='50px' class='toast_image'>
+            //         </span>
+            //         <span class='toast_img_text'>
+            //             ${buttonJsonData.title}<br>
+            //             ${text}
+            //         </span>
+            //     </div>`
+            //         }`;
+            //     document.querySelector(".our-sweetalert").innerHTML = toastLeft;
+            // }
+            // else if (generalSetting.notificationTypeOption === "toast-top-left") {
+            //     document.querySelector(".our-sweetalert").style.display = "block";
+            //     let toastLeft = `${fromWhere === "allToCart" ? `
+            //     <div style="${notificationStyle}" class="toast-top-left toast-alignment toast_img">
+            //         <span class='toast_img_text'>
+            //             ${text}
+            //         </span>
+            //     </div>`
+            //         : `<div style="${notificationStyle}" class="toast-top-left toast-alignment toast_img">
+            //         <span class="imageWrapper">
+            //             <img src='${buttonJsonData.images[0]}' width='50px' class='toast_image'>
+            //         </span>
+            //         <span class='toast_img_text'>
+            //             ${buttonJsonData.title}<br>
+            //             ${text}
+            //         </span>
+            //     </div>`
+            //         }`;
+            //     document.querySelector(".our-sweetalert").innerHTML = toastLeft;
+            // }
+            // else if (generalSetting.notificationTypeOption === "toast-right") {
+            //     document.querySelector(".our-sweetalert").style.display = "block";
+            //     let toastLeft = `${fromWhere === "allToCart" ? `
+            //     <div style="${notificationStyle}" class="toast-bottom-right toast-alignment toast_img">
+            //         <span class='toast_img_text'>
+            //             ${text}
+            //         </span>
+            //     </div>`
+            //         : `<div style="${notificationStyle}" class="toast-bottom-right toast-alignment toast_img">
+            //         <span class="imageWrapper">
+            //             <img src='${buttonJsonData.images[0]}' width='50px' class='toast_image'>
+            //         </span>
+            //         <span class='toast_img_text'>
+            //             ${buttonJsonData.title}<br>
+            //             ${text}
+            //         </span>
+            //     </div>`
+            //         }`;
+            //     document.querySelector(".our-sweetalert").innerHTML = toastLeft;
+            // }
+            // else if (generalSetting.notificationTypeOption === "toast-left") {
+            //     document.querySelector(".our-sweetalert").style.display = "block";
+            //     let toastLeft = `${fromWhere === "allToCart" ? `
+            //     <div style="${notificationStyle}" class="toast-bottom-left toast-alignment toast_img">
+            //         <span class='toast_img_text'>
+            //             ${text}
+            //         </span>
+            //     </div>`
+            //         : `<div style="${notificationStyle}" class="toast-bottom-left toast-alignment toast_img">
+            //         <span class="imageWrapper">
+            //             <img src='${buttonJsonData.images[0]}' width='50px' class='toast_image'>
+            //         </span>
+            //         <span class='toast_img_text'>
+            //             ${buttonJsonData.title}<br>
+            //             ${text}
+            //         </span>
+            //     </div>`
+            //         }`;
+            //     document.querySelector(".our-sweetalert").innerHTML = toastLeft;
+            // }
+            // else {
+            //     document.querySelector(".our-sweetalert").style.display = "block";
+            //     let toastImageCenter = `${fromWhere === "allToCart" ? `
+            //     <div style="${notificationStyle}" class="toast-bottom-center toast-alignment toast_img">
+            //         <span class='toast_img_text'>
+            //             ${text}
+            //         </span>
+            //     </div>`
+            //         : `<div style="${notificationStyle}" class="toast-bottom-center toast-alignment toast_img">
+            //         <span class="imageWrapper">
+            //             <img src='${buttonJsonData.images[0]}' width='50px' class='toast_image'>
+            //         </span>
+            //         <span class='toast_img_text'>
+            //             ${buttonJsonData.title}<br>
+            //             ${text}
+            //         </span>
+            //     </div>`
+            //         }`;
+            //     document.querySelector(".our-sweetalert").innerHTML = toastImageCenter;
+            // }
+
+
+            // Toast Image code starts
+            if (generalSetting.notificationTypeOption === "toastImage-center") {
+                // notificationDivId.style.display = "block";
+                document.querySelector(".our-sweetalert").style.display = "block";
+                let toastCenter = `<div style="${notificationStyle}" class="toast-bottom-center toast-alignment">${text}</div>`;
+                document.querySelector(".our-sweetalert").innerHTML = toastCenter;
+            }
+            else if (generalSetting.notificationTypeOption === "toastImage-left") {
+                // notificationDivId.style.display = "block";
+                document.querySelector(".our-sweetalert").style.display = "block";
+                let toastLeft = `<div style="${notificationStyle}" class="toast-bottom-left toast-alignment">${text}</div>`;
+                document.querySelector(".our-sweetalert").innerHTML = toastLeft;
+            }
+            else if (generalSetting.notificationTypeOption === "toastImage-right") {
+                // notificationDivId.style.display = "block";
+                document.querySelector(".our-sweetalert").style.display = "block";
+                let toastRight = `<div style="${notificationStyle}" class="toast-bottom-right toast-alignment">${text}</div>`;
+                document.querySelector(".our-sweetalert").innerHTML = toastRight;
+            }
+            else if (generalSetting.notificationTypeOption === "toastImage-top-right") {
+                // notificationDivId.style.display = "block";
+                document.querySelector(".our-sweetalert").style.display = "block";
+                let toastTopRight = `<div style="${notificationStyle}" class="toast-top-right toast-alignment">${text}</div>`;
+                document.querySelector(".our-sweetalert").innerHTML = toastTopRight;
+            }
+            else if (generalSetting.notificationTypeOption === "toastImage-top-left") {
+                // notificationDivId.style.display = "block";
+                document.querySelector(".our-sweetalert").style.display = "block";
+                let toastTopLeft = `<div style="${notificationStyle}" class="toast-top-left toast-alignment ">${text}</div>`;
+                document.querySelector(".our-sweetalert").innerHTML = toastTopLeft;
+            }
+            else if (generalSetting.notificationTypeOption === "toastImage-top-center") {
+                // notificationDivId.style.display = "block";
+                document.querySelector(".our-sweetalert").style.display = "block";
+                let toastTopCenter = `<div style="${notificationStyle}" class="toast-top-center toast-alignment">${text}</div>`;
+                document.querySelector(".our-sweetalert").innerHTML = toastTopCenter;
+            }
+            else if (generalSetting.notificationTypeOption === "toast-top-right") {
+                document.querySelector(".our-sweetalert").style.display = "block";
+                // notificationDivId.style.display = "block";
+                let toastTopRight = `${notificationData.fromWhere === "allToCart" || notificationData.fromWhere === "copyUrl" ? `
+            <div style="${notificationStyle}" class="toast-top-right toast-alignment toast_img">
+                ${text}
+            </div>`
+                    : `<div style="${notificationStyle}" class="removed-notification toast-top-right toast-alignment toast_img">
+                <span class="imageWrapper">
+                    <img src='${buttonJsonData ? getSelectedVariantImg(productData.variantId, buttonJsonData) : notificationData.image}' width='50px' class='toast_image'>
+                </span>
+                <span class='toast_img_text'>
+                    ${buttonJsonData ? buttonJsonData.title : notificationData.title}<br>
+                    ${text}
+                </span>
+            </div>`
+                    }`;
+                document.querySelector(".our-sweetalert").innerHTML = toastTopRight;
+            }
+            else if (generalSetting.notificationTypeOption === "toast-top-center") {
+                document.querySelector(".our-sweetalert").style.display = "block";
+                // notificationDivId.style.display = "block";
+                let toastTopCenter = `${notificationData.fromWhere === "allToCart" || notificationData.fromWhere === "copyUrl" ? `
+            <div style="${notificationStyle}" class="toast-top-center toast-alignment toast_img">
+                ${text}
+            </div>`
+                    : `<div style="${notificationStyle}" class="removed-notification toast-top-center toast-alignment toast_img">
+                <span class="imageWrapper">
+                    <img src='${buttonJsonData ? getSelectedVariantImg(productData.variantId, buttonJsonData) : notificationData.image}' width='50px' class='toast_image'>
+                </span>
+                <span class='toast_img_text'>
+                    ${buttonJsonData ? buttonJsonData.title : notificationData.title}<br>
+                    ${text}
+                </span>
+            </div>`
+                    }`;
+                document.querySelector(".our-sweetalert").innerHTML = toastTopCenter;
+            }
+            else if (generalSetting.notificationTypeOption === "toast-top-left") {
+                document.querySelector(".our-sweetalert").style.display = "block";
+                // notificationDivId.style.display = "block";
+                let toastTopLeft = `${notificationData.fromWhere === "allToCart" || notificationData.fromWhere === "copyUrl" ? `
+            <div style="${notificationStyle}" class="toast-top-left toast-alignment toast_img">
+                ${text}
+            </div>`
+                    : `<div style="${notificationStyle}" class="removed-notification toast-top-left toast-alignment toast_img">
+                <span class="imageWrapper">
+                    <img src='${buttonJsonData ? getSelectedVariantImg(productData.variantId, buttonJsonData) : notificationData.image}' width='50px' class='toast_image'>
+                </span>
+                <span class='toast_img_text'>
+                    ${buttonJsonData ? buttonJsonData.title : notificationData.title}<br>
+                    ${text}
+                </span>
+            </div>`
+                    }`;
+                document.querySelector(".our-sweetalert").innerHTML = toastTopLeft;
+            }
+            else if (generalSetting.notificationTypeOption === "toast-right") {
+                document.querySelector(".our-sweetalert").style.display = "block";
+                // notificationDivId.style.display = "block";
+                let toastRight = `${notificationData.fromWhere === "allToCart" || notificationData.fromWhere === "copyUrl" ? `
+            <div style="${notificationStyle}" class="toast-bottom-right toast-alignment toast_img">
+                ${text}
+            </div>`
+                    : `<div style="${notificationStyle}" class="removed-notification toast-bottom-right toast-alignment toast_img">
+                <span class="imageWrapper">
+                    <img src='${buttonJsonData ? getSelectedVariantImg(productData.variantId, buttonJsonData) : notificationData.image}' width='50px' class='toast_image'>
+                </span>
+                <span class='toast_img_text'>
+                    ${buttonJsonData ? buttonJsonData.title : notificationData.title}<br>
+                    ${text}
+                </span>
+            </div>`
+                    }`;
+                document.querySelector(".our-sweetalert").innerHTML = toastRight;
+            }
+            else if (generalSetting.notificationTypeOption === "toast-left") {
+                document.querySelector(".our-sweetalert").style.display = "block";
+                // notificationDivId.style.display = "block";
+                let toastLeft = `${notificationData.fromWhere === "allToCart" || notificationData.fromWhere === "copyUrl" ? `
+            <div style="${notificationStyle}" class="toast-bottom-left toast-alignment toast_img">
+                ${text}
+            </div>`
+                    : `<div style="${notificationStyle}" class="removed-notification toast-bottom-left toast-alignment toast_img">
+                <span class="imageWrapper">
+                    <img src='${buttonJsonData ? getSelectedVariantImg(productData.variantId, buttonJsonData) : notificationData.image}' width='50px' class='toast_image'>
+                </span>
+                <span class='toast_img_text'>
+                    ${buttonJsonData ? buttonJsonData.title : notificationData.title}<br>
+                    ${text}
+                </span>
+            </div>`
+                    }`;
+                document.querySelector(".our-sweetalert").innerHTML = toastLeft;
+            }
+            else if (generalSetting.notificationTypeOption === "toast-center") {
+                // notificationDivId.style.display = "block";
+                document.querySelector(".our-sweetalert").style.display = "block";
+                let toastImageCenter = `${fromWhere === "allToCart" || fromWhere === "copyUrl" ? `
+            <div style="${notificationStyle}" class="toast-bottom-center toast-alignment toast_img">
+                ${text}
+            </div>`
+                    : `<div style="${notificationStyle}" class="removed-notification toast-bottom-center toast-alignment toast_img">
+                <span class="imageWrapper">
+                    <img src='${buttonJsonData ? getSelectedVariantImg(productData.variantId, buttonJsonData) : notificationData.image}' width='50px' class='toast_image'>
+                </span>
+                <span class='toast_img_text'>
+                    ${buttonJsonData ? buttonJsonData.title : notificationData.title}<br>
+                    ${text}
+                </span>
+            </div>`
+                    }`;
+                document.querySelector(".our-sweetalert").innerHTML = toastImageCenter;
+            }
+            // Toast Image code ends
         }
+    }
+    else {
+        document.querySelector(".our-sweetalert").style.display = "block";
+        let toastCenter = `<div style="${notificationStyle}" class="toast-top-right toast-alignment">${text && text}<br/>${msgggg !== null ? msgggg : ""}</div>`;
+        document.querySelector(".our-sweetalert").innerHTML = toastCenter;
     }
     // var { buttonJsonData } = await getProductData(productData.handle);
     console.log("buttonJsonData = ", buttonJsonData)
 
     // Toast Image code ends
-
-    if (generalSetting.wishlistOrNotification === "show-wishlist") {
-        if (msgggg === "added") {
-            heartButtonHandle();
-        }
-    } else {
-        const notificationStyle = notificationStyleFxn();
-        // if (generalSetting.notificationTypeOption === "toastImage-left") {
-        //     let toastLeft = `<div style="${notificationStyle}" class="toast-bottom-left toast-alignment">${text}</div>`;
-        //     document.querySelector(".our-sweetalert").innerHTML = toastLeft;
-        // } else if (generalSetting.notificationTypeOption === "toastImage-right") {
-        //     let toastRight = `<div style="${notificationStyle}" class="toast-bottom-right toast-alignment"> ${text}</div>`;
-        //     document.querySelector(".our-sweetalert").innerHTML = toastRight;
-        // } else if (generalSetting.notificationTypeOption === "toastImage-center") {
-        //     let toastCenter = `<div style="${notificationStyle} background-color: ${generalSetting.bgColor}; " class="toast-bottom-center toast-alignment">${text}</div>`;
-        //     document.querySelector(".our-sweetalert").innerHTML = toastCenter;
-        //     console.log("alert toast else case is running")
-        // } else if (generalSetting.notificationTypeOption === "toastImage-top-right") {
-        //     let toastRight = `<div style="${notificationStyle}" class="toast-top-right toast-alignment">${text}</div>`;
-        //     document.querySelector(".our-sweetalert").innerHTML = toastRight;
-        // } else if (generalSetting.notificationTypeOption === "toastImage-top-left") {
-        //     let toastRight = `<div style="${notificationStyle}" class="toast-top-left toast-alignment">${text}</div>`;
-        //     document.querySelector(".our-sweetalert").innerHTML = toastRight;
-        // } else if (generalSetting.notificationTypeOption === "toastImage-top-center") {
-        //     let toastRight = `<div style="${notificationStyle}" class="toast-top-center toast-alignment">${text}</div>`;
-        //     document.querySelector(".our-sweetalert").innerHTML = toastRight;
-        // }
-        // // toastImage-top-right
-        // else if (generalSetting.notificationTypeOption === "toast-top-right") {
-        //     document.querySelector(".our-sweetalert").style.display = "block";
-        //     let toastLeft = `${fromWhere === "allToCart" ? `
-        //     <div style="${notificationStyle}" class="toast-top-right toast-alignment toast_img">
-        //         <span class='toast_img_text'>
-        //             ${text}
-        //         </span>
-        //     </div>`
-        //         : `<div style="${notificationStyle}" class="toast-top-right toast-alignment toast_img">
-        //         <span class="imageWrapper">
-        //             <img src='${buttonJsonData.images[0]}' width='50px' class='toast_image'>
-        //         </span>
-        //         <span class='toast_img_text'>
-        //             ${buttonJsonData.title}<br>
-        //             ${text}
-        //         </span>
-        //     </div>`
-        //         }`;
-        //     document.querySelector(".our-sweetalert").innerHTML = toastLeft;
-        // }
-        // else if (generalSetting.notificationTypeOption === "toast-top-center") {
-        //     document.querySelector(".our-sweetalert").style.display = "block";
-        //     let toastLeft = `${fromWhere === "allToCart" ? `
-        //     <div style="${notificationStyle}" class="toast-top-center toast-alignment toast_img">
-        //         <span class='toast_img_text'>
-        //             ${text}
-        //         </span>
-        //     </div>`
-        //         : `<div style="${notificationStyle}" class="toast-top-center toast-alignment toast_img">
-        //         <span class="imageWrapper">
-        //             <img src='${buttonJsonData.images[0]}' width='50px' class='toast_image'>
-        //         </span>
-        //         <span class='toast_img_text'>
-        //             ${buttonJsonData.title}<br>
-        //             ${text}
-        //         </span>
-        //     </div>`
-        //         }`;
-        //     document.querySelector(".our-sweetalert").innerHTML = toastLeft;
-        // }
-        // else if (generalSetting.notificationTypeOption === "toast-top-left") {
-        //     document.querySelector(".our-sweetalert").style.display = "block";
-        //     let toastLeft = `${fromWhere === "allToCart" ? `
-        //     <div style="${notificationStyle}" class="toast-top-left toast-alignment toast_img">
-        //         <span class='toast_img_text'>
-        //             ${text}
-        //         </span>
-        //     </div>`
-        //         : `<div style="${notificationStyle}" class="toast-top-left toast-alignment toast_img">
-        //         <span class="imageWrapper">
-        //             <img src='${buttonJsonData.images[0]}' width='50px' class='toast_image'>
-        //         </span>
-        //         <span class='toast_img_text'>
-        //             ${buttonJsonData.title}<br>
-        //             ${text}
-        //         </span>
-        //     </div>`
-        //         }`;
-        //     document.querySelector(".our-sweetalert").innerHTML = toastLeft;
-        // }
-        // else if (generalSetting.notificationTypeOption === "toast-right") {
-        //     document.querySelector(".our-sweetalert").style.display = "block";
-        //     let toastLeft = `${fromWhere === "allToCart" ? `
-        //     <div style="${notificationStyle}" class="toast-bottom-right toast-alignment toast_img">
-        //         <span class='toast_img_text'>
-        //             ${text}
-        //         </span>
-        //     </div>`
-        //         : `<div style="${notificationStyle}" class="toast-bottom-right toast-alignment toast_img">
-        //         <span class="imageWrapper">
-        //             <img src='${buttonJsonData.images[0]}' width='50px' class='toast_image'>
-        //         </span>
-        //         <span class='toast_img_text'>
-        //             ${buttonJsonData.title}<br>
-        //             ${text}
-        //         </span>
-        //     </div>`
-        //         }`;
-        //     document.querySelector(".our-sweetalert").innerHTML = toastLeft;
-        // }
-        // else if (generalSetting.notificationTypeOption === "toast-left") {
-        //     document.querySelector(".our-sweetalert").style.display = "block";
-        //     let toastLeft = `${fromWhere === "allToCart" ? `
-        //     <div style="${notificationStyle}" class="toast-bottom-left toast-alignment toast_img">
-        //         <span class='toast_img_text'>
-        //             ${text}
-        //         </span>
-        //     </div>`
-        //         : `<div style="${notificationStyle}" class="toast-bottom-left toast-alignment toast_img">
-        //         <span class="imageWrapper">
-        //             <img src='${buttonJsonData.images[0]}' width='50px' class='toast_image'>
-        //         </span>
-        //         <span class='toast_img_text'>
-        //             ${buttonJsonData.title}<br>
-        //             ${text}
-        //         </span>
-        //     </div>`
-        //         }`;
-        //     document.querySelector(".our-sweetalert").innerHTML = toastLeft;
-        // }
-        // else {
-        //     document.querySelector(".our-sweetalert").style.display = "block";
-        //     let toastImageCenter = `${fromWhere === "allToCart" ? `
-        //     <div style="${notificationStyle}" class="toast-bottom-center toast-alignment toast_img">
-        //         <span class='toast_img_text'>
-        //             ${text}
-        //         </span>
-        //     </div>`
-        //         : `<div style="${notificationStyle}" class="toast-bottom-center toast-alignment toast_img">
-        //         <span class="imageWrapper">
-        //             <img src='${buttonJsonData.images[0]}' width='50px' class='toast_image'>
-        //         </span>
-        //         <span class='toast_img_text'>
-        //             ${buttonJsonData.title}<br>
-        //             ${text}
-        //         </span>
-        //     </div>`
-        //         }`;
-        //     document.querySelector(".our-sweetalert").innerHTML = toastImageCenter;
-        // }
-
-
-        // Toast Image code starts
-        if (generalSetting.notificationTypeOption === "toastImage-center") {
-            // notificationDivId.style.display = "block";
-            document.querySelector(".our-sweetalert").style.display = "block";
-            let toastCenter = `<div style="${notificationStyle}" class="toast-bottom-center toast-alignment">${text}</div>`;
-            document.querySelector(".our-sweetalert").innerHTML = toastCenter;
-        }
-        else if (generalSetting.notificationTypeOption === "toastImage-left") {
-            // notificationDivId.style.display = "block";
-            document.querySelector(".our-sweetalert").style.display = "block";
-            let toastLeft = `<div style="${notificationStyle}" class="toast-bottom-left toast-alignment">${text}</div>`;
-            document.querySelector(".our-sweetalert").innerHTML = toastLeft;
-        }
-        else if (generalSetting.notificationTypeOption === "toastImage-right") {
-            // notificationDivId.style.display = "block";
-            document.querySelector(".our-sweetalert").style.display = "block";
-            let toastRight = `<div style="${notificationStyle}" class="toast-bottom-right toast-alignment">${text}</div>`;
-            document.querySelector(".our-sweetalert").innerHTML = toastRight;
-        }
-        else if (generalSetting.notificationTypeOption === "toastImage-top-right") {
-            // notificationDivId.style.display = "block";
-            document.querySelector(".our-sweetalert").style.display = "block";
-            let toastTopRight = `<div style="${notificationStyle}" class="toast-top-right toast-alignment">${text}</div>`;
-            document.querySelector(".our-sweetalert").innerHTML = toastTopRight;
-        }
-        else if (generalSetting.notificationTypeOption === "toastImage-top-left") {
-            // notificationDivId.style.display = "block";
-            document.querySelector(".our-sweetalert").style.display = "block";
-            let toastTopLeft = `<div style="${notificationStyle}" class="toast-top-left toast-alignment ">${text}</div>`;
-            document.querySelector(".our-sweetalert").innerHTML = toastTopLeft;
-        }
-        else if (generalSetting.notificationTypeOption === "toastImage-top-center") {
-            // notificationDivId.style.display = "block";
-            document.querySelector(".our-sweetalert").style.display = "block";
-            let toastTopCenter = `<div style="${notificationStyle}" class="toast-top-center toast-alignment">${text}</div>`;
-            document.querySelector(".our-sweetalert").innerHTML = toastTopCenter;
-        }
-        else if (generalSetting.notificationTypeOption === "toast-top-right") {
-            document.querySelector(".our-sweetalert").style.display = "block";
-            // notificationDivId.style.display = "block";
-            let toastTopRight = `${notificationData.fromWhere === "allToCart" || notificationData.fromWhere === "copyUrl" ? `
-            <div style="${notificationStyle}" class="toast-top-right toast-alignment toast_img">
-                ${text}
-            </div>`
-                : `<div style="${notificationStyle}" class="removed-notification toast-top-right toast-alignment toast_img">
-                <span class="imageWrapper">
-                    <img src='${buttonJsonData ? getSelectedVariantImg(productData.variantId, buttonJsonData) : notificationData.image}' width='50px' class='toast_image'>
-                </span>
-                <span class='toast_img_text'>
-                    ${buttonJsonData ? buttonJsonData.title : notificationData.title}<br>
-                    ${text}
-                </span>
-            </div>`
-                }`;
-            document.querySelector(".our-sweetalert").innerHTML = toastTopRight;
-        }
-        else if (generalSetting.notificationTypeOption === "toast-top-center") {
-            document.querySelector(".our-sweetalert").style.display = "block";
-            // notificationDivId.style.display = "block";
-            let toastTopCenter = `${notificationData.fromWhere === "allToCart" || notificationData.fromWhere === "copyUrl" ? `
-            <div style="${notificationStyle}" class="toast-top-center toast-alignment toast_img">
-                ${text}
-            </div>`
-                : `<div style="${notificationStyle}" class="removed-notification toast-top-center toast-alignment toast_img">
-                <span class="imageWrapper">
-                    <img src='${buttonJsonData ? getSelectedVariantImg(productData.variantId, buttonJsonData) : notificationData.image}' width='50px' class='toast_image'>
-                </span>
-                <span class='toast_img_text'>
-                    ${buttonJsonData ? buttonJsonData.title : notificationData.title}<br>
-                    ${text}
-                </span>
-            </div>`
-                }`;
-            document.querySelector(".our-sweetalert").innerHTML = toastTopCenter;
-        }
-        else if (generalSetting.notificationTypeOption === "toast-top-left") {
-            document.querySelector(".our-sweetalert").style.display = "block";
-            // notificationDivId.style.display = "block";
-            let toastTopLeft = `${notificationData.fromWhere === "allToCart" || notificationData.fromWhere === "copyUrl" ? `
-            <div style="${notificationStyle}" class="toast-top-left toast-alignment toast_img">
-                ${text}
-            </div>`
-                : `<div style="${notificationStyle}" class="removed-notification toast-top-left toast-alignment toast_img">
-                <span class="imageWrapper">
-                    <img src='${buttonJsonData ? getSelectedVariantImg(productData.variantId, buttonJsonData) : notificationData.image}' width='50px' class='toast_image'>
-                </span>
-                <span class='toast_img_text'>
-                    ${buttonJsonData ? buttonJsonData.title : notificationData.title}<br>
-                    ${text}
-                </span>
-            </div>`
-                }`;
-            document.querySelector(".our-sweetalert").innerHTML = toastTopLeft;
-        }
-        else if (generalSetting.notificationTypeOption === "toast-right") {
-            document.querySelector(".our-sweetalert").style.display = "block";
-            // notificationDivId.style.display = "block";
-            let toastRight = `${notificationData.fromWhere === "allToCart" || notificationData.fromWhere === "copyUrl" ? `
-            <div style="${notificationStyle}" class="toast-bottom-right toast-alignment toast_img">
-                ${text}
-            </div>`
-                : `<div style="${notificationStyle}" class="removed-notification toast-bottom-right toast-alignment toast_img">
-                <span class="imageWrapper">
-                    <img src='${buttonJsonData ? getSelectedVariantImg(productData.variantId, buttonJsonData) : notificationData.image}' width='50px' class='toast_image'>
-                </span>
-                <span class='toast_img_text'>
-                    ${buttonJsonData ? buttonJsonData.title : notificationData.title}<br>
-                    ${text}
-                </span>
-            </div>`
-                }`;
-            document.querySelector(".our-sweetalert").innerHTML = toastRight;
-        }
-        else if (generalSetting.notificationTypeOption === "toast-left") {
-            document.querySelector(".our-sweetalert").style.display = "block";
-            // notificationDivId.style.display = "block";
-            let toastLeft = `${notificationData.fromWhere === "allToCart" || notificationData.fromWhere === "copyUrl" ? `
-            <div style="${notificationStyle}" class="toast-bottom-left toast-alignment toast_img">
-                ${text}
-            </div>`
-                : `<div style="${notificationStyle}" class="removed-notification toast-bottom-left toast-alignment toast_img">
-                <span class="imageWrapper">
-                    <img src='${buttonJsonData ? getSelectedVariantImg(productData.variantId, buttonJsonData) : notificationData.image}' width='50px' class='toast_image'>
-                </span>
-                <span class='toast_img_text'>
-                    ${buttonJsonData ? buttonJsonData.title : notificationData.title}<br>
-                    ${text}
-                </span>
-            </div>`
-                }`;
-            document.querySelector(".our-sweetalert").innerHTML = toastLeft;
-        }
-        else if (generalSetting.notificationTypeOption === "toast-center") {
-            // notificationDivId.style.display = "block";
-            document.querySelector(".our-sweetalert").style.display = "block";
-            let toastImageCenter = `${fromWhere === "allToCart" || fromWhere === "copyUrl" ? `
-            <div style="${notificationStyle}" class="toast-bottom-center toast-alignment toast_img">
-                ${text}
-            </div>`
-                : `<div style="${notificationStyle}" class="removed-notification toast-bottom-center toast-alignment toast_img">
-                <span class="imageWrapper">
-                    <img src='${buttonJsonData ? getSelectedVariantImg(productData.variantId, buttonJsonData) : notificationData.image}' width='50px' class='toast_image'>
-                </span>
-                <span class='toast_img_text'>
-                    ${buttonJsonData ? buttonJsonData.title : notificationData.title}<br>
-                    ${text}
-                </span>
-            </div>`
-                }`;
-            document.querySelector(".our-sweetalert").innerHTML = toastImageCenter;
-        }
-        // Toast Image code ends
-        setTimeout(() => {
-            document.querySelector(".our-sweetalert").innerHTML = "";
-        }, Number(generalSetting.notificationTimer) * 1000);
-    }
+    setTimeout(() => {
+        document.querySelector(".our-sweetalert").innerHTML = "";
+    }, Number(generalSetting.notificationTimer) * 1000);
 }
 
 function addToMyCart(variantId, userId) {
@@ -11701,7 +11770,7 @@ async function saveMainData(data, productId, fromWhere, notificationData, produc
     // Toast image code starts
     let result = await SqlFunction(data);
     const proId = injectCoderr.getAttribute("data-product-id");
-    if (result.msg === "item updated") {
+    if (result?.msg === "item updated") {
         await showCountAll()
         const matchFound = await checkFound(allWishlistData, productId, data.variantId)
         const notificationMsg = result.isAdded === "yes" && !result.bothUpdated ?
@@ -11783,7 +11852,7 @@ async function saveMainData(data, productId, fromWhere, notificationData, produc
 
     }
 
-    if (result.msg === "limit cross") {
+    if (result?.msg === "limit cross") {
         alertContent(customLanguage?.quotaLimitAlert || storeFrontDefLang.quotaLimitAlert);
     }
 }
@@ -12529,4 +12598,60 @@ function wgGetProductOptions() {
     });
 
     return Object.keys(result).length === 0 ? null : result;
+}
+
+if (customerEmail) {
+    (async () => {
+        try {
+            const storeLanguages = await fetch(`${serverURL}/get-languages/${permanentDomain}`, {
+                method: "GET",
+            })
+            const result = await storeLanguages.json();
+            // console.log("storeLanguages = ", result)
+            let languagesDropdown = document.getElementById("language")
+            result.map((l) => {
+                let option = document.createElement("option")
+                option.value = l.lang_name
+                option.textContent = l.lang_name
+                option.classList.add("lang-option")
+                languagesDropdown.appendChild(option)
+            })
+
+            try {
+                const preferred_language = await fetch(`${serverURL}/get-preferred-lang/${permanentDomain}/${customerEmail}`)
+                const result = await preferred_language.json()
+                console.log("preferred language = ", result)
+                if (result[0]?.preferred_language !== "") {
+                    languagesDropdown.querySelector(`option[value=${result[0]?.preferred_language}]`).selected = true
+                }
+            }
+            catch (err) {
+                console.log("Error in getting preferred language: ", err)
+            }
+
+            languagesDropdown.addEventListener("change", async (e) => {
+                try {
+                    await fetch(`${serverURL}/set-preferred-lang`, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            shopDomain: permanentDomain,
+                            customerEmail: customerEmail,
+                            preferredLanguage: e.target.value
+                        })
+                    })
+
+                    alertToast("Preferred language saved successfully!", null, null, null)
+                }
+                catch (err) {
+                    console.log("Error in setting preferred language : ", err)
+                }
+            })
+        }
+        catch (err) {
+            console.log("Error in fetching store languages : ", err)
+        }
+    })()
 }

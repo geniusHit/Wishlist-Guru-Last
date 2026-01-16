@@ -148,6 +148,8 @@ const EditTemplate = ({ value }) => {
     const bodyData = getEditorStateContent(editorStateFirst);
     const footerData = getEditorStateContent(editorFooterState);
 
+    console.log("footerData = ", footerData)
+
     const coloredBodyData = watchColors.contentColor ?
       renderColor(bodyData, watchColors.contentColor) : bodyData;
 
@@ -448,6 +450,12 @@ const EditTemplate = ({ value }) => {
   }
 
   const onEditorFooterStateChange = (editorState) => {
+    setEditorFooterState(editorState)
+    setHeaderSave(true)
+  }
+
+  const onEditorFooter2StateChange = (editorState) => {
+    console.log("editorState = ", editorState)
     setEditorFooterState(editorState)
     setHeaderSave(true)
   }
@@ -906,6 +914,65 @@ const EditTemplate = ({ value }) => {
                   <Editor
                     editorState={editorFooterState}
                     onEditorStateChange={onEditorFooterStateChange}
+
+                    toolbar={{
+                      options: [
+                        'inline',
+                        'blockType',
+                        'fontSize',
+                        'fontFamily',
+                        'list',
+                        'textAlign',
+                        'colorPicker',
+                        'link',
+                        'embedded',
+                        'emoji',
+                        'remove',
+                        'history',
+                      ],
+                      fontFamily: {
+                        options: [
+                          'Arial',
+                          'Georgia',
+                          'Impact',
+                          'Tahoma',
+                          'Times New Roman',
+                          'Verdana',
+                          'Courier New',
+                          'Montserrat', // ✅ Added Montserrat
+                          'Poppins',    // ✅ added
+                        ],
+                      },
+                    }}
+
+                  />
+                </div>
+              </div>
+
+
+
+
+
+
+              <div className='wf-style-wishbtn'>
+                <div className='pb-15'>
+                  <Text variant="headingMd" as="h2">Footer 2</Text>
+                  <p>{myLanguage.footerSubheading}</p>
+                </div>
+
+                <div className='wf-footerDiv'>
+                  <Checkbox
+                    id="isLogo"
+                    label={myLanguage.displayLogo}
+                    checked={isLogo}
+                    onChange={handleIsLogo}
+                  />
+                </div>
+
+                <div className='wf-template-editor pb-15'>
+                  <Editor
+                    editorState={editorFooterState}
+                    onEditorStateChange={onEditorFooter2StateChange}
 
                     toolbar={{
                       options: [

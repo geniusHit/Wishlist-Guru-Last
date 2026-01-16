@@ -36,10 +36,10 @@
 <div
   id="wf-custom-wishBtn-inject"
   class="inject-button-pp"
-  data-product-id="{{ product.id }}"
-  data-product-handle="{{ product.handle }}"
-  variant-id="{{ product.selected_or_first_available_variant.id }}"
-  inject-code-automatic="{{ app.metafields.wishlist-app.inject-code-automatic.value }}"
+  data-product-id='{{ product.id }}'
+  data-product-handle='{{ product.handle }}'
+  variant-id='{{ product.selected_or_first_available_variant.id }}'
+  inject-code-automatic='{{ app.metafields.wishlist-app.inject-code-automatic.value }}'
 ></div>
 
 <!-- This is modal -->
@@ -138,12 +138,21 @@
     <div id="wg-multiWishlistInnerContent"></div>
   </div>
 </div>
-<!-- This is settings -->
+<!-- This is customer preferences -->
 <div id="mysettingsModal">
   <div class="modal-settings-content">
-    <span class="heading">Customer Preferences</span><br>
-    <span>Send Emails</span>
-    <label class="toggle"><input type="checkbox" id="toggleBtn"><span class="slider"></span></label>
+    <h3 class="heading">CUSTOMER PREFERENCES</h3>
+    <br>
+    <div id="receiveEmails">
+      <span>Receive Emails</span>
+      <label class="toggle"><input type="checkbox" id="toggleBtn"><span class="slider"></span></label>
+    </div>
+    <div id="languagePreferences">
+      <span>Preferred Language</span>
+      <select id="language">
+
+      </select>
+    </div>
     <div class="successSettingsDiv">
       {% comment %} <i class="fa fa-times closeByShareModal" aria-hidden="true"  onclick="closeShareModal()"></i> {% endcomment %}
       <span class="closeBySettingsModal" onclick="closeSettingsModal()"></span>
@@ -152,9 +161,7 @@
   </div>
 </div>
 <div id="accountModal">
-  <div class="modal-account-content">
-    
-  </div>
+  <div class="modal-account-content"></div>
 </div>
 <!-- This is alert -->
 <div class="our-sweetalert"></div>

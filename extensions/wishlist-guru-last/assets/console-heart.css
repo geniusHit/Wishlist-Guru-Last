@@ -2163,6 +2163,10 @@ html[dir=rtl] #wg-myModal1 .wg-modal-content1 .close1 {
   color: inherit
 }
 
+#mysettingsModal .modal-settings-content h3 {
+  margin: 0;
+}
+
 #myshareModal .modal-share-content label,
 #mysettingsModal .modal-settings-content label {
   font-size: 18px;
@@ -2172,7 +2176,7 @@ html[dir=rtl] #wg-myModal1 .wg-modal-content1 .close1 {
   display: inline-block;
   position: relative;
   padding-right: 10px;
-  margin: 0 0 10px
+  margin-left: 10px;
 }
 
 #myshareModal .modal-share-content label span,
@@ -3779,6 +3783,36 @@ span.drawerDisableClass {
   display: none;
 }
 
-#accountModal h3{
+#accountModal h3 {
   text-align: center;
+}
+
+#language {
+  text-transform: capitalize;
+  margin-left: 10px;
+  border: 1px solid black;
+  outline: none;
+  padding: 5px;
+  border-radius: 4px;
+  box-shadow: none;
+  font-size: 14px;
+}
+
+#mysettingsModal .heading{
+  color: black !important;
+  font-weight: bold;
+}
+
+#receiveEmails{
+  display: flex;
+  align-items: center;
+  margin-top: -10px;
+}
+
+#receiveEmails span{
+  color:black;
+}
+
+#languagePreferences span{
+  color:black;
 }
