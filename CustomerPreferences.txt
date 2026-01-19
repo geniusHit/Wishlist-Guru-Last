@@ -1,0 +1,666 @@
+// in consoleheart.js, updateLanguageFxn() function
+
+const settings = document.getElementById("settings")
+        if(currentPlan<2){
+            settings.style.display = "none"
+        }
+        settings.addEventListener("click", () => {
+            if (!customerEmail) {
+                const accountModal = document.getElementById("accountModal")
+                const accountContent = document.querySelector(".modal-account-content")
+                const newDivData = `
+                <h3>You need to login first to edit Customer Preferences</h3>
+                <span class="closeByAccountModal" onclick="closeAccountModal()"></span>
+                <div class="wg-islogin-buttons-for-cp">
+                    <button onClick="goToRegister()" class="wg-register-btn">
+                        ${customLanguage?.createAccountAnchor || storeFrontDefLang.createAccountAnchor}
+                    </button>
+                    <button onClick="goToAccount()" class="wg-login-btn">
+                        ${customLanguage?.loginTextAnchor || storeFrontDefLang?.loginTextAnchor}
+                    </button>
+                </div>`;
+
+                accountContent.innerHTML = newDivData
+                accountModal.style.display = "block"
+                let consoleBtn = document.getElementById("console-style")
+                consoleBtn.innerHTML += `.wg-islogin-buttons-for-cp{display:flex; justify-content:center; gap:15px;}
+                
+                .wg-islogin-buttons-for-cp .wg-register-btn{text-transform:uppercase;
+                cursor: pointer;
+            box-sizing: border-box;
+            text-transform: uppercase; background-color: ${currentPlan>2? generalSetting?.userLogin?.bgColor : customButton.cartButtonStyle.hover.bgColor};
+    color: ${currentPlan>2? generalSetting?.userLogin?.textColor : customButton.cartButtonStyle.hover.textColor};
+    max-width: 100%;
+    border: ${currentPlan>2? generalSetting?.userLogin?.border.value : customButton.cartButtonStyle.hover.border.value}${currentPlan>2? generalSetting?.userLogin?.border.unit : customButton.cartButtonStyle.hover.border.unit} ${currentPlan>2? generalSetting?.userLogin?.border.type : customButton.cartButtonStyle.hover.border.type} ${currentPlan>2? generalSetting?.userLogin?.border.color : customButton.cartButtonStyle.hover.border.color};
+    border-radius: ${currentPlan>2? generalSetting?.userLogin?.borderRadius.value : customButton.cartButtonStyle.borderRadius.value}${currentPlan>2? generalSetting?.userLogin?.borderRadius.unit : customButton.cartButtonStyle.borderRadius.unit};
+            font-size: ${currentPlan>2? generalSetting?.userLogin?.fontSize.value : customButton.cartButtonStyle.fontSize.value}${currentPlan>2? generalSetting?.userLogin?.fontSize.unit : customButton.cartButtonStyle.fontSize.unit} !important;
+            padding: ${currentPlan>2? generalSetting?.userLogin?.paddingTopBottom.value : customButton.cartButtonStyle.paddingTopBottom.value}${currentPlan>2? generalSetting?.userLogin?.paddingTopBottom.unit : customButton.cartButtonStyle.paddingTopBottom.unit} ${currentPlan>2? generalSetting?.userLogin?.paddingLeftRight.value : customButton.cartButtonStyle.paddingLeftRight.value}${currentPlan>2? generalSetting?.userLogin?.paddingLeftRight.unit : customButton.cartButtonStyle.paddingLeftRight.unit};
+            margin: ${currentPlan>2? generalSetting?.userLogin?.marginTopBottom.value : customButton.cartButtonStyle.marginTopBottom.value}${currentPlan>2? generalSetting?.userLogin?.marginTopBottom.unit : customButton.cartButtonStyle.marginTopBottom.unit} ${currentPlan>2? generalSetting?.userLogin?.marginLeftRight.value : customButton.cartButtonStyle.marginLeftRight.value}${currentPlan>2? generalSetting?.userLogin?.marginTopBottom.unit : customButton.cartButtonStyle.marginLeftRight.unit};
+            text-align: ${currentPlan>2? generalSetting?.userLogin?.textAlign : customButton.cartButtonStyle.textAlign};
+            cursor: pointer;
+            box-sizing: border-box;
+            font-weight: ${getFontWt(customButton.cartButtonStyle.fontWeight, customButton.cartButtonStyle.fontWeight).textFw};
+            font-family: ${currentPlan>2? generalSetting?.userLogin?.fontFamily : customButton.cartButtonStyle.fontFamily};
+            width:auto;
+    }
+
+
+        .wg-islogin-buttons-for-cp .wg-login-btn{background-color: ${currentPlan>2?generalSetting?.guestLogin?.bgColor : customButton.cartButtonStyle.hover.bgColor};
+    color: ${currentPlan>2? generalSetting?.guestLogin?.textColor : customButton.cartButtonStyle.hover.textColor};
+    border: ${currentPlan>2? generalSetting?.guestLogin?.border.value : customButton.cartButtonStyle.hover.border.value}${currentPlan>2? generalSetting?.guestLogin?.border.unit : customButton.cartButtonStyle.hover.border.unit} ${currentPlan>2? generalSetting?.guestLogin?.border.type : customButton.cartButtonStyle.hover.border.type} ${currentPlan>2? generalSetting?.guestLogin?.border.color : customButton.cartButtonStyle.hover.border.color};
+    border-radius: ${currentPlan>2? generalSetting?.guestLogin?.borderRadius.value : customButton.cartButtonStyle.borderRadius.value}${currentPlan>2? generalSetting?.guestLogin?.borderRadius.unit : customButton.cartButtonStyle.borderRadius.unit};
+            font-size: ${currentPlan>2? generalSetting?.guestLogin?.fontSize.value : customButton.cartButtonStyle.fontSize.value}${currentPlan>2? generalSetting?.guestLogin?.fontSize.unit : customButton.cartButtonStyle.fontSize.unit} !important;
+            padding: ${currentPlan>2? generalSetting?.guestLogin?.paddingTopBottom.value : customButton.cartButtonStyle.paddingTopBottom.value}${currentPlan>2? generalSetting?.guestLogin?.paddingTopBottom.unit : customButton.cartButtonStyle.paddingTopBottom.unit} ${currentPlan>2? generalSetting?.guestLogin?.paddingLeftRight.value : customButton.cartButtonStyle.paddingLeftRight.value}${currentPlan>2? generalSetting?.guestLogin?.paddingLeftRight.unit : customButton.cartButtonStyle.paddingLeftRight.unit};
+            margin: ${currentPlan>2? generalSetting?.guestLogin?.marginTopBottom.value : customButton.cartButtonStyle.marginTopBottom.value}${currentPlan>2? generalSetting?.guestLogin?.marginTopBottom.unit : customButton.cartButtonStyle.marginTopBottom.unit} ${currentPlan>2? generalSetting?.guestLogin?.marginLeftRight.value : customButton.cartButtonStyle.marginLeftRight.value}${currentPlan>2? generalSetting?.guestLogin?.marginTopBottom.unit : customButton.cartButtonStyle.marginLeftRight.unit};
+            text-align: ${currentPlan>2? generalSetting?.guestLogin?.textAlign : customButton.cartButtonStyle.textAlign};
+            cursor: pointer;
+            box-sizing: border-box;
+            font-weight: ${getFontWt(customButton.cartButtonStyle.fontWeight, customButton.cartButtonStyle.fontWeight).textFw};
+            font-family: ${currentPlan>2? generalSetting?.guestLogin?.fontFamily : customButton.cartButtonStyle.fontFamily}, ${getFontFamily}, ${getFontFamilyFallback};
+            width:auto;
+            text-transform: uppercase;
+    }
+
+
+                    .wg-islogin-buttons-for-cp .wg-register-btn:hover{background-color: ${currentPlan>2? generalSetting?.userLogin?.hover.bgColor : customButton.cartButtonStyle.bgColor};
+    color: ${currentPlan>2? generalSetting?.userLogin?.hover.textColor : customButton.cartButtonStyle.textColor};
+    border: ${currentPlan>2? generalSetting?.userLogin?.hover.border.value : customButton.cartButtonStyle.border.value}${currentPlan>2? generalSetting?.userLogin?.hover.border.unit : customButton.cartButtonStyle.border.unit} ${currentPlan>2? generalSetting?.userLogin?.hover.border.type : customButton.cartButtonStyle.border.type} ${currentPlan>2? generalSetting?.userLogin?.hover.border.color : customButton.cartButtonStyle.border.color}}
+    
+    .wg-islogin-buttons-for-cp .wg-login-btn:hover{
+    background-color: ${currentPlan>2? generalSetting?.guestLogin?.hover.bgColor : customButton.cartButtonStyle.bgColor};
+    color: ${currentPlan>2? generalSetting?.guestLogin?.hover.textColor : customButton.cartButtonStyle.textColor};
+    border: ${currentPlan>2? generalSetting?.guestLogin?.hover.border.value : customButton.cartButtonStyle.border.value}${currentPlan>2? generalSetting?.guestLogin?.hover.border.unit : customButton.cartButtonStyle.border.unit} ${currentPlan>2? generalSetting?.guestLogin?.hover.border.type : customButton.cartButtonStyle.border.type} ${currentPlan>2? generalSetting?.guestLogin?.hover.border.color : customButton.cartButtonStyle.border.color};
+    }
+    `;
+            }
+            else {
+                let settingsModal = document.getElementById("mysettingsModal")
+                settingsModal.style.display = "block"
+                document.querySelector(".closeByShareModal").style.filter = generalSetting.wlCrossFilter;
+            }
+        })
+
+        const toggleBtn = document.getElementById("toggleBtn");
+        const toggle = document.querySelector(".toggle")
+        const accountModal = document.getElementById("accountModal")
+        const accountContent = document.querySelector(".modal-account-content")
+        const setCustomerPreferences = async () => {
+            let curEmail, wishlistUsers, wishlistUsersRresult;
+            curEmail = await getCurrentLoginFxn()
+
+            wishlistUsers = await fetch(`${serverURL}/getWishlistUsers`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+
+            wishlistUsersRresult = await wishlistUsers.json()
+            console.log("wishlistUsersRresult = ", wishlistUsersRresult)
+
+            wishlistUsersRresult.map((el) => {
+                if (curEmail === el.email) {
+                    console.log("curEmail matched = ", el.email)
+                    if (toggleBtn) {
+                        toggleBtn.checked = el.send_emails === "true" ? true : false
+                    }
+                }
+            })
+
+            toggleBtn.addEventListener("change", async () => {
+                curEmail = await getCurrentLoginFxn()
+
+                wishlistUsersRresult.map(async (el) => {
+                    if (curEmail === el.email) {
+                        console.log("curEmail matched = ", el.email)
+                        await fetch(`${serverURL}/send-email-on-off`, {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({
+                                "send_emails": toggleBtn.checked,
+                                "email": curEmail
+                            })
+                        })
+                    }
+                })
+
+                if (toggleBtn.checked) {
+                    alertToast("You will receive emails!", null, null, null)
+                } else {
+                    alertToast("You will not receive emails!", null, null, null)
+                }
+            });
+        }
+
+        setCustomerPreferences()
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// in consoleheart.js, at end
+if (customerEmail) {
+    (async () => {
+        try {
+            const storeLanguages = await fetch(`${serverURL}/get-languages/${permanentDomain}`, {
+                method: "GET",
+            })
+            const result = await storeLanguages.json();
+            // console.log("storeLanguages = ", result)
+            let languagesDropdown = document.getElementById("language")
+            result.map((l) => {
+                let option = document.createElement("option")
+                option.value = l.lang_name
+                option.textContent = l.lang_name
+                option.classList.add("lang-option")
+                languagesDropdown.appendChild(option)
+            })
+
+            try {
+                const preferred_language = await fetch(`${serverURL}/get-preferred-lang/${permanentDomain}/${customerEmail}`)
+                const result = await preferred_language.json()
+                console.log("preferred language = ", result)
+                if (result[0]?.preferred_language !== "") {
+                    languagesDropdown.querySelector(`option[value=${result[0]?.preferred_language}]`).selected = true
+                }
+            }
+            catch (err) {
+                console.log("Error in getting preferred language: ", err)
+            }
+
+            languagesDropdown.addEventListener("change", async (e) => {
+                try {
+                    await fetch(`${serverURL}/set-preferred-lang`, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            shopDomain: permanentDomain,
+                            customerEmail: customerEmail,
+                            preferredLanguage: e.target.value
+                        })
+                    })
+
+                    alertToast("Preferred language saved successfully!", null, null, null)
+                }
+                catch (err) {
+                    console.log("Error in setting preferred language : ", err)
+                }
+            })
+        }
+        catch (err) {
+            console.log("Error in fetching store languages : ", err)
+        }
+    })()
+}
+
+
+
+
+
+
+
+
+
+
+// in consoleheart.js
+async function alertToast(text, msgggg, notificationData, productData) {
+
+    console.log("notificationData = ", notificationData)
+    console.log("productData = ", productData)
+
+    const notificationStyle = notificationStyleFxn();
+    if (notificationData && (notificationData?.image === null || notificationData?.title === null) && (productData?.handle !== "" && productData?.handle !== undefined && productData?.handle !== null)) {
+        var { buttonJsonData } = await getProductData(productData?.handle);
+
+        if (generalSetting.wishlistOrNotification === "show-wishlist") {
+            if (msgggg === "added") {
+                heartButtonHandle();
+            }
+        } else {
+            // Toast Image code starts
+            if (generalSetting.notificationTypeOption === "toastImage-center") {
+                // notificationDivId.style.display = "block";
+                document.querySelector(".our-sweetalert").style.display = "block";
+                let toastCenter = `<div style="${notificationStyle}" class="toast-bottom-center toast-alignment">${text}</div>`;
+                document.querySelector(".our-sweetalert").innerHTML = toastCenter;
+            }
+            else if (generalSetting.notificationTypeOption === "toastImage-left") {
+                // notificationDivId.style.display = "block";
+                document.querySelector(".our-sweetalert").style.display = "block";
+                let toastLeft = `<div style="${notificationStyle}" class="toast-bottom-left toast-alignment">${text}</div>`;
+                document.querySelector(".our-sweetalert").innerHTML = toastLeft;
+            }
+            else if (generalSetting.notificationTypeOption === "toastImage-right") {
+                // notificationDivId.style.display = "block";
+                document.querySelector(".our-sweetalert").style.display = "block";
+                let toastRight = `<div style="${notificationStyle}" class="toast-bottom-right toast-alignment">${text}</div>`;
+                document.querySelector(".our-sweetalert").innerHTML = toastRight;
+            }
+            else if (generalSetting.notificationTypeOption === "toastImage-top-right") {
+                // notificationDivId.style.display = "block";
+                document.querySelector(".our-sweetalert").style.display = "block";
+                let toastTopRight = `<div style="${notificationStyle}" class="toast-top-right toast-alignment">${text}</div>`;
+                document.querySelector(".our-sweetalert").innerHTML = toastTopRight;
+            }
+            else if (generalSetting.notificationTypeOption === "toastImage-top-left") {
+                // notificationDivId.style.display = "block";
+                document.querySelector(".our-sweetalert").style.display = "block";
+                let toastTopLeft = `<div style="${notificationStyle}" class="toast-top-left toast-alignment ">${text}</div>`;
+                document.querySelector(".our-sweetalert").innerHTML = toastTopLeft;
+            }
+            else if (generalSetting.notificationTypeOption === "toastImage-top-center") {
+                // notificationDivId.style.display = "block";
+                document.querySelector(".our-sweetalert").style.display = "block";
+                let toastTopCenter = `<div style="${notificationStyle}" class="toast-top-center toast-alignment">${text}</div>`;
+                document.querySelector(".our-sweetalert").innerHTML = toastTopCenter;
+            }
+            else if (generalSetting.notificationTypeOption === "toast-top-right") {
+                document.querySelector(".our-sweetalert").style.display = "block";
+                // notificationDivId.style.display = "block";
+                let toastTopRight = `${notificationData.fromWhere === "allToCart" || notificationData.fromWhere === "copyUrl" ? `
+            <div style="${notificationStyle}" class="toast-top-right toast-alignment toast_img">
+                ${text}
+            </div>`
+                    : `<div style="${notificationStyle}" class="removed-notification toast-top-right toast-alignment toast_img">
+                <span class="imageWrapper">
+                    <img src='${buttonJsonData ? getSelectedVariantImg(productData.variantId, buttonJsonData) : notificationData.image}' width='50px' class='toast_image'>
+                </span>
+                <span class='toast_img_text'>
+                    ${buttonJsonData ? buttonJsonData.title : notificationData.title}<br>
+                    ${text}
+                </span>
+            </div>`
+                    }`;
+                document.querySelector(".our-sweetalert").innerHTML = toastTopRight;
+            }
+            else if (generalSetting.notificationTypeOption === "toast-top-center") {
+                document.querySelector(".our-sweetalert").style.display = "block";
+                // notificationDivId.style.display = "block";
+                let toastTopCenter = `${notificationData.fromWhere === "allToCart" || notificationData.fromWhere === "copyUrl" ? `
+            <div style="${notificationStyle}" class="toast-top-center toast-alignment toast_img">
+                ${text}
+            </div>`
+                    : `<div style="${notificationStyle}" class="removed-notification toast-top-center toast-alignment toast_img">
+                <span class="imageWrapper">
+                    <img src='${buttonJsonData ? getSelectedVariantImg(productData.variantId, buttonJsonData) : notificationData.image}' width='50px' class='toast_image'>
+                </span>
+                <span class='toast_img_text'>
+                    ${buttonJsonData ? buttonJsonData.title : notificationData.title}<br>
+                    ${text}
+                </span>
+            </div>`
+                    }`;
+                document.querySelector(".our-sweetalert").innerHTML = toastTopCenter;
+            }
+            else if (generalSetting.notificationTypeOption === "toast-top-left") {
+                document.querySelector(".our-sweetalert").style.display = "block";
+                // notificationDivId.style.display = "block";
+                let toastTopLeft = `${notificationData.fromWhere === "allToCart" || notificationData.fromWhere === "copyUrl" ? `
+            <div style="${notificationStyle}" class="toast-top-left toast-alignment toast_img">
+                ${text}
+            </div>`
+                    : `<div style="${notificationStyle}" class="removed-notification toast-top-left toast-alignment toast_img">
+                <span class="imageWrapper">
+                    <img src='${buttonJsonData ? getSelectedVariantImg(productData.variantId, buttonJsonData) : notificationData.image}' width='50px' class='toast_image'>
+                </span>
+                <span class='toast_img_text'>
+                    ${buttonJsonData ? buttonJsonData.title : notificationData.title}<br>
+                    ${text}
+                </span>
+            </div>`
+                    }`;
+                document.querySelector(".our-sweetalert").innerHTML = toastTopLeft;
+            }
+            else if (generalSetting.notificationTypeOption === "toast-right") {
+                document.querySelector(".our-sweetalert").style.display = "block";
+                // notificationDivId.style.display = "block";
+                let toastRight = `${notificationData.fromWhere === "allToCart" || notificationData.fromWhere === "copyUrl" ? `
+            <div style="${notificationStyle}" class="toast-bottom-right toast-alignment toast_img">
+                ${text}
+            </div>`
+                    : `<div style="${notificationStyle}" class="removed-notification toast-bottom-right toast-alignment toast_img">
+                <span class="imageWrapper">
+                    <img src='${buttonJsonData ? getSelectedVariantImg(productData.variantId, buttonJsonData) : notificationData.image}' width='50px' class='toast_image'>
+                </span>
+                <span class='toast_img_text'>
+                    ${buttonJsonData ? buttonJsonData.title : notificationData.title}<br>
+                    ${text}
+                </span>
+            </div>`
+                    }`;
+                document.querySelector(".our-sweetalert").innerHTML = toastRight;
+            }
+            else if (generalSetting.notificationTypeOption === "toast-left") {
+                document.querySelector(".our-sweetalert").style.display = "block";
+                // notificationDivId.style.display = "block";
+                let toastLeft = `${notificationData.fromWhere === "allToCart" || notificationData.fromWhere === "copyUrl" ? `
+            <div style="${notificationStyle}" class="toast-bottom-left toast-alignment toast_img">
+                ${text}
+            </div>`
+                    : `<div style="${notificationStyle}" class="removed-notification toast-bottom-left toast-alignment toast_img">
+                <span class="imageWrapper">
+                    <img src='${buttonJsonData ? getSelectedVariantImg(productData.variantId, buttonJsonData) : notificationData.image}' width='50px' class='toast_image'>
+                </span>
+                <span class='toast_img_text'>
+                    ${buttonJsonData ? buttonJsonData.title : notificationData.title}<br>
+                    ${text}
+                </span>
+            </div>`
+                    }`;
+                document.querySelector(".our-sweetalert").innerHTML = toastLeft;
+            }
+            else if (generalSetting.notificationTypeOption === "toast-center") {
+                // notificationDivId.style.display = "block";
+                document.querySelector(".our-sweetalert").style.display = "block";
+                let toastImageCenter = `${fromWhere === "allToCart" || fromWhere === "copyUrl" ? `
+            <div style="${notificationStyle}" class="toast-bottom-center toast-alignment toast_img">
+                ${text}
+            </div>`
+                    : `<div style="${notificationStyle}" class="removed-notification toast-bottom-center toast-alignment toast_img">
+                <span class="imageWrapper">
+                    <img src='${buttonJsonData ? getSelectedVariantImg(productData.variantId, buttonJsonData) : notificationData.image}' width='50px' class='toast_image'>
+                </span>
+                <span class='toast_img_text'>
+                    ${buttonJsonData ? buttonJsonData.title : notificationData.title}<br>
+                    ${text}
+                </span>
+            </div>`
+                    }`;
+                document.querySelector(".our-sweetalert").innerHTML = toastImageCenter;
+            }
+            // Toast Image code ends
+        }
+    }
+    else {
+        document.querySelector(".our-sweetalert").style.display = "block";
+        let toastCenter = `<div style="${notificationStyle}" class="toast-top-right toast-alignment">${text && text}<br/>${msgggg !== null ? msgggg : ""}</div>`;
+        document.querySelector(".our-sweetalert").innerHTML = toastCenter;
+    }
+    // var { buttonJsonData } = await getProductData(productData.handle);
+    console.log("buttonJsonData = ", buttonJsonData)
+
+    // Toast Image code ends
+    setTimeout(() => {
+        document.querySelector(".our-sweetalert").innerHTML = "";
+    }, Number(generalSetting.notificationTimer) * 1000);
+}
+
+
+
+
+
+
+
+
+
+
+
+// in routerSql.js
+import { logoUpload, createSocialLike, createNewWishlist, copyToWishlist, editWishlistName, deleteWishlistName, getMultiWishlistData, createUser, deleteItem, deleteAllItem, getAllItems, saveActiveTheme, getKlaviyoEmailIntegration, getSmtpEmailIntegration, getReportAllItems, getIdFromEmail, getSharedWishlist, addToMyWishlist, getAllUsers, getAllUsersCount, getCurrentPlanSql, deleteUser, adminDataWithDate, apiPlanId, adminTopDataRecentData, adminTopDataWithDates, adminGraphDataMonthly, adminGraphDataYearly, getPlanName, getPlanData, requestFormMain, emailReminderChecksUpdate, getEmailReminderAndStoreLanguage, cleanDbData, getEmailReminderChecks, getEmailTempData, emailTemplateUpdate, saveSenderReceiverName, getEmailReportsData, sendWishlistQuotaLimitMails, sendWeeklyWishlistToAdmin, sendWeeklyWishlistToUser, sendMonthlyWishlistToAdmin, sendMonthlyWishlistToUser, klaviyoEmailIntegration, smtpEmailIntegration, shareWishlistByMail, shareWishlistToAdmin, shareWishlistStats, storeLanguagesData, premiumStoreLanguagesData, getStoreLanguageData, getStoreLanguageDataUseeff, getStoreLanguage, deleteStoreLanguageData, updateStoreLanguageData, basicStoreLanguageData, updateDataAppInstallation, appInstallation, updateProductQuantity, sendTestEmail, getAllCartItems, currentAppTheme, handleRedirect, checkPromoCode, checkPromoCodePrevPlan, getShareStatsData, getShareStatsUserData, getShareStatsWishlistItemData, getRefFromEmail, clearWishlistData, getWishlistUsersData, removeWishlistDataById, getWishlistItemData, getDefaultStoreLang, getThemeData, getWishlistCartData, getCurrentUserWishlistData, cartItemRecord, apiHealthChecker, getProductCountData, saveDataToSql, postmarkWebhook, checkSmtpConnection, getSmtpDetail, klaviyoInstall, klaviyoAuthCallback, updateProductVariant, saveShareWishlistToAdminEmail, getShareWishlistToAdminEmail, getWishlistUsers, sendEmailOnOff, getLanguages, setPreferredLanguage, getPreferredLanguage } from "../controllers/controllersSql.js";
+
+routerSql.post("/send-email-on-off", sendEmailOnOff)
+routerSql.get("/get-languages/:shopName", getLanguages)
+routerSql.post("/set-preferred-lang", setPreferredLanguage)
+routerSql.get("/get-preferred-lang/:shopDomain/:customerEmail", getPreferredLanguage)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// in controllersSql.js
+
+export async function sendEmailOnOff(req, res) {
+    try{
+        const updateQuery = `UPDATE wishlist_users SET send_emails=? WHERE email=?`
+        let send_emails = req.body.send_emails === true? "true": "false"
+        database.query(updateQuery, [send_emails, req.body.email])
+        // console.log("req.body.send_emails = ", req.body.send_emails)
+        // console.log("req.body.email = ", req.body.email)
+        console.log("req.body.send_emails = ", req.body.send_emails)
+        // console.log("parseInt(req.body.send_emails) = ", parseInt(req.body.send_emails))
+    }
+    catch(err){
+        console.log("Error: ", err)
+    }
+}
+
+export const getLanguages = async (req, res)=>{
+    try{
+        const query = `SELECT lang_name, type
+                       FROM ${store_languages_table} AS s
+                       INNER JOIN ${store_languages_url_table} AS su
+                       ON s.lang_id=su.lang_id
+                       WHERE s.shop_name=?`;
+        const [result] = await database.query(query, [req.params.shopName])
+        res.send(result)
+    }
+    catch(err){
+        console.log("Error in fetching store languages : ", err)
+    }
+}
+
+export const setPreferredLanguage = async (req, res)=>{
+    try{
+        const query = `UPDATE ${user_table}
+                       SET preferred_language=?
+                       WHERE shop_name=? AND email=?`;
+        const [result] = await database.query(query, [req.body.preferredLanguage, req.body.shopDomain, req.body.customerEmail])
+        res.status(200).send("Preferred language set successfully")
+    }
+    catch(err){
+        console.log("Error in setting preferred language : ", err)
+    }
+}
+
+
+export const getPreferredLanguage = async (req, res)=>{
+    try{
+        const query = `SELECT preferred_language FROM ${user_table}
+                       WHERE shop_name=? AND email=?`;
+        const [result] = await database.query(query, [req.params.shopDomain, req.params.customerEmail])
+        res.send(result)
+    }
+    catch(err){
+        console.log("Error in fetching preferred language : ", err)
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// in heartButton.liquid, under <div id="wg-multiWishlistMainDiv">
+
+<!-- This is customer preferences -->
+<div id="mysettingsModal">
+  <div class="modal-settings-content">
+    <h3 class="heading">CUSTOMER PREFERENCES</h3>
+    <br>
+    <div id="receiveEmails">
+      <span>Receive Emails</span>
+      <label class="toggle"><input type="checkbox" id="toggleBtn"><span class="slider"></span></label>
+    </div>
+    <div id="languagePreferences">
+      <span>Preferred Language</span>
+      <select id="language">
+
+      </select>
+    </div>
+    <div class="successSettingsDiv">
+      {% comment %} <i class="fa fa-times closeByShareModal" aria-hidden="true"  onclick="closeShareModal()"></i> {% endcomment %}
+      <span class="closeBySettingsModal" onclick="closeSettingsModal()"></span>
+      <div class="successInnerDiv"></div>
+    </div>
+  </div>
+</div>
+<div id="accountModal">
+  <div class="modal-account-content"></div>
+</div>
+
+
+
+
+
+
+
+
+
+// in consoleheart.css
+
+#myshareModal,
+#mysettingsModal,
+#accountModal,
+#wg-multiWishlistMainDiv,
+.modal1,
+.wg-modal1,
+.wg-modalD {
+  top: 0;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .4)
+}
+
+
+#myshareModal,
+#mysettingsModal,
+#accountModal,
+#wg-multiWishlistMainDiv,
+.modal1 {
+  z-index: 9996;
+  width: 100%;
+  overflow: auto
+}
+
+#mysettingsModal,
+#accountModal {
+  z-index: 9999;
+}
+
+
+#myshareModal,
+#mysettingsModal,
+#accountModal,
+#wg-multiWishlistMainDiv {
+  display: none;
+  position: fixed;
+  justify-content: center;
+  align-items: center
+}
+
+
+#myshareModal .modal-share-content input:not([type=submit]),
+#mysettingsModal .modal-settings-content input:not([type=submit]),
+#myshareModal .modal-share-content textarea,
+#mysettingsModal .modal-settings-content textarea,
+.multiWishCreate input,
+.searchData,
+.share-url-div .share-url-text,
+.wishlist-modal-all {
+  width: 100%
+}
+
+
+#myshareModal .modal-share-content .closeByShareModal,
+#mysettingsModal .modal-settings-content .closeBySettingsModal,
+.closeByAccountModal #wg-multiWishlist_div .wg-closeMultiwishlist,
+#wg-myModal .wg-modal-content .wg-close,
+#wg-myModal1 .wg-modal-content1 .close1,
+.closebtn {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background-size: 12px !important;
+  background: url("wislist-close-icon.svg") center no-repeat;
+  border: none;
+  z-index: 1;
+  cursor: pointer
+}
+
+#myshareModal .modal-share-content,
+#mysettingsModal .modal-settings-content,
+#accountModal .modal-account-content,
+#wg-myModal1 .wg-modal-content1 {
+  padding: 40px 36px;
+  width: 500px;
+  top: 50%;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%)
+}
+
+
+#myshareModal .modal-share-content h3,
+#mysettingsModal .modal-settings-content h3,
+#accountModal .modal-account-content h3 {
+  font-size: 22px;
+  line-height: 26px;
+  margin: 0 0 15px;
+  letter-spacing: 0;
+  color: inherit
+}
+
+
+#mysettingsModal .modal-settings-content h3 {
+  margin: 0;
+}
+
+
+#myshareModal .modal-share-content label,
+#mysettingsModal .modal-settings-content label {
+  font-size: 18px;
+  line-height: 24px;
+  color: inherit;
+  letter-spacing: 0;
+  display: inline-block;
+  position: relative;
+  padding-right: 10px;
+  margin-left: 10px;
+}
+
+
+#myshareModal .modal-share-content label span,
+#mysettingsModal .modal-settings-content label span {
+  position: absolute;
+  right: 0;
+  top: 0;
+  color: red
+}
+
+#mysettingsModal .heading{
+  color: black !important;
+  font-weight: bold;
+}

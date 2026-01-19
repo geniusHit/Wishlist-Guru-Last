@@ -660,9 +660,9 @@ const CollectionSetting = () => {
                                                             <ColorPickerController control={control} controllerName={`iconDefaultBgColor`} id={`iconDefaultBgColor`} label={myLanguage.collectionIconDefaultBgColor} setSaveBar={setSaveBar} />
                                                         </div>
 
-                                                        <div className={`${renderWhichIcon().onlyFilledIcon ? 'disableOneByOne' : ""}`}>
-                                                            <ColorPickerController control={control} controllerName={`iconSelectedColor`} id={`iconSelectedColor`} label={myLanguage.collectionIconSelectedColor} setSaveBar={setSaveBar} />
-                                                        </div>
+                                                        {/* <div className={`${renderWhichIcon().onlyFilledIcon ? 'disableOneByOne' : ""}`}> */}
+                                                        <ColorPickerController control={control} controllerName={`iconSelectedColor`} id={`iconSelectedColor`} label={myLanguage.collectionIconSelectedColor} setSaveBar={setSaveBar} />
+                                                        {/* </div> */}
 
                                                         <div className={`${renderWhichIcon().whichIcon ? 'disableOneByOne' : ""}`}>
                                                             <ColorPickerController control={control} controllerName={`iconSelectedBgColor`} id={`iconSelectedBgColor`} label={myLanguage.collectionIconSelectedBgColor} setSaveBar={setSaveBar} />

@@ -113,14 +113,11 @@ body {
     color: white;
 }
 
-/*Toast image code starts*/
 .notificationToolTipCollapsible,
 .notificationToastCollapsible,
-.notificationTextCollapsible,
-.notificationToastImageCollapsible {
+.notificationTextCollapsible {
     padding-left: 25px;
 }
-/*Toast image code ends*/
 
 .customMediaCard .Polaris-MediaCard {
     flex-direction: row-reverse !important;

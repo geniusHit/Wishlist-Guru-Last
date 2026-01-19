@@ -15,6 +15,7 @@
   "type": "module",
   "dependencies": {
     "@shopify/app": "^3.55.4",
+    "@shopify/app-bridge-utils": "^3.5.1",
     "@shopify/cli": "^3.84.1",
     "@shopify/shopify-api": "^7.5.0",
     "cors": "^2.8.5",
@@ -35,6 +36,7 @@
     "web/frontend"
   ],
   "devDependencies": {
+    "baseline-browser-mapping": "^2.9.14",
     "kill-port": "^2.0.1"
   }
 }

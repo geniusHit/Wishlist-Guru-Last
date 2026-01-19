@@ -254,6 +254,7 @@ export function priceDropFxn(customer, productTitle, variantId, previousPrice, u
             <div style="margin: 0 auto 30px;text-align: center;font-size: 15px;line-height: 20px;font-weight: 400;color:${updatedFooterColor};font-family: 'Poppins', sans-serif;
             max-width: 500px;">
             ${footerData}
+            ${emailData.footer2Row}
             </div>
             </td>
           </tr>

@@ -126,6 +126,13 @@ const EmailSmtpSetting = () => {
 
 
     const checkSmtpData = async () => {
+
+        Swal.fire({
+            text: myLanguage.swalWaiting,
+            imageUrl: loaderGif,
+            showConfirmButton: false,
+        });
+
         try {
             const response = await fetch(`${serverURL}/check-smtp-connection`, {
                 method: "POST",
@@ -143,6 +150,9 @@ const EmailSmtpSetting = () => {
             });
             let result = await response.json();
 
+            console.log("gggggggg ", result)
+
+
             if (result.msg === "SMTP connected successfully") {
                 Swal.fire({
                     icon: "success",
@@ -158,6 +168,13 @@ const EmailSmtpSetting = () => {
             }
         } catch (error) {
             console.log("ERR -", error)
+
+            Swal.fire({
+                icon: "warning",
+                title: "Warning",
+                text: "There is an authentication error. Please check your credentials and try again"
+            });
+
         }
     }
 

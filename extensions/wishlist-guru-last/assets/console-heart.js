@@ -1,4 +1,3 @@
-// const e = require("cors");
 
 const heartButton = document.getElementById("heart");
 heartButton.addEventListener("click", heartButtonHandle);
@@ -16,8 +15,7 @@ let localData = JSON.parse(localStorage.getItem("wg-local-data"));
 let customButton = localData?.customButton || JSON.parse(heartButton.getAttribute("button-setting"));
 let customLanguage = localData?.customLanguage || JSON.parse(heartButton.getAttribute("language-setting").replace(/~/g, "'"));
 let generalSetting = localData?.generalSetting || JSON.parse(heartButton.getAttribute("general-setting"));
-// let getThemeName = localData?.getThemeName || JSON.parse(heartButton.getAttribute("theme-name"));
-let getThemeName = { themeName: "Dawn" }
+let getThemeName = localData?.getThemeName || JSON.parse(heartButton.getAttribute("theme-name"));
 let advanceSetting = localData?.advanceSetting || JSON.parse(heartButton.getAttribute("advance-setting").replace(/~/g, "'"));
 let collectionBtnSetting = localData?.collectionBtnSetting || JSON.parse(heartButton.getAttribute("collection-btn-setting"));
 let currentPlan = localData?.currentPlan || JSON.parse(heartButton.getAttribute("current-plan"));
@@ -67,8 +65,6 @@ let newArrayAfterSelection = [];
 
 // let wgLastClickTime = 0;
 
-console.log("customerEmail = ", customerEmail)
-
 setTimeout(() => {
     document.documentElement.style.setProperty('--add-to-wishlist', `"${customLanguage?.addToWishlist}"`);
     document.documentElement.style.setProperty('--remove-from-wishlist', `"${customLanguage?.addedToWishlist}"`);
@@ -94,7 +90,6 @@ function onHeaderActionsRender(element) {
     showWishlistButtonType();
     showCountAll();
 }
-
 
 // this is for meta conversion
 (function () {
@@ -123,9 +118,9 @@ function onHeaderActionsRender(element) {
 let modalDrawerTextColor = generalSetting?.wlTextColor?.color ? generalSetting?.wlTextColor?.color : generalSetting.wlTextColor;
 document.addEventListener("DOMContentLoaded", getCurentPlanSql);
 
-const serverURL = "http://localhost:5000"; // -------------- local
-// const serverURL = "https://writing-voltage-proportion-purchased.trycloudflare.com"; // -------------- local
-// const serverURL = 'https://wishlist-api.webframez.com'; // -------------- production
+// const serverURL = "http://localhost:5000"; // -------------- local
+// const serverURL = "https://registrar-conditioning-periodically-involved.trycloudflare.com"; // -------------- local
+const serverURL = 'https://wishlist-api.webframez.com'; // -------------- production
 // const serverURL = 'https://wishlist-guru-api.webframez.com'; // -------------- stagging
 
 const injectCoderr = document.getElementById("wf-custom-wishBtn-inject");
@@ -134,6 +129,7 @@ let injectCodeCondition = injectCoderr?.getAttribute("inject-code-automatic") ||
 let varriantId;
 let allWishlistData = JSON.parse(localStorage.getItem("wg-local-list")) || [];
 let wgAllProducts = [];
+let wgWishlistLanguage = "";
 
 const colIconDefaultColor = collectionBtnSetting?.iconDefaultColor?.filterColor
     ? collectionBtnSetting?.iconDefaultColor?.filterColor
@@ -188,9 +184,8 @@ if (!wfGetDomain.endsWith("/")) {
     isMultiwishlistTrue = isMultiwishlistTrueValue1 === "yes" && currentPlan > 3;
     console.log(" ---- optimizing WG 2.O ---- ");
     // ------- to show the header icon with custom code -------
-
-    // currentPlan > 1 && showCustomHeaderIcon1();
-    showWishlistButtonType();
+    currentPlan > 1 && showCustomHeaderIcon1();
+    // showWishlistButtonType();
     // -------to show the collection icon and button with custom code-------
     currentPlan > 1 && wishlistIcon1();
     currentPlan > 1 && wishlistButtonForCollection1();
@@ -225,9 +220,9 @@ async function getCurentPlanSql() {
     isMultiwishlistTrue = isMultiwishlistTrueValue1 === "yes" && currentPlan > 3;
     //    ---------- this code will show header and floating icon using plan from metafield.. after we are confirming the plan from DB-------- 
     buttonStyleFxn();
-    if (JSON.parse(heartButton.getAttribute("current-plan")) >= 1) {
-        await Promise.all([showWishlistButtonType(), showCountAll()]);
-    }
+    // if (JSON.parse(heartButton.getAttribute("current-plan")) >= 1) {
+    //     await Promise.all([showWishlistButtonType(), showCountAll()]);
+    // }
 
     try {
         const response = await fetch(`${serverURL}/get-current-plan-sql`, {
@@ -244,17 +239,24 @@ async function getCurentPlanSql() {
             }),
         });
         const result = await response.json();
+
         if (result?.planData.length > 0) {
             const prevToken = localStorage.getItem("wg-token");
             if (!prevToken || prevToken !== result.token) {
                 localStorage.setItem("wg-token", result.token);
             }
+
+            // let languageVariable = JSON.parse(result?.languageData[0]?.translations);
+            // wgWishlistLanguage = languageVariable?.textMsgLanguage || "";
+
             currentPlan = result?.planData[0]?.active_plan_id;
             const translationData =
                 result?.languageData.length > 0
                     ? result?.languageData[0]?.translations
                     : heartButton.getAttribute("language-setting");
             customLanguage = JSON.parse(translationData.replace(/~/g, "'"));
+
+            wgWishlistLanguage = customLanguage.textMsgLanguage;
             shouldAutoUpdateRender = true;
             updateLanguageFxn();
         }
@@ -321,6 +323,7 @@ async function getCurentPlanSql() {
     showIconOnPdpImage();
     // -------- this function will add data in the modal structure after 0.5 sec --------  
     setTimeout(() => pageTypeFunction(), 0)
+    await Promise.all([showWishlistButtonType(), showCountAll()]);
 }
 
 function removeDrawerClasses() {
@@ -358,155 +361,17 @@ function updateLanguageFxn() {
                                         <span class="wg-search-icon"></span>
                                         <input id="search-input" class="searchbar_Input" placeholder="" onkeyup="handleSearchData(event)" value=""/>
                                     </div>
-                                    <div class="searchData-main-right">
-                                        <div class="searchData-main2">
-                                            <div class="vcb-width wg-clearwishlist">
-                                                <div onclick="clearAllWishlist()" class="cartButtonStyle addAllToCartButton">
-                                                ${customLanguage.clearAllWishlist || storeFrontDefLang.clearAllWishlist}
-                                                </div>
-                                            </div>
+                                    <div class="searchData-main2">
+                                        <div class="vcb-width wg-clearwishlist">
+                                            <div onclick="clearAllWishlist()" class="cartButtonStyle addAllToCartButton">
+                                            ${customLanguage.clearAllWishlist || storeFrontDefLang.clearAllWishlist}
+                                            </div>  
                                         </div>
-
-                                        <div class='settings' id='settings'><span><span></div>
                                     </div>
                                 </div>`
 
 
         // `<input id="search-input" class="searchbar_Input" placeholder="" onkeyup="handleSearchData(event)" value=""/>`;
-
-        const settings = document.getElementById("settings")
-        if(currentPlan<2){
-            settings.style.display = "none"
-        }
-        settings.addEventListener("click", () => {
-            if (!customerEmail) {
-                const accountModal = document.getElementById("accountModal")
-                const accountContent = document.querySelector(".modal-account-content")
-                const newDivData = `
-                <h3>You need to login first to edit Customer Preferences</h3>
-                <span class="closeByAccountModal" onclick="closeAccountModal()"></span>
-                <div class="wg-islogin-buttons-for-cp">
-                    <button onClick="goToRegister()" class="wg-register-btn">
-                        ${customLanguage?.createAccountAnchor || storeFrontDefLang.createAccountAnchor}
-                    </button>
-                    <button onClick="goToAccount()" class="wg-login-btn">
-                        ${customLanguage?.loginTextAnchor || storeFrontDefLang?.loginTextAnchor}
-                    </button>
-                </div>`;
-
-                accountContent.innerHTML = newDivData
-                accountModal.style.display = "block"
-                let consoleBtn = document.getElementById("console-style")
-                consoleBtn.innerHTML += `.wg-islogin-buttons-for-cp{display:flex; justify-content:center; gap:15px;}
-                
-                .wg-islogin-buttons-for-cp .wg-register-btn{text-transform:uppercase;
-                cursor: pointer;
-            box-sizing: border-box;
-            text-transform: uppercase; background-color: ${currentPlan>2? generalSetting?.userLogin?.bgColor : customButton.cartButtonStyle.hover.bgColor};
-    color: ${currentPlan>2? generalSetting?.userLogin?.textColor : customButton.cartButtonStyle.hover.textColor};
-    max-width: 100%;
-    border: ${currentPlan>2? generalSetting?.userLogin?.border.value : customButton.cartButtonStyle.hover.border.value}${currentPlan>2? generalSetting?.userLogin?.border.unit : customButton.cartButtonStyle.hover.border.unit} ${currentPlan>2? generalSetting?.userLogin?.border.type : customButton.cartButtonStyle.hover.border.type} ${currentPlan>2? generalSetting?.userLogin?.border.color : customButton.cartButtonStyle.hover.border.color};
-    border-radius: ${currentPlan>2? generalSetting?.userLogin?.borderRadius.value : customButton.cartButtonStyle.borderRadius.value}${currentPlan>2? generalSetting?.userLogin?.borderRadius.unit : customButton.cartButtonStyle.borderRadius.unit};
-            font-size: ${currentPlan>2? generalSetting?.userLogin?.fontSize.value : customButton.cartButtonStyle.fontSize.value}${currentPlan>2? generalSetting?.userLogin?.fontSize.unit : customButton.cartButtonStyle.fontSize.unit} !important;
-            padding: ${currentPlan>2? generalSetting?.userLogin?.paddingTopBottom.value : customButton.cartButtonStyle.paddingTopBottom.value}${currentPlan>2? generalSetting?.userLogin?.paddingTopBottom.unit : customButton.cartButtonStyle.paddingTopBottom.unit} ${currentPlan>2? generalSetting?.userLogin?.paddingLeftRight.value : customButton.cartButtonStyle.paddingLeftRight.value}${currentPlan>2? generalSetting?.userLogin?.paddingLeftRight.unit : customButton.cartButtonStyle.paddingLeftRight.unit};
-            margin: ${currentPlan>2? generalSetting?.userLogin?.marginTopBottom.value : customButton.cartButtonStyle.marginTopBottom.value}${currentPlan>2? generalSetting?.userLogin?.marginTopBottom.unit : customButton.cartButtonStyle.marginTopBottom.unit} ${currentPlan>2? generalSetting?.userLogin?.marginLeftRight.value : customButton.cartButtonStyle.marginLeftRight.value}${currentPlan>2? generalSetting?.userLogin?.marginTopBottom.unit : customButton.cartButtonStyle.marginLeftRight.unit};
-            text-align: ${currentPlan>2? generalSetting?.userLogin?.textAlign : customButton.cartButtonStyle.textAlign};
-            cursor: pointer;
-            box-sizing: border-box;
-            font-weight: ${getFontWt(customButton.cartButtonStyle.fontWeight, customButton.cartButtonStyle.fontWeight).textFw};
-            font-family: ${currentPlan>2? generalSetting?.userLogin?.fontFamily : customButton.cartButtonStyle.fontFamily};
-            width:auto;
-    }
-
-
-        .wg-islogin-buttons-for-cp .wg-login-btn{background-color: ${currentPlan>2?generalSetting?.guestLogin?.bgColor : customButton.cartButtonStyle.hover.bgColor};
-    color: ${currentPlan>2? generalSetting?.guestLogin?.textColor : customButton.cartButtonStyle.hover.textColor};
-    border: ${currentPlan>2? generalSetting?.guestLogin?.border.value : customButton.cartButtonStyle.hover.border.value}${currentPlan>2? generalSetting?.guestLogin?.border.unit : customButton.cartButtonStyle.hover.border.unit} ${currentPlan>2? generalSetting?.guestLogin?.border.type : customButton.cartButtonStyle.hover.border.type} ${currentPlan>2? generalSetting?.guestLogin?.border.color : customButton.cartButtonStyle.hover.border.color};
-    border-radius: ${currentPlan>2? generalSetting?.guestLogin?.borderRadius.value : customButton.cartButtonStyle.borderRadius.value}${currentPlan>2? generalSetting?.guestLogin?.borderRadius.unit : customButton.cartButtonStyle.borderRadius.unit};
-            font-size: ${currentPlan>2? generalSetting?.guestLogin?.fontSize.value : customButton.cartButtonStyle.fontSize.value}${currentPlan>2? generalSetting?.guestLogin?.fontSize.unit : customButton.cartButtonStyle.fontSize.unit} !important;
-            padding: ${currentPlan>2? generalSetting?.guestLogin?.paddingTopBottom.value : customButton.cartButtonStyle.paddingTopBottom.value}${currentPlan>2? generalSetting?.guestLogin?.paddingTopBottom.unit : customButton.cartButtonStyle.paddingTopBottom.unit} ${currentPlan>2? generalSetting?.guestLogin?.paddingLeftRight.value : customButton.cartButtonStyle.paddingLeftRight.value}${currentPlan>2? generalSetting?.guestLogin?.paddingLeftRight.unit : customButton.cartButtonStyle.paddingLeftRight.unit};
-            margin: ${currentPlan>2? generalSetting?.guestLogin?.marginTopBottom.value : customButton.cartButtonStyle.marginTopBottom.value}${currentPlan>2? generalSetting?.guestLogin?.marginTopBottom.unit : customButton.cartButtonStyle.marginTopBottom.unit} ${currentPlan>2? generalSetting?.guestLogin?.marginLeftRight.value : customButton.cartButtonStyle.marginLeftRight.value}${currentPlan>2? generalSetting?.guestLogin?.marginTopBottom.unit : customButton.cartButtonStyle.marginLeftRight.unit};
-            text-align: ${currentPlan>2? generalSetting?.guestLogin?.textAlign : customButton.cartButtonStyle.textAlign};
-            cursor: pointer;
-            box-sizing: border-box;
-            font-weight: ${getFontWt(customButton.cartButtonStyle.fontWeight, customButton.cartButtonStyle.fontWeight).textFw};
-            font-family: ${currentPlan>2? generalSetting?.guestLogin?.fontFamily : customButton.cartButtonStyle.fontFamily}, ${getFontFamily}, ${getFontFamilyFallback};
-            width:auto;
-            text-transform: uppercase;
-    }
-
-
-                    .wg-islogin-buttons-for-cp .wg-register-btn:hover{background-color: ${currentPlan>2? generalSetting?.userLogin?.hover.bgColor : customButton.cartButtonStyle.bgColor};
-    color: ${currentPlan>2? generalSetting?.userLogin?.hover.textColor : customButton.cartButtonStyle.textColor};
-    border: ${currentPlan>2? generalSetting?.userLogin?.hover.border.value : customButton.cartButtonStyle.border.value}${currentPlan>2? generalSetting?.userLogin?.hover.border.unit : customButton.cartButtonStyle.border.unit} ${currentPlan>2? generalSetting?.userLogin?.hover.border.type : customButton.cartButtonStyle.border.type} ${currentPlan>2? generalSetting?.userLogin?.hover.border.color : customButton.cartButtonStyle.border.color}}
-    
-    .wg-islogin-buttons-for-cp .wg-login-btn:hover{
-    background-color: ${currentPlan>2? generalSetting?.guestLogin?.hover.bgColor : customButton.cartButtonStyle.bgColor};
-    color: ${currentPlan>2? generalSetting?.guestLogin?.hover.textColor : customButton.cartButtonStyle.textColor};
-    border: ${currentPlan>2? generalSetting?.guestLogin?.hover.border.value : customButton.cartButtonStyle.border.value}${currentPlan>2? generalSetting?.guestLogin?.hover.border.unit : customButton.cartButtonStyle.border.unit} ${currentPlan>2? generalSetting?.guestLogin?.hover.border.type : customButton.cartButtonStyle.border.type} ${currentPlan>2? generalSetting?.guestLogin?.hover.border.color : customButton.cartButtonStyle.border.color};
-    }
-    `;
-            }
-            else {
-                let settingsModal = document.getElementById("mysettingsModal")
-                settingsModal.style.display = "block"
-                document.querySelector(".closeByShareModal").style.filter = generalSetting.wlCrossFilter;
-            }
-        })
-
-        const toggleBtn = document.getElementById("toggleBtn");
-        const toggle = document.querySelector(".toggle")
-        const accountModal = document.getElementById("accountModal")
-        const accountContent = document.querySelector(".modal-account-content")
-        const setCustomerPreferences = async () => {
-            let curEmail, wishlistUsers, wishlistUsersRresult;
-            curEmail = await getCurrentLoginFxn()
-
-            wishlistUsers = await fetch(`${serverURL}/getWishlistUsers`, {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            })
-
-            wishlistUsersRresult = await wishlistUsers.json()
-            console.log("wishlistUsersRresult = ", wishlistUsersRresult)
-
-            wishlistUsersRresult.map((el) => {
-                if (curEmail === el.email) {
-                    console.log("curEmail matched = ", el.email)
-                    if (toggleBtn) {
-                        toggleBtn.checked = el.send_emails === "true" ? true : false
-                    }
-                }
-            })
-
-            toggleBtn.addEventListener("change", async () => {
-                curEmail = await getCurrentLoginFxn()
-
-                wishlistUsersRresult.map(async (el) => {
-                    if (curEmail === el.email) {
-                        console.log("curEmail matched = ", el.email)
-                        await fetch(`${serverURL}/send-email-on-off`, {
-                            method: "POST",
-                            headers: { "Content-Type": "application/json" },
-                            body: JSON.stringify({
-                                "send_emails": toggleBtn.checked,
-                                "email": curEmail
-                            })
-                        })
-                    }
-                })
-
-                if (toggleBtn.checked) {
-                    alertToast("You will receive emails!", null, null, null)
-                } else {
-                    alertToast("You will not receive emails!", null, null, null)
-                }
-            });
-        }
-
-        setCustomerPreferences()
     }
 
     var searchPlaceholder = document.querySelectorAll(".searchData input");
@@ -575,7 +440,9 @@ function updateLanguageFxn() {
         }
     } else {
     }
-    let modifiedString = getThemeName?.themeName?.replace(/ /g, "_");
+    // let modifiedString = getThemeName?.themeName?.replace(/ /g, "_");
+    let modifiedString = getThemeName?.themeName?.replace(/[ .:]/g, "_");
+
     modifiedString = modifiedString?.toLowerCase();
     let themeNameClass = `wg-${modifiedString}-custom-css`;
     document.body.classList.add(themeNameClass);
@@ -584,11 +451,6 @@ function updateLanguageFxn() {
     if (allowedThemes.includes(getThemeName?.themeName)) {
         document.body.classList.add("wg-grid-relative-forcely");
     }
-}
-
-function closeAccountModal() {
-    const accountModal = document.getElementById("accountModal")
-    accountModal.style.display = "none"
 }
 
 function goToAccount() {
@@ -703,16 +565,6 @@ async function customCodeButtonClickLaGirl(selectedId, imgHandle, productTitle, 
             quantity: 1,
             language: wfGetDomain,
         };
-        const notificationData = {
-            fromWhere: null,
-            image: imgHandle,
-            title: productTitle,
-        }
-
-        const productData = {
-            handle: handle,
-            variantId: variant_id,
-        }
         const res = await showLoginPopup(selectedId);
         if (res) return;
         const matchFound = await checkFound(allWishlistData, selectedId)
@@ -720,22 +572,15 @@ async function customCodeButtonClickLaGirl(selectedId, imgHandle, productTitle, 
             renderPopupLoader()
             if (allWishlistData.length > 0 && matchFound) {
                 buttonClickData.isDelete = "yes";
-                // Toast image code starts
-                openMultiWishlist(buttonClickData, selectedId, "customIcon", selectedId, productHandle)
-                // Toast image code ends
+                openMultiWishlist(buttonClickData, selectedId, "customIcon")
             } else {
-                // Toast image code starts
-                openMultiWishlist(buttonClickData, selectedId, "customIcon", selectedId, productHandle)
-                // Toast image code ends
+                openMultiWishlist(buttonClickData, selectedId, "customIcon")
             }
         } else {
             buttonClickData.wishlistName = matchFound ? ["wfNotMulti"] : ["favourites"];
             await checkCollectionCounterData(selectedId, !matchFound ? "add" : "remove")
             customIconAddedRemoveToWishlistLaGirl(selectedId, matchFound ? false : true);
-            // Toast image code starts
-            // saveMainData(buttonClickData, selectedId, "customIcon", selectedId, productHandle)
-            saveMainData(buttonClickData, selectedId, "customIcon", notificationData, productData)
-            // Toast image code ends
+            saveMainData(buttonClickData, selectedId, "customIcon")
         }
     } catch (error) {
         console.error("Error:", error);
@@ -1167,42 +1012,22 @@ async function injectButtonClick(selectedId, handle, varId) {
             productOption: JSON.stringify(getProductOption)
         };
 
-        const notificationData = {
-            fromWhere: null,
-            image: saveImage,
-            title: buttonJsonData.title,
-        }
-
-        const productData = {
-            handle: buttonJsonData.handle,
-            variantId: saveVariantId,
-        }
-
         const res = await showLoginPopup(selectedId);
         if (res) return;
         const matchFound = await checkFound(allWishlistData, selectedId, varId)
         if (isMultiwishlistTrue) {
             renderPopupLoader();
-            console.log("varId = ", varId)
-            console.log("handle = ", handle)
             if (allWishlistData.length > 0 && matchFound) {
                 buttonData.isDelete = "yes";
-                // Toast image code starts
-                openMultiWishlist(buttonData, selectedId, "inject", varId, handle)
-                // Toast image code ends
+                openMultiWishlist(buttonData, selectedId, "inject", varId)
             } else {
-                // Toast image code starts
-                openMultiWishlist(buttonData, selectedId, "inject", varId, handle)
-                // Toast image code ends
+                openMultiWishlist(buttonData, selectedId, "inject", varId)
             }
         } else {
             buttonData.wishlistName = matchFound ? ["wfNotMulti"] : ["favourites"];
             await checkCounterData(selectedId, !matchFound ? "add" : "remove")
             injectButtonAddedRemoveWishlist(selectedId, matchFound ? false : true)
-            // Toast image code starts
-            // saveMainData(buttonData, selectedId, "inject", varId, handle);
-            saveMainData(buttonData, selectedId, "inject", notificationData, productData);
-            // Toast image code ends
+            saveMainData(buttonData, selectedId, "inject");
         }
     } catch (error) {
         console.error("Error:", error);
@@ -1233,11 +1058,9 @@ function renderWidth(isCountValid) {
 }
 
 async function getProductData(handle) {
-    console.log("handle from getProductData = ", handle)
     try {
         const buttonResponseData = await fetch(`${wfGetDomain}products/${handle}.js`);
         const buttonJsonData = await buttonResponseData.json();
-        console.log("buttonJsonData = ", buttonJsonData)
         const variantData = buttonJsonData.variants;
         let productPrice = null;
         const urlNew = new URL(location.href).searchParams.get("variant");
@@ -1629,7 +1452,9 @@ async function showWishlistButtonType() {
     // save back to localStorage
     localStorage.setItem("wg-local-data", JSON.stringify(wgLocalData));
     // let modifiedString = getThemeName?.themeName?.replace(/ /g, "_");
-    let modifiedString = getThemeName?.themeName?.replace(/[ .]/g, "_");
+    // let modifiedString = getThemeName?.themeName?.replace(/[ .]/g, "_");
+    let modifiedString = getThemeName?.themeName?.replace(/[ .:]/g, "_");
+
     modifiedString = modifiedString?.toLowerCase();
 
     if (currentPlan >= 1) {
@@ -1983,16 +1808,18 @@ async function showWishlistButtonType() {
 
                             // headerMainIconElement.appendChild(createNewElementDiv);
                             if (generalSetting?.headerIconPosition === "right" && getThemeSelector?.cart !== "" && currentPlan > 1) {
-                                // let insertRightafterCart = document.querySelector(getThemeSelector?.cart);
-                                // insertRightafterCart?.after(createNewElementDiv);
 
-                                // const insertRightafterCartList = document.querySelectorAll(getThemeSelector?.cart);
-                                // insertRightafterCartList.forEach((element) => {
-                                //     element.after(createNewElementDiv.cloneNode(true));
-                                // });
+                                if (getThemeName.themeName === "Prestige") {
+                                    let insertRightafterCart = document.querySelector(getThemeSelector?.cart);
+                                    insertRightafterCart?.after(createNewElementDiv);
+                                } else {
+                                    const insertRightafterCartList = document.querySelectorAll(getThemeSelector?.cart);
+                                    insertRightafterCartList.forEach((element) => {
+                                        element.after(createNewElementDiv.cloneNode(true));
+                                    });
+                                }
 
-                                const insertRightafterCartList = document.querySelector(getThemeSelector?.cart);
-                                insertRightafterCartList.after(createNewElementDiv);
+
                             } else if (generalSetting?.headerIconPosition === "left" && getThemeSelector?.cart !== "" && currentPlan > 1) {
 
 
@@ -2119,109 +1946,109 @@ async function showWishlistButtonType() {
         }
 
 
-        // if (currentPlan > 1) {
-        //     if (generalSetting.paidWlbLocation === "yes") {
-        //         // let getCustomDiv = document.querySelector(".custom-wishlist-icon");
-        //         const customDivs = document.querySelectorAll(".custom-wishlist-icon");
-        //         customDivs.forEach((getCustomDiv) => {
-        //             // if (getCustomDiv !== null) {
-        //             if (getCustomDiv && getCustomDiv.innerHTML.trim() === "") {
+        if (currentPlan > 1) {
+            if (generalSetting.paidWlbLocation === "yes") {
+                // let getCustomDiv = document.querySelector(".custom-wishlist-icon");
+                const customDivs = document.querySelectorAll(".custom-wishlist-icon");
+                customDivs.forEach((getCustomDiv) => {
+                    // if (getCustomDiv !== null) {
+                    if (getCustomDiv && getCustomDiv.innerHTML.trim() === "") {
 
-        //                 let iconType = getCustomDiv.getAttribute("wishlist-type");
-        //                 // console.log("hhhh ... ", iconType)
-        //                 if (iconType === "text") {
-        //                     getCustomDiv.innerHTML = `<a tabindex="0" role="button" aria-haspopup="dialog" aria-controls="wishlist-dialog" aria-expanded="false" onClick="heartButtonHandle()" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); heartButtonHandle(); }" >${customLanguage?.headerMenuWishlist || storeFrontDefLang?.headerMenuWishlist || "Wishlist"}</a>`
-        //                 } else {
-        //                     getCustomDiv.innerHTML = `<div tabindex="0" role="button" aria-haspopup="dialog" aria-controls="wishlist-dialog" aria-expanded="false" onClick="heartButtonHandle()" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); heartButtonHandle(); }" class="header-heart-position ${getThemeSelector.headerHeartIconMobileClass
-        //                         }" > <div class="red-heart  ${customButton.iconType === "star"
-        //                             ? generalSetting.headerIconType === "fillHeaderIcon"
-        //                                 ? "starICON2"
-        //                                 : generalSetting.headerIconType === "outlineHeaderIcon"
-        //                                     ? "starICON"
-        //                                     : "starICON"
-        //                             : ""
-        //                         } ${customButton.iconType === "save"
-        //                             ? generalSetting.headerIconType === "fillHeaderIcon"
-        //                                 ? "saveICON2"
-        //                                 : generalSetting.headerIconType === "outlineHeaderIcon"
-        //                                     ? "saveICON"
-        //                                     : "saveICON"
-        //                             : ""
-        //                         } ${customButton.iconType === "heart"
-        //                             ? generalSetting.headerIconType === "fillHeaderIcon"
-        //                                 ? "heartICON2"
-        //                                 : generalSetting.headerIconType === "outlineHeaderIcon"
-        //                                     ? "heartICON"
-        //                                     : "heartICON"
-        //                             : ""
-        //                         } "  ><span></span> </div>   <span class="count-span"> </span> </div>`;
-        //                 }
-        //             }
-        //         })
-        //     }
-        // }
+                        let iconType = getCustomDiv.getAttribute("wishlist-type");
+                        // console.log("hhhh ... ", iconType)
+                        if (iconType === "text") {
+                            getCustomDiv.innerHTML = `<a tabindex="0" role="button" aria-haspopup="dialog" aria-controls="wishlist-dialog" aria-expanded="false" onClick="heartButtonHandle()" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); heartButtonHandle(); }" >${customLanguage?.headerMenuWishlist || storeFrontDefLang?.headerMenuWishlist || "Wishlist"}</a>`
+                        } else {
+                            getCustomDiv.innerHTML = `<div tabindex="0" role="button" aria-haspopup="dialog" aria-controls="wishlist-dialog" aria-expanded="false" onClick="heartButtonHandle()" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); heartButtonHandle(); }" class="header-heart-position ${getThemeSelector.headerHeartIconMobileClass
+                                }" > <div class="red-heart  ${customButton.iconType === "star"
+                                    ? generalSetting.headerIconType === "fillHeaderIcon"
+                                        ? "starICON2"
+                                        : generalSetting.headerIconType === "outlineHeaderIcon"
+                                            ? "starICON"
+                                            : "starICON"
+                                    : ""
+                                } ${customButton.iconType === "save"
+                                    ? generalSetting.headerIconType === "fillHeaderIcon"
+                                        ? "saveICON2"
+                                        : generalSetting.headerIconType === "outlineHeaderIcon"
+                                            ? "saveICON"
+                                            : "saveICON"
+                                    : ""
+                                } ${customButton.iconType === "heart"
+                                    ? generalSetting.headerIconType === "fillHeaderIcon"
+                                        ? "heartICON2"
+                                        : generalSetting.headerIconType === "outlineHeaderIcon"
+                                            ? "heartICON"
+                                            : "heartICON"
+                                    : ""
+                                } "  ><span></span> </div>   <span class="count-span"> </span> </div>`;
+                        }
+                    }
+                })
+            }
+        }
         headerIconStyle();
     }
 }
 
-// function showCustomHeaderIcon1() {
-//     const wgLocalData = JSON.parse(localStorage.getItem("wg-local-data")) || {};
-//     const getThemeSelector = wgLocalData?.getThemeSelector;
-//     if (generalSetting.paidWlbLocation === "yes") {
-//         // const getCustomDiv = document.querySelector(".custom-wishlist-icon");
-//         const customDivs = document.querySelectorAll(".custom-wishlist-icon");
-//         customDivs.forEach((getCustomDiv) => {
-//             if (getCustomDiv) {
-//                 // If already rendered, just exit (avoid duplicate injection)
-//                 if (getCustomDiv.querySelector(".header-heart-position")) {
-//                     return;
-//                 }
-//                 // Wrapper div
-//                 const wrapper = document.createElement("div");
-//                 wrapper.tabIndex = 0;
-//                 wrapper.role = "button";
-//                 wrapper.setAttribute("aria-haspopup", "dialog");
-//                 wrapper.setAttribute("aria-controls", "wishlist-dialog");
-//                 wrapper.setAttribute("aria-expanded", "false");
-//                 wrapper.className = `header-heart-position ${getThemeSelector?.headerHeartIconMobileClass || ""}`;
-//                 wrapper.onclick = heartButtonHandle;
-//                 wrapper.onkeydown = (e) => {
-//                     if (e.key === "Enter" || e.key === " ") {
-//                         e.preventDefault();
-//                         heartButtonHandle();
-//                     }
-//                 };
-//                 // Icon div
-//                 const iconDiv = document.createElement("div");
-//                 iconDiv.classList.add("red-heart");
-//                 if (customButton.iconType === "star") {
-//                     iconDiv.classList.add(
-//                         generalSetting.headerIconType === "fillHeaderIcon" ? "starICON2" : "starICON"
-//                     );
-//                 } else if (customButton.iconType === "save") {
-//                     iconDiv.classList.add(
-//                         generalSetting.headerIconType === "fillHeaderIcon" ? "saveICON2" : "saveICON"
-//                     );
-//                 } else if (customButton.iconType === "heart") {
-//                     iconDiv.classList.add(
-//                         generalSetting.headerIconType === "fillHeaderIcon" ? "heartICON2" : "heartICON"
-//                     );
-//                 }
-//                 const spanInner = document.createElement("span");
-//                 iconDiv.appendChild(spanInner);
+function showCustomHeaderIcon1() {
+    const wgLocalData = JSON.parse(localStorage.getItem("wg-local-data")) || {};
+    const getThemeSelector = wgLocalData?.getThemeSelector;
+    if (generalSetting.paidWlbLocation === "yes") {
+        // const getCustomDiv = document.querySelector(".custom-wishlist-icon");
+        const customDivs = document.querySelectorAll(".custom-wishlist-icon");
+        customDivs.forEach((getCustomDiv) => {
+            if (getCustomDiv) {
+                // If already rendered, just exit (avoid duplicate injection)
+                if (getCustomDiv.querySelector(".header-heart-position")) {
+                    return;
+                }
+                // Wrapper div
+                const wrapper = document.createElement("div");
+                wrapper.tabIndex = 0;
+                wrapper.role = "button";
+                wrapper.setAttribute("aria-haspopup", "dialog");
+                wrapper.setAttribute("aria-controls", "wishlist-dialog");
+                wrapper.setAttribute("aria-expanded", "false");
+                wrapper.className = `header-heart-position ${getThemeSelector?.headerHeartIconMobileClass || ""}`;
+                wrapper.onclick = heartButtonHandle;
+                wrapper.onkeydown = (e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        heartButtonHandle();
+                    }
+                };
+                // Icon div
+                const iconDiv = document.createElement("div");
+                iconDiv.classList.add("red-heart");
+                if (customButton.iconType === "star") {
+                    iconDiv.classList.add(
+                        generalSetting.headerIconType === "fillHeaderIcon" ? "starICON2" : "starICON"
+                    );
+                } else if (customButton.iconType === "save") {
+                    iconDiv.classList.add(
+                        generalSetting.headerIconType === "fillHeaderIcon" ? "saveICON2" : "saveICON"
+                    );
+                } else if (customButton.iconType === "heart") {
+                    iconDiv.classList.add(
+                        generalSetting.headerIconType === "fillHeaderIcon" ? "heartICON2" : "heartICON"
+                    );
+                }
+                const spanInner = document.createElement("span");
+                iconDiv.appendChild(spanInner);
 
-//                 const countSpan = document.createElement("span");
-//                 countSpan.className = "count-span";
+                const countSpan = document.createElement("span");
+                countSpan.className = "count-span";
 
-//                 wrapper.appendChild(iconDiv);
-//                 wrapper.appendChild(countSpan);
+                wrapper.appendChild(iconDiv);
+                wrapper.appendChild(countSpan);
 
-//                 // Replace children instantly without emptying
-//                 getCustomDiv.replaceChildren(wrapper);
-//             }
-//         })
-//     }
-// }
+                // Replace children instantly without emptying
+                getCustomDiv.replaceChildren(wrapper);
+            }
+        })
+    }
+}
 
 async function handleSearchData(event) {
     const searchValue = event.target.value.trim().toLowerCase();
@@ -3220,8 +3047,6 @@ async function pageTypeFunction() {
             ? localStorage.getItem("isLoginProductId")
             : null;
 
-        console.log("getLocalId = ", getLocalId)
-
         if (!customerEmail && getLocalId) {
             document.querySelector(".modal-page-auth").style.display = "none";
             document.querySelector(".grid-outer-main").style.display = "none";
@@ -3375,6 +3200,25 @@ function checkImage(rawUrl) {
     });
 }
 
+async function wfGetMetaObjectData(handle) {
+    try {
+        const metaData = await fetch(`${serverURL}/wf-get-meta-object`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                shopName: permanentDomain,
+                handle: handle
+            }),
+        });
+        let result = await metaData.json();
+        return result?.data?.productByHandle?.metafields?.edges;
+    } catch (error) {
+        console.log("errr ", error);
+    }
+}
+
 // ----------recreated with promises.all----------
 async function renderMultiModalContentFxn(arrayList) {
     shareWishlistFXN();
@@ -3430,6 +3274,12 @@ async function renderMultiModalContentFxn(arrayList) {
                                                     <span class="delete-main-icon" onclick="shareSingleWishlist(event, '${keyId}')">
                                                         <div class="img_test"><span></span></div>
                                                     </span>
+
+                                                    ${(generalSetting.downloadCsv === "yes" && currentPlan >= 4) ?
+                `<span class="delete-main-icon" onclick="downloadSingleWishlist(event, '${key.replace(/'/g, "\\'")}')">
+                                                        <div class="img_test_csv"><span></span></div>
+                                                    </span>` : ""}
+
                                                 </div>
                                             </div>` : "";
 
@@ -3454,6 +3304,9 @@ async function renderMultiModalContentFxn(arrayList) {
             let hasTag = false;
             let variantResponse = null;
             let variantDataResponse;
+            let getMetaFieldData = null;
+
+            getMetaFieldData = (currentPlan >= 4 && generalSetting.metafieldActive === "yes") && await wfGetMetaObjectData(data?.handle);
 
             variantResponse = await fetch(`${wfGetDomain}products/${data.handle}.js`);
             if (variantResponse.status !== 404) {
@@ -3478,14 +3331,18 @@ async function renderMultiModalContentFxn(arrayList) {
                                     </div>
                                </div>`;
             loadingItemsCount.forEach(div => div.innerHTML = loadingText);
-            return { data, foundVariant, hasTag, responseStatus: response, variantDataResponse, itemIndex };
+            return { data, foundVariant, hasTag, responseStatus: response, variantDataResponse, itemIndex, getMetaFieldData };
         })
 
         let results = await Promise.all(fetchPromises);
-        results.forEach(async ({ data, foundVariant, hasTag, responseStatus, variantDataResponse, itemIndex }) => {
+        results.forEach(async ({ data, foundVariant, hasTag, responseStatus, variantDataResponse, itemIndex, getMetaFieldData }) => {
 
             function wfGetImage() {
-                let imageUrl = isVariantWishlistTrue === true && currentPlan >= 4 ? foundVariant?.featured_image !== null ? foundVariant?.featured_image?.src : variantDataResponse?.featured_image : variantDataResponse?.featured_image
+                // let imageUrl = isVariantWishlistTrue === true && currentPlan >= 4 ? foundVariant?.featured_image !== null ? foundVariant?.featured_image?.src : variantDataResponse?.featured_image : variantDataResponse?.featured_image
+
+                let imageUrl = foundVariant?.featured_image !== null ? foundVariant?.featured_image?.src : variantDataResponse?.featured_image
+
+
                 // return `${imageUrl}?width=600`
                 if (!imageUrl) return "";
                 const separator = imageUrl?.includes("?") ? "&" : "?";
@@ -3515,7 +3372,7 @@ async function renderMultiModalContentFxn(arrayList) {
                     .replace(/'/g, "/wg-sgl")
                     .replace(/"/g, "/wg-dbl");
 
-                const variantNAME = currentPlan >= 4 ? foundVariant?.name ? foundVariant?.name : data.title : data.title;
+                const variantNAME = generalSetting?.showProductMetafield === "yes" ? data.title : currentPlan >= 4 ? foundVariant?.name ? foundVariant?.name : data.title : data.title;
                 const variantData = variantArray.length > 0 ? variantArray.join(" / ") : "";
                 const priceToDb =
                     foundVariant?.compare_at_price &&
@@ -3536,6 +3393,9 @@ async function renderMultiModalContentFxn(arrayList) {
 
                 const productOptionString = data?.product_option ? data.product_option.replace(/"/g, '&quot;') : '';
 
+                // console.log("HANDLE --- ", data.handle)
+                // console.log("getMetaFieldData ---- ", getMetaFieldData);
+
                 wishlistBody += `<div class="wishlist-grid1">
                         ${isMultiwishlistTrue
                         ? `
@@ -3555,6 +3415,9 @@ async function renderMultiModalContentFxn(arrayList) {
 
                         <h3 class="title11" style="color: ${modalDrawerTextColor};"><a href="${wfGetDomain}products/${data.handle
                     }?variant=${data.variant_id}">${(variantNAME && variantNAME.includes("(")) ? variantNAME.replace(/\((.*?)\)/, `</span><br><span class="wg-2">$1</span>`).replace(/^/, '<span class="wg-1">') : `<span>${variantNAME}</span>`}</a></h3>
+
+
+                    ${(permanentDomain === "specsmakerspartner.myshopify.com" && parsedProductOption?.size) ? `<span class="wf-specs-size">SIZE: ${parsedProductOption?.size}</span>` : ""}
 
                     ${isVariantWishlistTrue === true ? "" : `<p class="product-selected-variants" style="color: ${modalDrawerTextColor};">${variantData}</p>`}
                     ${isPrice ? `<div class="product-option-price">${currentNewPrice}</div>` : ""}
@@ -3584,7 +3447,7 @@ async function renderMultiModalContentFxn(arrayList) {
                     ` : ""
                     }
 
-                     ${(currentPlan >= 4 && parsedProductOption) ?
+                     ${(currentPlan >= 4 && parsedProductOption && permanentDomain !== "specsmakerspartner.myshopify.com") ?
                         generalSetting?.showProductOption === "no" ? "" :
                             `<div class="wg-product-option">
                             ${Object.entries(parsedProductOption).map(([key, value]) => {
@@ -3621,6 +3484,18 @@ async function renderMultiModalContentFxn(arrayList) {
                         </div>`
                         : ""
                     }
+
+                    ${(currentPlan >= 4 && generalSetting.metafieldActive === "yes")
+                        ? getMetaFieldData.length !== 0 ?
+                            `<div class="wg-product-option">
+                            ${getMetaFieldData.map((data, index) =>
+                                generalSetting[data?.node?.key] === true
+                                    ? `<b key="${index}">${data?.node?.key}:</b> ${data?.node?.value}<br/>`
+                                    : "").filter(Boolean).join("")
+                            }
+                            </div>`
+                            : "" : ""
+                    }
                 
                     ${isMoveToCart
                         ? `<div class="movecart-button">
@@ -3639,6 +3514,9 @@ async function renderMultiModalContentFxn(arrayList) {
                           </div>`
                         : ""
                     }
+
+                     ${(permanentDomain === "specsmakerspartner.myshopify.com" && parsedProductOption?.offer) ? `<span class="wf-specs-offer">${parsedProductOption?.offer}</span>` : ""}
+
                     </div>
                 </div>`;
 
@@ -3693,6 +3571,23 @@ async function renderMultiModalContentFxn(arrayList) {
 
     gridStyleFxn();
 }
+
+// this is for the product metafields
+//   ${(currentPlan >= 4 && getMetaFieldData.length !== 0)
+//                         ?
+//                         `<div class="wg-product-option">
+//                             ${getMetaFieldData.map((data, index) =>
+//                             generalSetting[data?.node?.key] === true
+//                                 ? `<b key="${index}">${data?.node?.key}:</b> ${data?.node?.value}<br/>`
+//                                 : ""
+//                         )
+//                             .filter(Boolean)
+//                             .join("")
+//                         }
+//                         </div>`
+//                         : ""
+//                     }
+
 
 function gridStyleFxn() {
     const modalBoxes = document.querySelectorAll('.wishlist-modal-box');
@@ -3872,6 +3767,47 @@ function shareSingleWishlist(event, key) {
     event.stopPropagation();
     openShareWishlistModal(key);
 }
+
+function downloadSingleWishlist(event, key) {
+    if (currentPlan >= 4) {
+        const data1 = allWishlistData;
+        const data = data1.filter(obj => obj[key]);
+        let allItems = [];
+        data.forEach(obj => {
+            Object.entries(obj).forEach(([key, val]) => {
+                if (Array.isArray(val)) {
+                    val.forEach(item => {
+                        allItems.push({
+                            wishlist_name: key,
+                            title: item.title,
+                            product_id: item.product_id,
+                            variant_id: item.variant_id,
+                            handle: item.handle,
+                            price: item.price,
+                            quantity: item.quantity,
+                            image: item.image,
+                            product_option: item.product_option,
+                            created_at: item.created_at,
+                        });
+                    });
+                }
+            });
+        });
+        // Create custom event
+        const wfDownloadCsvEvent = new CustomEvent("WgWishlistCsvDownload", {
+            detail: { data: allItems },
+            cancelable: true
+        });
+        // Dispatch the event
+        window.dispatchEvent(wfDownloadCsvEvent);
+        // Fallback only if listener did not call preventDefault()
+        if (!wfDownloadCsvEvent.defaultPrevented) {
+            const csvContent = arrayToCSV(allItems);
+            downloadCSV(csvContent, `Wishlist-Guru(${key}).csv`);
+        }
+    }
+}
+
 
 function viewItem(handle) {
     window.top.location = `${wfGetDomain}products/${handle}`
@@ -4057,7 +3993,7 @@ async function renderDrawerContentFxn() {
                         .replace(/'/g, "/wg-sgl")
                         .replace(/"/g, "/wg-dbl");
 
-                    const variantNAME = currentPlan >= 4 ? foundVariant?.name : data.title;
+                    const variantNAME = generalSetting.showProductMetafield === "yes" ? data.title : currentPlan >= 4 ? foundVariant?.name : data.title;
                     const variantData =
                         variantArray.length > 0 ? variantArray.join(" / ") : "";
                     const priceToDb =
@@ -4320,8 +4256,11 @@ async function modalButtonFxn() {
             `<button id="downloadAllProductsButton" class="wg-download-csv"> <span class="download-csv-icon"></span> Download Complete Masterdata</button>` : ""}
 
         </div>`;
-
     document.querySelectorAll(".modal-button-div").forEach(div => div.innerHTML = buttonContent);
+
+    if (!isMoveToCart && generalSetting.shareWishlistToAdmin !== "yes") {
+        document.querySelector(".modal-button-div").style.display = "none";
+    }
 }
 
 function wgDownloadCsv() {
@@ -5144,17 +5083,6 @@ async function addToMyWishlist(
         referral_id: sharedId
     };
 
-    const notificationData = {
-        fromWhere: null,
-        image: image,
-        title: title,
-    }
-
-    const productData = {
-        handle: handle,
-        variantId: variant_id,
-    }
-
     if (isMultiwishlistTrue && !matchFound) {
         renderPopupLoader()
         if (wishlistDataInSql.length === 0 || !matchFound) {
@@ -5162,10 +5090,7 @@ async function addToMyWishlist(
             event.target.innerHTML = customLanguage.sharedPageItemAdded;
             event.target.classList.add("added");
         } else {
-            // Toast image code starts
-            // alertToast(`${customLanguage.sharedPageAlreadyAdded}`, null, null, product_id, handle, variant_id);
-            alertToast(`${customLanguage.sharedPageAlreadyAdded}`, null, notificationData, productData);
-            // Toast image code ends
+            alertToast(`${customLanguage.sharedPageAlreadyAdded}`);
             event.target.innerHTML = customLanguage.sharedPageAlreadyAdded;
             event.target.classList.add("already-added");
         }
@@ -5176,11 +5101,7 @@ async function addToMyWishlist(
             event.target.innerHTML = customLanguage.sharedPageItemAdded;
             event.target.classList.add("added");
         } else {
-            // alertToast(`${customLanguage.sharedPageAlreadyAdded}`);
-            // Toast image code starts
-            // alertToast(`${customLanguage.sharedPageAlreadyAdded}`, null, null, product_id, handle, variant_id);
-            alertToast(`${customLanguage.sharedPageAlreadyAdded}`, null, notificationData, productData);
-            // Toast image code ends
+            alertToast(`${customLanguage.sharedPageAlreadyAdded}`);
             event.target.innerHTML = customLanguage.sharedPageAlreadyAdded;
             event.target.classList.add("already-added");
         }
@@ -5211,36 +5132,19 @@ async function saveSharedWishlist(data) {
                 wishlistName: data.wishlistName,
                 permission: data.permission,
                 referral_id: data.referral_id,
-                wfGetDomain: wfGetDomain
+                wfGetDomain: wfGetDomain,
+                wgLanguage: wgWishlistLanguage
             }),
         })
-
-        const notificationData = {
-            fromWhere: null,
-            image: data.image,
-            title: data.title,
-        }
-
-        const productData = {
-            handle: data.handle,
-            variantId: data.variantId,
-        }
 
 
         let result = await userData.json();
         if (result.msg === "item updated" && result.isAdded === "yes") {
             await showCountAll();
-            // Toast image code starts
-            // alertToast(`${customLanguage.sharedPageItemAdded}`, null, null, data.productId, data.handle, data.variantId);
-            alertToast(`${customLanguage.sharedPageItemAdded}`, null, notificationData, productData);
-            // Toast image code ends
+            alertToast(`${customLanguage.sharedPageItemAdded}`);
             await renderAddToWishlistIcon(data.productId);
         } else if (result.msg === "already added") {
-            // alertToast(`${customLanguage.sharedPageAlreadyAdded}`);
-            // Toast image code starts
-            // alertToast(`${customLanguage.sharedPageItemAdded}`, null, null, data.productId, data.handle, data.variantId);
-            alertToast(`${customLanguage.sharedPageItemAdded}`, null, notificationData, productData);
-            // Toast image code ends
+            alertToast(`${customLanguage.sharedPageAlreadyAdded}`);
         }
         if (result.msg === "limit cross") {
             alertContent(customLanguage?.quotaLimitAlert || "Wishlist Quota of this store reached its monthly limit, We have notified store owner to upgrade their plan. Sorry for the inconvenience");
@@ -5335,16 +5239,6 @@ async function removeItem(
             }),
         });
 
-        const notificationData = {
-            fromWhere: null,
-            image: null,
-            title: null,
-        }
-        const productData = {
-            handle: handle,
-            variantId: variant_id,
-        }
-
         let result = await userData.json();
         // console.log("ERRRORR ", result)
 
@@ -5358,9 +5252,7 @@ async function removeItem(
 
             createFilterOptionInStructure();
 
-            // Toast image code starts
-            showAlert === true && !isMultiwishlistTrue && alertToast(`${customLanguage.alertForRemoveButton}`, null, notificationData, productData);
-            // Toast image code ends
+            showAlert === true && !isMultiwishlistTrue && alertToast(`${customLanguage.alertForRemoveButton}`);
 
             const arrayList = isMultiwishlistTrue
                 ? allWishlistData
@@ -5917,6 +5809,30 @@ async function refreshCart() {
             console.error('❌ Error updating cart drawer:', error);
         }
     }
+    else if (getThemeName.themeName == 'Sunrise') {
+        const drawer = document.querySelector('cart-drawer');
+        if (!drawer) return;
+        const drawerInner = drawer.querySelector(".drawer__inner");
+        const drawerHeader = drawer.querySelector(".drawer__header");
+        const drawerCartItems = drawer.querySelector("cart-drawer-items");
+        const drawerFooter = drawer.querySelector(".drawer__footer");
+        const emptyState = drawer.querySelector(".drawer__inner-empty");
+        if (emptyState) emptyState.remove();
+        const response = await fetch(`${window.Shopify.routes.root}?section=cart-drawer`);
+        const html = await response.text();
+        const parser = new DOMParser().parseFromString(html, "text/html");
+        const newDrawerInner = parser.querySelector(".drawer__inner");
+        const newDrawerHeader = parser.querySelector(".drawer__header");
+        const newDrawerCartItems = parser.querySelector("cart-drawer-items");
+        const newDrawerFooter = parser.querySelector(".drawer__footer");
+        if (drawerInner && newDrawerInner) drawerInner.innerHTML = newDrawerInner.innerHTML;
+        if (drawerHeader && newDrawerHeader) drawerHeader.innerHTML = newDrawerHeader.innerHTML;
+        if (drawerCartItems && newDrawerCartItems) drawerCartItems.innerHTML = newDrawerCartItems.innerHTML;
+        if (drawerFooter && newDrawerFooter) drawerFooter.innerHTML = newDrawerFooter.innerHTML;
+        document.dispatchEvent(new Event("dispatch:cart-drawer:open", { detail: { opener: true } }));
+        drawer.classList.remove("is-empty");
+        drawer.classList.add("active");
+    }
 
     else {
         try {
@@ -5948,9 +5864,9 @@ async function refreshCart() {
             const countDrawerCount = document.querySelector('.cart__title cart-count');
 
             // Check if required elements exist before updating them
-            if (!newCartDrawer || !newCountBubble) {
+            if (!newCartDrawer) {
                 // console.log('❌ Required elements not found in fetched HTML. Some updates might be missing.');
-                return
+                // return
             }
 
             // Update cart drawer content
@@ -6094,10 +6010,7 @@ async function addToCartWf(
     //     quantity: quantity || 1,
     // };
 
-    // const res = await cartFunction(data);
-    // Toast Image code starts
-    const res = await cartFunction(data, true, handle);
-    // Toast Image code ends
+    const res = await cartFunction(data);
     if (res.message !== "Cart Error" && res.status !== 422) {
         await refreshCart();
 
@@ -6368,25 +6281,10 @@ async function allToCartFxn(allData, viewItemProducts = []) {
         //     console.error("Error processing cart items:", error);
         // }
 
-        const notificationData = {
-            fromWhere: "allToCart",
-            image: null,
-            title: null,
-        }
-
-        const productData = {
-            handle: null,
-            variantId: null,
-        }
 
         await cartFunctionForAllItems(val, false);
         await refreshCart();
-        // alertToast(customLanguage.alertAddAllToCart || storeFrontDefLang.alertAddAllToCart);
-        // Toast image code starts
-        // alertToast(customLanguage.alertAddAllToCart || storeFrontDefLang.alertAddAllToCart, null, "allToCart", null, null);
-        alertToast(customLanguage.alertAddAllToCart || storeFrontDefLang.alertAddAllToCart, null, notificationData, productData);
-
-        // Toast image code ends
+        alertToast(customLanguage.alertAddAllToCart || storeFrontDefLang.alertAddAllToCart);
 
         const parentDiv = document.querySelector(".wg-addalltocart");
         if (parentDiv) {
@@ -6593,9 +6491,8 @@ async function cartFunctionForAllItems(items, alertValue = true) {
     }
 }
 
-// Toast image code starts
-async function cartFunction(data, alertValue = true, handle) {
-    // Toast image code ends
+
+async function cartFunction(data, alertValue = true) {
     try {
         const response = await fetch("/cart/add.js", {
             body: JSON.stringify(data),
@@ -6607,28 +6504,13 @@ async function cartFunction(data, alertValue = true, handle) {
             method: "POST",
         });
 
-        console.log("data from cartFunction = ", data)
         const json = await response.json();
-
-        const notificationData = {
-            fromWhere: null,
-            image: json.image,
-            title: json.title,
-        }
-
-        const productData = {
-            handle: json.handle,
-            variantId: json.variant_id,
-        }
 
         if (alertValue) {
             if (json.message === "Cart Error" || json.status === 422) {
                 alertContent(json.description);
             } else {
-                // alertToast(`${customLanguage.alertForAddToCartButton}`);
-                // Toast image code starts
-                alertToast(`${customLanguage.alertForAddToCartButton}`, null, notificationData, productData);
-                // Toast image code ends
+                alertToast(`${customLanguage.alertForAddToCartButton}`);
             }
         }
 
@@ -6760,23 +6642,33 @@ async function customCodeButtonClick(event, selectedId, getHandle, selectedVaria
         let variantArr = buttonClickproductData?.variants;
 
         let saveVariantId = buttonClickproductData.variants[0].id;
+        let productTitle = null;
+        let productSize = null;
+        let productOffer = null;
+
         let saveImage = buttonClickproductData?.images[0];
         if (isVariantWishlistTrue === true) {
 
             const clickedElement = event.target;
             const wishlistDiv = clickedElement.closest('.wf-wishlist')?.getAttribute("variant-id");
+            productTitle = clickedElement.closest('.wf-wishlist')?.getAttribute("product-title");
+
+            productSize = clickedElement.closest('.wf-wishlist')?.getAttribute("product-size");
+            productOffer = clickedElement.closest('.wf-wishlist')?.getAttribute("product-offer");
 
             saveVariantId = wishlistDiv ? wishlistDiv : selectedVariantId === "null" ? buttonClickproductData?.variants[0].id : selectedVariantId || buttonClickproductData?.variants[0].id;
             const resultFind = variantArr.find(data => data.id === parseInt(selectedVariantId));
             saveImage = resultFind?.featured_image?.src || buttonClickproductData?.images[0];
-            console.log("saveImage = ", saveImage)
         } else {
             saveVariantId = buttonClickproductData.variants[0].id;
             saveImage = buttonClickproductData?.images[0];
         }
-
         // console.log("Final variant -- ", saveVariantId)
 
+        let specsMakerObj = {
+            size: productSize,
+            offer: productOffer
+        }
 
         let buttonClickData = {
             productId: buttonClickproductData.id,
@@ -6784,23 +6676,13 @@ async function customCodeButtonClick(event, selectedId, getHandle, selectedVaria
             variantId: saveVariantId,
             price: Number(buttonClickproductData.variants[0].price) / 100,
             handle: buttonClickproductData.handle,
-            title: buttonClickproductData.title,
+            title: productTitle ? productTitle : buttonClickproductData.title,
             // image: buttonClickproductData.images[0] ? buttonClickproductData.images[0] : "",
             image: saveImage || "",
             quantity: 1,
             language: wfGetDomain,
+            productOption: permanentDomain === "specsmakerspartner.myshopify.com" ? JSON.stringify(specsMakerObj) : null,
         };
-
-        const notificationData = {
-            fromWhere: null,
-            image: saveImage || "",
-            title: buttonClickproductData.title,
-        }
-
-        const productData = {
-            handle: buttonClickproductData.handle,
-            variantId: saveVariantId,
-        }
 
         const res = await showLoginPopup(selectedId);
         if (res) return;
@@ -6811,26 +6693,17 @@ async function customCodeButtonClick(event, selectedId, getHandle, selectedVaria
 
         if (isMultiwishlistTrue) {
             renderPopupLoader()
-            console.log("saveVariantId = ", saveVariantId)
-            console.log("getHandle = ", getHandle)
             if (allWishlistData.length > 0 && matchFound) {
                 buttonClickData.isDelete = "yes";
-                // Toast image code starts
-                openMultiWishlist(buttonClickData, selectedId, "customIcon", saveVariantId, getHandle)
-                // Toast image code ends
+                openMultiWishlist(buttonClickData, selectedId, "customIcon", saveVariantId)
             } else {
-                // Toast image code starts
-                openMultiWishlist(buttonClickData, selectedId, "customIcon", saveVariantId, getHandle)
-                // Toast image code ends
+                openMultiWishlist(buttonClickData, selectedId, "customIcon", saveVariantId)
             }
         } else {
             buttonClickData.wishlistName = matchFound ? ["wfNotMulti"] : ["favourites"];
             await checkCollectionCounterData(selectedId, !matchFound ? "add" : "remove")
             customIconAddedRemoveToWishlist(selectedId, matchFound ? false : true, saveVariantId)
-            // Toast image code starts
-            // saveMainData(buttonClickData, selectedId, "customIcon", selectedVariantId, getHandle)
-            saveMainData(buttonClickData, selectedId, "customIcon", notificationData, productData)
-            // Toast image code ends
+            saveMainData(buttonClickData, selectedId, "customIcon")
         }
     } catch (error) {
         console.error("Error:", error);
@@ -6962,7 +6835,7 @@ async function wishlistButtonForCollection1() {
             let addWishlistButton = document.createElement("div");
             addWishlistButton.style.zIndex = "10";
             addWishlistButton.style.position = "relative";
-            wishlistButtonDiv.style.display = "none";
+            // wishlistButtonDiv.style.display = "none";
             // Fetch data with throttling and caching
             const addToWishlistData = await renderButtonAddToWishlist(selectedId, false, "load");
             const alreadyAddedToWishlistData = await renderButtonAddedToWishlist(selectedId, false, "load");
@@ -7029,44 +6902,24 @@ async function buttonColectionClick(selectedId, handle, selectedVariantId) {
 
         };
 
-        const notificationData = {
-            fromWhere: null,
-            image: saveImage || "",
-            title: buttonJsonData.title,
-        }
-
-        const productData = {
-            handle: buttonJsonData.handle,
-            variantId: saveVariantId,
-        }
-
         const res = await showLoginPopup(selectedId);
         if (res) return;
 
         const matchFound = await checkFound(allWishlistData, selectedId, saveVariantId);
 
         if (isMultiwishlistTrue) {
-            console.log("saveVariantId = ", saveVariantId)
-            console.log("handle = ", handle)
             renderPopupLoader()
             if (allWishlistData.length > 0 && matchFound) {
                 buttonData.isDelete = "yes";
-                // Toast image code starts
-                openMultiWishlist(buttonData, selectedId, "customButton", saveVariantId, handle)
-                // Toast image code ends
+                openMultiWishlist(buttonData, selectedId, "customButton", saveVariantId)
             } else {
-                // Toast image code starts
-                openMultiWishlist(buttonData, selectedId, "customButton", saveVariantId, handle)
-                // Toast image code ends
+                openMultiWishlist(buttonData, selectedId, "customButton", saveVariantId)
             }
         } else {
             buttonData.wishlistName = matchFound ? ["wfNotMulti"] : ["favourites"];
             await checkCollectionCounterData(selectedId, !matchFound ? "add" : "remove")
             buttonAddedRemoveWishlist(selectedId, matchFound ? false : true, "load")
-            // Toast image code starts
-            // saveMainData(buttonData, selectedId, "customButton", selectedVariantId, handle);
-            saveMainData(buttonData, selectedId, "customButton", notificationData, productData);
-            // Toast image code ends
+            saveMainData(buttonData, selectedId, "customButton");
         }
     } catch (error) {
         console.error("Error:", error);
@@ -7166,17 +7019,6 @@ async function collectionIconClick(event, selectedId, handle) {
             language: wfGetDomain
         }
 
-        const notificationData = {
-            fromWhere: null,
-            image: matchedElement !== null ? variant_img : collectionIconJsonData.images[0] ? collectionIconJsonData.images[0] : "",
-            title: collectionIconJsonData.title,
-        }
-
-        const productData = {
-            handle: collectionIconJsonData.handle,
-            variantId: matchedElement !== null ? matchedProductId : collectionIconJsonData.variants[0].id,
-        }
-
         const res = await showLoginPopup(selectedId);
         if (res) return;
 
@@ -7186,22 +7028,15 @@ async function collectionIconClick(event, selectedId, handle) {
             renderPopupLoader()
             if (allWishlistData.length > 0 && matchFound) {
                 collectionIconData.isDelete = "yes";
-                // Toast image code starts
-                openMultiWishlist(collectionIconData, selectedId, "collection", matchedProductId, handle);
-                // Toast image code ends
+                openMultiWishlist(collectionIconData, selectedId, "collection");
             } else {
-                // Toast image code starts
-                openMultiWishlist(collectionIconData, selectedId, "collection", matchedProductId, handle);
-                // Toast image code ends
+                openMultiWishlist(collectionIconData, selectedId, "collection");
             }
         } else {
             collectionIconData.wishlistName = matchFound ? ["wfNotMulti"] : ["favourites"];
             await checkCollectionCounterData(selectedId, !matchFound ? "add" : "remove")
             collectionIcon(selectedId, matchFound ? false : true)
-            // Toast image code starts
-            // saveMainData(collectionIconData, selectedId, "collection", matchedProductId, handle);
-            saveMainData(collectionIconData, selectedId, "collection", notificationData, productData);
-            // Toast image code ends
+            saveMainData(collectionIconData, selectedId, "collection");
         }
     } catch (error) {
         console.error("Error:", error);
@@ -7557,22 +7392,6 @@ const wgFabricCss = (getThemeName.themeName === "Fabric")
     : '';
 
 
-const wgMotionCss = (getThemeName.themeName === "Motion")
-    ? `
-       .wf-wishlist.pdp-img-icon-bottom-right {
-            bottom:22px !important;
-       }
-       .wf-wishlist.pdp-img-icon-bottom-left {
-            left: 0;
-            bottom: 22px;
-       }
-       .wf-wishlist.pdp-img-icon-top-left {
-            left: 0;
-        }
-    `
-    : '';
-
-
 const wgResponsiveCss = (getThemeName.themeName === "Responsive")
     ? `
 
@@ -7594,14 +7413,6 @@ const wgResponsiveCss = (getThemeName.themeName === "Responsive")
 }
     `
     : '';
-
-const wgDawnCss = (getThemeName.themeName === "Dawn")
-    ? `
-        .collection_icon_new_selected, .collection_icon_new{
-            z-index:2 !important;
-        }
-    `
-    : ''
 
 
 
@@ -7700,22 +7511,58 @@ const wgGridCss = `
     width: 100%;
     height: 100%;
 } 
-.modal-button-div .cartButtonStyle,
-.searchData-main2 .cartButtonStyle,
-.modalContainer .cartButtonStyle,
-#wg-multiWishlist_div .cartButtonStyle {
-    background-color: ${generalSetting?.modalButtonIsToggleOn ? generalSetting?.modalButtonbgColor : customButton.cartButtonStyle.hover.bgColor};
-    color: ${generalSetting?.modalButtonIsToggleOn ? generalSetting?.modalButtontextColor : customButton.cartButtonStyle.hover.textColor};
-    border: ${generalSetting?.modalButtonIsToggleOn ? generalSetting?.modalButtonborderInput : customButton.cartButtonStyle.hover.border.value}${generalSetting?.modalButtonIsToggleOn ? generalSetting?.modalButtonborderInputUnit : customButton.cartButtonStyle.hover.border.unit} ${generalSetting?.modalButtonIsToggleOn ? generalSetting?.modalButtonborderType : customButton.cartButtonStyle.hover.border.type} ${generalSetting?.modalButtonIsToggleOn ? generalSetting?.modalButtonborderColor : customButton.cartButtonStyle.hover.border.color}
-}
-.modal-button-div .cartButtonStyle:hover,
-.searchData-main2 .cartButtonStyle:hover,
-.modalContainer .cartButtonStyle:hover,
-#wg-multiWishlist_div .cartButtonStyle:hover {
-    background-color: ${generalSetting?.modalButtonIsToggleOn ? generalSetting?.modalButtonhoverBgColor : customButton.cartButtonStyle.bgColor};
-    color: ${generalSetting?.modalButtonIsToggleOn ? generalSetting?.modalButtonhoverTextColor : customButton.cartButtonStyle.textColor};
-    border: ${generalSetting?.modalButtonIsToggleOn ? generalSetting?.modalButtonhoverBorderInput : customButton.cartButtonStyle.border.value}${generalSetting?.modalButtonIsToggleOn ? generalSetting?.modalButtonhoverBorderInputUnit : customButton.cartButtonStyle.border.unit} ${generalSetting?.modalButtonIsToggleOn ? generalSetting?.modalButtonhoverBorderType : customButton.cartButtonStyle.border.type} ${generalSetting?.modalButtonIsToggleOn ? generalSetting?.modalButtonhoverBorderColor : customButton.cartButtonStyle.border.color};
-}
+
+${(generalSetting?.clearBtnStyleActive === "yes") ?
+        `.modal-button-div .cartButtonStyle,
+        .searchData-main2 .cartButtonStyle,
+        .modalContainer .cartButtonStyle,
+        #wg-multiWishlist_div .cartButtonStyle,
+        .a-main .cartButtonStyle {
+            background-color: ${customButton.clearButtonStyle.bgColor};
+            color: ${customButton.clearButtonStyle.textColor};
+            max-width: 100%;
+            border: ${customButton.clearButtonStyle.border.value}${customButton.clearButtonStyle.border.unit} ${customButton.clearButtonStyle.border.type} ${customButton.clearButtonStyle.border.color};
+            border-radius: ${customButton.clearButtonStyle.borderRadius.value}${customButton.clearButtonStyle.borderRadius.unit};
+            font-size: ${customButton.clearButtonStyle.fontSize.value}${customButton.clearButtonStyle.fontSize.unit} !important;
+            padding: ${customButton.clearButtonStyle.paddingTopBottom.value}${customButton.clearButtonStyle.paddingTopBottom.unit} ${customButton.clearButtonStyle.paddingLeftRight.value}${customButton.clearButtonStyle.paddingLeftRight.unit};
+            margin: ${customButton.clearButtonStyle.marginTopBottom.value}${customButton.clearButtonStyle.marginTopBottom.unit} ${customButton.clearButtonStyle.marginLeftRight.value}${customButton.clearButtonStyle.marginLeftRight.unit};
+            text-align: ${customButton.clearButtonStyle.textAlign};
+            cursor: pointer;
+            box-sizing: border-box;
+            font-weight: ${getFontWt(customButton.clearButtonStyle.fontWeight, customButton.clearButtonStyle.fontWeight).textFw};
+            font-family: ${customButton.clearButtonStyle.fontFamily};
+        }
+
+        .modal-button-div .cartButtonStyle:hover,
+        .searchData-main2 .cartButtonStyle:hover,
+        .modalContainer .cartButtonStyle:hover,
+        #wg-multiWishlist_div .cartButtonStyle:hover,
+        .a-main .cartButtonStyle:hover {
+            background-color: ${customButton.clearButtonStyle.hover.bgColor};
+            color: ${customButton.clearButtonStyle.hover.textColor};
+            border: ${customButton.clearButtonStyle.hover.border.value}${customButton.clearButtonStyle.hover.border.unit} ${customButton.clearButtonStyle.hover.border.type} ${customButton.clearButtonStyle.hover.border.color};
+        }`
+        :
+        `.modal-button-div .cartButtonStyle,
+        .searchData-main2 .cartButtonStyle,
+        .modalContainer .cartButtonStyle,
+        #wg-multiWishlist_div .cartButtonStyle,
+        .a-main .cartButtonStyle {
+            background-color: ${customButton.cartButtonStyle.hover.bgColor};
+            color: ${customButton.cartButtonStyle.hover.textColor};
+            border: ${customButton.cartButtonStyle.hover.border.value}${customButton.cartButtonStyle.hover.border.unit} ${customButton.cartButtonStyle.hover.border.type} ${customButton.cartButtonStyle.hover.border.color};
+        }
+        .modal-button-div .cartButtonStyle:hover,
+        .searchData-main2 .cartButtonStyle:hover,
+        .modalContainer .cartButtonStyle:hover,
+        #wg-multiWishlist_div .cartButtonStyle:hover,
+        .a-main .cartButtonStyle:hover {
+            background-color: ${customButton.cartButtonStyle.bgColor};
+            color: ${customButton.cartButtonStyle.textColor};
+            border: ${customButton.cartButtonStyle.border.value}${customButton.cartButtonStyle.border.unit} ${customButton.cartButtonStyle.border.type} ${customButton.cartButtonStyle.border.color};
+        }`
+    }
+
 .wishlist-modal-box {
     margin-bottom: ${generalSetting.gridGap}px;
 }
@@ -7965,39 +7812,16 @@ function buttonStyleFxn() {
             background-color: ${cartButtonStyle.bgColor};
             color: ${cartButtonStyle.textColor};
             max-width: 100%;
-            border: ${cartButtonStyle.border.value}${cartButtonStyle.border.unit
-        } ${cartButtonStyle.border.type} ${cartButtonStyle.border.color};
-            border-radius: ${cartButtonStyle.borderRadius.value}${cartButtonStyle.borderRadius.unit
-        };
-            font-size: ${cartButtonStyle.fontSize.value}${cartButtonStyle.fontSize.unit
-        } !important;
-            padding: ${cartButtonStyle.paddingTopBottom.value}${cartButtonStyle.paddingTopBottom.unit
-        } ${cartButtonStyle.paddingLeftRight.value}${cartButtonStyle.paddingLeftRight.unit
-        };
-            margin: ${cartButtonStyle.marginTopBottom.value}${cartButtonStyle.marginTopBottom.unit
-        } ${cartButtonStyle.marginLeftRight.value}${cartButtonStyle.marginLeftRight.unit
-        };
+            border: ${cartButtonStyle.border.value}${cartButtonStyle.border.unit} ${cartButtonStyle.border.type} ${cartButtonStyle.border.color};
+            border-radius: ${cartButtonStyle.borderRadius.value}${cartButtonStyle.borderRadius.unit};
+            font-size: ${cartButtonStyle.fontSize.value}${cartButtonStyle.fontSize.unit} !important;
+            padding: ${cartButtonStyle.paddingTopBottom.value}${cartButtonStyle.paddingTopBottom.unit} ${cartButtonStyle.paddingLeftRight.value}${cartButtonStyle.paddingLeftRight.unit};
+            margin: ${cartButtonStyle.marginTopBottom.value}${cartButtonStyle.marginTopBottom.unit} ${cartButtonStyle.marginLeftRight.value}${cartButtonStyle.marginLeftRight.unit};
             text-align: ${cartButtonStyle.textAlign};
             cursor: pointer;
             box-sizing: border-box;
             font-weight: ${getFontWt(cartButtonStyle.fontWeight, cartButtonStyle.fontWeight).textFw};
             font-family: ${cartButtonStyle.fontFamily};
-        }
-        .modal-button-div .cartButtonStyle, .searchData-main2 .cartButtonStyle, .modalContainer .cartButtonStyle {
-            background-color: ${generalSetting?.modalButtonIsToggleOn ? generalSetting?.modalButtonbgColor : cartButtonStyle.bgColor};
-            color: ${generalSetting?.modalButtonIsToggleOn ? generalSetting?.modalButtontextColor : cartButtonStyle.textColor};
-            max-width: 100%;
-            border: ${generalSetting?.modalButtonIsToggleOn ? generalSetting?.modalButtonborderInput : cartButtonStyle.border.value}${generalSetting?.modalButtonIsToggleOn ? generalSetting?.modalButtonborderInputUnit : cartButtonStyle.border.unit} ${generalSetting?.modalButtonIsToggleOn ? generalSetting?.modalButtonborderType : cartButtonStyle.border.type} ${generalSetting?.modalButtonIsToggleOn ? generalSetting?.modalButtonborderColor : cartButtonStyle.border.color};
-            border-radius: ${generalSetting?.modalButtonIsToggleOn ? generalSetting?.modalButtonborderRadius : cartButtonStyle.borderRadius.value}${generalSetting?.modalButtonIsToggleOn ? generalSetting?.modalButtonborderRadiusUnit : cartButtonStyle.borderRadius.unit};
-            font-size: ${generalSetting?.modalButtonIsToggleOn ? generalSetting?.modalButtonfontSize : cartButtonStyle.fontSize.value}${generalSetting?.modalButtonIsToggleOn ? generalSetting?.modalButtonfontSizeUnit : cartButtonStyle.fontSize.unit} !important;
-            padding: ${generalSetting?.modalButtonIsToggleOn ? generalSetting?.modalButtonpaddingTopBottom : cartButtonStyle.paddingTopBottom.value}${generalSetting?.modalButtonIsToggleOn ? generalSetting?.modalButtonmarginTopBottomUnit : cartButtonStyle.paddingTopBottom.unit} ${generalSetting?.modalButtonIsToggleOn ? generalSetting?.modalButtonpaddingLeftRight : cartButtonStyle.paddingLeftRight.value}${generalSetting?.modalButtonIsToggleOn ? generalSetting?.modalButtonpaddingLeftRightUnit : cartButtonStyle.paddingLeftRight.unit};
-            margin: ${generalSetting?.modalButtonIsToggleOn ? generalSetting?.modalButtonmarginTopBottom : cartButtonStyle.marginTopBottom.value}${generalSetting?.modalButtonIsToggleOn ? generalSetting?.modalButtonmarginTopBottomUnit : cartButtonStyle.marginTopBottom.unit} ${generalSetting?.modalButtonIsToggleOn ? generalSetting?.modalButtonmarginLeftRight : cartButtonStyle.marginLeftRight.value}${generalSetting?.modalButtonIsToggleOn ? generalSetting?.modalButtonmarginLeftRightUnit : cartButtonStyle.marginLeftRight.unit};
-            text-align: ${generalSetting?.modalButtonIsToggleOn ? generalSetting?.modalButtontextAlign : cartButtonStyle.textAlign};
-            cursor: pointer;
-            box-sizing: border-box;
-            font-weight: ${generalSetting?.modalButtonIsToggleOn ? getFontWt(generalSetting?.modalButtonfontWeight, generalSetting.modalButtonfontWeight).textFw : getFontWt(cartButtonStyle.fontWeight, cartButtonStyle.fontWeight).textFw};
-            font-family: ${generalSetting?.modalButtonIsToggleOn ? generalSetting?.modalButtonfontFamily : cartButtonStyle.fontFamily};
-            width:auto;
         }
         .shareButtonTextStyle {
             color: ${generalSetting.shareWishBtntextColor};
@@ -8183,7 +8007,7 @@ function buttonStyleFxn() {
             border-radius: ${generalSetting?.userLogin?.borderRadius.value}${generalSetting?.userLogin?.borderRadius.unit
         }; 
             font-size: ${generalSetting?.userLogin?.fontSize.value}${generalSetting?.userLogin?.fontSize.unit
-        } !important;
+        } !important; 
             font-family: ${generalSetting?.userLogin?.fontFamily
         }, ${getFontFamily}, ${getFontFamilyFallback};
             padding: ${generalSetting?.userLogin?.paddingTopBottom.value}${generalSetting?.userLogin?.paddingTopBottom.unit
@@ -8203,7 +8027,7 @@ function buttonStyleFxn() {
         }
 
         .wg-islogin-buttons .wg-login-btn{
-            background-color: ${generalSetting?.guestLogin?.bgColor};
+            background-color: ${generalSetting?.guestLogin?.bgColor}; 
             color: ${generalSetting?.guestLogin?.textColor}; 
             max-width: 100%;
             border: ${generalSetting?.guestLogin?.border.value}${generalSetting?.guestLogin?.border.unit
@@ -8523,15 +8347,7 @@ function buttonStyleFxn() {
             .cartButtonStyle:hover {
                 background-color: ${customButton.cartButtonStyle.hover.bgColor};
                 color: ${customButton.cartButtonStyle.hover.textColor};
-                border: ${customButton.cartButtonStyle.hover.border.value}${customButton.cartButtonStyle.hover.border.unit
-        } ${customButton.cartButtonStyle.hover.border.type} ${customButton.cartButtonStyle.hover.border.color
-        };
-            }
-
-            .modal-button-div .cartButtonStyle:hover, .searchData-main2 .cartButtonStyle:hover, .modalContainer .cartButtonStyle:hover {
-                background-color: ${generalSetting?.modalButtonIsToggleOn ? generalSetting?.modalButtonhoverBgColor : customButton.cartButtonStyle.hover.bgColor};
-                color: ${generalSetting?.modalButtonIsToggleOn ? generalSetting?.modalButtonhoverTextColor : customButton.cartButtonStyle.hover.textColor};
-                border: ${generalSetting?.modalButtonIsToggleOn ? generalSetting?.modalButtonhoverBorderInput : customButton.cartButtonStyle.hover.border.value}${generalSetting?.modalButtonIsToggleOn ? generalSetting?.modalButtonhoverBorderInputUnit : customButton.cartButtonStyle.hover.border.unit} ${generalSetting?.modalButtonIsToggleOn ? generalSetting?.modalButtonhoverBorderType : customButton.cartButtonStyle.hover.border.type} ${generalSetting?.modalButtonIsToggleOn ? generalSetting?.modalButtonhoverBorderColor : customButton.cartButtonStyle.hover.border.color};
+                border: ${customButton.cartButtonStyle.hover.border.value}${customButton.cartButtonStyle.hover.border.unit} ${customButton.cartButtonStyle.hover.border.type} ${customButton.cartButtonStyle.hover.border.color};
             }
 
             .shareButtonTextStyle:hover {
@@ -8718,6 +8534,17 @@ function buttonStyleFxn() {
             }` : ``}
 
 
+   ${getThemeName?.themeName === "Empire" ? `
+        @media screen and (max-width:1024px) {
+            .wg-empire-headerIcon-desktop {
+                 display: none !important;
+            }
+            .wg-empire-headerIcon-mobile {
+                position: absolute !important;
+                right: 36px !important;
+            }
+        }
+            ` : ``}
 
 
     @media screen and (max-width:1024px) {
@@ -8825,9 +8652,14 @@ function buttonStyleFxn() {
 
        ${wgResponsiveCss}
 
-       ${wgMotionCss}
+        .wg-heart-icon-blank.selected,
+        .wg-heart-icon-solid.selected {
+            background-color: transparent !important;
+            border: none !important;
+            background-size: cover !important;
+        }
 
-       ${wgDawnCss}
+
     `;
 
     localStorage.setItem("wg-button-style", buttonStyleHead.innerHTML);
@@ -8838,7 +8670,6 @@ function buttonStyleFxn() {
 
 async function SqlFunction(product) {
     let returnMsg;
-    console.log("product = ", product)
     let { accessToken, accessEmail } = getAccessToken();
 
     try {
@@ -8869,11 +8700,13 @@ async function SqlFunction(product) {
                 wfGetDomain: wfGetDomain,
                 specificVariant: isVariantWishlistTrue || null,
                 productOption: product?.productOption || null,
+                wgLanguage: wgWishlistLanguage
+
             }),
         });
         let result = await userData.json();
 
-        console.log("create user ---- ", result)
+        // console.log("create user ---- ", result)
 
         // // --------to track meta adds on the add-to-cart button-------- 
         if (advanceSetting?.metaPixelApiKey?.trim() && currentPlan >= 3) {
@@ -9107,23 +8940,9 @@ async function collectionIconClickModal(event, selectedId, handle) {
                 quantity: 1,
                 language: wfGetDomain
             }
-
-            const notificationData = {
-                fromWhere: null,
-                image: filteredImages.length != 0 ? filteredImages[0] : "",
-                title: jsonData.title,
-            }
-
-            const productData = {
-                handle: jsonData.handle,
-                variantId: productVariantValue,
-            }
-
             let result = await SqlFunction(data);
             if (result.msg === "item added") {
-                // Toast image code starts
-                alertToast(`${customLanguage.addToWishlistNotification}`, null, notificationData, productData);
-                // Toast image code ends
+                alertToast(`${customLanguage.addToWishlistNotification}`);
                 collectionBtnAddedRemoveWishlist(selectedId, handle, "added")
                 customIconAddedRemoveToWishlist(selectedId, "filter")
                 buttonAddedRemoveWishlist(selectedId, "added")
@@ -9133,10 +8952,7 @@ async function collectionIconClickModal(event, selectedId, handle) {
                 (currentPlan > 1) && fxnAfterAddToWishlist();
             }
             if (result.msg === "item removed") {
-                // Toast image code starts
-                // alertToast(`${customLanguage.removeFromWishlistNotification}`, null, null, jsonData.id, jsonData.handle, productVariantValue);
-                alertToast(`${customLanguage.addToWishlistNotification}`, null, notificationData, productData);
-                // Toast image code ends
+                alertToast(`${customLanguage.removeFromWishlistNotification}`);
                 collectionBtnAddedRemoveWishlist(selectedId, handle, "")
                 customIconAddedRemoveToWishlist(selectedId, "")
                 buttonAddedRemoveWishlist(selectedId, "")
@@ -9243,459 +9059,136 @@ function styleForTooltipArrow() {
     document.getElementsByTagName("head")[0].appendChild(notificationStyle);
 };
 
-// Toast Image code starts
-async function notificationOfRemoved(fromWhere, notificationData, productData) {
-    // Toast Image code ends
+function notificationOfRemoved() {
+
     const notificationStyle = notificationStyleFxn();
     const notificationTextStyle = notificationTextStyleFxn()
     const notificationDivId = document.getElementById("notificationDiv")
     const notificationAbove = document.querySelector('.wf-text-notification-above')
     const notificationBelow = document.querySelector('.wf-text-notification-below')
-
-    // Toast Image code starts
-    if (notificationData.image === null || notificationData.title === null) {
-        if (productData.handle !== "" && productData.handle !== undefined && productData.handle !== null) {
-            var { buttonJsonData } = await getProductData(productData.handle);
-        }
-    }
-    // Toast Image code ends
-
     styleForTooltipArrow();
     if (generalSetting.wishlistOrNotification === "show-wishlist") {
         // console.log("item removed");
     }
     if (generalSetting.wishlistOrNotification === "show-notification") {
-        // if (generalSetting.notificationTypeOption === "toast-center") {
-        //     notificationDivId.style.display = "block";
-        //     let toastCenter = `<div style="${notificationStyle}" class="toast-bottom-center toast-alignment">${customLanguage.removeFromWishlistNotification}</div>`;
-        //     notificationDivId.innerHTML = toastCenter;
-        // }
-        // else if (generalSetting.notificationTypeOption === "toast-left") {
-        //     notificationDivId.style.display = "block";
-        //     let toastLeft = `<div style="${notificationStyle}" class="toast-bottom-left toast-alignment">${customLanguage.removeFromWishlistNotification}</div>`;
-        //     notificationDivId.innerHTML = toastLeft;
-        // }
-        // else if (generalSetting.notificationTypeOption === "toast-right") {
-        //     notificationDivId.style.display = "block";
-        //     let toastRight = `<div style="${notificationStyle}" class="toast-bottom-right toast-alignment">${customLanguage.removeFromWishlistNotification}</div>`;
-        //     notificationDivId.innerHTML = toastRight;
-        // }
-        // else if (generalSetting.notificationTypeOption === "toast-top-right") {
-        //     notificationDivId.style.display = "block";
-        //     let toastRight = `<div style="${notificationStyle}" class="toast-top-right toast-alignment">${customLanguage.removeFromWishlistNotification}</div>`;
-        //     notificationDivId.innerHTML = toastRight;
-        // }
-        // else if (generalSetting.notificationTypeOption === "toast-top-left") {
-        //     notificationDivId.style.display = "block";
-        //     let toastRight = `<div style="${notificationStyle}" class="toast-top-left toast-alignment">${customLanguage.removeFromWishlistNotification}</div>`;
-        //     notificationDivId.innerHTML = toastRight;
-        // }
-        // else if (generalSetting.notificationTypeOption === "toast-top-center") {
-        //     notificationDivId.style.display = "block";
-        //     let toastRight = `<div style="${notificationStyle}" class="toast-top-center toast-alignment">${customLanguage.removeFromWishlistNotification}</div>`;
-        //     notificationDivId.innerHTML = toastRight;
-        // }
-        // // notificationTextStyle
-        // else if (generalSetting.notificationTypeOption === "text-above") {
-        //     notificationAbove.style.display = "block"
-        //     let tooltipAbove = `<span style="${notificationStyle}" class="text-above" >${customLanguage.removeFromWishlistNotification}</span>`;
-        //     document.querySelector('.wf-text-notification-above').innerHTML = tooltipAbove;
-        // }
-        // else if (generalSetting.notificationTypeOption === "text-below") {
-        //     notificationBelow.style.display = "block"
-        //     let tooltipRight = `<span style="${notificationStyle}" class="text-bottom" >${customLanguage.removeFromWishlistNotification}</span>`;
-        //     document.querySelector('.wf-text-notification-below').innerHTML = tooltipRight;
-        // }
-        // else if (generalSetting.notificationTypeOption === "tool-tip-above") {
-        //     let tooltipAbove = `<span style="${notificationStyle}" class="tooltiptext-above">${customLanguage.removeFromWishlistNotification}</span>`;
-        //     document.querySelector(".tooltip-above").innerHTML = tooltipAbove;
-        // }
-        // else {
-        //     let tooltipBelow = `<span style="${notificationStyle}" class="tooltiptext-below">${customLanguage.removeFromWishlistNotification}</span>`;
-        //     document.querySelector(".tooltip-below").innerHTML = tooltipBelow;
-        // }
-
-        // Toast Image code starts
-        if (generalSetting.notificationTypeOption === "toastImage-center") {
+        if (generalSetting.notificationTypeOption === "toast-center") {
             notificationDivId.style.display = "block";
             let toastCenter = `<div style="${notificationStyle}" class="toast-bottom-center toast-alignment">${customLanguage.removeFromWishlistNotification}</div>`;
             notificationDivId.innerHTML = toastCenter;
         }
-        else if (generalSetting.notificationTypeOption === "toastImage-left") {
+        else if (generalSetting.notificationTypeOption === "toast-left") {
             notificationDivId.style.display = "block";
             let toastLeft = `<div style="${notificationStyle}" class="toast-bottom-left toast-alignment">${customLanguage.removeFromWishlistNotification}</div>`;
             notificationDivId.innerHTML = toastLeft;
         }
-        else if (generalSetting.notificationTypeOption === "toastImage-right") {
+        else if (generalSetting.notificationTypeOption === "toast-right") {
             notificationDivId.style.display = "block";
             let toastRight = `<div style="${notificationStyle}" class="toast-bottom-right toast-alignment">${customLanguage.removeFromWishlistNotification}</div>`;
             notificationDivId.innerHTML = toastRight;
         }
-        else if (generalSetting.notificationTypeOption === "toastImage-top-right") {
-            notificationDivId.style.display = "block";
-            let toastTopRight = `<div style="${notificationStyle}" class="toast-top-right toast-alignment">${customLanguage.removeFromWishlistNotification}</div>`;
-            notificationDivId.innerHTML = toastTopRight;
-        }
-        else if (generalSetting.notificationTypeOption === "toastImage-top-left") {
-            notificationDivId.style.display = "block";
-            let toastTopLeft = `<div style="${notificationStyle}" class="toast-top-left toast-alignment ">${customLanguage.removeFromWishlistNotification}</div>`;
-            notificationDivId.innerHTML = toastTopLeft;
-        }
-        else if (generalSetting.notificationTypeOption === "toastImage-top-center") {
-            notificationDivId.style.display = "block";
-            let toastTopCenter = `<div style="${notificationStyle}" class="toast-top-center toast-alignment">${customLanguage.removeFromWishlistNotification}</div>`;
-            notificationDivId.innerHTML = toastTopCenter;
-        }
         else if (generalSetting.notificationTypeOption === "toast-top-right") {
-            // document.querySelector(".our-sweetalert").style.display = "block";
             notificationDivId.style.display = "block";
-            let toastTopRight = `${notificationData.fromWhere === "allToCart" || notificationData.fromWhere === "copyUrl" ? `
-            <div style="${notificationStyle}" class="toast-top-right toast-alignment toast_img">
-                ${customLanguage.removeFromWishlistNotification}
-            </div>`
-                : `<div style="${notificationStyle}" class="removed-notification toast-top-right toast-alignment toast_img">
-                <span class="imageWrapper">
-                    <img src='${buttonJsonData ? getSelectedVariantImg(productData.variantId, buttonJsonData) : notificationData.image}' width='50px' class='toast_image'>
-                </span>
-                <span class='toast_img_text'>
-                    ${buttonJsonData ? buttonJsonData.title : notificationData.title}<br>
-                    ${customLanguage.removeFromWishlistNotification}
-                </span>
-            </div>`
-                }`;
-            notificationDivId.innerHTML = toastTopRight;
-        }
-        else if (generalSetting.notificationTypeOption === "toast-top-center") {
-            // document.querySelector(".our-sweetalert").style.display = "block";
-            notificationDivId.style.display = "block";
-            let toastTopCenter = `${notificationData.fromWhere === "allToCart" || notificationData.fromWhere === "copyUrl" ? `
-            <div style="${notificationStyle}" class="toast-top-center toast-alignment toast_img">
-                ${customLanguage.removeFromWishlistNotification}
-            </div>`
-                : `<div style="${notificationStyle}" class="removed-notification toast-top-center toast-alignment toast_img">
-                <span class="imageWrapper">
-                    <img src='${buttonJsonData ? getSelectedVariantImg(productData.variantId, buttonJsonData) : notificationData.image}' width='50px' class='toast_image'>
-                </span>
-                <span class='toast_img_text'>
-                    ${buttonJsonData ? buttonJsonData.title : notificationData.title}<br>
-                    ${customLanguage.removeFromWishlistNotification}
-                </span>
-            </div>`
-                }`;
-            notificationDivId.innerHTML = toastTopCenter;
-        }
-        else if (generalSetting.notificationTypeOption === "toast-top-left") {
-            // document.querySelector(".our-sweetalert").style.display = "block";
-            notificationDivId.style.display = "block";
-            let toastTopLeft = `${notificationData.fromWhere === "allToCart" || notificationData.fromWhere === "copyUrl" ? `
-            <div style="${notificationStyle}" class="toast-top-left toast-alignment toast_img">
-                ${customLanguage.removeFromWishlistNotification}
-            </div>`
-                : `<div style="${notificationStyle}" class="removed-notification toast-top-left toast-alignment toast_img">
-                <span class="imageWrapper">
-                    <img src='${buttonJsonData ? getSelectedVariantImg(productData.variantId, buttonJsonData) : notificationData.image}' width='50px' class='toast_image'>
-                </span>
-                <span class='toast_img_text'>
-                    ${buttonJsonData ? buttonJsonData.title : notificationData.title}<br>
-                    ${customLanguage.removeFromWishlistNotification}
-                </span>
-            </div>`
-                }`;
-            notificationDivId.innerHTML = toastTopLeft;
-        }
-        else if (generalSetting.notificationTypeOption === "toast-right") {
-            // document.querySelector(".our-sweetalert").style.display = "block";
-            notificationDivId.style.display = "block";
-            let toastRight = `${notificationData.fromWhere === "allToCart" || notificationData.fromWhere === "copyUrl" ? `
-            <div style="${notificationStyle}" class="toast-bottom-right toast-alignment toast_img">
-                ${customLanguage.removeFromWishlistNotification}
-            </div>`
-                : `<div style="${notificationStyle}" class="removed-notification toast-bottom-right toast-alignment toast_img">
-                <span class="imageWrapper">
-                    <img src='${buttonJsonData ? getSelectedVariantImg(productData.variantId, buttonJsonData) : notificationData.image}' width='50px' class='toast_image'>
-                </span>
-                <span class='toast_img_text'>
-                    ${buttonJsonData ? buttonJsonData.title : notificationData.title}<br>
-                    ${customLanguage.removeFromWishlistNotification}
-                </span>
-            </div>`
-                }`;
+            let toastRight = `<div style="${notificationStyle}" class="toast-top-right toast-alignment">${customLanguage.removeFromWishlistNotification}</div>`;
             notificationDivId.innerHTML = toastRight;
         }
-        else if (generalSetting.notificationTypeOption === "toast-left") {
-            // document.querySelector(".our-sweetalert").style.display = "block";
+        else if (generalSetting.notificationTypeOption === "toast-top-left") {
             notificationDivId.style.display = "block";
-            let toastLeft = `${notificationData.fromWhere === "allToCart" || notificationData.fromWhere === "copyUrl" ? `
-            <div style="${notificationStyle}" class="toast-bottom-left toast-alignment toast_img">
-                ${customLanguage.removeFromWishlistNotification}
-            </div>`
-                : `<div style="${notificationStyle}" class="removed-notification toast-bottom-left toast-alignment toast_img">
-                <span class="imageWrapper">
-                    <img src='${buttonJsonData ? getSelectedVariantImg(productData.variantId, buttonJsonData) : notificationData.image}' width='50px' class='toast_image'>
-                </span>
-                <span class='toast_img_text'>
-                    ${buttonJsonData ? buttonJsonData.title : notificationData.title}<br>
-                    ${customLanguage.removeFromWishlistNotification}
-                </span>
-            </div>`
-                }`;
-            notificationDivId.innerHTML = toastLeft;
+            let toastRight = `<div style="${notificationStyle}" class="toast-top-left toast-alignment">${customLanguage.removeFromWishlistNotification}</div>`;
+            notificationDivId.innerHTML = toastRight;
         }
-        else if (generalSetting.notificationTypeOption === "toast-center") {
+        else if (generalSetting.notificationTypeOption === "toast-top-center") {
             notificationDivId.style.display = "block";
-            let toastImageCenter = `${notificationData.fromWhere === "allToCart" || notificationData.fromWhere === "copyUrl" ? `
-            <div style="${notificationStyle}" class="toast-bottom-center toast-alignment toast_img">
-                ${customLanguage.removeFromWishlistNotification}
-            </div>`
-                : `<div style="${notificationStyle}" class="removed-notification toast-bottom-center toast-alignment toast_img">
-                <span class="imageWrapper">
-                    <img src='${buttonJsonData ? getSelectedVariantImg(productData.variantId, buttonJsonData) : notificationData.image}' width='50px' class='toast_image'>
-                </span>
-                <span class='toast_img_text'>
-                    ${buttonJsonData ? buttonJsonData.title : notificationData.title}<br>
-                    ${customLanguage.removeFromWishlistNotification}
-                </span>
-            </div>`
-                }`;
-            notificationDivId.innerHTML = toastImageCenter;
+            let toastRight = `<div style="${notificationStyle}" class="toast-top-center toast-alignment">${customLanguage.removeFromWishlistNotification}</div>`;
+            notificationDivId.innerHTML = toastRight;
         }
-        // Toast Image code ends
+        // notificationTextStyle
+        else if (generalSetting.notificationTypeOption === "text-above") {
+            notificationAbove.style.display = "block"
+            let tooltipAbove = `<span style="${notificationStyle}" class="text-above" >${customLanguage.removeFromWishlistNotification}</span>`;
+            document.querySelector('.wf-text-notification-above').innerHTML = tooltipAbove;
+        }
+        else if (generalSetting.notificationTypeOption === "text-below") {
+            notificationBelow.style.display = "block"
+            let tooltipRight = `<span style="${notificationStyle}" class="text-bottom" >${customLanguage.removeFromWishlistNotification}</span>`;
+            document.querySelector('.wf-text-notification-below').innerHTML = tooltipRight;
+        }
+        else if (generalSetting.notificationTypeOption === "tool-tip-above") {
+            let tooltipAbove = `<span style="${notificationStyle}" class="tooltiptext-above">${customLanguage.removeFromWishlistNotification}</span>`;
+            document.querySelector(".tooltip-above").innerHTML = tooltipAbove;
+        }
+        else {
+            let tooltipBelow = `<span style="${notificationStyle}" class="tooltiptext-below">${customLanguage.removeFromWishlistNotification}</span>`;
+            document.querySelector(".tooltip-below").innerHTML = tooltipBelow;
+        }
     }
     clearNotification();
 };
 
-// Toast Image code starts
-async function notificationOfAdded(fromWhere, notificationData, productData) {
-    // Toast Image code ends
+function notificationOfAdded() {
 
     const notificationDivId = document.getElementById("notificationDiv")
     const notificationAbove = document.querySelector('.wf-text-notification-above')
     const notificationBelow = document.querySelector('.wf-text-notification-below')
     const notificationStyle = notificationStyleFxn();
     const notificationTextStyle = notificationTextStyleFxn()
-
-    // Toast Image code starts
-    if (notificationData.image === null || notificationData.title === null) {
-        if (productData.handle !== "" && productData.handle !== undefined && productData.handle !== null) {
-            var { buttonJsonData } = await getProductData(productData.handle);
-        }
-    }
-    // Toast Image code ends
-
-    console.log("buttonJsonData = ", buttonJsonData)
-
     styleForTooltipArrow();
     if (generalSetting.wishlistOrNotification === "show-wishlist") {
         heartButtonHandle();
     }
     if (generalSetting.wishlistOrNotification === "show-notification") {
-        // if (generalSetting.notificationTypeOption === "toast-center") {
-        //     notificationDivId.style.display = "block";
-        //     let toastCenter = `<div style="${notificationStyle}" class="toast-bottom-center toast-alignment">${customLanguage.addToWishlistNotification}</div>`;
-        //     notificationDivId.innerHTML = toastCenter;
-        // }
-        // else if (generalSetting.notificationTypeOption === "toast-left") {
-        //     notificationDivId.style.display = "block";
-        //     let toastLeft = `<div style="${notificationStyle}" class="toast-bottom-left toast-alignment">${customLanguage.addToWishlistNotification}</div>`;
-        //     notificationDivId.innerHTML = toastLeft;
-        // }
-        // else if (generalSetting.notificationTypeOption === "toast-right") {
-        //     notificationDivId.style.display = "block";
-        //     let toastRight = `<div style="${notificationStyle}" class="toast-bottom-right toast-alignment">${customLanguage.addToWishlistNotification}</div>`;
-        //     notificationDivId.innerHTML = toastRight;
-        // }
-        // else if (generalSetting.notificationTypeOption === "toast-top-right") {
-        //     notificationDivId.style.display = "block";
-        //     let toastRight = `<div style="${notificationStyle}" class="toast-top-right toast-alignment">${customLanguage.addToWishlistNotification}</div>`;
-        //     notificationDivId.innerHTML = toastRight;
-        // }
-        // else if (generalSetting.notificationTypeOption === "toast-top-left") {
-        //     notificationDivId.style.display = "block";
-        //     let toastRight = `<div style="${notificationStyle}" class="toast-top-left toast-alignment ">${customLanguage.addToWishlistNotification}</div>`;
-        //     notificationDivId.innerHTML = toastRight;
-        // }
-        // else if (generalSetting.notificationTypeOption === "toast-top-center") {
-        //     notificationDivId.style.display = "block";
-        //     let toastRight = `<div style="${notificationStyle}" class="toast-top-center toast-alignment">${customLanguage.addToWishlistNotification}</div>`;
-        //     notificationDivId.innerHTML = toastRight;
-        // }
-
-        // // notificationTextStyle
-        // else if (generalSetting.notificationTypeOption === "text-above") {
-        //     notificationAbove.style.display = "block"
-        //     let tooltipAbove = `<span style="${notificationStyle}" class="text-above" >${customLanguage.addToWishlistNotification}</span>`;
-        //     document.querySelector('.wf-text-notification-above').innerHTML = tooltipAbove;
-        // }
-        // else if (generalSetting.notificationTypeOption === "text-below") {
-        //     notificationBelow.style.display = "block"
-        //     let tooltipBelow = `<span style="${notificationStyle}" class="text-bottom" >${customLanguage.addToWishlistNotification}</span>`;
-        //     document.querySelector('.wf-text-notification-below').innerHTML = tooltipBelow;
-        // }
-        // else if (generalSetting.notificationTypeOption === "tool-tip-above") {
-        //     let tooltipAbove = `<span style="${notificationStyle}" class="tooltiptext-above">${customLanguage.addToWishlistNotification}</span>`;
-        //     document.querySelector(".tooltip-above").innerHTML = tooltipAbove;
-        // }
-        // else {
-        //     let tooltipBelow = `<span style="${notificationStyle}" class="tooltiptext-below">${customLanguage.addToWishlistNotification}</span>`;
-        //     document.querySelector(".tooltip-below").innerHTML = tooltipBelow;
-        // }
-
-        // Toast Image code starts
-        if (generalSetting.notificationTypeOption === "toastImage-center") {
+        if (generalSetting.notificationTypeOption === "toast-center") {
             notificationDivId.style.display = "block";
             let toastCenter = `<div style="${notificationStyle}" class="toast-bottom-center toast-alignment">${customLanguage.addToWishlistNotification}</div>`;
             notificationDivId.innerHTML = toastCenter;
         }
-        else if (generalSetting.notificationTypeOption === "toastImage-left") {
+        else if (generalSetting.notificationTypeOption === "toast-left") {
             notificationDivId.style.display = "block";
             let toastLeft = `<div style="${notificationStyle}" class="toast-bottom-left toast-alignment">${customLanguage.addToWishlistNotification}</div>`;
             notificationDivId.innerHTML = toastLeft;
         }
-        else if (generalSetting.notificationTypeOption === "toastImage-right") {
+        else if (generalSetting.notificationTypeOption === "toast-right") {
             notificationDivId.style.display = "block";
             let toastRight = `<div style="${notificationStyle}" class="toast-bottom-right toast-alignment">${customLanguage.addToWishlistNotification}</div>`;
             notificationDivId.innerHTML = toastRight;
         }
-        else if (generalSetting.notificationTypeOption === "toastImage-top-right") {
-            notificationDivId.style.display = "block";
-            let toastTopRight = `<div style="${notificationStyle}" class="toast-top-right toast-alignment">${customLanguage.addToWishlistNotification}</div>`;
-            notificationDivId.innerHTML = toastTopRight;
-        }
-        else if (generalSetting.notificationTypeOption === "toastImage-top-left") {
-            notificationDivId.style.display = "block";
-            let toastTopLeft = `<div style="${notificationStyle}" class="toast-top-left toast-alignment ">${customLanguage.addToWishlistNotification}</div>`;
-            notificationDivId.innerHTML = toastTopLeft;
-        }
-        else if (generalSetting.notificationTypeOption === "toastImage-top-center") {
-            notificationDivId.style.display = "block";
-            let toastTopCenter = `<div style="${notificationStyle}" class="toast-top-center toast-alignment">${customLanguage.addToWishlistNotification}</div>`;
-            notificationDivId.innerHTML = toastTopCenter;
-        }
         else if (generalSetting.notificationTypeOption === "toast-top-right") {
-            // document.querySelector(".our-sweetalert").style.display = "block";
             notificationDivId.style.display = "block";
-            let toastTopRight = `${notificationData.fromWhere === "allToCart" || notificationData.fromWhere === "copyUrl" ? `
-            <div style="${notificationStyle}" class="toast-top-right toast-alignment toast_img">
-                ${customLanguage.addToWishlistNotification}
-            </div>`
-                : `<div style="${notificationStyle}" class="added-notification toast-top-right toast-alignment toast_img">
-                <span class="imageWrapper">
-                    <img src='${buttonJsonData ? getSelectedVariantImg(productData.variantId, buttonJsonData) : notificationData.image}' width='50px' class='toast_image'>
-                </span>
-                <span class='toast_img_text'>
-                    ${buttonJsonData ? buttonJsonData.title : notificationData.title}<br>
-                    ${customLanguage.addToWishlistNotification}
-                </span>
-            </div>`
-                }`;
-            notificationDivId.innerHTML = toastTopRight;
-        }
-        else if (generalSetting.notificationTypeOption === "toast-top-center") {
-            // document.querySelector(".our-sweetalert").style.display = "block";
-            notificationDivId.style.display = "block";
-            let toastTopCenter = `${notificationData.fromWhere === "allToCart" || notificationData.fromWhere === "copyUrl" ? `
-            <div style="${notificationStyle}" class="toast-top-center toast-alignment toast_img">
-                ${customLanguage.addToWishlistNotification}
-            </div>`
-                : `<div style="${notificationStyle}" class="added-notification toast-top-center toast-alignment toast_img">
-                <span class="imageWrapper">
-                    <img src='${buttonJsonData ? getSelectedVariantImg(productData.variantId, buttonJsonData) : notificationData.image}' width='50px' class='toast_image'>
-                </span>
-                <span class='toast_img_text'>
-                    ${buttonJsonData ? buttonJsonData.title : notificationData.title}<br>
-                    ${customLanguage.addToWishlistNotification}
-                </span>
-            </div>`
-                }`;
-            notificationDivId.innerHTML = toastTopCenter;
-        }
-        else if (generalSetting.notificationTypeOption === "toast-top-left") {
-            // document.querySelector(".our-sweetalert").style.display = "block";
-            notificationDivId.style.display = "block";
-            let toastTopLeft = `${notificationData.fromWhere === "allToCart" || notificationData.fromWhere === "copyUrl" ? `
-            <div style="${notificationStyle}" class="toast-top-left toast-alignment toast_img">
-                ${customLanguage.addToWishlistNotification}
-            </div>`
-                : `<div style="${notificationStyle}" class="added-notification toast-top-left toast-alignment toast_img">
-                <span class="imageWrapper">
-                    <img src='${buttonJsonData ? getSelectedVariantImg(productData.variantId, buttonJsonData) : notificationData.image}' width='50px' class='toast_image'>
-                </span>
-                <span class='toast_img_text'>
-                    ${buttonJsonData ? buttonJsonData.title : notificationData.title}<br>
-                    ${customLanguage.addToWishlistNotification}
-                </span>
-            </div>`
-                }`;
-            notificationDivId.innerHTML = toastTopLeft;
-        }
-        else if (generalSetting.notificationTypeOption === "toast-right") {
-            // document.querySelector(".our-sweetalert").style.display = "block";
-            notificationDivId.style.display = "block";
-            let toastRight = `${notificationData.fromWhere === "allToCart" || notificationData.fromWhere === "copyUrl" ? `
-            <div style="${notificationStyle}" class="toast-bottom-right toast-alignment toast_img">
-                ${customLanguage.addToWishlistNotification}
-            </div>`
-                : `<div style="${notificationStyle}" class="added-notification toast-bottom-right toast-alignment toast_img">
-                <span class="imageWrapper">
-                    <img src='${buttonJsonData ? getSelectedVariantImg(productData.variantId, buttonJsonData) : notificationData.image}' width='50px' class='toast_image'>
-                </span>
-                <span class='toast_img_text'>
-                    ${buttonJsonData ? buttonJsonData.title : notificationData.title}<br>
-                    ${customLanguage.addToWishlistNotification}
-                </span>
-            </div>`
-                }`;
+            let toastRight = `<div style="${notificationStyle}" class="toast-top-right toast-alignment">${customLanguage.addToWishlistNotification}</div>`;
             notificationDivId.innerHTML = toastRight;
         }
-        else if (generalSetting.notificationTypeOption === "toast-left") {
-            // document.querySelector(".our-sweetalert").style.display = "block";
+        else if (generalSetting.notificationTypeOption === "toast-top-left") {
             notificationDivId.style.display = "block";
-            let toastLeft = `${notificationData.fromWhere === "allToCart" || notificationData.fromWhere === "copyUrl" ? `
-            <div style="${notificationStyle}" class="toast-bottom-left toast-alignment toast_img">
-                ${customLanguage.addToWishlistNotification}
-            </div>`
-                : `<div style="${notificationStyle}" class="added-notification toast-bottom-left toast-alignment toast_img">
-                <span class="imageWrapper">
-                    <img src='${buttonJsonData ? getSelectedVariantImg(productData.variantId, buttonJsonData) : notificationData.image}' width='50px' class='toast_image'>
-                </span>
-                <span class='toast_img_text'>
-                    ${buttonJsonData ? buttonJsonData.title : notificationData.title}<br>
-                    ${customLanguage.addToWishlistNotification}
-                </span>
-            </div>`
-                }`;
-            notificationDivId.innerHTML = toastLeft;
+            let toastRight = `<div style="${notificationStyle}" class="toast-top-left toast-alignment ">${customLanguage.addToWishlistNotification}</div>`;
+            notificationDivId.innerHTML = toastRight;
         }
-        else if (generalSetting.notificationTypeOption === "toast-center") {
+        else if (generalSetting.notificationTypeOption === "toast-top-center") {
             notificationDivId.style.display = "block";
-            let toastImageCenter = `${notificationData.fromWhere === "allToCart" || notificationData.fromWhere === "copyUrl" ? `
-            <div style="${notificationStyle}" class="toast-bottom-center toast-alignment toast_img">
-                ${customLanguage.addToWishlistNotification}
-            </div>`
-                : `<div style="${notificationStyle}" class="added-notification toast-bottom-center toast-alignment toast_img">
-                <span class="imageWrapper">
-                    <img src='${buttonJsonData ? getSelectedVariantImg(productData.variantId, buttonJsonData) : notificationData.image}' width='50px' class='toast_image'>
-                </span>
-                <span class='toast_img_text'>
-                    ${buttonJsonData ? buttonJsonData.title : notificationData.title}<br>
-                    ${customLanguage.addToWishlistNotification}
-                </span>
-            </div>`
-                }`;
-            notificationDivId.innerHTML = toastImageCenter;
+            let toastRight = `<div style="${notificationStyle}" class="toast-top-center toast-alignment">${customLanguage.addToWishlistNotification}</div>`;
+            notificationDivId.innerHTML = toastRight;
         }
-        // Toast Image code ends
+
+        // notificationTextStyle
+        else if (generalSetting.notificationTypeOption === "text-above") {
+            notificationAbove.style.display = "block"
+            let tooltipAbove = `<span style="${notificationStyle}" class="text-above" >${customLanguage.addToWishlistNotification}</span>`;
+            document.querySelector('.wf-text-notification-above').innerHTML = tooltipAbove;
+        }
+        else if (generalSetting.notificationTypeOption === "text-below") {
+            notificationBelow.style.display = "block"
+            let tooltipBelow = `<span style="${notificationStyle}" class="text-bottom" >${customLanguage.addToWishlistNotification}</span>`;
+            document.querySelector('.wf-text-notification-below').innerHTML = tooltipBelow;
+        }
+        else if (generalSetting.notificationTypeOption === "tool-tip-above") {
+            let tooltipAbove = `<span style="${notificationStyle}" class="tooltiptext-above">${customLanguage.addToWishlistNotification}</span>`;
+            document.querySelector(".tooltip-above").innerHTML = tooltipAbove;
+        }
+        else {
+            let tooltipBelow = `<span style="${notificationStyle}" class="tooltiptext-below">${customLanguage.addToWishlistNotification}</span>`;
+            document.querySelector(".tooltip-below").innerHTML = tooltipBelow;
+        }
     }
     clearNotification();
 };
-
-// Toast image code starts
-function getSelectedVariantImg(variantId, buttonJsonData) {
-    let foundVariant = buttonJsonData.variants.find(el => parseInt(variantId) === el.id)
-    console.log("foundVariant = ", foundVariant)
-    return foundVariant !== undefined ? (foundVariant?.featured_image !== null ? foundVariant?.featured_image?.src : buttonJsonData.images[0]) : buttonJsonData.images[0]
-}
-// Toast image code ends
 
 function clearNotification() {
     const notificationDivId = document.getElementById("notificationDiv")
@@ -10069,19 +9562,7 @@ async function createShareWishlistLink(singleWishlist = "") {
 
 function copyUrl(data) {
     navigator.clipboard.writeText(data);
-    // Toast image code starts
-    const notificationData = {
-        fromWhere: "copyUrl",
-        image: null,
-        title: null,
-    }
-
-    const productData = {
-        handle: null,
-        variantId: null,
-    }
-    alertToast(`${customLanguage.alertForLinkCopied}`, null, notificationData, productData);
-    // Toast image code ends
+    alertToast(`${customLanguage.alertForLinkCopied}`);
 }
 
 function notificationStyleFxn() {
@@ -10163,335 +9644,36 @@ function closeNortiFxn() {
 }
 
 // --------------------- additional alert toast  ----------------
-// Toast Image code starts
-//async function alertToast(text, msgggg, fromWhere, productId, prodHandle, variantId2) {
-async function alertToast(text, msgggg, notificationData, productData) {
-
-    // if (prodHandle !== "" && prodHandle !== undefined && prodHandle !== null) {
-    //     var { productPrice, variantId, variant_img, buttonJsonData } = await getProductData(prodHandle);
-    // }
-
-    console.log("notificationData = ", notificationData)
-    console.log("productData = ", productData)
-
-    const notificationStyle = notificationStyleFxn();
-    if (notificationData && (notificationData?.image === null || notificationData?.title === null) && (productData?.handle !== "" && productData?.handle !== undefined && productData?.handle !== null)) {
-        var { buttonJsonData } = await getProductData(productData?.handle);
-
-        if (generalSetting.wishlistOrNotification === "show-wishlist") {
-            if (msgggg === "added") {
-                heartButtonHandle();
-            }
-        } else {
-            // if (generalSetting.notificationTypeOption === "toastImage-left") {
-            //     let toastLeft = `<div style="${notificationStyle}" class="toast-bottom-left toast-alignment">${text}</div>`;
-            //     document.querySelector(".our-sweetalert").innerHTML = toastLeft;
-            // } else if (generalSetting.notificationTypeOption === "toastImage-right") {
-            //     let toastRight = `<div style="${notificationStyle}" class="toast-bottom-right toast-alignment"> ${text}</div>`;
-            //     document.querySelector(".our-sweetalert").innerHTML = toastRight;
-            // } else if (generalSetting.notificationTypeOption === "toastImage-center") {
-            //     let toastCenter = `<div style="${notificationStyle} background-color: ${generalSetting.bgColor}; " class="toast-bottom-center toast-alignment">${text}</div>`;
-            //     document.querySelector(".our-sweetalert").innerHTML = toastCenter;
-            //     console.log("alert toast else case is running")
-            // } else if (generalSetting.notificationTypeOption === "toastImage-top-right") {
-            //     let toastRight = `<div style="${notificationStyle}" class="toast-top-right toast-alignment">${text}</div>`;
-            //     document.querySelector(".our-sweetalert").innerHTML = toastRight;
-            // } else if (generalSetting.notificationTypeOption === "toastImage-top-left") {
-            //     let toastRight = `<div style="${notificationStyle}" class="toast-top-left toast-alignment">${text}</div>`;
-            //     document.querySelector(".our-sweetalert").innerHTML = toastRight;
-            // } else if (generalSetting.notificationTypeOption === "toastImage-top-center") {
-            //     let toastRight = `<div style="${notificationStyle}" class="toast-top-center toast-alignment">${text}</div>`;
-            //     document.querySelector(".our-sweetalert").innerHTML = toastRight;
-            // }
-            // // toastImage-top-right
-            // else if (generalSetting.notificationTypeOption === "toast-top-right") {
-            //     document.querySelector(".our-sweetalert").style.display = "block";
-            //     let toastLeft = `${fromWhere === "allToCart" ? `
-            //     <div style="${notificationStyle}" class="toast-top-right toast-alignment toast_img">
-            //         <span class='toast_img_text'>
-            //             ${text}
-            //         </span>
-            //     </div>`
-            //         : `<div style="${notificationStyle}" class="toast-top-right toast-alignment toast_img">
-            //         <span class="imageWrapper">
-            //             <img src='${buttonJsonData.images[0]}' width='50px' class='toast_image'>
-            //         </span>
-            //         <span class='toast_img_text'>
-            //             ${buttonJsonData.title}<br>
-            //             ${text}
-            //         </span>
-            //     </div>`
-            //         }`;
-            //     document.querySelector(".our-sweetalert").innerHTML = toastLeft;
-            // }
-            // else if (generalSetting.notificationTypeOption === "toast-top-center") {
-            //     document.querySelector(".our-sweetalert").style.display = "block";
-            //     let toastLeft = `${fromWhere === "allToCart" ? `
-            //     <div style="${notificationStyle}" class="toast-top-center toast-alignment toast_img">
-            //         <span class='toast_img_text'>
-            //             ${text}
-            //         </span>
-            //     </div>`
-            //         : `<div style="${notificationStyle}" class="toast-top-center toast-alignment toast_img">
-            //         <span class="imageWrapper">
-            //             <img src='${buttonJsonData.images[0]}' width='50px' class='toast_image'>
-            //         </span>
-            //         <span class='toast_img_text'>
-            //             ${buttonJsonData.title}<br>
-            //             ${text}
-            //         </span>
-            //     </div>`
-            //         }`;
-            //     document.querySelector(".our-sweetalert").innerHTML = toastLeft;
-            // }
-            // else if (generalSetting.notificationTypeOption === "toast-top-left") {
-            //     document.querySelector(".our-sweetalert").style.display = "block";
-            //     let toastLeft = `${fromWhere === "allToCart" ? `
-            //     <div style="${notificationStyle}" class="toast-top-left toast-alignment toast_img">
-            //         <span class='toast_img_text'>
-            //             ${text}
-            //         </span>
-            //     </div>`
-            //         : `<div style="${notificationStyle}" class="toast-top-left toast-alignment toast_img">
-            //         <span class="imageWrapper">
-            //             <img src='${buttonJsonData.images[0]}' width='50px' class='toast_image'>
-            //         </span>
-            //         <span class='toast_img_text'>
-            //             ${buttonJsonData.title}<br>
-            //             ${text}
-            //         </span>
-            //     </div>`
-            //         }`;
-            //     document.querySelector(".our-sweetalert").innerHTML = toastLeft;
-            // }
-            // else if (generalSetting.notificationTypeOption === "toast-right") {
-            //     document.querySelector(".our-sweetalert").style.display = "block";
-            //     let toastLeft = `${fromWhere === "allToCart" ? `
-            //     <div style="${notificationStyle}" class="toast-bottom-right toast-alignment toast_img">
-            //         <span class='toast_img_text'>
-            //             ${text}
-            //         </span>
-            //     </div>`
-            //         : `<div style="${notificationStyle}" class="toast-bottom-right toast-alignment toast_img">
-            //         <span class="imageWrapper">
-            //             <img src='${buttonJsonData.images[0]}' width='50px' class='toast_image'>
-            //         </span>
-            //         <span class='toast_img_text'>
-            //             ${buttonJsonData.title}<br>
-            //             ${text}
-            //         </span>
-            //     </div>`
-            //         }`;
-            //     document.querySelector(".our-sweetalert").innerHTML = toastLeft;
-            // }
-            // else if (generalSetting.notificationTypeOption === "toast-left") {
-            //     document.querySelector(".our-sweetalert").style.display = "block";
-            //     let toastLeft = `${fromWhere === "allToCart" ? `
-            //     <div style="${notificationStyle}" class="toast-bottom-left toast-alignment toast_img">
-            //         <span class='toast_img_text'>
-            //             ${text}
-            //         </span>
-            //     </div>`
-            //         : `<div style="${notificationStyle}" class="toast-bottom-left toast-alignment toast_img">
-            //         <span class="imageWrapper">
-            //             <img src='${buttonJsonData.images[0]}' width='50px' class='toast_image'>
-            //         </span>
-            //         <span class='toast_img_text'>
-            //             ${buttonJsonData.title}<br>
-            //             ${text}
-            //         </span>
-            //     </div>`
-            //         }`;
-            //     document.querySelector(".our-sweetalert").innerHTML = toastLeft;
-            // }
-            // else {
-            //     document.querySelector(".our-sweetalert").style.display = "block";
-            //     let toastImageCenter = `${fromWhere === "allToCart" ? `
-            //     <div style="${notificationStyle}" class="toast-bottom-center toast-alignment toast_img">
-            //         <span class='toast_img_text'>
-            //             ${text}
-            //         </span>
-            //     </div>`
-            //         : `<div style="${notificationStyle}" class="toast-bottom-center toast-alignment toast_img">
-            //         <span class="imageWrapper">
-            //             <img src='${buttonJsonData.images[0]}' width='50px' class='toast_image'>
-            //         </span>
-            //         <span class='toast_img_text'>
-            //             ${buttonJsonData.title}<br>
-            //             ${text}
-            //         </span>
-            //     </div>`
-            //         }`;
-            //     document.querySelector(".our-sweetalert").innerHTML = toastImageCenter;
-            // }
-
-
-            // Toast Image code starts
-            if (generalSetting.notificationTypeOption === "toastImage-center") {
-                // notificationDivId.style.display = "block";
-                document.querySelector(".our-sweetalert").style.display = "block";
-                let toastCenter = `<div style="${notificationStyle}" class="toast-bottom-center toast-alignment">${text}</div>`;
-                document.querySelector(".our-sweetalert").innerHTML = toastCenter;
-            }
-            else if (generalSetting.notificationTypeOption === "toastImage-left") {
-                // notificationDivId.style.display = "block";
-                document.querySelector(".our-sweetalert").style.display = "block";
-                let toastLeft = `<div style="${notificationStyle}" class="toast-bottom-left toast-alignment">${text}</div>`;
-                document.querySelector(".our-sweetalert").innerHTML = toastLeft;
-            }
-            else if (generalSetting.notificationTypeOption === "toastImage-right") {
-                // notificationDivId.style.display = "block";
-                document.querySelector(".our-sweetalert").style.display = "block";
-                let toastRight = `<div style="${notificationStyle}" class="toast-bottom-right toast-alignment">${text}</div>`;
-                document.querySelector(".our-sweetalert").innerHTML = toastRight;
-            }
-            else if (generalSetting.notificationTypeOption === "toastImage-top-right") {
-                // notificationDivId.style.display = "block";
-                document.querySelector(".our-sweetalert").style.display = "block";
-                let toastTopRight = `<div style="${notificationStyle}" class="toast-top-right toast-alignment">${text}</div>`;
-                document.querySelector(".our-sweetalert").innerHTML = toastTopRight;
-            }
-            else if (generalSetting.notificationTypeOption === "toastImage-top-left") {
-                // notificationDivId.style.display = "block";
-                document.querySelector(".our-sweetalert").style.display = "block";
-                let toastTopLeft = `<div style="${notificationStyle}" class="toast-top-left toast-alignment ">${text}</div>`;
-                document.querySelector(".our-sweetalert").innerHTML = toastTopLeft;
-            }
-            else if (generalSetting.notificationTypeOption === "toastImage-top-center") {
-                // notificationDivId.style.display = "block";
-                document.querySelector(".our-sweetalert").style.display = "block";
-                let toastTopCenter = `<div style="${notificationStyle}" class="toast-top-center toast-alignment">${text}</div>`;
-                document.querySelector(".our-sweetalert").innerHTML = toastTopCenter;
-            }
-            else if (generalSetting.notificationTypeOption === "toast-top-right") {
-                document.querySelector(".our-sweetalert").style.display = "block";
-                // notificationDivId.style.display = "block";
-                let toastTopRight = `${notificationData.fromWhere === "allToCart" || notificationData.fromWhere === "copyUrl" ? `
-            <div style="${notificationStyle}" class="toast-top-right toast-alignment toast_img">
-                ${text}
-            </div>`
-                    : `<div style="${notificationStyle}" class="removed-notification toast-top-right toast-alignment toast_img">
-                <span class="imageWrapper">
-                    <img src='${buttonJsonData ? getSelectedVariantImg(productData.variantId, buttonJsonData) : notificationData.image}' width='50px' class='toast_image'>
-                </span>
-                <span class='toast_img_text'>
-                    ${buttonJsonData ? buttonJsonData.title : notificationData.title}<br>
-                    ${text}
-                </span>
-            </div>`
-                    }`;
-                document.querySelector(".our-sweetalert").innerHTML = toastTopRight;
-            }
-            else if (generalSetting.notificationTypeOption === "toast-top-center") {
-                document.querySelector(".our-sweetalert").style.display = "block";
-                // notificationDivId.style.display = "block";
-                let toastTopCenter = `${notificationData.fromWhere === "allToCart" || notificationData.fromWhere === "copyUrl" ? `
-            <div style="${notificationStyle}" class="toast-top-center toast-alignment toast_img">
-                ${text}
-            </div>`
-                    : `<div style="${notificationStyle}" class="removed-notification toast-top-center toast-alignment toast_img">
-                <span class="imageWrapper">
-                    <img src='${buttonJsonData ? getSelectedVariantImg(productData.variantId, buttonJsonData) : notificationData.image}' width='50px' class='toast_image'>
-                </span>
-                <span class='toast_img_text'>
-                    ${buttonJsonData ? buttonJsonData.title : notificationData.title}<br>
-                    ${text}
-                </span>
-            </div>`
-                    }`;
-                document.querySelector(".our-sweetalert").innerHTML = toastTopCenter;
-            }
-            else if (generalSetting.notificationTypeOption === "toast-top-left") {
-                document.querySelector(".our-sweetalert").style.display = "block";
-                // notificationDivId.style.display = "block";
-                let toastTopLeft = `${notificationData.fromWhere === "allToCart" || notificationData.fromWhere === "copyUrl" ? `
-            <div style="${notificationStyle}" class="toast-top-left toast-alignment toast_img">
-                ${text}
-            </div>`
-                    : `<div style="${notificationStyle}" class="removed-notification toast-top-left toast-alignment toast_img">
-                <span class="imageWrapper">
-                    <img src='${buttonJsonData ? getSelectedVariantImg(productData.variantId, buttonJsonData) : notificationData.image}' width='50px' class='toast_image'>
-                </span>
-                <span class='toast_img_text'>
-                    ${buttonJsonData ? buttonJsonData.title : notificationData.title}<br>
-                    ${text}
-                </span>
-            </div>`
-                    }`;
-                document.querySelector(".our-sweetalert").innerHTML = toastTopLeft;
-            }
-            else if (generalSetting.notificationTypeOption === "toast-right") {
-                document.querySelector(".our-sweetalert").style.display = "block";
-                // notificationDivId.style.display = "block";
-                let toastRight = `${notificationData.fromWhere === "allToCart" || notificationData.fromWhere === "copyUrl" ? `
-            <div style="${notificationStyle}" class="toast-bottom-right toast-alignment toast_img">
-                ${text}
-            </div>`
-                    : `<div style="${notificationStyle}" class="removed-notification toast-bottom-right toast-alignment toast_img">
-                <span class="imageWrapper">
-                    <img src='${buttonJsonData ? getSelectedVariantImg(productData.variantId, buttonJsonData) : notificationData.image}' width='50px' class='toast_image'>
-                </span>
-                <span class='toast_img_text'>
-                    ${buttonJsonData ? buttonJsonData.title : notificationData.title}<br>
-                    ${text}
-                </span>
-            </div>`
-                    }`;
-                document.querySelector(".our-sweetalert").innerHTML = toastRight;
-            }
-            else if (generalSetting.notificationTypeOption === "toast-left") {
-                document.querySelector(".our-sweetalert").style.display = "block";
-                // notificationDivId.style.display = "block";
-                let toastLeft = `${notificationData.fromWhere === "allToCart" || notificationData.fromWhere === "copyUrl" ? `
-            <div style="${notificationStyle}" class="toast-bottom-left toast-alignment toast_img">
-                ${text}
-            </div>`
-                    : `<div style="${notificationStyle}" class="removed-notification toast-bottom-left toast-alignment toast_img">
-                <span class="imageWrapper">
-                    <img src='${buttonJsonData ? getSelectedVariantImg(productData.variantId, buttonJsonData) : notificationData.image}' width='50px' class='toast_image'>
-                </span>
-                <span class='toast_img_text'>
-                    ${buttonJsonData ? buttonJsonData.title : notificationData.title}<br>
-                    ${text}
-                </span>
-            </div>`
-                    }`;
-                document.querySelector(".our-sweetalert").innerHTML = toastLeft;
-            }
-            else if (generalSetting.notificationTypeOption === "toast-center") {
-                // notificationDivId.style.display = "block";
-                document.querySelector(".our-sweetalert").style.display = "block";
-                let toastImageCenter = `${fromWhere === "allToCart" || fromWhere === "copyUrl" ? `
-            <div style="${notificationStyle}" class="toast-bottom-center toast-alignment toast_img">
-                ${text}
-            </div>`
-                    : `<div style="${notificationStyle}" class="removed-notification toast-bottom-center toast-alignment toast_img">
-                <span class="imageWrapper">
-                    <img src='${buttonJsonData ? getSelectedVariantImg(productData.variantId, buttonJsonData) : notificationData.image}' width='50px' class='toast_image'>
-                </span>
-                <span class='toast_img_text'>
-                    ${buttonJsonData ? buttonJsonData.title : notificationData.title}<br>
-                    ${text}
-                </span>
-            </div>`
-                    }`;
-                document.querySelector(".our-sweetalert").innerHTML = toastImageCenter;
-            }
-            // Toast Image code ends
+function alertToast(text, msgggg) {
+    if (generalSetting.wishlistOrNotification === "show-wishlist") {
+        if (msgggg === "added") {
+            heartButtonHandle();
         }
+    } else {
+        const notificationStyle = notificationStyleFxn();
+        if (generalSetting.notificationTypeOption === "toast-left") {
+            let toastLeft = `<div style="${notificationStyle}" class="toast-bottom-left toast-alignment">${text}</div>`;
+            document.querySelector(".our-sweetalert").innerHTML = toastLeft;
+        } else if (generalSetting.notificationTypeOption === "toast-right") {
+            let toastRight = `<div style="${notificationStyle}" class="toast-bottom-right toast-alignment"> ${text}</div>`;
+            document.querySelector(".our-sweetalert").innerHTML = toastRight;
+        } else if (generalSetting.notificationTypeOption === "toast-top-right") {
+            let toastRight = `<div style="${notificationStyle}" class="toast-top-right toast-alignment">${text}</div>`;
+            document.querySelector(".our-sweetalert").innerHTML = toastRight;
+        } else if (generalSetting.notificationTypeOption === "toast-top-left") {
+            let toastRight = `<div style="${notificationStyle}" class="toast-top-left toast-alignment">${text}</div>`;
+            document.querySelector(".our-sweetalert").innerHTML = toastRight;
+        } else if (generalSetting.notificationTypeOption === "toast-top-center") {
+            let toastRight = `<div style="${notificationStyle}" class="toast-top-center toast-alignment">${text}</div>`;
+            document.querySelector(".our-sweetalert").innerHTML = toastRight;
+        } else {
+            let toastCenter = `<div style="${notificationStyle} background-color: ${generalSetting.bgColor}; " class="toast-bottom-center toast-alignment">${text}</div>`;
+            document.querySelector(".our-sweetalert").innerHTML = toastCenter;
+        }
+        setTimeout(() => {
+            document.querySelector(".our-sweetalert").innerHTML = "";
+        }, Number(generalSetting.notificationTimer) * 1000);
     }
-    else {
-        document.querySelector(".our-sweetalert").style.display = "block";
-        let toastCenter = `<div style="${notificationStyle}" class="toast-top-right toast-alignment">${text && text}<br/>${msgggg !== null ? msgggg : ""}</div>`;
-        document.querySelector(".our-sweetalert").innerHTML = toastCenter;
-    }
-    // var { buttonJsonData } = await getProductData(productData.handle);
-    console.log("buttonJsonData = ", buttonJsonData)
-
-    // Toast Image code ends
-    setTimeout(() => {
-        document.querySelector(".our-sweetalert").innerHTML = "";
-    }, Number(generalSetting.notificationTimer) * 1000);
 }
 
 function addToMyCart(variantId, userId) {
@@ -10570,11 +9752,6 @@ function closeShareModal() {
     if (errorMessage) errorMessage.innerText = "";
 
     shareModal.style.display = "none";
-}
-
-function closeSettingsModal() {
-    let mysettingsModal = document.getElementById("mysettingsModal")
-    mysettingsModal.style.display = "none"
 }
 
 async function extractIdAndGetDataForTable(pageUrl) {
@@ -11389,8 +10566,7 @@ function collectionIconSize() {
         }
 
         .wg-collectionIcon.selected{
-            filter:${isComboIcon ? colIconDefaultColor : colIconSelectedColor
-        } !important;
+            filter:${colIconSelectedColor} !important;
         }    
         
         .wg-collectionIcon{
@@ -11496,7 +10672,7 @@ async function executeMe2(wishName, fromWhere) {
     let result = await userData.json();
 }
 
-async function openMultiWishlist(data, productId, fromWhere, variantId = null, handle) {
+async function openMultiWishlist(data, productId, fromWhere, variantId = null) {
     closeMultiWishlist();
     getMultiWishlistDiv.style.display = "block";
     const dataToSend = fromWhere === "shared" ? {
@@ -11505,10 +10681,10 @@ async function openMultiWishlist(data, productId, fromWhere, variantId = null, h
         customerEmail: data.customerEmail,
     } : "";
     const multiArrayData = await getMultiwishlistData(dataToSend)
-    await renderData(multiArrayData, data, productId, fromWhere, variantId, handle);
+    await renderData(multiArrayData, data, productId, fromWhere, variantId);
 }
 
-async function renderData(multiArray, data, productId, fromWhere, variantId = null, handle) {
+async function renderData(multiArray, data, productId, fromWhere, variantId = null) {
     const newDataArray = allWishlistData;
     const isDeleteMode = data.isDelete === "yes";
     const checkedArr = [];
@@ -11570,7 +10746,6 @@ async function renderData(multiArray, data, productId, fromWhere, variantId = nu
                 ${wishlistItems}
             </ul>
         </div>`;
-    // Toast image code starts
     const saveButton = multiArray.length > 0
         ? `<button class="saveBtn cartButtonStyle" id="${isDeleteMode ? "saveDelWishlistBtn" : "saveWishlistBtn"}"
               onclick="${isDeleteMode ? "saveDelteWishlists" : "saveWishlists"}(event, ${productId}, '${fromWhere}')">
@@ -11579,7 +10754,6 @@ async function renderData(multiArray, data, productId, fromWhere, variantId = nu
             : customLanguage.saveWishlistBtn || storeFrontDefLang.saveWishlistBtn}
            </button>`
         : "";
-    // Toast image code ends
 
     const multiWishlistData = `
         <div>
@@ -11693,9 +10867,7 @@ async function handleDeleteCheckboxClick(event) {
     document.getElementById("saveDelWishlistBtn").disabled = disableButton;
 }
 
-// Toast image code starts
 async function saveWishlists(event, productId, fromWhere) {
-    // Toast image code ends
     if (checkedItems.length === 0) {
         await showErrorPara(customLanguage?.mwChooseWishlistToSave || storeFrontDefLang.chooseWishlist);
         return;
@@ -11703,24 +10875,10 @@ async function saveWishlists(event, productId, fromWhere) {
     const parentElement = event.target.parentNode;
     const dataValue = parentElement.querySelector("#hiddenDiv").dataset.prodata;
     const newData = { ...JSON.parse(dataValue), wishlistName: checkedItems };
-    console.log("newData from saveWishlists = ", newData)
     if (newData.shopName) {
         saveSharedWishlist(newData);
     } else {
-        // Toast image code starts
-        const notificationData = {
-            fromWhere: null,
-            image: newData.image,
-            title: newData.title,
-        }
-
-        const productData = {
-            handle: newData.handle,
-            variantId: newData.variantId,
-        }
-
-        saveMainData(newData, productId, fromWhere, notificationData, productData)
-        // Toast image code ends
+        saveMainData(newData, productId, fromWhere)
     }
     checkedItems = [];
     nonCheckedItems = [];
@@ -11735,42 +10893,24 @@ async function showErrorPara(msg) {
     }
 }
 
-// Toast image code starts
 async function saveDelteWishlists(event, productId, fromWhere) {
-    // Toast image code ends
     const parentElement = event.target.parentNode;
     const dataValue = parentElement.querySelector("#hiddenDiv").dataset.prodata;
     const newData = { ...JSON.parse(dataValue), wishlistName: checkedItems, DelWishlistName: nonCheckedItems };
-    console.log("newData = ", newData)
     if (fromWhere === "shared") {
         saveSharedWishlist(newData);
     } else {
-        // Toast image code starts
-        const notificationData = {
-            fromWhere: null,
-            image: newData.image,
-            title: newData.title,
-        }
-
-        const productData = {
-            handle: newData.handle,
-            variantId: newData.variantId,
-        }
-
-        saveMainData(newData, productId, fromWhere, notificationData, productData)
-        // Toast image code ends
+        saveMainData(newData, productId, fromWhere)
     }
     checkedItems = [];
     nonCheckedItems = [];
     getMultiWishlistDiv.style.display = "none";
 }
 
-// Toast image code starts
-async function saveMainData(data, productId, fromWhere, notificationData, productData) {
-    // Toast image code starts
+async function saveMainData(data, productId, fromWhere) {
     let result = await SqlFunction(data);
     const proId = injectCoderr.getAttribute("data-product-id");
-    if (result?.msg === "item updated") {
+    if (result.msg === "item updated") {
         await showCountAll()
         const matchFound = await checkFound(allWishlistData, productId, data.variantId)
         const notificationMsg = result.isAdded === "yes" && !result.bothUpdated ?
@@ -11805,6 +10945,7 @@ async function saveMainData(data, productId, fromWhere, notificationData, produc
             buttonAddedRemoveWishlist(productId, matchFound);
             collectionIcon(productId, matchFound);
             currentPlan > 1 && (matchFound ? fxnAfterAddToWishlist() : fxnAfterRemoveFromWishlist());
+
         } else if (fromWhere === "collection") {
             isMultiwishlistTrue && collectionIcon(productId, matchFound)
             injectButtonAddedRemoveWishlist(productId, matchFound);
@@ -11816,7 +10957,8 @@ async function saveMainData(data, productId, fromWhere, notificationData, produc
             buttonAddedRemoveWishlist(productId, matchFound)
             customIconAddedRemoveToWishlist(productId, matchFound);
             currentPlan > 1 && (matchFound ? fxnAfterAddToWishlist() : fxnAfterRemoveFromWishlist());
-        } else if (fromWhere === "customButton") {
+
+        } else if (fromWhere === "cutomButton") {
             isMultiwishlistTrue && buttonAddedRemoveWishlist(productId, matchFound)
             injectButtonAddedRemoveWishlist(productId, matchFound);
             if (typeof alreadyInWishlist === 'function' || typeof addToWishList === 'function') {
@@ -11824,12 +10966,10 @@ async function saveMainData(data, productId, fromWhere, notificationData, produc
                     matchFound ? alreadyInWishlist() : addToWishList();
                 }
             }
-            // Toast image code starts
-            buttonAddedRemoveWishlist(productId, matchFound);
-            // Toast image code ends
             customIconAddedRemoveToWishlist(productId, matchFound);
             collectionIcon(productId, matchFound);
             currentPlan > 1 && (matchFound ? fxnAfterAddToWishlist() : fxnAfterRemoveFromWishlist());
+
         } else {
             isMultiwishlistTrue && customIconAddedRemoveToWishlist(productId, matchFound)
             injectButtonAddedRemoveWishlist(productId, matchFound);
@@ -11842,17 +10982,12 @@ async function saveMainData(data, productId, fromWhere, notificationData, produc
             collectionIcon(productId, matchFound);
             currentPlan > 1 && (matchFound ? fxnAfterAddToWishlist() : fxnAfterRemoveFromWishlist());
         }
-
-
-        // Toast Image code starts
-        // matchFound ? alertToast(notificationMsg, "added", notificationData, productData) : alertToast(customLanguage.removeFromWishlistNotification, "removed", notificationData, productData);
-        matchFound ? notificationOfAdded(fromWhere, notificationData, productData) : notificationOfRemoved(fromWhere, notificationData, productData);
-        // Toast Image code ends
+        matchFound ? alertToast(notificationMsg, "added") : alertToast(customLanguage.removeFromWishlistNotification, "removed");
         (currentPlan >= 3 && generalSetting?.trendingLayout) && await renderTrendingGridData();
 
     }
 
-    if (result?.msg === "limit cross") {
+    if (result.msg === "limit cross") {
         alertContent(customLanguage?.quotaLimitAlert || storeFrontDefLang.quotaLimitAlert);
     }
 }
@@ -12397,38 +11532,43 @@ async function disableShare(data, className) {
 function runWishlistVariantUpdateLogic() {
     if (!location.pathname.includes("/products/")) return; // Exit if not product page
 
-    const wishlistButtons = document.querySelectorAll(".wf-wishlist-button, .wf-wishlist, .wishlist-guru-bb, .inject-button-pp");
+    // if (currentPlan >= 4) {
+    if (permanentDomain !== "specsmakerspartner.myshopify.com") {
+        const wishlistButtons = document.querySelectorAll(".wf-wishlist-button, .wf-wishlist, .wishlist-guru-bb, .inject-button-pp");
 
-    function updateVariantId(newVariantId) {
-        wishlistButtons.forEach(button => {
-            button.setAttribute("variant-id", newVariantId);
-        });
-
-        setTimeout(() => {
-            wishlistIcon();
-            wishlistButtonForCollection();
-            injectWishlistButtonForcely();
-            if (typeof autoUpdateOfPage === "function") {
-                autoUpdateOfPage();
-            }
-        }, 200);
-
-        setTimeout(() => {
-            showIconOnPdpImage();
-            wishlistIcon();
-        }, 500);
-    }
-
-    const variantSelect = document.querySelector("[name='id']");
-    if (variantSelect) {
-        if (!variantSelect.dataset.listenerAttached) {
-            variantSelect.dataset.listenerAttached = "true";
-            variantSelect.addEventListener("change", function () {
-                updateVariantId(this.value);
+        function updateVariantId(newVariantId) {
+            wishlistButtons.forEach(button => {
+                button.setAttribute("variant-id", newVariantId);
             });
+
+            setTimeout(() => {
+                wishlistIcon();
+                wishlistButtonForCollection();
+                injectWishlistButtonForcely();
+                if (typeof autoUpdateOfPage === "function") {
+                    autoUpdateOfPage();
+                }
+            }, 200);
+
+            setTimeout(() => {
+                showIconOnPdpImage();
+                wishlistIcon();
+            }, 500);
         }
-        updateVariantId(variantSelect.value);
+
+        const variantSelect = document.querySelector("[name='id']");
+        if (variantSelect) {
+            if (!variantSelect.dataset.listenerAttached) {
+                variantSelect.dataset.listenerAttached = "true";
+                variantSelect.addEventListener("change", function () {
+                    updateVariantId(this.value);
+                });
+            }
+            updateVariantId(variantSelect.value);
+        }
+
     }
+    // }
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -12522,10 +11662,11 @@ function showIconOnPdpImage() {
                 wrapperDiv.appendChild(targetButton);
                 wrapperDiv.appendChild(icon);
             }
-            if (customButton?.iconBesideAddToCart === "left" && document.querySelector(".wg-addtocart-wrapper")) {
+            if (customButton?.iconBesideAddToCart === "left") {
                 document.querySelector(".wg-addtocart-wrapper").style.flexDirection = "row-reverse"
             }
         }
+
     }
 }
 
@@ -12598,60 +11739,4 @@ function wgGetProductOptions() {
     });
 
     return Object.keys(result).length === 0 ? null : result;
-}
-
-if (customerEmail) {
-    (async () => {
-        try {
-            const storeLanguages = await fetch(`${serverURL}/get-languages/${permanentDomain}`, {
-                method: "GET",
-            })
-            const result = await storeLanguages.json();
-            // console.log("storeLanguages = ", result)
-            let languagesDropdown = document.getElementById("language")
-            result.map((l) => {
-                let option = document.createElement("option")
-                option.value = l.lang_name
-                option.textContent = l.lang_name
-                option.classList.add("lang-option")
-                languagesDropdown.appendChild(option)
-            })
-
-            try {
-                const preferred_language = await fetch(`${serverURL}/get-preferred-lang/${permanentDomain}/${customerEmail}`)
-                const result = await preferred_language.json()
-                console.log("preferred language = ", result)
-                if (result[0]?.preferred_language !== "") {
-                    languagesDropdown.querySelector(`option[value=${result[0]?.preferred_language}]`).selected = true
-                }
-            }
-            catch (err) {
-                console.log("Error in getting preferred language: ", err)
-            }
-
-            languagesDropdown.addEventListener("change", async (e) => {
-                try {
-                    await fetch(`${serverURL}/set-preferred-lang`, {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify({
-                            shopDomain: permanentDomain,
-                            customerEmail: customerEmail,
-                            preferredLanguage: e.target.value
-                        })
-                    })
-
-                    alertToast("Preferred language saved successfully!", null, null, null)
-                }
-                catch (err) {
-                    console.log("Error in setting preferred language : ", err)
-                }
-            })
-        }
-        catch (err) {
-            console.log("Error in fetching store languages : ", err)
-        }
-    })()
 }

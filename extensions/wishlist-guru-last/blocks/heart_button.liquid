@@ -1,17 +1,17 @@
 <link href="{{ 'console-heart.css' | asset_url }}" rel="stylesheet" type="text/css">
 {% # theme-check-disable AssetSizeJavaScript %}
-<script src="{{ 'console-heart.js' | asset_url }}" defer></script>
-{% # theme-check-enable AssetSizeJavaScript %}
+ <script src="{{ 'console-heart.js' | asset_url }}" defer ></script>
+ {% # theme-check-enable AssetSizeJavaScript %} 
 
-{% comment %} ---------this is a demo of using a toast library--------- {% endcomment %}
-{% comment %}
-  <!-- Toastr CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-  <!-- jQuery (Required for Toastr) -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <!-- Toastr JS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-{% endcomment %}
+ {% comment %} ---------this is a demo of using a toast library--------- {% endcomment %}
+{% comment %} 
+<!-- Toastr CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+<!-- jQuery (Required for Toastr) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<!-- Toastr JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+ {% endcomment %}
 <div
   id="heart"
   button-setting='{{ app.metafields.wishlist-app.wishlist-button-setting.value }}'
@@ -26,32 +26,26 @@
   customer-email='{{ customer.email }}'
   get-font-family='{{ settings.type_body_font.family }}'
   get-font-family-fallback='{{ settings.type_body_font.fallback_families }}'
-  permanent-domain='{{ shop.permanent_domain }}'
+  permanent-domain= '{{ shop.permanent_domain }}'
   isMultiwishlistTrue='{{ app.metafields.wishlist-app.is-Multi-wishlist }}'
   isVariantTrue='{{ app.metafields.wishlist-app.is-variant-wishlist.value }}'
   cur-data='{{ shop.currency }}'
   currency-symbol='{{ shop.currency_symbol }}'
   currency-format='{{ shop.money_format }}'
-></div>
-<div
-  id="wf-custom-wishBtn-inject"
-  class="inject-button-pp"
-  data-product-id='{{ product.id }}'
-  data-product-handle='{{ product.handle }}'
-  variant-id='{{ product.selected_or_first_available_variant.id }}'
-  inject-code-automatic='{{ app.metafields.wishlist-app.inject-code-automatic.value }}'
-></div>
+
+  ></div>
+  <div id="wf-custom-wishBtn-inject" class="inject-button-pp" data-product-id={{ product.id }} data-product-handle='{{ product.handle }}' variant-id='{{ product.selected_or_first_available_variant.id }}' inject-code-automatic='{{ app.metafields.wishlist-app.inject-code-automatic.value }}'  ></div>
 
 <!-- This is modal -->
 <div id="wg-myModal" class="wg-modal">
   <div class="wg-modal-content">
-    <div class="wg-close"></div>
+    <div class="wg-close" ></div>
     <div id="main-Modal-form">
       <div class="modal-section">
         <div class="modal-heading-parent"><h2 class="modal-heading"></h2></div>
         <div class="cart-all-div"></div>
       </div>
-      <p class="modal-page-auth"></p>
+      <p class="modal-page-auth"></p>     
 
       <!-- This is grid and share button -->
       <div class="wg-modal-layer">
@@ -94,7 +88,7 @@
 <div id="mySidenav" class="sidenav">
   <h2 class="drawer-text"></h2>
   <div class="closebtn" onclick="closeNav()"></div>
-  {% comment %} <i class="fa fa-times closebtn" aria-hidden="true"  onclick="closeNav()"></i> {% endcomment %}
+   {% comment %} <i class="fa fa-times closebtn" aria-hidden="true"  onclick="closeNav()"></i> {% endcomment %}
   <div class="swlb-div"></div>
   <div class="drawer-main"></div>
   <div class="drawer-button-div"></div>
@@ -111,162 +105,140 @@
     </div>
   </div>
 </div>
-<!-- This is share wishlist modal -->
-<div id="wg-myModal1" class="wg-modal1">
-  <div class="wg-modal-content1">
-    <div class="close1"></div>
-    <div id="main-Modal-form1">
-      <span class="sharable-link-heading"></span>
-      <span class="modal-inside"></span>
-      <br>
+  <!-- This is share wishlist modal -->
+  <div id="wg-myModal1" class="wg-modal1">
+    <div class="wg-modal-content1">
+      <div class="close1"></div>
+      <div id="main-Modal-form1">
+        <span class="sharable-link-heading"></span>
+        <span class="modal-inside"></span>
+        <br>
+      </div>
     </div>
   </div>
-</div>
 <!-- This is share wishlist via email modal -->
 <div id="myshareModal">
-  <div class="modal-share-content"></div>
+    <div class="modal-share-content"></div>
   <div class="successDiv">
     {% comment %} <i class="fa fa-times closeByShareModal" aria-hidden="true"  onclick="closeShareModal()"></i> {% endcomment %}
-    <div class="closeByShareModal" onclick="closeShareModal()"></div>
-    <div class="successInnerDiv"></div>
-  </div>
+      <div class="closeByShareModal" onclick="closeShareModal()"></div>
+      <div class="successInnerDiv"> </div>
+  </div> 
 </div>
-<!-- Multi wishlist -->
+<!--Multi wishlist -->
 <div id="wg-multiWishlistMainDiv">
   <div id="wg-multiWishlist_div">
     <div class="wg-closeMultiwishlist"></div>
     <div id="wg-multiWishlistInnerContent"></div>
   </div>
 </div>
-<!-- This is customer preferences -->
-<div id="mysettingsModal">
-  <div class="modal-settings-content">
-    <h3 class="heading">CUSTOMER PREFERENCES</h3>
-    <br>
-    <div id="receiveEmails">
-      <span>Receive Emails</span>
-      <label class="toggle"><input type="checkbox" id="toggleBtn"><span class="slider"></span></label>
-    </div>
-    <div id="languagePreferences">
-      <span>Preferred Language</span>
-      <select id="language">
-
-      </select>
-    </div>
-    <div class="successSettingsDiv">
-      {% comment %} <i class="fa fa-times closeByShareModal" aria-hidden="true"  onclick="closeShareModal()"></i> {% endcomment %}
-      <span class="closeBySettingsModal" onclick="closeSettingsModal()"></span>
-      <div class="successInnerDiv"></div>
-    </div>
-  </div>
-</div>
-<div id="accountModal">
-  <div class="modal-account-content"></div>
-</div>
 <!-- This is alert -->
 <div class="our-sweetalert"></div>
 
-<script>
-     // const wfCurrencyType = '{{ shop.money_format }}';
-     const currentPermanentDomain =  '{{ shop.permanent_domain }}';
-     const currentLoginCustomerEmail = '{{ customer.email }}';
-     localStorage.setItem("customer-email", currentLoginCustomerEmail);
-     const myPlan = parseInt('{{ app.metafields.wishlist-app.current-plan.value }}');
-     let customCodeUnfiltered = {{ app.metafields.wishlist-app.advance-setting.value }};
-     let customCode = JSON.parse(JSON.stringify(customCodeUnfiltered).replace(/~/g, "'"));
-     if (myPlan > 1) {
-     let styleTag = document.createElement("style");
-     styleTag.innerHTML = customCode.customCss;
-     document.getElementsByTagName("head")[0].appendChild(styleTag);
-     eval(customCode.customJs);
+  <script>
+    // const wfCurrencyType = '{{ shop.money_format }}';
+    const currentPermanentDomain =  '{{ shop.permanent_domain }}';
+    const currentLoginCustomerEmail = '{{ customer.email }}';
+    localStorage.setItem("customer-email", currentLoginCustomerEmail); 
+    const myPlan = parseInt('{{ app.metafields.wishlist-app.current-plan.value }}');
+    let customCodeUnfiltered = {{ app.metafields.wishlist-app.advance-setting.value }};
+    let customCode = JSON.parse(JSON.stringify(customCodeUnfiltered).replace(/~/g, "'"));
+    if (myPlan > 1) {
+    let styleTag = document.createElement("style");
+    styleTag.innerHTML = customCode.customCss;
+    document.getElementsByTagName("head")[0].appendChild(styleTag);
+    eval(customCode.customJs);
 
-     };
-      if (!document.querySelector("#wf-custom-Product")) {
-         var wfDiv = document.createElement('div');
-         // Set div id and data attribute
-         wfDiv.id = 'wf-custom-Product';
-         wfDiv.style.display ="none"
-         wfDiv.setAttribute('data-aj', '0');
-         wfDiv.setAttribute('data-product-handle','[]');
-         // Prepend the wfDiv to the body
-         document.body.prepend(wfDiv);
-     }
-  if (!document.querySelector("#wf-custom-button-Product")) {
-         var wfDiv = document.createElement('div');
-         // Set div id and data attribute
-         wfDiv.id = 'wf-custom-button-Product';
-         wfDiv.style.display ="none"
-         wfDiv.setAttribute('data-aj', '0');
-         wfDiv.setAttribute('data-product-handle','[]');
-         // Prepend the wfDiv to the body
-         document.body.prepend(wfDiv);
-     }
-   if(currentPermanentDomain === 'l-a-girl-cosmetics.myshopify.com'){
-     if (!document.querySelector("#wf-custom-Product-laGirlUsa")) {
-         var checkdiv = document.createElement('div');
-         // Set div id and data attribute
-         checkdiv.id = 'wf-custom-Product-laGirlUsa';
-         checkdiv.style.display ="none"
-         checkdiv.setAttribute('data-aj', '0');
-         checkdiv.setAttribute('data-product-handle','[]');
-         // Prepend the checkdiv to the body
-         document.body.prepend(checkdiv);
-     }
-   }
-</script>
-<script>
-  const trendingSection = document.getElementById('wishlist-guru-trending-widget');
-  if (!trendingSection) {
-    const script = document.createElement('script');
-    script.src = "{{ 'trending_widget.js' | asset_url }}";
-    script.defer = true;
-    document.body.appendChild(script);
+    };
+     if (!document.querySelector("#wf-custom-Product")) {
+        var wfDiv = document.createElement('div');
+        // Set div id and data attribute
+        wfDiv.id = 'wf-custom-Product';
+        wfDiv.style.display ="none"
+        wfDiv.setAttribute('data-aj', '0');
+        wfDiv.setAttribute('data-product-handle','[]');
+        // Prepend the wfDiv to the body
+        document.body.prepend(wfDiv);
+    }
+ if (!document.querySelector("#wf-custom-button-Product")) {
+        var wfDiv = document.createElement('div');
+        // Set div id and data attribute
+        wfDiv.id = 'wf-custom-button-Product';
+        wfDiv.style.display ="none"
+        wfDiv.setAttribute('data-aj', '0');
+        wfDiv.setAttribute('data-product-handle','[]');
+        // Prepend the wfDiv to the body
+        document.body.prepend(wfDiv);
+    }
+  if(currentPermanentDomain === 'l-a-girl-cosmetics.myshopify.com'){
+    if (!document.querySelector("#wf-custom-Product-laGirlUsa")) {
+        var checkdiv = document.createElement('div');
+        // Set div id and data attribute
+        checkdiv.id = 'wf-custom-Product-laGirlUsa';
+        checkdiv.style.display ="none"
+        checkdiv.setAttribute('data-aj', '0');
+        checkdiv.setAttribute('data-product-handle','[]');
+        // Prepend the checkdiv to the body
+        document.body.prepend(checkdiv);
+    }
   }
 </script>
-<script src="{{ 'checkEvent.js' | asset_url }}" defer></script>
+<script>
+    const trendingSection = document.getElementById('wishlist-guru-trending-widget');
+    if (!trendingSection) {
+        const script = document.createElement('script');
+        script.src = "{{ 'trending_widget.js' | asset_url }}";
+        script.defer = true;
+        document.body.appendChild(script);
+    }
+</script>
+<script src="{{ 'checkEvent.js' | asset_url }}" defer ></script>
 
 {% comment %} ----------this code is safe end of multiple body tags-------- {% endcomment %}
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const allBodies = document.getElementsByTagName('body');
+document.addEventListener("DOMContentLoaded", () => {
+    const allBodies = document.getElementsByTagName("body");
     if (allBodies.length <= 1) {
-      return;
+        return;
     }
     const outerBody = allBodies[0];
     const idsToMove = [
-      'heart',
-      'wf-custom-wishBtn-inject',
-      'wg-myModal',
-      'mySidenav',
-      'wg-myModalD',
-      'wg-myModal1',
-      'myshareModal',
-      'wg-multiWishlistMainDiv',
+        "heart",
+        "wf-custom-wishBtn-inject",
+        "wg-myModal",
+        "mySidenav",
+        "wg-myModalD",
+        "wg-myModal1",
+        "myshareModal",
+        "wg-multiWishlistMainDiv"
     ];
-    idsToMove.forEach((id) => {
-      const el = document.getElementById(id);
-      if (el && el.parentElement !== outerBody) {
-        outerBody.appendChild(el);
-      }
-    });
-    const classesToMove = ['our-sweetalert', 'overlayy'];
-    classesToMove.forEach((cls) => {
-      document.querySelectorAll('.' + cls).forEach((el) => {
+    idsToMove.forEach(id => {
+        const el = document.getElementById(id);
         if (el && el.parentElement !== outerBody) {
-          outerBody.appendChild(el);
+            outerBody.appendChild(el);
         }
-      });
     });
-  });
+    const classesToMove = [
+        "our-sweetalert",
+        "overlayy"
+    ];
+    classesToMove.forEach(cls => {
+        document.querySelectorAll("." + cls).forEach(el => {
+            if (el && el.parentElement !== outerBody) {
+                outerBody.appendChild(el);
+            }
+        });
+    });
+});
 </script>
 
 {% schema %}
-{
-  "name": "App Configuration",
-  "target": "body",
-  "enabled_on": {
-    "templates": ["*"]
-  },
-  "settings": []
-}
+  {
+    "name": "App Configuration",
+    "target": "body",
+    "enabled_on": {
+      "templates": ["*"]
+    },
+    "settings": []
+  }
 {% endschema %}

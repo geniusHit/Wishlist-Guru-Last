@@ -15,9 +15,19 @@ import { useForm } from 'react-hook-form';
 import { userWishlistTableFxn } from '../../../backend/emailTemplates/userWishlistTableFxn';
 import RangeController from '../../hooks/useRangeController';
 import SingleFieldController from '../../hooks/useSingleFieldController';
-
+import { getSessionToken } from '@shopify/app-bridge-utils';
+import createApp from "@shopify/app-bridge";
+import language from 'react-syntax-highlighter/dist/esm/languages/hljs/1c';
 
 const EditTemplate = ({ value }) => {
+
+  const hostValue = sessionStorage.getItem("shopify_host")
+  const app = createApp({
+    apiKey: import.meta.env.VITE_SHOPIFY_API_KEY,
+    host: new URLSearchParams(window.location.search).get("host") || hostValue,
+    forceRedirect: true,
+  });
+
   const { handleSubmit, control, watch, reset, } = useForm();
   const watchColors = watch();
   const [isLoaded, setIsLoaded] = useState(false);
@@ -32,9 +42,11 @@ const EditTemplate = ({ value }) => {
   const [goToWishlistBtn, setGoToWishlistBtn] = useState("")
 
   const [editorFooterState, setEditorFooterState] = useState(EditorState.createEmpty());
+  const [editorFooter2State, setEditorFooter2State] = useState(EditorState.createEmpty());
   const [isLogo, setIsLogo] = useState(false);
   const [bodyContent, setBodyContent] = useState('');
   const [smtpDetail, setSmtpDetail] = useState([]);
+  const [language, setLanguage] = useState()
 
   const { tempData, search, file, serverURL, appInstallId, shopData, Swal, myLanguage, loaderGif, headerSave, setHeaderSave, priceDropData, lowStockData, backInStockData, weeklyEmailData, getTemplates } = value;
 
@@ -58,9 +70,11 @@ const EditTemplate = ({ value }) => {
   useEffect(() => {
     const loadTemplate = async () => {
       const tempValue = await filterTemplate();
+      console.log("tempValue = ", tempValue)
       if (tempValue) {
         setEditorStateFirst(htmlToDraftFxn(tempValue.firstRow || ""));
         setEditorFooterState(htmlToDraftFxn(tempValue.footerRow || ""));
+        setEditorFooter2State(htmlToDraftFxn(tempValue.footer2Row || ""));
         setIsLogo(tempValue.isLogo)
         setEmailSubject(tempValue.emailSubject)
         setAddToCartBtn(tempValue.addToCartBtn)
@@ -69,6 +83,7 @@ const EditTemplate = ({ value }) => {
 
         setEmailSenderName(tempData[0].senderName)
         setReplyToEmail(tempData[0].replyToMail)
+        setLanguage(tempValue.language)
         reset({
           headerBgColor: tempValue.headerBgColor,
           contentBgColor: tempValue.contentBgColor,
@@ -88,7 +103,7 @@ const EditTemplate = ({ value }) => {
           gtwBgColor: tempValue.goToWishlistBtnStyle.bgColor,
           gtwBorderRadius: tempValue.goToWishlistBtnStyle.borderRadius,
           gtwIcon: tempValue.goToWishlistBtnStyle.icon,
-
+          language: tempValue.language,
         })
       }
       await getSmtpDataFromSql(shopData.shopName);
@@ -98,8 +113,6 @@ const EditTemplate = ({ value }) => {
 
 
   }, [tempData]);
-
-
 
 
   async function getSmtpDataFromSql(data) {
@@ -147,9 +160,11 @@ const EditTemplate = ({ value }) => {
     let htmlContent;
     const bodyData = getEditorStateContent(editorStateFirst);
     const footerData = getEditorStateContent(editorFooterState);
+    const footer2Data = getEditorStateContent(editorFooter2State);
 
-    console.log("footerData = ", footerData)
+    console.log("footer2Data = ", footer2Data)
 
+    console.log("watchColors = ", watchColors)
     const coloredBodyData = watchColors.contentColor ?
       renderColor(bodyData, watchColors.contentColor) : bodyData;
 
@@ -159,6 +174,7 @@ const EditTemplate = ({ value }) => {
     const emailData = {
       firstRow: coloredBodyData,
       footerRow: coloredFooterData,
+      footer2Row: footer2Data,
       isLogo: isLogo,
       headerBgColor: watchColors.headerBgColor,
       contentBgColor: watchColors.contentBgColor,
@@ -288,8 +304,9 @@ const EditTemplate = ({ value }) => {
     }
 
     const bodyContent = getBodyContent(htmlContent);
+    console.log("bodyContent = ", bodyContent)
     setBodyContent(bodyContent);
-  }, [editorStateFirst, editorFooterState, isLogo, watchColors]);
+  }, [editorStateFirst, editorFooterState, editorFooter2State, isLogo, watchColors]);
 
   const getEditorStateContent = (editorState) => {
     const contentState = editorState.getCurrentContent();
@@ -341,11 +358,13 @@ const EditTemplate = ({ value }) => {
   }
 
   async function handleUpdateTemplate(data) {
+    console.log("data = ", data)
 
     const tempName = await filterTemplate();
 
     const bodyData = getEditorStateContent(editorStateFirst);
     const footerData = getEditorStateContent(editorFooterState);
+    const footer2Data = getEditorStateContent(editorFooter2State);
 
     const coloredBodyData = watchColors.contentColor ?
       renderColor(bodyData, watchColors.contentColor) : bodyData;
@@ -355,6 +374,7 @@ const EditTemplate = ({ value }) => {
 
     tempName.firstRow = coloredBodyData;
     tempName.footerRow = coloredFooterData;
+    tempName.footer2Row = footer2Data
     tempName.emailSubject = emailSubject;
     tempName.addToCartBtn = addToCartBtn;
     tempName.shopNowBtn = shopNowBtn;
@@ -392,6 +412,7 @@ const EditTemplate = ({ value }) => {
     tempName.contentColor = data.contentColor
     tempName.footerBgColor = data.footerBgColor
     tempName.footerColor = data.footerColor
+    tempName.language = data.language
     await updateData(tempName)
   }
 
@@ -455,8 +476,7 @@ const EditTemplate = ({ value }) => {
   }
 
   const onEditorFooter2StateChange = (editorState) => {
-    console.log("editorState = ", editorState)
-    setEditorFooterState(editorState)
+    setEditorFooter2State(editorState)
     setHeaderSave(true)
   }
 
@@ -549,10 +569,12 @@ const EditTemplate = ({ value }) => {
       showLoaderOnConfirm: true,
       preConfirm: async (inputValue) => {
         try {
+          const token = await getSessionToken(app);
           const response = await fetch(`${serverURL}/send-test-email`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
+              "Authorization": `Bearer ${token}`
             },
             body: JSON.stringify({
               recieverEmail: inputValue,
@@ -949,11 +971,6 @@ const EditTemplate = ({ value }) => {
                 </div>
               </div>
 
-
-
-
-
-
               <div className='wf-style-wishbtn'>
                 <div className='pb-15'>
                   <Text variant="headingMd" as="h2">Footer 2</Text>
@@ -971,7 +988,7 @@ const EditTemplate = ({ value }) => {
 
                 <div className='wf-template-editor pb-15'>
                   <Editor
-                    editorState={editorFooterState}
+                    editorState={editorFooter2State}
                     onEditorStateChange={onEditorFooter2StateChange}
 
                     toolbar={{
@@ -1016,6 +1033,46 @@ const EditTemplate = ({ value }) => {
                   <div className='editBtn disable-app'>
                     <Button onClick={sendTestEmail}>{myLanguage.sendTestEmail}</Button>
                     <div className='wf-resetButton'><Button onClick={resetHandler}>{myLanguage.resetBtn}</Button></div>
+                    <SingleFieldController
+                      name="language"
+                      control={control}>
+                      {({ field }) =>
+                        <select {...field} onChange={(e)=>{field.onChange(e.target.value),setHeaderSave(true);}}>
+                          <option value="albanian">Albanian</option>
+                          <option value="brazilianPortuguese">Brazilian Portuguese</option>
+                          <option value="bulgarian">Bulgarian</option>
+                          <option value="chineseSimplified">Chinese (Simplified)</option>
+                          <option value="chineseTraditional">Chinese (Traditional)</option>
+                          <option value="czech">Czech</option>
+                          <option value="danish">Danish</option>
+                          <option value="english">English</option>
+                          <option value="filipino">Filipino</option>
+                          <option value="finnish">Finnish</option>
+                          <option value="french">French</option>
+                          <option value="german">German</option>
+                          <option value="greek">Greek</option>
+                          <option value="hungarian">Hungarian</option>
+                          <option value="italian">Italian</option>
+                          <option value="irish">Irish</option>
+                          <option value="indonesian">Indonesian</option>
+                          <option value="japanese">Japanese</option>
+                          <option value="korean">Korean</option>
+                          <option value="lithuanian">Lithuanian</option>
+                          <option value="norwegian">Norwegian (Bokmal)</option>
+                          <option value="polish">Polish</option>
+                          <option value="portugueseBrazil">Portuguese (Brazil)</option>
+                          <option value="portuguesePortugal">Portuguese (Portugal)</option>
+                          <option value="romanian">Romanian</option>
+                          <option value="russian">Russian</option>
+                          <option value="spanish">Spanish</option>
+                          <option value="swedish">Swedish</option>
+                          <option value="thai">Thai</option>
+                          <option value="turkish">Turkish</option>
+                          <option value="romanian">Romanian</option>
+                          <option value="ukrainian">Ukrainian</option>
+                          <option value="vietnamese">Vietnamese</option>
+                        </select>}
+                    </SingleFieldController>
                   </div>
                 </div>
                 <div dangerouslySetInnerHTML={{ __html: bodyContent }} style={{ pointerEvents: 'none' }} />

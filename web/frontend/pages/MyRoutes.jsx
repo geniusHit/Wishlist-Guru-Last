@@ -80,11 +80,7 @@ const MyRoutes = () => {
     //         destination: "/RequestFormModal",
     //         // component: RequestModal
     //     }
-
     // ];
-
-
-
 
     const AllRoutes = () => {
         return (
@@ -103,12 +99,9 @@ const MyRoutes = () => {
         )
     }
 
-
     const SelectedRoutes = () => {
         return <Link to="/RequestFormModal">{myLanguage?.getSupport}</Link>
     }
-
-
 
     // let selectedRoutes = [
     //     {
@@ -118,15 +111,16 @@ const MyRoutes = () => {
     //     }
     // ];
 
-
-
-
-
-
-
     let noRoutes = [];
 
     useEffect(() => {
+        let host = new URLSearchParams(location.search).get("host");
+        if (host) {
+            sessionStorage.setItem("shopify_host", host);
+        } else {
+            host = sessionStorage.getItem("shopify_host");
+        }
+
         let isMounted = true;
 
         utilityFunction.getCurrentLanguage().then((res) => {

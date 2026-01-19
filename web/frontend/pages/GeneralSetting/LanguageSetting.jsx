@@ -563,7 +563,8 @@ const LanguageSetting = () => {
             })
 
             const result = await storeLanguagesData.json();
-            const newResult = result?.data?.[0]?.translations;
+            // const newResult = result?.data?.[0]?.translations;
+            const newResult = result?.data?.[0]?.[0]?.translations;
 
             if (!newResult) throw new Error("No translation data found");
 

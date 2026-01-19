@@ -1,10 +1,11 @@
 import express from "express";
 import fs from "fs";
 import multer from "multer";
-import { logoUpload, createSocialLike, createNewWishlist, copyToWishlist, editWishlistName, deleteWishlistName, getMultiWishlistData, createUser, deleteItem, deleteAllItem, getAllItems, saveActiveTheme, getKlaviyoEmailIntegration, getSmtpEmailIntegration, getReportAllItems, getIdFromEmail, getSharedWishlist, addToMyWishlist, getAllUsers, getAllUsersCount, getCurrentPlanSql, deleteUser, adminDataWithDate, apiPlanId, adminTopDataRecentData, adminTopDataWithDates, adminGraphDataMonthly, adminGraphDataYearly, getPlanName, getPlanData, requestFormMain, emailReminderChecksUpdate, getEmailReminderAndStoreLanguage, cleanDbData, getEmailReminderChecks, getEmailTempData, emailTemplateUpdate, saveSenderReceiverName, getEmailReportsData, sendWishlistQuotaLimitMails, sendWeeklyWishlistToAdmin, sendWeeklyWishlistToUser, sendMonthlyWishlistToAdmin, sendMonthlyWishlistToUser, klaviyoEmailIntegration, smtpEmailIntegration, shareWishlistByMail, shareWishlistToAdmin, shareWishlistStats, storeLanguagesData, premiumStoreLanguagesData, getStoreLanguageData, getStoreLanguageDataUseeff, getStoreLanguage, deleteStoreLanguageData, updateStoreLanguageData, basicStoreLanguageData, updateDataAppInstallation, appInstallation, updateProductQuantity, sendTestEmail, getAllCartItems, currentAppTheme, handleRedirect, checkPromoCode, checkPromoCodePrevPlan, getShareStatsData, getShareStatsUserData, getShareStatsWishlistItemData, getRefFromEmail, clearWishlistData, getWishlistUsersData, removeWishlistDataById, getWishlistItemData, getDefaultStoreLang, getThemeData, getWishlistCartData, getCurrentUserWishlistData, cartItemRecord, apiHealthChecker, getProductCountData, saveDataToSql, postmarkWebhook, checkSmtpConnection, getSmtpDetail, klaviyoInstall, klaviyoAuthCallback, updateProductVariant, saveShareWishlistToAdminEmail, getShareWishlistToAdminEmail, getWishlistUsers, sendEmailOnOff, getLanguages, setPreferredLanguage, getPreferredLanguage } from "../controllers/controllersSql.js";
+import { logoUpload, createSocialLike, createNewWishlist, copyToWishlist, editWishlistName, deleteWishlistName, getMultiWishlistData, createUser, deleteItem, deleteAllItem, getAllItems, saveActiveTheme, getKlaviyoEmailIntegration, getSmtpEmailIntegration, getReportAllItems, getIdFromEmail, getSharedWishlist, addToMyWishlist, getAllUsers, getAllUsersCount, getCurrentPlanSql, deleteUser, adminDataWithDate, apiPlanId, adminTopDataRecentData, adminTopDataWithDates, adminGraphDataMonthly, adminGraphDataYearly, getPlanName, getPlanData, requestFormMain, emailReminderChecksUpdate, getEmailReminderAndStoreLanguage, cleanDbData, getEmailReminderChecks, getEmailTempData, emailTemplateUpdate, saveSenderReceiverName, getEmailReportsData, sendWishlistQuotaLimitMails, sendWeeklyWishlistToAdmin, sendWeeklyWishlistToUser, sendMonthlyWishlistToAdmin, sendMonthlyWishlistToUser, klaviyoEmailIntegration, smtpEmailIntegration, shareWishlistByMail, shareWishlistToAdmin, shareWishlistStats, storeLanguagesData, premiumStoreLanguagesData, getStoreLanguageData, getStoreLanguageDataUseeff, getStoreLanguage, deleteStoreLanguageData, updateStoreLanguageData, basicStoreLanguageData, updateDataAppInstallation, appInstallation, updateProductQuantity, sendTestEmail, getAllCartItems, currentAppTheme, handleRedirect, checkPromoCode, checkPromoCodePrevPlan, getShareStatsData, getShareStatsUserData, getShareStatsWishlistItemData, getRefFromEmail, clearWishlistData, getWishlistUsersData, removeWishlistDataById, getWishlistItemData, getDefaultStoreLang, getThemeData, getWishlistCartData, getCurrentUserWishlistData, cartItemRecord, apiHealthChecker, getProductCountData, saveDataToSql, postmarkWebhook, checkSmtpConnection, getSmtpDetail, klaviyoInstall, klaviyoAuthCallback, updateProductVariant, saveShareWishlistToAdminEmail, getShareWishlistToAdminEmail, getMetaObject, getAllUniqueMetaFields, downloadStoreCsvFile } from "../controllers/controllersSql.js";
 import { fileURLToPath } from "url";
 import path from "path";
 import { authenticateToken } from "../jwt/authenticateToken.js";
+import shopify from "../../shopify.js";
 const routerSql = express.Router();
 
 // Directory where files will be uploaded
@@ -56,6 +57,7 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 
+
 routerSql.post("/logo/upload", upload.single("image"), logoUpload);
 routerSql.post("/create-social-like", createSocialLike);
 routerSql.post("/create-new-wihlist", createNewWishlist);
@@ -85,6 +87,8 @@ routerSql.post("/admin-top-data-with-dates", adminTopDataWithDates);
 routerSql.post("/admin-graph-data-monthly", adminGraphDataMonthly);
 routerSql.post("/admin-graph-data-yearly", adminGraphDataYearly);
 routerSql.post("/get-plan-name", getPlanName);
+routerSql.post("/wf-get-meta-object", getMetaObject);
+routerSql.post("/wf-get-unique-metafields", getAllUniqueMetaFields);
 routerSql.get("/get-plan-data", getPlanData);
 routerSql.post("/request-form", requestFormMain);
 routerSql.post("/email-reminder-checks-update", emailReminderChecksUpdate);
@@ -119,7 +123,7 @@ routerSql.post("/update-data-app-installation", updateDataAppInstallation);
 routerSql.post("/app-installation", appInstallation);
 routerSql.post("/update-product-quantity", updateProductQuantity);
 routerSql.post("/update-product-variant", updateProductVariant);
-routerSql.post("/send-test-email", sendTestEmail);
+routerSql.post("/send-test-email", shopify.validateAuthenticatedSession(), sendTestEmail);
 routerSql.post("/get-all-cart-items", getAllCartItems);
 routerSql.get("/current/app-theme", currentAppTheme);
 routerSql.get("/handleRedirect", handleRedirect);
@@ -144,12 +148,11 @@ routerSql.post("/postmark/bounce-handler", postmarkWebhook);
 routerSql.post("/check-smtp-connection", checkSmtpConnection);
 routerSql.post("/get-smtp-detail", getSmtpDetail);
 routerSql.get("/klaviyo/install", klaviyoInstall);
+routerSql.get("/download-store-data-csv", downloadStoreCsvFile);
 routerSql.get("/klaviyo/oauth/callback", klaviyoAuthCallback);
 routerSql.get("/health", apiHealthChecker);
-routerSql.get("/getWishlistUsers", getWishlistUsers)
-routerSql.post("/send-email-on-off", sendEmailOnOff)
-routerSql.get("/get-languages/:shopName", getLanguages)
-routerSql.post("/set-preferred-lang", setPreferredLanguage)
-routerSql.get("/get-preferred-lang/:shopDomain/:customerEmail", getPreferredLanguage)
+
 
 export default routerSql;
+
+

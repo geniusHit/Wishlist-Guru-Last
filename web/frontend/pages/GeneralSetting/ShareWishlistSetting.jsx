@@ -15,9 +15,18 @@ import draftToHtml from 'draftjs-to-html';
 import htmlToDraft from 'html-to-draftjs';
 import { Constants } from '../../../backend/constants/constant';
 import useApi from '../../hooks/useApi';
-
+import { getSessionToken } from '@shopify/app-bridge-utils';
+import createApp from "@shopify/app-bridge";
 
 const ShareWishlistSetting = () => {
+
+    const hostValue = sessionStorage.getItem("shopify_host")
+    const app = createApp({
+        apiKey: import.meta.env.VITE_SHOPIFY_API_KEY,
+        host: new URLSearchParams(window.location.search).get("host") || hostValue,
+        forceRedirect: true,
+    });
+
     const { serverURL } = Constants;
     const { handleSubmit, watch, control, reset, formState: { errors } } = useForm();
     const appMetafield = useAppMetafield();
@@ -276,10 +285,12 @@ const ShareWishlistSetting = () => {
             showLoaderOnConfirm: true,
             preConfirm: async (inputValue) => {
                 try {
+                    const token = await getSessionToken(app);
                     const response = await fetch(`${serverURL}/send-test-email`, {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
+                            "Authorization": `Bearer ${token}`
                         },
                         body: JSON.stringify({
                             recieverEmail: inputValue,

@@ -18,11 +18,8 @@ import saveEmpty from '../../assets/saveBlank.svg';
 import saveFill from '../../assets/saveBlack.svg';
 import starEmpty from '../../assets/starBlank.svg';
 import starFill from '../../assets/starBlack.svg';
-import { data } from '@shopify/app-bridge/actions/Modal';
-{/* Custom code for header wishlist starts */}
-import detectThemeName from '../../../backend/utils/themeDetector'
-import { Constants } from '../../../backend/constants/constant'
-{/* Custom code for header wishlist ends */}
+
+
 
 const WishlistButtonLocation = () => {
     const { handleSubmit, watch, control, reset, formState: { errors } } = useForm();
@@ -36,25 +33,12 @@ const WishlistButtonLocation = () => {
     const [myLanguage, setMyLanguage] = useState({});
     const [currentPlan, setCurrentPlan] = useState(0);
     const [getIconType, setGetIconType] = useState("");
-    const [generalSetting, setGeneralSetting] = useState();
     const options = [
         { value: "floating-heart-bottom-right", label: myLanguage.iconLocationValue3Sub1 },
         { value: "floating-heart-mid-left", label: myLanguage.iconLocationValue3Sub2 },
         { value: "floating-heart-mid-right", label: myLanguage.iconLocationValue3Sub3 },
         { value: "floating-heart-bottom-left", label: myLanguage.iconLocationValue3Sub4 }
     ];
-    {/* Custom code for header wishlist starts */}
-    const [customWishlistIconCode, setCustomWishlistIconCode] = useState()
-    const [customWishlistTextCode, setCustomWishlistTextCode] = useState()
-    // const serverURL = "http://localhost:5000"; // -------------- local
-    const serverURL = Constants.serverURL;
-    const [storeFrontDefLang, setStoreFrontDefLang] = useState(null);
-    const [customLanguage, setCustomLanguage] = useState()
-    const [themeName, setThemeName] = useState()
-    {/* Custom code for header wishlist ends */}
-
-
-    console.log("Constants = ", Constants)
 
     useEffect(() => {
         useEffectLite();
@@ -68,79 +52,6 @@ const WishlistButtonLocation = () => {
         });
         getAllAppDataMetafields();
     }
-
-    // async function detechThemeName() {
-    //     if (shopify.shop === 'mashbir.myshopify.com') {
-    //         settingCurrentFilter = "none";
-    //     }
-    //     const params = {
-    //         themeName: btoa(getCurrentThemeName.themeName),
-    //         filter: btoa(settingCurrentFilter)
-    //     }
-
-    //     if (settingCurrentFilter === "custom") {
-    //         params.customSettings = {
-    //             gridElement: btoa(settingGridElement),
-    //             productLink: btoa(settingProductElement),
-    //             appendIcon: btoa(settingAppendIconElement),
-    //             appendIconCheck: btoa(settingAppendIconCheck),
-    //             afterIcon: btoa(settingAfterIcon),
-    //             buttonPrependBeforeElemnt: btoa(settingButtonPrependBeforeElemnt)
-    //         };
-    //     }
-
-    //     try {
-    //         const response = await fetch(`${serverURL}/get-theme-data`, {
-    //             body: JSON.stringify(params),
-    //             method: 'POST',
-    //             headers: {
-    //                 'Content-Type': 'application/json'
-    //             }
-    //         });
-    //         if (!response.ok) {
-    //             throw new Error('Network response was not ok ' + response.statusText);
-    //         }
-    //         const data = await response.json();
-    //         return data
-    //     } catch (error) {
-    //         console.error('Error fetching theme data:', error);
-    //     }
-    // }
-
-
-    // let themeSelectors = {}
-
-    // detechThemeName().then((result) => {
-    //     themeSelectors = result
-    // }).catch((error) => {
-    //     console.error('Promise rejected:', error);
-    // });
-
-    {/* Custom code for header wishlist starts */}
-    async function getDefLanguage() {
-        console.log("customLanguage from getDefLanguage = ", customLanguage)
-        console.log("serverURL from getDefLanguage", serverURL)
-        const params = {
-            langName: btoa(`${customLanguage.textMsgLanguage}Message`),
-        };
-        try {
-            const response = await fetch(`${serverURL}/get-default-store-lang`, {
-                body: JSON.stringify(params),
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            });
-            if (!response.ok) {
-                throw new Error("Network response was not ok " + response.statusText);
-            }
-            const data = await response.json();
-            return data;
-        } catch (error) {
-            console.error("Error fetching theme data:", error);
-        }
-    }
-    {/* Custom code for header wishlist ends */}
 
     const convertColor = (color) => {
         if (/^#[0-9A-F]{6}$/i.test(color)) {
@@ -159,8 +70,6 @@ const WishlistButtonLocation = () => {
 
     async function getAllAppDataMetafields() {
         const dataArray = await appMetafield.getAllAppMetafields();
-        console.log("dataArray = ", dataArray)
-
         for (let i = 0; i < dataArray.length; i++) {
             if (dataArray[i].node.key === "general-setting") {
                 setIsLoading(true);
@@ -170,9 +79,7 @@ const WishlistButtonLocation = () => {
                     utilityFunction.upgradeButtonFxn();
                 }
                 let dData = JSON.parse(dataArray[i].node.value);
-                setGeneralSetting(dData)
                 existingData.current = dData;
-                console.log("dData = ", dData)
 
                 if (!dData.floatingHeartIconCountBgcolor) {
                     dData.floatingHeartIconCountBgcolor = '#000000'
@@ -201,6 +108,8 @@ const WishlistButtonLocation = () => {
                     headerHeartIconCountTextcolor: dData.headerHeartIconCountTextcolor || '#FFFFFF',
                     hideHeaderCounter: dData?.hideHeaderCounter || "no",
                     headerIconPosition: dData?.headerIconPosition || "",
+
+
                 })
             }
             if (dataArray[i].node.key === "wishlist-button-setting") {
@@ -208,15 +117,6 @@ const WishlistButtonLocation = () => {
                 setGetIconType(dData.iconType);
             }
 
-            if (dataArray[i].node.key === "language-setting") {
-                let dData = JSON.parse(dataArray[i].node.value);
-                setCustomLanguage(dData);
-            }
-
-            if (dataArray[i].node.key === "current-theme-name") {
-                let dData = JSON.parse(dataArray[i].node.value);
-                setThemeName(dData.themeName);
-            }
         }
     }
 
@@ -227,8 +127,6 @@ const WishlistButtonLocation = () => {
             imageUrl: loaderGif,
             showConfirmButton: false,
         });
-
-        console.log("data = ", data)
 
         let mergedData = { ...existingData.current };
 
@@ -252,7 +150,6 @@ const WishlistButtonLocation = () => {
         mergedData.headerHeartIconCountTextcolor = data.headerHeartIconCountTextcolor;
         mergedData.hideHeaderCounter = data?.hideHeaderCounter;
         mergedData.headerIconPosition = data?.headerIconPosition;
-
 
         await createMeta(mergedData).then((res) => {
             Swal.fire({
@@ -298,62 +195,6 @@ const WishlistButtonLocation = () => {
         });
     }
 
-    {/* Custom code for header wishlist starts */}
-    useEffect(() => {
-        console.log("currentPlan = ", currentPlan)
-        console.log("generalSetting = ", generalSetting)
-        console.log("themeName = ", themeName)
-        let storeLang;
-        const getDefLang = async () => {
-            storeLang = await getDefLanguage();
-            console.log("storeLang = ", storeLang)
-        }
-
-
-        if (generalSetting !== undefined && currentPlan > 1 && myLanguage.headerMenuWishlist !== undefined && themeName !== undefined) {
-            console.log("storeFrontDefLang = ", storeFrontDefLang)
-            const getThemeSelector = detectThemeName(themeName)
-            console.log("getThemeSelector = ", getThemeSelector)
-
-            if (generalSetting.paidWlbLocation === "yes") {
-                console.log("myLanguage = ", myLanguage)
-                getDefLang()
-                let customWishlistText = `
-                <span class=”custom-wishlist-icon” wishlist-type=”text”>
-                    <a tabindex="0" role="button" aria-haspopup="dialog" aria-controls="wishlist-dialog" aria-expanded="false" onClick="heartButtonHandle()" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); heartButtonHandle(); }" >${storeLang?.headerMenuWishlist || "Wishlist"}
-                    </a>
-                </span>`
-                setCustomWishlistTextCode(customWishlistText)
-
-                let customWishlistIcon = `<span class=”custom-wishlist-icon” wishlist-type=”icon”><div tabindex="0" role="button" aria-haspopup="dialog" aria-controls="wishlist-dialog" aria-expanded="false" onClick="heartButtonHandle()" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); heartButtonHandle(); }" class="header-heart-position ${getThemeSelector.headerHeartIconMobileClass
-                    }" > <div class="red-heart  ${getIconType === "star"
-                        ? generalSetting.headerIconType === "fillHeaderIcon"
-                            ? "starICON2"
-                            : generalSetting.headerIconType === "outlineHeaderIcon"
-                                ? "starICON"
-                                : "starICON"
-                        : ""
-                    } ${getIconType === "save"
-                        ? generalSetting.headerIconType === "fillHeaderIcon"
-                            ? "saveICON2"
-                            : generalSetting.headerIconType === "outlineHeaderIcon"
-                                ? "saveICON"
-                                : "saveICON"
-                        : ""
-                    } ${getIconType === "heart"
-                        ? generalSetting.headerIconType === "fillHeaderIcon"
-                            ? "heartICON2"
-                            : generalSetting.headerIconType === "outlineHeaderIcon"
-                                ? "heartICON"
-                                : "heartICON"
-                        : ""
-                    } "  ><span></span> </div>   <span class="count-span"> </span> </div></span>`;
-
-                setCustomWishlistIconCode(customWishlistIcon)
-            }
-        }
-    }, [currentPlan, generalSetting, getIconType, myLanguage, themeName])
-    {/* Custom code for header wishlist ends */}
 
     return (
         <div className='wf-dashboard wf-dashboard-buttonSetting'>
@@ -513,7 +354,6 @@ const WishlistButtonLocation = () => {
 
                                     {/* <div className={`${!watchAllFields.wlbLocation2 && 'not-allowed-class'}`}>
                                         <div className={`${!watchAllFields.wlbLocation2 && 'disable-block77'}`}> */}
-
                                     <div>
                                         <div>
                                             <div className='wf-wishlist-range-box'>
@@ -689,8 +529,6 @@ const WishlistButtonLocation = () => {
                                     </div>
                                 </div>
 
-
-
                                 {/* 777777777777 */}
 
                                 {/* <div className={`${currentPlan >= 2 ? "" : "disableEverything under-basic"}`} style={{ marginTop: "0" }}> */}
@@ -786,14 +624,6 @@ const WishlistButtonLocation = () => {
                                                 </div>
                                             </div>
                                         </div>
-
-                                        {/* Custome code for header wishlist starts */}
-                                        <Text variant="headingMd" as="h4">Custom code for Wishlist icon: </Text>
-                                        {customWishlistIconCode}<br/><br/>
-
-                                        <Text variant="headingMd" as="h4">Custom code for Wishlist text: </Text>
-                                        {customWishlistTextCode}
-                                        {/* Custom code for header wishlist ends */}
                                     </div>
 
 
@@ -850,10 +680,6 @@ const WishlistButtonLocation = () => {
                                 </div>
 
                             </Collapsible>
-
-
-
-
 
                             <div id='custom-code-icon-section' className='wf-style-wishbtn'>
                                 <div className={`${currentPlan >= 2 ? "" : "disableEverything under-basic"}`} >
@@ -920,7 +746,7 @@ const WishlistButtonLocation = () => {
                     </form>
                 </Frame >
             }
-        </div >
+        </div>
     )
 }
 
