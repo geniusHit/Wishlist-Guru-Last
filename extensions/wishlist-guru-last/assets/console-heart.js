@@ -15,7 +15,8 @@ let localData = JSON.parse(localStorage.getItem("wg-local-data"));
 let customButton = localData?.customButton || JSON.parse(heartButton.getAttribute("button-setting"));
 let customLanguage = localData?.customLanguage || JSON.parse(heartButton.getAttribute("language-setting").replace(/~/g, "'"));
 let generalSetting = localData?.generalSetting || JSON.parse(heartButton.getAttribute("general-setting"));
-let getThemeName = localData?.getThemeName || JSON.parse(heartButton.getAttribute("theme-name"));
+// let getThemeName = localData?.getThemeName || JSON.parse(heartButton.getAttribute("theme-name"));
+let getThemeName = { themeName: "Dawn" }
 let advanceSetting = localData?.advanceSetting || JSON.parse(heartButton.getAttribute("advance-setting").replace(/~/g, "'"));
 let collectionBtnSetting = localData?.collectionBtnSetting || JSON.parse(heartButton.getAttribute("collection-btn-setting"));
 let currentPlan = localData?.currentPlan || JSON.parse(heartButton.getAttribute("current-plan"));
@@ -372,6 +373,140 @@ function updateLanguageFxn() {
 
 
         // `<input id="search-input" class="searchbar_Input" placeholder="" onkeyup="handleSearchData(event)" value=""/>`;
+
+        const settings = document.getElementById("settings")
+        if(currentPlan<2){
+            settings.style.display = "none"
+        }
+        settings.addEventListener("click", () => {
+            if (!customerEmail) {
+                const accountModal = document.getElementById("accountModal")
+                const accountContent = document.querySelector(".modal-account-content")
+                const newDivData = `
+                <h3>You need to login first to edit Customer Preferences</h3>
+                <span class="closeByAccountModal" onclick="closeAccountModal()"></span>
+                <div class="wg-islogin-buttons-for-cp">
+                    <button onClick="goToRegister()" class="wg-register-btn">
+                        ${customLanguage?.createAccountAnchor || storeFrontDefLang.createAccountAnchor}
+                    </button>
+                    <button onClick="goToAccount()" class="wg-login-btn">
+                        ${customLanguage?.loginTextAnchor || storeFrontDefLang?.loginTextAnchor}
+                    </button>
+                </div>`;
+
+                accountContent.innerHTML = newDivData
+                accountModal.style.display = "block"
+                let consoleBtn = document.getElementById("console-style")
+                consoleBtn.innerHTML += `.wg-islogin-buttons-for-cp{display:flex; justify-content:center; gap:15px;}
+                
+                .wg-islogin-buttons-for-cp .wg-register-btn{text-transform:uppercase;
+                cursor: pointer;
+            box-sizing: border-box;
+            text-transform: uppercase; background-color: ${currentPlan>2? generalSetting?.userLogin?.bgColor : customButton.cartButtonStyle.hover.bgColor};
+    color: ${currentPlan>2? generalSetting?.userLogin?.textColor : customButton.cartButtonStyle.hover.textColor};
+    max-width: 100%;
+    border: ${currentPlan>2? generalSetting?.userLogin?.border.value : customButton.cartButtonStyle.hover.border.value}${currentPlan>2? generalSetting?.userLogin?.border.unit : customButton.cartButtonStyle.hover.border.unit} ${currentPlan>2? generalSetting?.userLogin?.border.type : customButton.cartButtonStyle.hover.border.type} ${currentPlan>2? generalSetting?.userLogin?.border.color : customButton.cartButtonStyle.hover.border.color};
+    border-radius: ${currentPlan>2? generalSetting?.userLogin?.borderRadius.value : customButton.cartButtonStyle.borderRadius.value}${currentPlan>2? generalSetting?.userLogin?.borderRadius.unit : customButton.cartButtonStyle.borderRadius.unit};
+            font-size: ${currentPlan>2? generalSetting?.userLogin?.fontSize.value : customButton.cartButtonStyle.fontSize.value}${currentPlan>2? generalSetting?.userLogin?.fontSize.unit : customButton.cartButtonStyle.fontSize.unit} !important;
+            padding: ${currentPlan>2? generalSetting?.userLogin?.paddingTopBottom.value : customButton.cartButtonStyle.paddingTopBottom.value}${currentPlan>2? generalSetting?.userLogin?.paddingTopBottom.unit : customButton.cartButtonStyle.paddingTopBottom.unit} ${currentPlan>2? generalSetting?.userLogin?.paddingLeftRight.value : customButton.cartButtonStyle.paddingLeftRight.value}${currentPlan>2? generalSetting?.userLogin?.paddingLeftRight.unit : customButton.cartButtonStyle.paddingLeftRight.unit};
+            margin: ${currentPlan>2? generalSetting?.userLogin?.marginTopBottom.value : customButton.cartButtonStyle.marginTopBottom.value}${currentPlan>2? generalSetting?.userLogin?.marginTopBottom.unit : customButton.cartButtonStyle.marginTopBottom.unit} ${currentPlan>2? generalSetting?.userLogin?.marginLeftRight.value : customButton.cartButtonStyle.marginLeftRight.value}${currentPlan>2? generalSetting?.userLogin?.marginTopBottom.unit : customButton.cartButtonStyle.marginLeftRight.unit};
+            text-align: ${currentPlan>2? generalSetting?.userLogin?.textAlign : customButton.cartButtonStyle.textAlign};
+            cursor: pointer;
+            box-sizing: border-box;
+            font-weight: ${getFontWt(customButton.cartButtonStyle.fontWeight, customButton.cartButtonStyle.fontWeight).textFw};
+            font-family: ${currentPlan>2? generalSetting?.userLogin?.fontFamily : customButton.cartButtonStyle.fontFamily};
+            width:auto;
+    }
+
+
+        .wg-islogin-buttons-for-cp .wg-login-btn{background-color: ${currentPlan>2?generalSetting?.guestLogin?.bgColor : customButton.cartButtonStyle.hover.bgColor};
+    color: ${currentPlan>2? generalSetting?.guestLogin?.textColor : customButton.cartButtonStyle.hover.textColor};
+    border: ${currentPlan>2? generalSetting?.guestLogin?.border.value : customButton.cartButtonStyle.hover.border.value}${currentPlan>2? generalSetting?.guestLogin?.border.unit : customButton.cartButtonStyle.hover.border.unit} ${currentPlan>2? generalSetting?.guestLogin?.border.type : customButton.cartButtonStyle.hover.border.type} ${currentPlan>2? generalSetting?.guestLogin?.border.color : customButton.cartButtonStyle.hover.border.color};
+    border-radius: ${currentPlan>2? generalSetting?.guestLogin?.borderRadius.value : customButton.cartButtonStyle.borderRadius.value}${currentPlan>2? generalSetting?.guestLogin?.borderRadius.unit : customButton.cartButtonStyle.borderRadius.unit};
+            font-size: ${currentPlan>2? generalSetting?.guestLogin?.fontSize.value : customButton.cartButtonStyle.fontSize.value}${currentPlan>2? generalSetting?.guestLogin?.fontSize.unit : customButton.cartButtonStyle.fontSize.unit} !important;
+            padding: ${currentPlan>2? generalSetting?.guestLogin?.paddingTopBottom.value : customButton.cartButtonStyle.paddingTopBottom.value}${currentPlan>2? generalSetting?.guestLogin?.paddingTopBottom.unit : customButton.cartButtonStyle.paddingTopBottom.unit} ${currentPlan>2? generalSetting?.guestLogin?.paddingLeftRight.value : customButton.cartButtonStyle.paddingLeftRight.value}${currentPlan>2? generalSetting?.guestLogin?.paddingLeftRight.unit : customButton.cartButtonStyle.paddingLeftRight.unit};
+            margin: ${currentPlan>2? generalSetting?.guestLogin?.marginTopBottom.value : customButton.cartButtonStyle.marginTopBottom.value}${currentPlan>2? generalSetting?.guestLogin?.marginTopBottom.unit : customButton.cartButtonStyle.marginTopBottom.unit} ${currentPlan>2? generalSetting?.guestLogin?.marginLeftRight.value : customButton.cartButtonStyle.marginLeftRight.value}${currentPlan>2? generalSetting?.guestLogin?.marginTopBottom.unit : customButton.cartButtonStyle.marginLeftRight.unit};
+            text-align: ${currentPlan>2? generalSetting?.guestLogin?.textAlign : customButton.cartButtonStyle.textAlign};
+            cursor: pointer;
+            box-sizing: border-box;
+            font-weight: ${getFontWt(customButton.cartButtonStyle.fontWeight, customButton.cartButtonStyle.fontWeight).textFw};
+            font-family: ${currentPlan>2? generalSetting?.guestLogin?.fontFamily : customButton.cartButtonStyle.fontFamily}, ${getFontFamily}, ${getFontFamilyFallback};
+            width:auto;
+            text-transform: uppercase;
+    }
+
+
+                    .wg-islogin-buttons-for-cp .wg-register-btn:hover{background-color: ${currentPlan>2? generalSetting?.userLogin?.hover.bgColor : customButton.cartButtonStyle.bgColor};
+    color: ${currentPlan>2? generalSetting?.userLogin?.hover.textColor : customButton.cartButtonStyle.textColor};
+    border: ${currentPlan>2? generalSetting?.userLogin?.hover.border.value : customButton.cartButtonStyle.border.value}${currentPlan>2? generalSetting?.userLogin?.hover.border.unit : customButton.cartButtonStyle.border.unit} ${currentPlan>2? generalSetting?.userLogin?.hover.border.type : customButton.cartButtonStyle.border.type} ${currentPlan>2? generalSetting?.userLogin?.hover.border.color : customButton.cartButtonStyle.border.color}}
+    
+    .wg-islogin-buttons-for-cp .wg-login-btn:hover{
+    background-color: ${currentPlan>2? generalSetting?.guestLogin?.hover.bgColor : customButton.cartButtonStyle.bgColor};
+    color: ${currentPlan>2? generalSetting?.guestLogin?.hover.textColor : customButton.cartButtonStyle.textColor};
+    border: ${currentPlan>2? generalSetting?.guestLogin?.hover.border.value : customButton.cartButtonStyle.border.value}${currentPlan>2? generalSetting?.guestLogin?.hover.border.unit : customButton.cartButtonStyle.border.unit} ${currentPlan>2? generalSetting?.guestLogin?.hover.border.type : customButton.cartButtonStyle.border.type} ${currentPlan>2? generalSetting?.guestLogin?.hover.border.color : customButton.cartButtonStyle.border.color};
+    }
+    `;
+            }
+            else {
+                let settingsModal = document.getElementById("mysettingsModal")
+                settingsModal.style.display = "block"
+                document.querySelector(".closeByShareModal").style.filter = generalSetting.wlCrossFilter;
+            }
+        })
+
+        const toggleBtn = document.getElementById("toggleBtn");
+        const toggle = document.querySelector(".toggle")
+        const accountModal = document.getElementById("accountModal")
+        const accountContent = document.querySelector(".modal-account-content")
+        const setCustomerPreferences = async () => {
+            let curEmail, wishlistUsers, wishlistUsersRresult;
+            curEmail = await getCurrentLoginFxn()
+
+            wishlistUsers = await fetch(`${serverURL}/getWishlistUsers`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+
+            wishlistUsersRresult = await wishlistUsers.json()
+            console.log("wishlistUsersRresult = ", wishlistUsersRresult)
+
+            wishlistUsersRresult.map((el) => {
+                if (curEmail === el.email) {
+                    console.log("curEmail matched = ", el.email)
+                    if (toggleBtn) {
+                        toggleBtn.checked = el.send_emails === "true" ? true : false
+                    }
+                }
+            })
+
+            toggleBtn.addEventListener("change", async () => {
+                curEmail = await getCurrentLoginFxn()
+
+                wishlistUsersRresult.map(async (el) => {
+                    if (curEmail === el.email) {
+                        console.log("curEmail matched = ", el.email)
+                        await fetch(`${serverURL}/send-email-on-off`, {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({
+                                "send_emails": toggleBtn.checked,
+                                "email": curEmail
+                            })
+                        })
+                    }
+                })
+
+                if (toggleBtn.checked) {
+                    alertToast("You will receive emails!", null, null, null)
+                } else {
+                    alertToast("You will not receive emails!", null, null, null)
+                }
+            });
+        }
+
+        setCustomerPreferences()
     }
 
     var searchPlaceholder = document.querySelectorAll(".searchData input");
@@ -11739,4 +11874,60 @@ function wgGetProductOptions() {
     });
 
     return Object.keys(result).length === 0 ? null : result;
+}
+
+if (customerEmail) {
+    (async () => {
+        try {
+            const storeLanguages = await fetch(`${serverURL}/get-languages/${permanentDomain}`, {
+                method: "GET",
+            })
+            const result = await storeLanguages.json();
+            // console.log("storeLanguages = ", result)
+            let languagesDropdown = document.getElementById("language")
+            result.map((l) => {
+                let option = document.createElement("option")
+                option.value = l.lang_name
+                option.textContent = l.lang_name
+                option.classList.add("lang-option")
+                languagesDropdown.appendChild(option)
+            })
+
+            try {
+                const preferred_language = await fetch(`${serverURL}/get-preferred-lang/${permanentDomain}/${customerEmail}`)
+                const result = await preferred_language.json()
+                console.log("preferred language = ", result)
+                if (result[0]?.preferred_language !== "") {
+                    languagesDropdown.querySelector(`option[value=${result[0]?.preferred_language}]`).selected = true
+                }
+            }
+            catch (err) {
+                console.log("Error in getting preferred language: ", err)
+            }
+
+            languagesDropdown.addEventListener("change", async (e) => {
+                try {
+                    await fetch(`${serverURL}/set-preferred-lang`, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            shopDomain: permanentDomain,
+                            customerEmail: customerEmail,
+                            preferredLanguage: e.target.value
+                        })
+                    })
+
+                    alertToast("Preferred language saved successfully!", null, null, null)
+                }
+                catch (err) {
+                    console.log("Error in setting preferred language : ", err)
+                }
+            })
+        }
+        catch (err) {
+            console.log("Error in fetching store languages : ", err)
+        }
+    })()
 }

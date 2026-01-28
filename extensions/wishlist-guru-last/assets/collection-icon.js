@@ -16,7 +16,8 @@ const serverURL1 = 'https://wishlist-api.webframez.com'; // -------------- produ
 // const serverURL1 = 'https://wishlist-guru-api.webframez.com';  // -------------- stagging
 
 
-let getCurrentThemeName = JSON.parse(getThemeNameColl);
+// let getCurrentThemeName = JSON.parse(getThemeNameColl);
+let getCurrentThemeName = {themeName: "Zenith"}
 // let localDataC = JSON.parse(localStorage.getItem("wg-local-data"));
 // let getCurrentThemeName = localDataC?.getThemeName || JSON.parse(getThemeNameColl);
 

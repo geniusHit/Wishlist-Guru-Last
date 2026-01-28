@@ -118,6 +118,7 @@ const EmailSetting = () => {
         const planValue = parseInt(getCurrentPlan.currentPlan)
         setCurrentPlan(planValue);
         await utilityFunction.getCurrentLanguage().then((res) => {
+            console.log("res = ", res)
             setMyLanguage(res);
         });
         getDefaultData(planValue, shopAPI);

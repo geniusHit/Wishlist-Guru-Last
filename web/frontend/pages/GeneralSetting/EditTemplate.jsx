@@ -18,6 +18,7 @@ import SingleFieldController from '../../hooks/useSingleFieldController';
 import { getSessionToken } from '@shopify/app-bridge-utils';
 import createApp from "@shopify/app-bridge";
 import language from 'react-syntax-highlighter/dist/esm/languages/hljs/1c';
+import { english, french, dutch, greek, arabic, german, chinese, brazilian, danish, swedish, spanish, chineseTraditional, czech, italian, ukrainian, japanese, korean, norwegianBokmal, polish, portugueseBrazil, portuguesePortugal, thai, turkish, finnish, herbew, hungarian, bulgarian, lithuanian, irish, romanian, filipino, indonesian, russian, vietnamese, albanian, latvian, estonian } from '../../../backend/utils/emailTemplate';
 
 const EditTemplate = ({ value }) => {
 
@@ -104,6 +105,7 @@ const EditTemplate = ({ value }) => {
           gtwBorderRadius: tempValue.goToWishlistBtnStyle.borderRadius,
           gtwIcon: tempValue.goToWishlistBtnStyle.icon,
           language: tempValue.language,
+          emailLanguage: tempValue.emailLanguage,
         })
       }
       await getSmtpDataFromSql(shopData.shopName);
@@ -163,6 +165,8 @@ const EditTemplate = ({ value }) => {
     const footer2Data = getEditorStateContent(editorFooter2State);
 
     console.log("footer2Data = ", footer2Data)
+    console.log("footerData = ", footerData)
+    console.log("watchColors = ", watchColors)
 
     console.log("watchColors = ", watchColors)
     const coloredBodyData = watchColors.contentColor ?
@@ -170,6 +174,86 @@ const EditTemplate = ({ value }) => {
 
     const coloredFooterData = watchColors.footerColor ?
       renderColor(footerData, watchColors.footerColor) : footerData;
+
+    // let et;
+    // switch(watchColors.emailLanguage){
+    //   case 'english': et = english;
+    //   break;
+    //   case 'french': et = french;
+    //   break;
+    //   case 'dutch': et = dutch;
+    //   break;
+    //   case 'greek': et = greek;
+    //   break;
+    //   case 'arabic': et = arabic;
+    //   break;
+    //   case 'german': et = german;
+    //   break;
+    //   case 'chinese': et = chinese;
+    //   break;
+    //   case 'brazilian': et = brazilian;
+    //   break;
+    //   case 'danish': et = danish;
+    //   break;
+    //   case 'swedish': et = swedish;
+    //   break;
+    //   case 'spanish': et = spanish;
+    //   break;
+    //   case 'chineseTraditional': et = chineseTraditional;
+    //   break;
+    //   case 'czech': et = czech;
+    //   break;
+    //   case 'italian': et = italian;
+    //   break;
+    //   case 'ukrainian': et = ukrainian;
+    //   break;
+    //   case 'japanese': et = japanese;
+    //   break;
+    //   case 'korean': et = korean;
+    //   break;
+    //   case 'norwegianBokmal': et = norwegianBokmal;
+    //   break;
+    //   case 'polish': et = polish;
+    //   break;
+    //   case 'portugueseBrazil': et = portugueseBrazil;
+    //   break;
+    //   case 'portuguesePortugal': et = portuguesePortugal;
+    //   break;
+    //   case 'thai': et = thai;
+    //   break;
+    //   case 'turkish': et = turkish;
+    //   break;
+    //   case 'finnish': et = finnish;
+    //   break;
+    //   case 'herbew': et = herbew;
+    //   break;
+    //   case 'hungarian': et = hungarian;
+    //   break;
+    //   case 'bulgarian': et = bulgarian;
+    //   break;
+    //   case 'lithuanian': et = lithuanian;
+    //   break;
+    //   case 'irish': et = irish;
+    //   break;
+    //   case 'romanian': et = romanian;
+    //   break;
+    //   case 'filipino': et = filipino;
+    //   break;
+    //   case 'indonesian': et = indonesian;
+    //   break;
+    //   case 'russian': et = russian;
+    //   break;
+    //   case 'vietnamese': et = vietnamese;
+    //   break;
+    //   case 'albanian': et = albanian;
+    //   break;
+    //   case 'latvian': et = latvian;
+    //   break;
+    //   case 'estonian': et = estonian;
+    //   break;
+    // }
+    // console.log("et = ", et)
+    // console.log("et.BackInStock = ", et.BackInStock)
 
     const emailData = {
       firstRow: coloredBodyData,
@@ -181,6 +265,11 @@ const EditTemplate = ({ value }) => {
       contentColor: watchColors.contentColor,
       footerBgColor: watchColors.footerBgColor,
       footerColor: watchColors.footerColor,
+      emailLanguage: watchColors.emailLanguage,
+      // emailTemplate: temp_type === "PriceDrop"? et.PriceDrop
+      //                 : temp_type === "LowInStock"? et.LowInStock
+      //                   : temp_type === "BackInStock" && et.BackInStock
+      //                 ,
 
       addToCartBtn: addToCartBtn,
       shopNowBtn: shopNowBtn,
@@ -379,6 +468,7 @@ const EditTemplate = ({ value }) => {
     tempName.addToCartBtn = addToCartBtn;
     tempName.shopNowBtn = shopNowBtn;
     tempName.goToWishlistBtn = goToWishlistBtn;
+    tempName.emailLanguage = data.emailLanguage;
 
     tempName.addToCartBtnStyle = {
       textColor: data.atcTextColor,
@@ -1072,6 +1162,46 @@ const EditTemplate = ({ value }) => {
                           <option value="ukrainian">Ukrainian</option>
                           <option value="vietnamese">Vietnamese</option>
                         </select>}
+                    </SingleFieldController>
+                    <SingleFieldController name="emailLanguage" control={control}>
+                      {({ field }) => <select {...field} onChange={(e)=>{
+                        setHeaderSave(true),
+                        field.onChange(e.target.value)
+                      }}>
+                        <option value="albanian">Albanian</option>
+                        <option value="brazilian">Brazilian Portuguese</option>
+                        <option value="bulgarian">Bulgarian</option>
+                        <option value="chinese">Chinese (Simplified)</option>
+                        <option value="chineseTraditional">Chinese (Traditional)</option>
+                        <option value="czech">Czech</option>
+                        <option value="danish">Danish</option>
+                        <option value="dutch">Dutch</option>
+                        <option value="english">English</option>
+                        <option value="filipino">Filipino</option>
+                        <option value="finnish">Finnish</option>
+                        <option value="french">French</option>
+                        <option value="german">German</option>
+                        <option value="greek">Greek</option>
+                        <option value="hungarian">Hungarian</option>
+                        <option value="italian">Italian</option>
+                        <option value="irish">Irish</option>
+                        <option value="indonesian">Indonesian</option>
+                        <option value="japanese">Japanese</option>
+                        <option value="korean">Korean</option>
+                        <option value="lithuanian">Lithuanian</option>
+                        <option value="norwegianBokmal">Norwegian (Bokmal)</option>
+                        <option value="polish">Polish</option>
+                        <option value="portugueseBrazil">Portuguese (Brazil)</option>
+                        <option value="portuguesePortugal">Portuguese (Portugal)</option>
+                        <option value="romanian">Romanian</option>
+                        <option value="russian">Russian</option>
+                        <option value="spanish">Spanish</option>
+                        <option value="swedish">Swedish</option>
+                        <option value="thai">Thai</option>
+                        <option value="turkish">Turkish</option>
+                        <option value="ukrainian">Ukrainian</option>
+                        <option value="vietnamese">Vietnamese</option>
+                      </select>}
                     </SingleFieldController>
                   </div>
                 </div>

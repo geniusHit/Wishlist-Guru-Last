@@ -1,5 +1,5 @@
 export function backInStockFxn(customer, productTitle, variantId, productHandle, shopDomain, imageUrl, logoResult, serverURL, app_install_id, emailData, dataToParmas, admin = "no", getSmtpDetail = []) {
-
+  console.log("emailData from back in stock = ", emailData)
   let imgSrc = null
   if (admin === "yes") {
     imgSrc = logoResult

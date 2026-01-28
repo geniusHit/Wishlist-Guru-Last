@@ -97,6 +97,12 @@ export const storeFrontLanguages = {
         allFieldsRequired: "جميع الحقول مطلوبة!",
         shareToAdminButton: "مشاركة قائمة الرغبات مع المشرف",
         downloadCsv: "تنزيل ملف CSV",
+
+        customerPreferenceHeading: "تفضيلات العميل",
+        cpEmailNotification: "تفعيل إشعارات البريد الإلكتروني:",
+        cpEmailLanguage: "لغة البريد الإلكتروني المفضلة:",
+        cpYouNeedToLogin: "يجب عليك تسجيل الدخول أولاً لتعديل تفضيلات العميل",
+
     },
 
     englishMessage: {
@@ -199,6 +205,12 @@ export const storeFrontLanguages = {
         allFieldsRequired: "All fields are required!",
         shareToAdminButton: "Share wishlist to admin",
         downloadCsv: "Download CSV",
+
+
+        customerPreferenceHeading: "CUSTOMER PREFERENCES",
+        cpEmailNotification: "Enable Email Notifications:",
+        cpEmailLanguage: "Email Language Preference:",
+        cpYouNeedToLogin: "You need to login first to edit Customer Preferences",
 
     },
 
@@ -303,6 +315,12 @@ export const storeFrontLanguages = {
         downloadCsv: "Télécharger le fichier CSV",
 
 
+        customerPreferenceHeading: "Préférences client",
+        cpEmailNotification: "Activer les notifications par e-mail :",
+        cpEmailLanguage: "Langue préférée pour les e-mails :",
+        cpYouNeedToLogin: "Vous devez d’abord vous connecter pour modifier les préférences client",
+
+
     },
 
     dutchMessage: {
@@ -403,6 +421,12 @@ export const storeFrontLanguages = {
         allFieldsRequired: "Alle velden zijn verplicht!",
         shareToAdminButton: "Verlanglijst delen met de beheerder",
         downloadCsv: "CSV-bestand downloaden",
+
+        customerPreferenceHeading: "Klantvoorkeuren",
+        cpEmailNotification: "E-mailmeldingen inschakelen:",
+        cpEmailLanguage: "Voorkeurstaal voor e-mail:",
+        cpYouNeedToLogin: "Je moet eerst inloggen om klantvoorkeuren te bewerken"
+
     },
 
     germanMessage: {
@@ -504,6 +528,10 @@ export const storeFrontLanguages = {
         shareToAdminButton: "Wunschliste mit dem Administrator teilen",
         downloadCsv: "CSV-Datei herunterladen",
 
+        customerPreferenceHeading: "Kundeneinstellungen",
+        cpEmailNotification: "E-Mail-Benachrichtigungen aktivieren:",
+        cpEmailLanguage: "Bevorzugte E-Mail-Sprache:",
+        cpYouNeedToLogin: "Sie müssen sich zuerst anmelden, um die Kundeneinstellungen zu bearbeiten",
 
     },
 
@@ -606,6 +634,11 @@ export const storeFrontLanguages = {
         shareToAdminButton: "将愿望清单分享给管理员",
         downloadCsv: "下载CSV文件",
 
+        customerPreferenceHeading: "客户偏好设置",
+        cpEmailNotification: "启用电子邮件通知：",
+        cpEmailLanguage: "电子邮件语言偏好：",
+        cpYouNeedToLogin: "您需要先登录才能编辑客户偏好设置",
+
     },
 
     brazilianMessage: {
@@ -706,6 +739,10 @@ export const storeFrontLanguages = {
         shareToAdminButton: "Compartilhar lista de desejos com o administrador",
         downloadCsv: "Baixar arquivo CSV",
 
+        customerPreferenceHeading: "Preferências do cliente",
+        cpEmailNotification: "Ativar notificações por e-mail:",
+        cpEmailLanguage: "Idioma preferido do e-mail:",
+        cpYouNeedToLogin: "Você precisa fazer login primeiro para editar as preferências do cliente",
 
     },
 
@@ -808,6 +845,11 @@ export const storeFrontLanguages = {
         shareToAdminButton: "Del ønskeliste med administrator",
         downloadCsv: "Download CSV-fil",
 
+        customerPreferenceHeading: "Kundepræferencer",
+        cpEmailNotification: "Aktivér e-mailnotifikationer:",
+        cpEmailLanguage: "Foretrukket e-mailsprog:",
+        cpYouNeedToLogin: "Du skal først logge ind for at redigere kundepræferencer",
+
     },
 
     swedishMessage: {
@@ -907,8 +949,12 @@ export const storeFrontLanguages = {
         swtaPlace: "Plats",
         allFieldsRequired: "Alla fält är obligatoriska!",
         shareToAdminButton: "Dela önskelista med administratören",
-        downloadCsv: "Ladda ner CSV-fil"
+        downloadCsv: "Ladda ner CSV-fil",
 
+        customerPreferenceHeading: "Kundpreferenser",
+        cpEmailNotification: "Aktivera e-postaviseringar:",
+        cpEmailLanguage: "Föredraget e-postspråk:",
+        cpYouNeedToLogin: "Du måste logga in först för att redigera kundpreferenser",
 
     },
 
@@ -1009,8 +1055,12 @@ export const storeFrontLanguages = {
         swtaPlace: "Lugar",
         allFieldsRequired: "¡Todos los campos son obligatorios!",
         shareToAdminButton: "Compartir lista de deseos con el administrador",
-        downloadCsv: "Descargar archivo CSV"
+        downloadCsv: "Descargar archivo CSV",
 
+        customerPreferenceHeading: "Preferencias del cliente",
+        cpEmailNotification: "Activar notificaciones por correo electrónico:",
+        cpEmailLanguage: "Idioma preferido del correo electrónico:",
+        cpYouNeedToLogin: "Debes iniciar sesión primero para editar las preferencias del cliente",
 
     },
 
@@ -1113,6 +1163,11 @@ export const storeFrontLanguages = {
         shareToAdminButton: "將願望清單分享給管理員",
         downloadCsv: "下載CSV文件",
 
+        customerPreferenceHeading: "客戶偏好設定",
+        cpEmailNotification: "啟用電子郵件通知：",
+        cpEmailLanguage: "電子郵件語言偏好：",
+        cpYouNeedToLogin: "您需要先登入才能編輯客戶偏好設定",
+
     },
 
     czechMessage: {
@@ -1212,8 +1267,12 @@ export const storeFrontLanguages = {
         swtaPlace: "Místo",
         allFieldsRequired: "Všechna pole jsou povinná!",
         shareToAdminButton: "Sdílet seznam přání s administrátorem",
-        downloadCsv: "Stáhnout soubor CSV"
+        downloadCsv: "Stáhnout soubor CSV",
 
+        customerPreferenceHeading: "Preference zákazníka",
+        cpEmailNotification: "Povolit e-mailová oznámení:",
+        cpEmailLanguage: "Preferovaný jazyk e-mailu:",
+        cpYouNeedToLogin: "Pro úpravu preferencí zákazníka se musíte nejprve přihlásit",
 
     },
 
@@ -1314,8 +1373,12 @@ export const storeFrontLanguages = {
         swtaPlace: "Luogo",
         allFieldsRequired: "Tutti i campi sono obbligatori!",
         shareToAdminButton: "Condividi la lista dei desideri con l'amministratore",
-        downloadCsv: "Scarica file CSV"
+        downloadCsv: "Scarica file CSV",
 
+        customerPreferenceHeading: "Preferenze del cliente",
+        cpEmailNotification: "Abilita notifiche email:",
+        cpEmailLanguage: "Lingua preferita per le email:",
+        cpYouNeedToLogin: "Devi prima effettuare l’accesso per modificare le preferenze del cliente",
 
     },
 
@@ -1416,8 +1479,12 @@ export const storeFrontLanguages = {
         swtaPlace: "Місце",
         allFieldsRequired: "Усі поля є обов’язковими!",
         shareToAdminButton: "Поділитися списком бажань з адміністратором",
-        downloadCsv: "Завантажити файл CSV"
+        downloadCsv: "Завантажити файл CSV",
 
+        customerPreferenceHeading: "Налаштування клієнта",
+        cpEmailNotification: "Увімкнути сповіщення електронною поштою:",
+        cpEmailLanguage: "Бажана мова електронної пошти:",
+        cpYouNeedToLogin: "Вам потрібно спочатку увійти, щоб редагувати налаштування клієнта",
 
     },
 
@@ -1518,8 +1585,12 @@ export const storeFrontLanguages = {
         swtaPlace: "場所",
         allFieldsRequired: "すべての項目を入力してください！",
         shareToAdminButton: "ウィッシュリストを管理者と共有する",
-        downloadCsv: "CSVファイルをダウンロード"
+        downloadCsv: "CSVファイルをダウンロード",
 
+        customerPreferenceHeading: "顧客設定",
+        cpEmailNotification: "メール通知を有効にする：",
+        cpEmailLanguage: "メールの言語設定：",
+        cpYouNeedToLogin: "顧客設定を編集するには、先にログインする必要があります",
 
 
     },
@@ -1621,8 +1692,12 @@ export const storeFrontLanguages = {
         swtaPlace: "장소",
         allFieldsRequired: "모든 필드는 필수입니다!",
         shareToAdminButton: "위시리스트를 관리자와 공유하기",
-        downloadCsv: "CSV 파일 다운로드"
+        downloadCsv: "CSV 파일 다운로드",
 
+        customerPreferenceHeading: "고객 환경설정",
+        cpEmailNotification: "이메일 알림 활성화:",
+        cpEmailLanguage: "이메일 언어 설정:",
+        cpYouNeedToLogin: "고객 환경설정을 수정하려면 먼저 로그인해야 합니다",
 
     },
 
@@ -1723,9 +1798,13 @@ export const storeFrontLanguages = {
         swtaPlace: "Sted",
         allFieldsRequired: "Alle felt er obligatoriske!",
         shareToAdminButton: "Del ønskeliste med administrator",
-        downloadCsv: "Last ned CSV-fil"
+        downloadCsv: "Last ned CSV-fil",
 
 
+        customerPreferenceHeading: "Kundepreferanser",
+        cpEmailNotification: "Aktiver e-postvarsler:",
+        cpEmailLanguage: "Foretrukket e-postspråk:",
+        cpYouNeedToLogin: "Du må først logge inn for å redigere kundepreferanser",
 
     },
 
@@ -1828,6 +1907,12 @@ export const storeFrontLanguages = {
         shareToAdminButton: "Udostępnij listę życzeń administratorowi",
         downloadCsv: "Pobierz plik CSV",
 
+
+        customerPreferenceHeading: "Preferencje klienta",
+        cpEmailNotification: "Włącz powiadomienia e-mail:",
+        cpEmailLanguage: "Preferowany język e-mail:",
+        cpYouNeedToLogin: "Musisz się najpierw zalogować, aby edytować preferencje klienta",
+
     },
 
     portugueseBrazilMessage: {
@@ -1927,7 +2012,12 @@ export const storeFrontLanguages = {
         swtaPlace: "Local",
         allFieldsRequired: "Todos os campos são obrigatórios!",
         shareToAdminButton: "Compartilhar lista de desejos com o administrador",
-        downloadCsv: "Baixar arquivo CSV"
+        downloadCsv: "Baixar arquivo CSV",
+
+        customerPreferenceHeading: "Preferências do cliente",
+        cpEmailNotification: "Ativar notificações por e-mail:",
+        cpEmailLanguage: "Idioma preferido do e-mail:",
+        cpYouNeedToLogin: "Você precisa fazer login primeiro para editar as preferências do cliente",
 
     },
 
@@ -2028,7 +2118,13 @@ export const storeFrontLanguages = {
         swtaPlace: "Local",
         allFieldsRequired: "Todos os campos são obrigatórios!",
         shareToAdminButton: "Partilhar lista de desejos com o administrador",
-        downloadCsv: "Descarregar ficheiro CSV"
+        downloadCsv: "Descarregar ficheiro CSV",
+
+        customerPreferenceHeading: "Preferências do cliente",
+        cpEmailNotification: "Ativar notificações de e-mail:",
+        cpEmailLanguage: "Idioma preferido do e-mail:",
+        cpYouNeedToLogin: "É necessário iniciar sessão primeiro para editar as preferências do cliente",
+
 
     },
 
@@ -2129,8 +2225,12 @@ export const storeFrontLanguages = {
         swtaPlace: "สถานที่",
         allFieldsRequired: "ต้องกรอกทุกช่อง!",
         shareToAdminButton: "แชร์รายการสิ่งที่อยากได้กับผู้ดูแลระบบ",
-        downloadCsv: "ดาวน์โหลดไฟล์ CSV"
+        downloadCsv: "ดาวน์โหลดไฟล์ CSV",
 
+        customerPreferenceHeading: "การตั้งค่าลูกค้า",
+        cpEmailNotification: "เปิดใช้งานการแจ้งเตือนทางอีเมล:",
+        cpEmailLanguage: "ภาษาที่ต้องการสำหรับอีเมล:",
+        cpYouNeedToLogin: "คุณต้องเข้าสู่ระบบก่อนจึงจะแก้ไขการตั้งค่าลูกค้าได้",
 
     },
 
@@ -2232,7 +2332,13 @@ export const storeFrontLanguages = {
         swtaPlace: "Yer",
         allFieldsRequired: "Tüm alanların doldurulması zorunludur!",
         shareToAdminButton: "İstek listeni yöneticiyle paylaş",
-        downloadCsv: "CSV dosyasını indir"
+        downloadCsv: "CSV dosyasını indir",
+
+        customerPreferenceHeading: "Müşteri Tercihleri",
+        cpEmailNotification: "E-posta bildirimlerini etkinleştir:",
+        cpEmailLanguage: "Tercih edilen e-posta dili:",
+        cpYouNeedToLogin: "Müşteri tercihlerini düzenlemek için önce giriş yapmanız gerekir",
+
 
     },
 
@@ -2333,7 +2439,13 @@ export const storeFrontLanguages = {
         swtaPlace: "Paikka",
         allFieldsRequired: "Kaikki kentät ovat pakollisia!",
         shareToAdminButton: "Jaa toivelista ylläpitäjälle",
-        downloadCsv: "Lataa CSV-tiedosto"
+        downloadCsv: "Lataa CSV-tiedosto",
+
+        customerPreferenceHeading: "Asiakkaan asetukset",
+        cpEmailNotification: "Ota sähköposti-ilmoitukset käyttöön:",
+        cpEmailLanguage: "Sähköpostin ensisijainen kieli:",
+        cpYouNeedToLogin: "Sinun täytyy kirjautua sisään ensin muokataksesi asiakkaan asetuksia",
+
 
     },
 
@@ -2434,7 +2546,13 @@ export const storeFrontLanguages = {
         swtaPlace: "מקום",
         allFieldsRequired: "כל השדות דרושים!",
         shareToAdminButton: "שתף רשימת משאלות עם המנהל",
-        downloadCsv: "הורד קובץ CSV"
+        downloadCsv: "הורד קובץ CSV",
+
+        customerPreferenceHeading: "העדפות לקוח",
+        cpEmailNotification: "הפעלת התראות בדוא״ל:",
+        cpEmailLanguage: "שפת הדוא״ל המועדפת:",
+        cpYouNeedToLogin: "עליך להתחבר תחילה כדי לערוך את העדפות הלקוח",
+
 
     },
 
@@ -2535,7 +2653,13 @@ export const storeFrontLanguages = {
         swtaPlace: "Helyszín",
         allFieldsRequired: "Minden mező kitöltése kötelező!",
         shareToAdminButton: "Kívánságlista megosztása az adminisztrátorral",
-        downloadCsv: "CSV fájl letöltése"
+        downloadCsv: "CSV fájl letöltése",
+
+        customerPreferenceHeading: "Ügyfélbeállítások",
+        cpEmailNotification: "E-mail értesítések engedélyezése:",
+        cpEmailLanguage: "Preferált e-mail nyelv:",
+        cpYouNeedToLogin: "Először be kell jelentkeznie az ügyfélbeállítások módosításához",
+
 
     },
 
@@ -2637,7 +2761,13 @@ export const storeFrontLanguages = {
         swtaPlace: "Място",
         allFieldsRequired: "Всички полета са задължителни!",
         shareToAdminButton: "Сподели списъка с желания с администратора",
-        downloadCsv: "Изтегли CSV файл"
+        downloadCsv: "Изтегли CSV файл",
+
+        customerPreferenceHeading: "Предпочитания на клиента",
+        cpEmailNotification: "Активиране на имейл известия:",
+        cpEmailLanguage: "Предпочитан език за имейл:",
+        cpYouNeedToLogin: "Трябва първо да влезете, за да редактирате предпочитанията на клиента",
+
 
     },
 
@@ -2738,7 +2868,13 @@ export const storeFrontLanguages = {
         swtaPlace: "Vieta",
         allFieldsRequired: "Visi laukai yra privalomi!",
         shareToAdminButton: "Pasidalyti norų sąrašu su administratoriumi",
-        downloadCsv: "Atsisiųsti CSV failą"
+        downloadCsv: "Atsisiųsti CSV failą",
+
+        customerPreferenceHeading: "Kliento nuostatos",
+        cpEmailNotification: "Įjungti el. pašto pranešimus:",
+        cpEmailLanguage: "Pageidaujama el. pašto kalba:",
+        cpYouNeedToLogin: "Pirmiausia turite prisijungti, kad galėtumėte redaguoti kliento nuostatas",
+
 
     },
 
@@ -2839,7 +2975,13 @@ export const storeFrontLanguages = {
         swtaPlace: "Τοποθεσία",
         allFieldsRequired: "Όλα τα πεδία είναι υποχρεωτικά!",
         shareToAdminButton: "Κοινοποίηση λίστας επιθυμιών στον διαχειριστή",
-        downloadCsv: "Λήψη αρχείου CSV"
+        downloadCsv: "Λήψη αρχείου CSV",
+
+        customerPreferenceHeading: "Προτιμήσεις πελάτη",
+        cpEmailNotification: "Ενεργοποίηση ειδοποιήσεων email:",
+        cpEmailLanguage: "Προτιμώμενη γλώσσα email:",
+        cpYouNeedToLogin: "Πρέπει πρώτα να συνδεθείτε για να επεξεργαστείτε τις προτιμήσεις πελάτη",
+
 
     },
 
@@ -2940,7 +3082,12 @@ export const storeFrontLanguages = {
         swtaPlace: "Áit",
         allFieldsRequired: "Tá gach réimse riachtanach!",
         shareToAdminButton: "Roinn liosta mianta leis an riarthóir",
-        downloadCsv: "Íoslódáil comhad CSV"
+        downloadCsv: "Íoslódáil comhad CSV",
+
+        customerPreferenceHeading: "Roghanna custaiméara",
+        cpEmailNotification: "Cumasaigh fógraí ríomhphoist:",
+        cpEmailLanguage: "Teanga roghnaithe don ríomhphost:",
+        cpYouNeedToLogin: "Caithfidh tú logáil isteach ar dtús chun roghanna an chustaiméara a chur in eagar",
 
     },
 
@@ -3041,7 +3188,13 @@ export const storeFrontLanguages = {
         swtaPlace: "Locație",
         allFieldsRequired: "Toate câmpurile sunt obligatorii!",
         shareToAdminButton: "Partajează lista de dorințe cu administratorul",
-        downloadCsv: "Descarcă fișierul CSV"
+        downloadCsv: "Descarcă fișierul CSV",
+
+        customerPreferenceHeading: "Preferințele clientului",
+        cpEmailNotification: "Activează notificările prin e-mail:",
+        cpEmailLanguage: "Limba preferată pentru e-mail:",
+        cpYouNeedToLogin: "Trebuie să vă autentificați mai întâi pentru a edita preferințele clientului",
+
 
     },
 
@@ -3142,7 +3295,13 @@ export const storeFrontLanguages = {
         swtaPlace: "Lugar",
         allFieldsRequired: "Lahat ng mga patlang ay kinakailangan!",
         shareToAdminButton: "Ibahagi ang listahan ng nais sa admin",
-        downloadCsv: "I-download ang CSV file"
+        downloadCsv: "I-download ang CSV file",
+
+        customerPreferenceHeading: "Mga Kagustuhan ng Customer",
+        cpEmailNotification: "I-enable ang mga abiso sa email:",
+        cpEmailLanguage: "Piniling wika ng email:",
+        cpYouNeedToLogin: "Kailangan mo munang mag-login upang ma-edit ang mga kagustuhan ng customer",
+
 
     },
 
@@ -3243,7 +3402,13 @@ export const storeFrontLanguages = {
         swtaPlace: "Tempat",
         allFieldsRequired: "Semua bidang wajib diisi!",
         shareToAdminButton: "Bagikan daftar keinginan kepada admin",
-        downloadCsv: "Unduh file CSV"
+        downloadCsv: "Unduh file CSV",
+
+        customerPreferenceHeading: "Preferensi Pelanggan",
+        cpEmailNotification: "Aktifkan notifikasi email:",
+        cpEmailLanguage: "Bahasa email pilihan:",
+        cpYouNeedToLogin: "Anda harus masuk terlebih dahulu untuk mengedit preferensi pelanggan",
+
 
     },
 
@@ -3344,7 +3509,13 @@ export const storeFrontLanguages = {
         swtaPlace: "Место",
         allFieldsRequired: "Все поля обязательны для заполнения!",
         shareToAdminButton: "Поделиться списком желаний с администратором",
-        downloadCsv: "Скачать файл CSV"
+        downloadCsv: "Скачать файл CSV",
+
+        customerPreferenceHeading: "Предпочтения клиента",
+        cpEmailNotification: "Включить уведомления по электронной почте:",
+        cpEmailLanguage: "Предпочтительный язык электронной почты:",
+        cpYouNeedToLogin: "Вам необходимо сначала войти в систему, чтобы изменить предпочтения клиента",
+
 
     },
 
@@ -3445,7 +3616,13 @@ export const storeFrontLanguages = {
         swtaPlace: "Địa điểm",
         allFieldsRequired: "Tất cả các trường đều bắt buộc!",
         shareToAdminButton: "Chia sẻ danh sách mong muốn với quản trị viên",
-        downloadCsv: "Tải xuống tệp CSV"
+        downloadCsv: "Tải xuống tệp CSV",
+
+        customerPreferenceHeading: "Tùy chọn khách hàng",
+        cpEmailNotification: "Bật thông báo email:",
+        cpEmailLanguage: "Ngôn ngữ email ưu tiên:",
+        cpYouNeedToLogin: "Bạn cần đăng nhập trước để chỉnh sửa tùy chọn khách hàng",
+
 
 
     },
@@ -3547,7 +3724,13 @@ export const storeFrontLanguages = {
         swtaPlace: "Vendi",
         allFieldsRequired: "Të gjitha fushat janë të detyrueshme!",
         shareToAdminButton: "Ndaj listën e dëshirave me administratorin",
-        downloadCsv: "Shkarko skedarin CSV"
+        downloadCsv: "Shkarko skedarin CSV",
+
+        customerPreferenceHeading: "Preferencat e klientit",
+        cpEmailNotification: "Aktivizo njoftimet me email:",
+        cpEmailLanguage: "Gjuha e preferuar e email-it:",
+        cpYouNeedToLogin: "Duhet të identifikoheni fillimisht për të redaktuar preferencat e klientit",
+
 
 
     },
@@ -3650,7 +3833,13 @@ export const storeFrontLanguages = {
         swtaPlace: "Vieta",
         allFieldsRequired: "Visi lauki ir obligāti!",
         shareToAdminButton: "Kopīgot vēlmju sarakstu ar administratoru",
-        downloadCsv: "Lejupielādēt CSV failu"
+        downloadCsv: "Lejupielādēt CSV failu",
+
+        customerPreferenceHeading: "Klienta preferences",
+        cpEmailNotification: "Ieslēgt e-pasta paziņojumus:",
+        cpEmailLanguage: "Vēlamā e-pasta valoda:",
+        cpYouNeedToLogin: "Lai rediģētu klienta preferences, vispirms ir jāpiesakās",
+
 
     },
 
@@ -3752,7 +3941,13 @@ export const storeFrontLanguages = {
         swtaPlace: "Koht",
         allFieldsRequired: "Kõik väljad on kohustuslikud!",
         shareToAdminButton: "Jaga soovide nimekirja administraatoriga",
-        downloadCsv: "Laadi alla CSV-fail"
+        downloadCsv: "Laadi alla CSV-fail",
+
+        customerPreferenceHeading: "Kliendi eelistused",
+        cpEmailNotification: "Luba e-posti teavitused:",
+        cpEmailLanguage: "Eelistatud e-posti keel:",
+        cpYouNeedToLogin: "Kliendi eelistuste muutmiseks peate esmalt sisse logima",
+
 
     },
 

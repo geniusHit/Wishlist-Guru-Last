@@ -155,6 +155,35 @@ async function addCreateWishlist(req, res, emailOrToken, guestOrUser) {
     }
 }
 
+
+export async function getWishlistUsers(req, res) {
+    try{
+        const selectQuery = `SELECT * FROM ${user_table} WHERE email=? AND shop_name=?`
+        const [result] = await database.query(selectQuery, [req.params.customerEmail, req.params.storeName])
+        res.send(result)
+    }
+    catch(err){
+        console.log("Error : ", err)
+    }
+}
+
+export async function sendEmailOnOff(req, res) {
+    try{
+        const updateQuery = `UPDATE wishlist_users SET send_emails=? WHERE email=?`
+        let send_emails = req.body.send_emails === true? "true": "false"
+        database.query(updateQuery, [send_emails, req.body.email])
+        // console.log("req.body.send_emails = ", req.body.send_emails)
+        // console.log("req.body.email = ", req.body.email)
+        console.log("req.body.send_emails = ", req.body.send_emails)
+        // console.log("parseInt(req.body.send_emails) = ", parseInt(req.body.send_emails))
+    }
+    catch(err){
+        console.log("Error: ", err)
+    }
+}
+
+
+
 export const copyToWishlist = async (req, res) => {
     if (req.body.customerEmail === "") {
         await CopyMultiWishlist(req, res, req.body.currentToken);
@@ -2382,12 +2411,14 @@ export const getEmailReminderChecks = async (req, res) => {
             WHERE ai.shop_name = ?
         `;
         const [mainResult] = await database.query(mainSelectQuery, [shopName]);
+        console.log("mainResult = ", mainResult)
         const getInstallationQuery = `
             SELECT app_install_id, date, shop_email
             FROM app_installation
             WHERE shop_name = ?
         `;
         const [installationData] = await database.query(getInstallationQuery, [shopName]);
+        console.log("installationData = ", installationData)
         if (!installationData.length) {
             return res.status(404).json({ msg: "Store not found" });
         }
@@ -5922,4 +5953,3 @@ export const klaviyoAuthCallback = async (req, res) => {
     }
 
 }
-
